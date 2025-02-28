@@ -25,20 +25,20 @@
             <div class="card">
                 <div class="card-header d-flex p-0">
                 <ul class="nav nav-pills ml-auto p4 mb10 mt10 nav-custom">
-                <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab">GENERAL</a></li>
+                <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab">TRIP INFO</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab"> ITINERARY </a></li>
-                <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> COST INCLUDES </a></li>
-                <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> COST EXCLUDES </a></li>
+                <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> HOLIDAY </a></li>
+                <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> GENERAL</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> EQUIPMENT </a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
+                <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
 
-                <!--<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> BANNER</a></li>-->
                 </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1">
+                        <div class="tab-pane active" id="tab_1">          
                             @include('admin.trips.edit.edit-general')
                         </div>
                          <div class="tab-pane" id="tab_2">
@@ -61,7 +61,7 @@
                         </div>  
                         <div class="tab-pane" id="tab_8">
                            @include('admin.trips.edit.edit-faqs') 
-                        </div>  
+                        </div>
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->

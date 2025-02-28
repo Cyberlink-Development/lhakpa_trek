@@ -9,7 +9,22 @@ var swiper = new Swiper(".mySwiper", {
       prevEl: ".swiper-button-prev",
     },
   });
+var spyNav = UIkit.scrollspyNav('#sidenav', {closest: 'li', scroll: true, offset:145, cls:'uk-active'});
 
+ let textContainer = document.querySelector('.text-container');
+        let text = textContainer.innerText;
+        textContainer.innerHTML = text.split('').map(letter => 
+            `<span>${letter}</span>`).join('');
+
+        // Typing animation
+        anime.timeline()
+            .add({
+                targets: '.text-container span',
+                opacity: [0, 1],
+                duration: 200,
+                easing: "easeInOutQuad",
+                delay: anime.stagger(150) // Each letter appears after a delay
+            });
 const divs = {
   original: document.getElementById("originalDiv"),
   new1: document.getElementById("newDiv1"),

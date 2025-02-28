@@ -28,14 +28,14 @@
                 <div class="card-header d-flex p-0">
                     <!-- <h3 class="card-title p-3">Manage Trips</h3> -->
                     <ul class="nav nav-pills ml-auto p4 mb10 mt10 nav-custom">
-                    <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab">GENERAL</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">ITINERARY</a></li> 
-                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> COST INCLUDES</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> COST EXCLUDES</a></li> 
+                    <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab">TRIP INFO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab"> ITINERARY</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> HOLIDAY</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> GENERAL </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> EQUIPMENT</a></li> 
                     <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS </a></li>
-                     <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES </a></li>
-                     <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
-                    <!--<li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> BANNER </a></li>   -->
+                    <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -46,7 +46,7 @@
                         <div class="tab-pane" id="tab_2">
                             @include('admin.trips.create.create-itinerary')
                         </div>
-                       <div class="tab-pane" id="tab_3">
+                        <div class="tab-pane" id="tab_3">
                             @include('admin.trips.create.create-cost-includes')
                         </div>
                          <div class="tab-pane" id="tab_4">
@@ -58,12 +58,12 @@
                         <div class="tab-pane" id="tab_6">
                             @include('admin.trips.create.create-banner')
                         </div>  
-                         <div class="tab-pane" id="tab_7">
+                        <div class="tab-pane" id="tab_7">
                            @include('admin.trips.create.create-trip-schedule') 
                         </div>  
-                          <div class="tab-pane" id="tab_8">
+                        <div class="tab-pane" id="tab_8">
                            @include('admin.trips.create.create-faqs') 
-                        </div>                    
+                        </div>               
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->
@@ -196,6 +196,7 @@
         /******** For Testimonial ***********/
         jQuery(document).delegate('a.add-testimonial', 'click', function(e) {
             e.preventDefault();
+            jQuery('#testimonial-headingg').hide();
             var content = jQuery('#row_testimonial_additional .row'),
                 size = jQuery('#row_testimonial_body >.row').length + 1,
                 element = null,
@@ -226,6 +227,7 @@
         /******** For Info ***********/
         jQuery(document).delegate('a.add-info', 'click', function(e) {
             e.preventDefault();
+            jQuery('#info-headingg').hide();
             var content = jQuery('#row_info_additional .row'),
                 size = jQuery('#row_info_body >.row').length + 1,
                 element = null,
@@ -257,6 +259,7 @@
         /* start of banner*/
         jQuery(document).delegate('a.add-banner', 'click', function(e) {
             e.preventDefault();
+            jQuery('#banner-headingg').hide();
             var content = jQuery('#row_banner_additional .row'),
                 size = jQuery('#row_banner_body >.row').length + 1,
                 element = null,

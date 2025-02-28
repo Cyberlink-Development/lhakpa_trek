@@ -1,730 +1,721 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>{{ $setting->site_name }} - @yield('post_title') @yield('title')</title>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="{{ asset('theme-assets/images/logo.png') }}">
-    <link rel="apple-touch-icon-precomposed" href="{{ asset('theme-assets/images/logo.png') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#c43426">
-    <meta name="keywords" content="@yield('meta_keyword')- {{$setting->meta_key}} "/>
-    <meta name="description" content="@yield('meta_description') -{{$setting->meta_description}}"/>
-    <link rel="stylesheet" href="{{ asset('theme-assets/css/app.css') }}" />
-    <link rel="stylesheet" href="{{ asset('theme-assets/css/custom.css') }}" />
-    <link rel="stylesheet" href="{{ asset('theme-assets/css/accordion.css') }}" />
-    <link rel="stylesheet" href="{{ asset('theme-assets/css/responsive.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="@yield('title')"/>
-    <meta property="og:url" content="{{url()->current()}}"/>
-    <meta property="og:site_name" content="{{$setting->site_name}}"/>
-    <meta property="og:description" content="@yield('meta_description')"/>
-   @if (trim($__env->yieldContent('thumbnail')))
-	   <meta property="og:image" content="{{ asset('uploads/original/' ) }}/@yield('thumbnail')" />
-	@else
-	   <meta property="og:image" content="{{asset('theme-assets/images/favicon.png')}}" />
-	@endif
-    <meta property="og:image:width" content="1000"/>
-    <meta property="og:image:height" content="600"/>
-    @if (trim($__env->yieldContent('thumbnail')))
-    <meta name="twitter:image" content="{{ asset('uploads/original/' ) }}/@yield('thumbnail')"/>
-    @else
-    <meta property="twitter:image" content="{{ asset('theme-assets/images/logo.png') }}"/>
-    @endif
-    <meta name="twitter:url" content="{{url()->current()}}">
-    <meta name="twitter:title" content="@yield('title')">
-    <meta name="twitter:description" content="@yield('meta_description')">
-    <meta name="twitter:card" content="summary_large_image"/>
-    
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <!--Flags icon-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.2.3/css/flag-icons.min.css" integrity="sha512-bZBu2H0+FGFz/stDN/L0k8J0G8qVsAL0ht1qg5kTwtAheiXwiRKyCq1frwfbSFSJN3jooR5kauE0YjtPzhZtJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-      <style>
-      body{
-         top: 0!important;
-      }
-      .skiptranslate > iframe{
-         display: none!important;
-      }
-      .goog-te-gadget-icon{
-         display: none!important;
-      }
-
-      iframe.VIpgJd-ZVi9od-xl07Ob-OEVmcd.skiptranslate{
-         height: 190px!important;
-      }
-      .skiptranslate.goog-te-gadget span{
-         display:inline-block;
-      }
-      #goog-gt-tt {
-         display: none !important;
-      }
-      .VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {
-         background:transparent!important;
-         box-shadow:none!important;
-      }
-      .VIpgJd-ZVi9od-aZ2wEe-wOHMyf{
-         display:none!important;
-      }
-      
-      /********* google captcha *********/
-      .grecaptcha-badge{
-          display: none!important;
-      }
-   </style>
-
-    <style>
-        /* Custom notification styles */
-        .uk-notification-message-danger {
-            background-color: #ffebee !important;
-            color: #c62828 !important;
-            border-left: 4px solid #d32f2f !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-        }
-        .uk-notification-message-danger .uk-notification-close {
-            color: #c62828 !important;
-        }
-        .uk-notification-message-danger:hover {
-            background-color: #ffcdd2 !important;
-        }
-
-        .uk-notification-message-success {
-            background-color: #e8f5e9 !important;
-            color: #2e7d32 !important;
-            border-left: 4px solid #4caf50 !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-        }
-        .uk-notification-message-success .uk-notification-close {
-            color: #2e7d32 !important;
-        }
-        .uk-notification-message-success:hover {
-            background-color: #c8e6c9 !important;
-        }
-
-        .uk-notification-message-warning {
-            background-color: #fff3e0 !important;
-            color: #ff9800 !important;
-            border-left: 4px solid #ffb74d !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-        }
-        .uk-notification-message-warning .uk-notification-close {
-            color: #ff9800 !important;
-        }
-        .uk-notification-message-warning:hover {
-            background-color: #ffe0b2 !important;
-        }
-
-        .uk-notification-message-info {
-            background-color: #e3f2fd !important;
-            color: #1976d2 !important;
-            border-left: 4px solid #64b5f6 !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-        }
-        .uk-notification-message-info .uk-notification-close {
-            color: #1976d2 !important;
-        }
-        .uk-notification-message-info:hover {
-            background-color: #bbdefb !important;
-        }
-
-        /* Ensure the notification container is positioned correctly */
-        .uk-notification {
-            top: 10px !important; /* Adjust as needed */
-            right: 10px !important; /* Adjust as needed */
-            z-index: 100000 !important;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lhakpa Trekking</title>
+    <link rel="stylesheet" href="{{asset('theme-assets/css/uikit.css')}}">
+    <link rel="stylesheet" href="{{asset('theme-assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('theme-assets/css/global.css')}}">
+    <link rel="stylesheet" href="{{asset('theme-assets/css/swiper.min.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="{{asset('theme-assets/js/uikit.js')}}"></script>
+    <script src="https://kit.fontawesome.com/7254a5967d.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    @if ($errors->any())
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                @foreach ($errors->all() as $index => $error)
-                    setTimeout(function() {
-                        showNotification("{{ $error }}", 'danger');
-                    }, {{ $index * 300 }}); // 300ms delay between each notification
-                @endforeach
-            });
 
-            function showNotification(message, status) {
-                UIkit.notification({
-                    message: message,
-                    status: status,
-                    pos: 'top-right',
-                    timeout: 5000,
-                    click: true
-                });
-            }
-        </script>
-    @endif
-    @if(session('success') || session('warning') || session('info') || session('error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                @if(session('success'))
-                    showNotification("{{ session('success') }}", 'success');
-                @endif
-                @if(session('warning'))
-                    showNotification("{{ session('warning') }}", 'warning');
-                @endif
-                @if(session('info'))
-                    showNotification("{{ session('info') }}", 'info');
-                @endif
-                @if(session('error'))
-                    showNotification("{{ session('error') }}", 'danger');
-                @endif
-            });
-
-            function showNotification(message, status) {
-                UIkit.notification({
-                    message: message,
-                    status: status,
-                    pos: 'top-right',
-                    timeout: 5000
-                });
-            }
-        </script>
-    @endif
-
-    <div  id="preloader"class=" uk-position-cover uk-flex uk-flex-center uk-flex-middle" >
-        <div class="spinner-container">
-            <img src="{{ asset('theme-assets/images/logo.png') }}" alt="" class="uk-logo-dark">
-            <div uk-spinner="ratio: 5"></div>
-        </div>
-    </div>
-    <!-- header -->
-              <!-- <div id="google_translate_element" style="position:absolute; right:50px; top:0px; z-index:100000;"></div> -->
-
-    <div uk-sticky="start: 300; animation: uk-animation-slide-top; cls-active:uk-navbar-sticky; sel-target:.uk-navbar-container; class:uk-sticky;">
-        <!-- Main Menu -->
-        <div class="uk-visible@l uk-main-header-transparent uk-navbar-container uk-navbar-transparent">
-            <div class="uk-container">
-                <nav class="uk-navbar d-flex uk-flex-middle" uk-navbar="dropbar: true; uk-dropbar-top">
-                    <div class="uk-navbar-left ">
-                        <a class="uk-navbar-item uk-logo " href="{{ url('/') }}"> <img src="{{ asset('theme-assets/images/adventure-logo.png') }}" alt="" class="uk-logo-dark"> </a>  
+    <body>
+        <!-- Header start -->
+        <header class="uk-position-top">
+            <div class="uk-main-header uk-navbar-container uk-navbar-transparent">
+                <!-- top nav menu -->
+                <div class="uk-visible@l uk-container uk-white " style="position:relative;z-index:1000;">
+                    <div class=" uk-flex uk-flex-middle uk-grid-collapse uk-grid uk-margin-top uk-top-nav">
+                        <div class="uk-width-auto@m">
+                            <a href="{{ url('/') }}"> <img src="{{asset('theme-assets/img/logo.png')}}" width="180" alt=""></a>
+                        </div>
+                        <div class="uk-width-expand@m">
+                            <ul class="uk-flex uk-flex-right uk-topnavbar-ul uk-margin-bottom">
+                                <li class="border-right"><a href="news.php">News / Blogs</a></li>
+                                <li class="border-right"><a href="">Women Empowerment</a></li>
+                                <li class="border-right"><a href="tourism.php">Toursim</a></li>
+                            </ul>
+                            <ul class="uk-flex uk-flex-right uk-topnavbar-ul">
+                                <li class="border-right">
+                                    <i class="fa-solid fa-phone uk-margin-small-right"></i> +123 456 7890 , +789 456 6786
+                                </li>
+                                <!--<li class="border-right">-->
+                                <!--    <a href="#">-->
+                                <!--        <i class="fa-solid fa-heart uk-margin-small-right"></i>My Favourite-->
+                                <!--    </a>-->
+                                <!--</li>-->
+                                <!--<li class="border-right">-->
+                                <!--    <a href="#">-->
+                                <!--        <i class="fa-solid fa-user uk-margin-small-right"></i>User Login-->
+                                <!--    </a>-->
+                                <!--</li>-->
+                                <li class="uk-margin-small-left">
+                                    <a href="plan.php" class="inquiry-btn">Plan Your Trip</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="uk-navbar-right">
-                        <ul class="uk-navbar-nav uk-position-relative">
-                            <li><a href="{{ url('/') }}"> Home</a> </li>
-                            @if ($navigations->count() > 0)
-                                @foreach ($navigations->take(1) as $row)
-                                    @if (has_posts($row->id))
+                </div>
+                <!-- top nav menu -->
+                <div uk-sticky="top: 0; animation: uk-animation-slide-top; cls-active: uk-navbar-sticky; sel-target: .uk-navbar-container;">
+                    <!-- Main Menu -->
+                    <div class="uk-visible@l uk-main-header-transparent uk-navbar-container  uk-navbar-transparent">
+                        <div class="uk-container">
+                            <nav class="uk-navbar d-flex uk-flex-middle" uk-navbar="dropbar: true; uk-dropbar-top">
+                                <div class="uk-navbar-left">
+                                    <a href="{{ url('/') }}" class="uk-logo-dark"> <img src="{{asset('theme-assets/img/logo.png')}}" width="180" alt=""></a>
+                                    <h2  class="uk-dark text-container" style="font-size: 20px; color: white; margin-top: 22px;">
+                                        Your Travel Partner in Nepal
+                                    </h2>
+                                </div>
+                                <div class="uk-navbar-right">
+                                    <ul class="uk-navbar-nav uk-position-relative">
                                         <li>
-                                            <a href="#"> {{ $row->post_type }} <span uk-navbar-parent-icon></span></a>
-                                            <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;" style="background-image: url({{ asset('theme-assets/images/navbar.jpg') }}); background-position: top right;  ">
-                                        
-                                                <div class="uk-container">
-                                                    <div class="uk-child-width-1-4 uk-grid-medium" uk-grid>
-                                                        <!--  -->
-                                                       
-                                                        @foreach (has_posts($row->id) as $item)
-                                                            <div class="uk-activities ">
-                                                                <a
-                                                                    href="{{ url(geturl($item->uri, $item->page_key)) }}">
-                                                                    <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block "
-                                                                        href="{{ url(geturl($item->uri, $item->page_key)) }}">
-                                                                        @if ($item->page_thumbnail)
-                                                                            <img src="{{ asset('uploads/original/' . $item->page_thumbnail) }}"
-                                                                                class="uk-image uk-cover"
-                                                                                alt="{{ $item->title }}">
-                                                                        @else
-                                                                            <img src="{{ asset('theme-assets/images/default-thumbnail.png') }}"
-                                                                                class="uk-image uk-cover"
-                                                                                alt="{{ $item->title }}">
-                                                                        @endif
-                                                                        <div
-                                                                            class="uk-overlay-banner  uk-position-cover">
-                                                                        </div>
-                                                                        <div
-                                                                            class="uk-position-bottom-center  uk-activities uk-text-center">
-                                                                            <h1
-                                                                                class=" expedition-small-font  text-white uk-margin-remove">
-                                                                                {{ $item->post_title }}</h1>
-                                                                        </div>
+                                            <a href="#"> Company <span uk-navbar-parent-icon></span></a>
+                                            <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
+                                                <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
+                                                    <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
+                                                        <div>
+                                                            <a href="about.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">About Us</h2>
                                                                     </div>
-                                                                </a>
-                                                            </div>
-                                                        @endforeach
-                                                        <!--  -->
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="why-us.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain2.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">Why Us</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="message.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain3.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">Message from us</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="migmar.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain4.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">Migmar Foundation</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="agent.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain5.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">Need an agent</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="team.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain6.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">Team Member</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="safety.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain7.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">SAFETY & SECURITY</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a href="suggestion.php">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain9.jpeg " />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">Suggestion</h2>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-flex uk-flex-middle uk-flex-center uk-margin uk-margin-remove-bottom">
+                                                        <a class="uk-nav-slider-btn prev-btn" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous" style="padding:6px 3px !important;"></a>
+                                                        <a class="uk-nav-slider-btn next-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next" style="padding:6px 3px !important;"></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-                                    @endif
-                                @endforeach
-                            @endif
-                            @if ($activity != null)
-
-                                <li><a href="{{ route('page.activitylist') }}">Activity<span
-                                            uk-navbar-parent-icon></span>
-                                    </a>
-                                    <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;"  style="background-image: url({{ asset('theme-assets/images/navbar.jpg') }}); background-position: top right; ">
-                                        <div class="uk-container">
-                                            <div class="uk-child-width-1-4 uk-grid-medium" uk-grid>
-                                                <!--  -->
-                                                @foreach ($activity as $row)
-                                                    <div class="uk-activities">
-                                                        @if($row->external_link)
-                                                            <a href="{{$row->external_link}}">
-                                                        @else
-                                                            <a href="{{ route('page.activitydetail', $row->uri) }}">
-                                                        @endif
-                                                                <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block ">
-                                                                    @if ($row->thumbnail)
-    
-                                                                        <img src="{{ asset('uploads/icon/' . $row->thumbnail) }}"
-                                                                            class="uk-image uk-cover"
-                                                                            alt="{{ $row->title }}">
-                                                                    @else
-                                                                        <img src="{{ asset('theme-assets/images/default-thumbnail.png') }}"
-                                                                            class="uk-image uk-cover"
-                                                                            alt="{{ $row->title }}">
-                                                                    @endif
-    
-                                                                    <div class="uk-overlay-banner uk-position-cover"></div>
-                                                                    <div
-                                                                        class="uk-position-bottom-center  uk-activities uk-text-center">
-                                                                        <h1
-                                                                            class=" expedition-small-font  text-white uk-margin-remove">
-                                                                            {{ $row->title }}</h1>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                    </div>
-                                                @endforeach
-                                                <!--  -->
-
-                                            </div>
-                                            <div class="uk-text-center">
-
-                                                <a href="{{ route('page.activitylist') }}"
-                                                    class=" uk-margin-top uk-margin-remove-bottom uk-button uk-button-navbar text-white">View
-                                                    All <span uk-icon="icon:  arrow-right"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endif
-                            @if ($expedition != null)
-                                <li><a href="{{ route('page.expeditionlist') }}">Expeditions <span uk-navbar-parent-icon></span></a>
-                                    <div class="uk-dropbar uk-dropbar-top"
-                                        uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;"
-                                        style="background-image: url({{ asset('theme-assets/images/navbar.jpg') }}); background-position: top right;  ">
-                                        <div class="uk-container">
-                                            <div class="mega-border-top">
-                                                <div uk-grid class="uk-grid-small">
-                                                    <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  "
-                                                        data-uk-tab="{connect:'.uk-switcher'}">
-                                                        @foreach ($expedition as $item)
-                                                            <li> <a href="">{{ $item->title }}</a> </li>
-                                                        @endforeach
-                                                    </ul>
-                                                    <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
-
-                                                        <!-- 8000ers --> <!---->
-                                                        <div class="uk-position-relative uk-visible-toggle uk-light"
-                                                            tabindex="-1" uk-slider>
-
-                                                            <div
-                                                                class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
-                                                               
-                                                                @foreach ($exp_8000ers as $item)
-                                                                    <div class="uk-activities ">
-                                                                        <a
-                                                                            href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                            <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block "
-                                                                                href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                                @if ($item->thumbnail)
-                                                                                    <img src="{{ asset('uploads/original/' . $item->thumbnail) }}"
-                                                                                        class="uk-image uk-cover"
-                                                                                        alt="{{ $item->trip_title }}">
-                                                                                @else
-                                                                                    <img src="{{ asset('theme-assets/images/default-thumbnail.png') }}"
-                                                                                        class="uk-image uk-cover"
-                                                                                        alt="{{ $item->trip_title }}">
-                                                                                @endif
-                                                                                <div
-                                                                                    class="uk-overlay-banner  uk-position-cover">
-                                                                                </div>
-                                                                                <div
-                                                                                    class="uk-position-bottom-center  uk-activities uk-text-center">
-                                                                                    <h1
-                                                                                        class=" expedition-small-font  text-white uk-margin-remove">
-                                                                                        {{ $item->trip_title }}</h1>
-                                                                                </div>
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
-                                                                @endforeach
-
-                                                            </div>
-                                                                 <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                            <a class="uk-nav-slider-btn " href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                            <a href="{{ route('expedition-list','8000ers') }}" class=" uk-margin-top uk-margin-remove-bottom uk-button uk-button-navbar">View
-                                                                All <span uk-icon="icon:  arrow-right"></span></a>
-                                                            <a class="uk-nav-slider-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
-                                                        </div>
-
-                                                        </div>
-                                                        <!-- end of 8000ers -->
-                                                        <!-- 7000ers -->
-                                                        <div class="uk-position-relative uk-visible-toggle uk-light"
-                                                            tabindex="-1" uk-slider>
-
-                                                            <div
-                                                                class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
-                                                                @foreach ($exp_7000ers as $item)
-                                                                    <div class="uk-activities ">
-                                                                        <a
-                                                                            href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                            <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block "
-                                                                                href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                                @if ($item->thumbnail)
-                                                                                    <img src="{{ asset('uploads/original/' . $item->thumbnail) }}"
-                                                                                        class="uk-image uk-cover"
-                                                                                        alt="{{ $item->trip_title }}">
-                                                                                @else
-                                                                                    <img src="{{ asset('theme-assets/images/default-thumbnail.png') }}"
-                                                                                        class="uk-image uk-cover"
-                                                                                        alt="{{ $item->trip_title }}">
-                                                                                @endif
-                                                                                <div
-                                                                                    class="uk-overlay-banner  uk-position-cover">
-                                                                                </div>
-                                                                                <div
-                                                                                    class="uk-position-bottom-center  uk-activities uk-text-center">
-                                                                                    <h1
-                                                                                        class=" expedition-small-font  text-white uk-margin-remove">
-                                                                                        {{ $item->trip_title }}</h1>
-                                                                                </div>
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
-                                                                @endforeach
-
-                                                            </div>
-                                       <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                            <a class="uk-nav-slider-btn " href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                            <a href="{{ route('expedition-list','7000ers') }}" class=" uk-margin-top uk-margin-remove-bottom uk-button uk-button-navbar">View
-                                                                All <span uk-icon="icon:  arrow-right"></span></a>
-                                                            <a class="uk-nav-slider-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
-                                                        </div>
-
-
-                                                        </div>
-                                                        <!-- end of 7000ers -->
-                                                        <!-- 6000ers -->
-                                                        <div class="uk-position-relative uk-visible-toggle uk-light"
-                                                            tabindex="-1" uk-slider>
-                                                          
-                                                                <div
-                                                                    class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
-                                                            @foreach ($exp_6000ers as $item)
-                                                                    <div class="uk-activities ">
-                                                                        <a
-                                                                            href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                            <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block "
-                                                                                href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                                @if ($item->thumbnail)
-                                                                                    <img src="{{ asset('uploads/original/' . $item->thumbnail) }}"
-                                                                                        class="uk-image uk-cover"
-                                                                                        alt="{{ $item->trip_title }}">
-                                                                                @else
-                                                                                    <img src="{{ asset('theme-assets/images/default-thumbnail.png') }}"
-                                                                                        class="uk-image uk-cover"
-                                                                                        alt="{{ $item->trip_title }}">
-                                                                                @endif
-                                                                                <div
-                                                                                    class="uk-overlay-banner  uk-position-cover">
-                                                                                </div>
-                                                                                <div
-                                                                                    class="uk-position-bottom-center  uk-activities uk-text-center">
-                                                                                    <h1
-                                                                                        class=" expedition-small-font  text-white uk-margin-remove">
-                                                                                        {{ $item->trip_title }}</h1>
-                                                                                </div>
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
+                                        <li>
+                                            <a href="#">Destination <span uk-navbar-parent-icon></span></a>
+                                            <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
+                                            <div class=" uk-container">
+                                                <div class="mega-border-top">
+                                                    <div uk-grid class="uk-grid-small">
+                                                        <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
+                                                            @foreach ($trekking as $trek)
+                                                                <li> <a href="">{{$trek->title}}</a> </li>
                                                             @endforeach
+                                                        </ul>
+                                                        <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
+                                                            <!-- Annapurna Region -->
+                                                            @foreach ($trekking as $key => $value)
+                                                                <div>
+                                                                    <div class="uk-child-width-1-2@m uk-grid">
+                                                                        <div>
+                                                                            <div class="uk-title-fonts">
+                                                                                <h2 class="uk-secondary">{{$value->title}}</h2>
+                                                                                <p class="uk-margin-bottom">
+                                                                                    {{ $value->excerpt }}
+                                                                                </p>
+                                                                                <a href="{{ route('trekking-list',$value->uri) }}" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <div class="uk-child-width-1-2 uk-grid-small uk-grid">
+                                                                                <div>
+                                                                                    <img src="{{ $value->thumbnail ? asset('uploads/icon/'.$value->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" alt="{{$value->title}}" class="border uk-media-140">
+                                                                                </div>
+                                                                                <div>
+                                                                                    <img src="{{ !empty($value->banner) ? asset('uploads/banners/'.$value->banner) : asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="{{$value->title}}" class="border uk-media-140">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
+                                                                        @php
+                                                                            $tripList = get_triplist($value->id)->take(9)->toArray();
+                                                                            $tripChunks = array_chunk($tripList, 3); 
+                                                                        @endphp
+                                                                        @foreach ($tripChunks as $chunk)
+                                                                            <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                                @foreach ($chunk as $item)
+                                                                                    <li> <a href="{{ url('page/' . tripurl($item['uri'])) }}">{{ $item['trip_title'] }}</a>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        @endforeach
+                                                                    </div>
                                                                 </div>
-                                                                 <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                            <a class="uk-nav-slider-btn " href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                            <a href="{{ route('expedition-list','6000ers') }}" class=" uk-margin-top uk-margin-remove-bottom uk-button uk-button-navbar">View
-                                                                All <span uk-icon="icon:  arrow-right"></span></a>
-                                                            <a class="uk-nav-slider-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
+                                                            @endforeach
                                                         </div>
-
-                                                           
-
-
-
-                                                        </div>
-                                                        <!-- end of 6000ers -->
                                                     </div>
-
                                                 </div>
                                             </div>
-                                      
-                                        </div>
-                                    </div>
+                                </div>
                                 </li>
-                            @endif
-
-                            @if ($trekking != null)
-                                <li><a href="{{ route('page.trekkinglist') }}">Trekking <span uk-navbar-parent-icon></span></a>
-                                    <div class="uk-dropbar uk-dropbar-top"
-                                        uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;"
-                                        style="background-image: url({{ asset('theme-assets/images/navbar.jpg') }}); background-position: top right;  ">
+                                <li>
+                                    <a href="#">Activities <span uk-navbar-parent-icon></span></a>
+                                    <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                         <div class="uk-container">
                                             <div class="mega-border-top">
                                                 <div uk-grid class="uk-grid-small">
-                                                    <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  "
-                                                        data-uk-tab="{connect:'.uk-switcher'}">
-                                                        @foreach ($trekking as $value)
-                                                            <li> <a href="">{{ $value->title }}</a> </li>
-                                                        @endforeach
-
+                                                    <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
+                                                        <li> <a href="">Biking</a> </li>
+                                                        <li> <a href="">Culture</a> </li>
+                                                        <li> <a href="">Cycling</a> </li>
+                                                        <li> <a href="">Family</a> </li>
                                                     </ul>
                                                     <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
-
-                                                        @foreach ($trekking as $key => $value)
-                                                            <!-- 8000ers -->
-                                                            <div class="uk-position-relative uk-visible-toggle uk-light"  
-                                                                tabindex="-1" uk-slider>
-                                                                <div
-                                                                    class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
-                                                                    @foreach (get_triplist($value->id) as $item)
-                                                                        <div class="uk-activities">
-                                                                            <a
-                                                                                href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                                <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block "
-                                                                                    href="{{ url('page/' . tripurl($item->uri)) }}">
-                                                                                    @if ($item->thumbnail)
-                                                                                        <img src="{{ asset('uploads/original/' . $item->thumbnail) }}"
-                                                                                            class="uk-image uk-cover"
-                                                                                            alt="{{ $item->trip_title }}">
-                                                                                    @else
-                                                                                        <img src="{{ asset('theme-assets/images/default-thumbnail.png') }}"
-                                                                                            class="uk-image uk-cover"
-                                                                                            alt="{{ $item->trip_title }}">
-                                                                                    @endif
-                                                                                    <div
-                                                                                        class="uk-overlay-banner  uk-position-cover">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        class="uk-position-bottom-center  uk-activities uk-text-center">
-                                                                                        <h1
-                                                                                            class=" expedition-small-font  text-white uk-margin-remove">
-                                                                                            {{ $item->trip_title }}
-                                                                                        </h1>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
+                                                        <!-- biking -->
+                                                        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
+                                                            <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
                                                                         </div>
-                                                                    @endforeach
-
+                                                                    </a>
                                                                 </div>
-                                                                <div
-                                                                    class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                                    <a class="uk-nav-slider-btn " href="#"
-                                                                        uk-icon="icon:arrow-left; ratio: 1.5"
-                                                                        uk-slider-item="previous"></a>
-                                                                    <a href="{{ route('trekking-list',$value->uri) }}"
-                                                                        class=" uk-margin-top uk-margin-remove-bottom uk-button uk-button-navbar">View
-                                                                        All <span
-                                                                            uk-icon="icon:  arrow-right"></span></a>
-                                                                    <a class="uk-nav-slider-btn" href="#"
-                                                                        uk-icon="icon:arrow-right; ratio: 1.5"
-                                                                        uk-slider-item="next"></a>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
-
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                            <!-- end of 8000ers -->
-                                                        @endforeach
-
-
+                                                            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
+                                                                <a class="uk-nav-slider-btn prev-btn" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous" style="padding:6px 3px !important;"></a>
+                                                                <a href="list.php" class=" uk-margin-top uk-margin-remove-bottom uk-btn uk-btn-secondary">View
+                                                                    All <span uk-icon="icon:  arrow-right"></span></a>
+                                                                <a class="uk-nav-slider-btn next-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next" style="padding:6px 3px !important;"></a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end of biking-->
+                                                        <!-- culture -->
+                                                        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
+                                                            <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a href="trip-detail.php">
+                                                                        <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
+                                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                                            <div class="uk-overlay-banner  uk-position-cover"></div>
+                                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                                <h2 class="text-secondary uk-margin-remove">MUSTANG ROYALE ENFIELD TOUR</h2>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
+                                                                <a class="uk-nav-slider-btn prev-btn" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous" style="padding:6px 3px !important;"></a>
+                                                                <a href="list.php" class=" uk-margin-top uk-margin-remove-bottom uk-btn uk-btn-secondary">View
+                                                                    All <span uk-icon="icon:  arrow-right"></span></a>
+                                                                <a class="uk-nav-slider-btn next-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next" style="padding:6px 3px !important;"></a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end of culture-->
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                            @endif
-
-                            @if ($useful_info != 'null')
                                 <li>
-                                    <a href="avoide:javascript;">Useful Info <span uk-navbar-parent-icon></span>
-                                    </a>
-                                    <div uk-drop="mode:hover; pos: bottom-center; delay-hide: 10;"
-                                        class="uk-dropdown uk-useful-dropdown">
-                                        <ul class="uk-nav uk-navbar-dropdown-nav uk-useful-nav">
-                                            @foreach ($useful_info as $item)
-                                                <li>
-                                                    <a href="{{ url(geturl($item->uri, $item->page_key)) }}" class="uk-useful-link"> <span uk-icon="icon:  chevron-right"></span>{{ $item->post_title }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+                                    <a href="#"> Travelling Style <span uk-navbar-parent-icon></span></a>
+                                    <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
+                                        <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
+                                            <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
+                                                <div>
+                                                    <a href="list.php">
+                                                        <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain3.jpeg " />
+                                                            <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                <h2 class="uk-secondary uk-margin-remove">Family Trip</h2>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="list.php">
+                                                        <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain2.jpeg " />
+                                                            <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                <h2 class="uk-secondary uk-margin-remove">Guided Trip</h2>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="#">
+                                                        <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
+                                                            <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                <h2 class="uk-secondary uk-margin-remove">Self Guieded TRip</h2>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <a href="group.php">
+                                                        <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                            <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain8.jpeg " />
+                                                            <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                            <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                <h2 class="uk-secondary uk-margin-remove">Your Group</h2>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="uk-flex uk-flex-middle uk-flex-center uk-margin uk-margin-remove-bottom">
+                                                <a class="uk-nav-slider-btn prev-btn" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous" style="padding:6px 3px !important;"></a>
+                                                <a class="uk-nav-slider-btn next-btn" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next" style="padding:6px 3px !important;"></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
-                            @endif
-                            @if ($contact_us != 'null')
-                                <li> <a href="{{ route('page.posttype_detail', $contact_us->uri) }}">
-                                        {{ $contact_us->post_type }}</a> </li>
-                            @endif
-                            <li><a href="{{ route('payment.direct') }}"><button class="uk-button uk-button-default">Payment</button></a></li>
+                                <li>
+                                    <a href="#">Expedition <span uk-navbar-parent-icon></span></a>
+                                    <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
+                                            <div class=" uk-container">
+                                        <div class="mega-border-top">
+                                            <div uk-grid class="uk-grid-small">
+                                                <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
+                                                    <li> <a href="">6000</a> </li>
+                                                    <li> <a href="">7000</a> </li>
+                                                    <li> <a href="">8000</a> </li>
+                                                </ul>
+                                                <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
+                                                    <!-- Annapurna Region -->
+                                                    <div>
+                                                        <div class="uk-child-width-1-2@m uk-grid">
+                                                            <div>
+                                                                <div class="uk-title-fonts">
+                                                                    <h2 class="uk-secondary">6000</h2>
+                                                                    <p class="uk-margin-bottom">The 6000 Region is one of Nepal’s most famous trekking destinations, known for its breathtaking mountain landscapes, diverse ecosystems, and rich cultural heritage.</p>
+                                                                    <a href="list.php" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="uk-child-width-1-2 uk-grid-small uk-grid">
+                                                                    <div>
+                                                                        <img src="assets/img/mountain/mountain3.jpeg" alt="" class="border uk-media-140">
+                                                                    </div>
+                                                                    <div>
+                                                                        <img src="assets/img/mountain/mountain4.jpeg" alt="" class="border uk-media-140">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
+                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp (ABC) Trek</a>
+                                                                        <li> <a href="trip-detail.php">Annapurna Circuit Trek</a>
+                                                                        <li> <a href="trip-detail.php">Mardi Himal Trek</a>
+                                                                    </ul>
+                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                        <li> <a href="trip-detail.php">Ghorepani Poon Hill Trek</a>
+                                                                        <li> <a href="trip-detail.php">Tilicho Lake Trek</a>
+                                                                        <li> <a href="trip-detail.php">Upper Mustang Trek</a>
+                                                                        </ul>
+                                                                    <ul class=" uk-list uk-highlight uk-navbar-list">
+                                                                        <li> <a href="trip-detail.php">Khopra Danda Trek</a>
+                                                                        <li> <a href="trip-detail.php"> Annapurna Short Trek (Ideal for beginners)</a>
+                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp Trek</a>
+                                                                    </ul>
+                                                                </div>
+                                                    </div>
+                                                    <!-- Dhaulagiri Region -->
+                                                    <div>
+                                                        <div class="uk-child-width-1-2@m uk-grid">
+                                                            <div>
+                                                                <div class="uk-title-fonts">
+                                                                    <h2 class="uk-secondary">7000</h2>
+                                                                    <p class="uk-margin-bottom">The 7000 is one of Nepal’s most famous trekking destinations, known for its breathtaking mountain landscapes, diverse ecosystems, and rich cultural heritage.</p>
+                                                                    <a href="list.php" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="uk-child-width-1-2 uk-grid-small uk-grid">
+                                                                    <div>
+                                                                        <img src="assets/img/mountain/mountain6.jpeg" alt="" class="border uk-media-140">
+                                                                    </div>
+                                                                    <div>
+                                                                        <img src="assets/img/mountain/mountain9.jpeg" alt="" class="border uk-media-140">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
+                                                            <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                <li> <a href="">Annapurna Base Camp (ABC) Trek</a>
+                                                                <li> <a href="">Annapurna Circuit Trek</a>
+                                                                <li> <a href="">Mardi Himal Trek</a>
+                                                            </ul>
+                                                            <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                <li> <a href="">Ghorepani Poon Hill Trek</a>
+                                                                <li> <a href="">Tilicho Lake Trek</a>
+                                                                <li> <a href="">Upper Mustang Trek</a>
+                                                                </ul>
+                                                                <ul class=" uk-list uk-highlight uk-navbar-list">
+                                                                <li> <a href="">Khopra Danda Trek</a>
+                                                                <li> <a href=""> Annapurna Short Trek (Ideal for beginners)</a>
+                                                                <li> <a href="">Annapurna Base Camp Trek</a>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Everest Region -->
+                                                    <div>
+                                                        <div class="uk-child-width-1-2@m uk-grid">
+                                                            <div>
+                                                                <div class="uk-title-fonts">
+                                                                    <h2 class="uk-secondary">8000</h2>
+                                                                    <p class="uk-margin-bottom">The 8000 is one of Nepal’s most famous trekking destinations, known for its breathtaking mountain landscapes, diverse ecosystems, and rich cultural heritage.</p>
+                                                                    <a href="list.php" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div class="uk-child-width-1-2 uk-grid-small uk-grid">
+                                                                    <div>
+                                                                        <img src="assets/img/mountain/mountain7.jpeg" alt="" class="border uk-media-140">
+                                                                    </div>
+                                                                    <div>
+                                                                        <img src="assets/img/mountain/mountain2.jpeg" alt="" class="border uk-media-140">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
+                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp (ABC) Trek</a>
+                                                                        <li> <a href="trip-detail.php">Annapurna Circuit Trek</a>
+                                                                        <li> <a href="trip-detail.php">Mardi Himal Trek</a>
+                                                                    </ul>
+                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                        <li> <a href="trip-detail.php">Ghorepani Poon Hill Trek</a>
+                                                                        <li> <a href="trip-detail.php">Tilicho Lake Trek</a>
+                                                                        <li> <a href="trip-detail.php">Upper Mustang Trek</a>
+                                                                        </ul>
+                                                                    <ul class=" uk-list uk-highlight uk-navbar-list">
+                                                                        <li> <a href="trip-detail.php">Khopra Danda Trek</a>
+                                                                        <li> <a href="trip-detail.php"> Annapurna Short Trek (Ideal for beginners)</a>
+                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp Trek</a>
+                                                                    </ul>
+                                                                </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                        </li>
+                        <!-- <li><a href="">Advanced Search</a></li> -->
+                        <li class="uk-flex uk-flex-middle">
+                            <form class="uk-search uk-search-default">
+                                <input class="uk-search-input " type="search" placeholder="Search" aria-label="Search">
+                                <span class="uk-search-icon-flip" uk-search-icon></span>
+                            </form>
+                        </li>
                         </ul>
                     </div>
-                </nav>
-            </div>
-        </div>
-        <!-- end main menu -->
-        <!-- mobile menu -->
-        <div class="uk-header-mobile uk-hidden@l " uk-header="">
-            <div class="uk-navbar-container ">
-                <div class="uk-container">
-                    <nav class="uk-navbar" uk-navbar="{&quot;container&quot;:&quot;.uk-header-mobile&quot;}">
-                        <div class="uk-navbar-left">
-                            <a href="{{ url('/') }}" class="uk-logo uk-navbar-item"> <img
-                                    src="{{ asset('theme-assets/images/adventure-logo.png') }}" alt="" class="uk-logo-dark"> </a>
-                        </div>
-                        <div class="uk-navbar-right">
-
-                            <a uk-toggle aria-label="Open Menu" href="#uk-dialog-mobile"
-                                class="uk-navbar-toggle uk-navbar-toggle-animate" aria-expanded="false">
-                                <div uk-navbar-toggle-icon class="uk-icon uk-navbar-toggle-icon"></div>
-                            </a>
-                        </div>
                     </nav>
                 </div>
             </div>
-            <div id="uk-dialog-mobile" class="uk-dropbar uk-padding-remove"
-                uk-drop="{&quot;clsDrop&quot;:&quot;uk-dropbar&quot;,&quot;flip&quot;:&quot;false&quot;,&quot;container&quot;:&quot;.uk-header-mobile&quot;,&quot;target-y&quot;:&quot;.uk-header-mobile .uk-navbar-container&quot;,&quot;mode&quot;:&quot;click&quot;,&quot;target-x&quot;:&quot;.uk-header-mobile .uk-navbar-container&quot;,&quot;stretch&quot;:true,&quot;bgScroll&quot;:&quot;false&quot;,&quot;animation&quot;:&quot;reveal-top&quot;,&quot;animateOut&quot;:true,&quot;duration&quot;:300,&quot;toggle&quot;:&quot;false&quot;}">
-                <div class="uk-height-min-1-1 uk-flex uk-flex-column">
-                    <div class="uk-margin-auto-bottom">
-                        <div class="uk-grid uk-child-width-1-1 uk-grid-stack" uk-grid="">
-                            <div>
-                                <div class="uk-panel" id="module-menu-dialog-mobile">
-                                    <ul class="uk-nav uk-nav-primary  uk-nav-divider uk-nav-accordion uk-margin-top"
-                                        uk-nav="targets: > .js-accordion">
-                                        <li><a href="{{ url('/') }}">Home</a></li>
-                                        @if ($navigations->count() > 0)
-                                            @foreach ($navigations->take(1) as $row)
-                                                @if (has_posts($row->id))
-                                                    <li class="js-accordion uk-parent"><a href=""
-                                                            aria-expanded="false"> {{ $row->post_type }} <span
-                                                                uk-nav-parent-icon=""
-                                                                class="uk-icon uk-nav-parent-icon"></span>
-                                                        </a>
-                                                        <ul class="uk-nav-sub">
-                                                            @foreach (has_posts($row->id) as $item)
-                                                                <li>
-                                                                    <a
-                                                                        href="{{ url(geturl($item->uri, $item->page_key)) }}">
-
-                                                                        {{ $item->post_title }}
-
-                                                                    </a>
-                                                                </li>
-                                                            @endforeach
-                                                            <!--  -->
-                                                        </ul>
-                                                    </li>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                        @if ($activity != null)
-                                            <li class="js-accordion uk-parent"><a href="{{ route('page.activitydetail', $row->uri) }}"
-                                                    aria-expanded="false"> Activities <span uk-nav-parent-icon=""
-                                                        class="uk-icon uk-nav-parent-icon"></span>
-                                                </a>
-                                                <ul class="uk-nav-sub">
-                                                    @foreach ($activity->whereNotIn('id',['58','59']) as $row)
-                                                        <li>
-                                                            <a href="{{ route('page.activitydetail', $row->uri) }}">
-
-                                                                {{ $row->title }}
-
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                             <li><a href="{{ route('page.trekkinglist') }}">Trekking</a></li>
-
-                                             <li><a href="{{ route('page.expeditionlist') }}">Expeditions</a></li>
-                                                    <!--  -->
-                                                </ul>
-                                            </li>
-                                        @endif
-                                        @if ($expedition != null)
-
-                                            <li class="js-accordion uk-parent"><a href="#"
-                                                    aria-expanded="false"> Expedition <span uk-nav-parent-icon=""
-                                                        class="uk-icon uk-nav-parent-icon"></span>
-                                                </a>
-                                                <ul class="uk-nav-sub">
-                                                    @foreach ($expedition as $row)
-                                                        <li>
-                                                            <a href="{{ route('expedition-list', $row->uri) }}">
-                                                                {{ $row->title }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                    <!--  -->
-                                                </ul>
-                                            </li>
-                                        @endif
-                                        <li class="js-accordion uk-parent"> <a href="#"
-                                                aria-expanded="false">
-                                                Trekking
-                                                <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
-                                            </a>
-                                            <ul class="uk-nav-sub">
-                                              @foreach ($trekking as $key => $value)
-                                                <li><a href="{{ route('trekking-list',$value->uri) }}">{{ $value->title }}</a></li>
-                                           @endforeach
-                                            </ul>
-                                        </li>
-
-                                        @if ($useful_info != 'null')
+            <!-- end main menu -->
+            <!-- mobile menu -->
+            <div class="uk-header-mobile uk-hidden@l " uk-header="">
+                <div class="uk-navbar-container ">
+                    <div class="uk-container">
+                        <nav class="uk-navbar" uk-navbar="{&quot;container&quot;:&quot;.uk-header-mobile&quot;}">
+                            <div class="uk-navbar-left">
+                                <a href="index.php" class="uk-logo uk-navbar-item"> <img src="assets/img/logo.png" alt="" style="height:56px;"> </a>
+                            </div>
+                            <div class="uk-navbar-right">
+                                <a href="contact.php"><i class="fa-solid fa-phone uk-white f-20 uk-margin-small-right"></i></a>
+                                <a href="#modal-search" uk-toggle><i class="fa-solid fa-magnifying-glass uk-white f-20 uk-margin-small-right"></i></a>
+                                <div id="modal-search" uk-modal>
+                                    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                        <form class="uk-search uk-search-default uk-width-1-1">
+                                            <input class="uk-search-input " type="search" placeholder="Search" aria-label="Search">
+                                            <span class="uk-search-icon-flip" uk-search-icon></span>
+                                        </form>
+                                    </div>
+                                </div>
+                                <a uk-toggle aria-label="Open Menu" href="#uk-dialog-mobile" class="uk-navbar-toggle uk-navbar-toggle-animate" aria-expanded="false">
+                                    <div uk-navbar-toggle-icon class="uk-icon uk-navbar-toggle-icon"></div>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div id="uk-dialog-mobile" class="uk-dropbar uk-padding-remove" uk-drop="{&quot;clsDrop&quot;:&quot;uk-dropbar&quot;,&quot;flip&quot;:&quot;false&quot;,&quot;container&quot;:&quot;.uk-header-mobile&quot;,&quot;target-y&quot;:&quot;.uk-header-mobile .uk-navbar-container&quot;,&quot;mode&quot;:&quot;click&quot;,&quot;target-x&quot;:&quot;.uk-header-mobile .uk-navbar-container&quot;,&quot;stretch&quot;:true,&quot;bgScroll&quot;:&quot;false&quot;,&quot;animation&quot;:&quot;reveal-top&quot;,&quot;animateOut&quot;:true,&quot;duration&quot;:300,&quot;toggle&quot;:&quot;false&quot;}">
+                    <div class="uk-height-min-1-1 uk-flex uk-flex-column">
+                        <div class="uk-margin-auto-bottom">
+                            <div class="uk-grid uk-child-width-1-1 uk-grid-stack" uk-grid="">
+                                <div>
+                                    <div class="uk-panel" id="module-menu-dialog-mobile">
+                                        <ul class="uk-nav uk-nav-primary  uk-nav-divider uk-nav-accordion uk-margin-top" uk-nav="targets: > .js-accordion">
                                             <li class="js-accordion uk-parent">
-                                                <a href="" aria-expanded="false">Useful Info <span
-                                                        uk-nav-parent-icon=""
-                                                        class="uk-icon uk-nav-parent-icon"></span>
+                                                <a href="" aria-expanded="false">
+                                                    Company <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                                 </a>
-
                                                 <ul class="uk-nav-sub">
-                                                    @foreach ($useful_info as $item)
-                                                        <li>
-                                                            <a href="{{ url(geturl($item->uri, $item->page_key)) }}">
-                                                                {{ $item->post_title }}</a>
-                                                        </li>
-                                                    @endforeach
-
-
+                                                    <li><a href="about.php">About Us</a></li>
+                                                    <li><a href="why-us.php">Why US</a></li>
+                                                    <li><a href="message.php">Messafe from us</a></li>
+                                                    <li><a href="migmar.php">Migmar Foundation</a></li>
+                                                    <li><a href="agent.php">Need an Agent</a></li>
+                                                    <li><a href="team.php">Team Member</a></li>
+                                                    <li><a href="safety.php">Safety & Security</a></li>
+                                                    <li><a href="suggestion.php">Suggestion</a></li>
                                                 </ul>
                                             </li>
-                                        @endif
-                                        @if ($contact_us != 'null')
-                                            <li> <a href="{{ route('page.posttype_detail', $contact_us->uri) }}">
-                                                    {{ $contact_us->post_type }}</a> </li>
-                                        @endif
-                                        <li><a href="{{ route('payment.direct') }}"><button class="uk-button uk-button-default">Payment</button></a></li>
-                                    </ul>
+                                            <li class="js-accordion uk-parent">
+                                                <a href="activities.php" aria-expanded="false"> Destination
+                                                    <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
+                                                </a>
+                                                <ul class="uk-nav-sub">
+                                                <li><a href="list.php">Everest Region</a></li>
+                                                    <li><a href="list.php">Manasulu Region</a></li>
+                                                    <li><a href="list.php">Annapurna Region</a></li>
+                                                    <li><a href="list.php">Langtang Region</a></li>
+                                                    <li><a href="list.php">Makalu Region</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="js-accordion uk-parent">
+                                                <a href="region-list.php" aria-expanded="false">Expedition
+                                                    <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
+                                                </a>
+                                                <ul class="uk-nav-sub">
+                                                    <li><a href="list.php">8000ers</a></li>
+                                                    <li><a href="list.php">7000ers</a></li>
+                                                    <li><a href="list.php">6000ers</a></li>
+                                                    <li><a href="list.php">5000ers</a></li>
+                                                    <li><a href="list.php">All</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="js-accordion uk-parent">
+                                                <a href="region-list.php" aria-expanded="false"> Activities
+                                                    <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
+                                                </a>
+                                                <ul class="uk-nav-sub">
+                                                    <li><a href="list.php">Biking</a></li>
+                                                    <li><a href="list.php">Culture</a></li>
+                                                    <li><a href="list.php">Cycling</a></li>
+                                                    <li><a href="list.php">Family</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="js-accordion uk-parent">
+                                                <a href="region-list.php" aria-expanded="false"> Travelling Style
+                                                    <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
+                                                </a>
+                                                <ul class="uk-nav-sub">
+                                                    <li><a href="list.php">Family Trip</a></li>
+                                                    <li><a href="list.php">Guided Trip</a></li>
+                                                    <li><a href="list.php">Self Guided Group</a></li>
+                                                    <li><a href="group.php">Your Group</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="news.php">News / Blogs</a></li>
+                                            <li class="js-accordion uk-parent">
+                                                <a href="" aria-expanded="false">Useful Info
+                                                    <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
+                                                </a>
+                                                <ul class="uk-nav-sub">
+                                                    <li><a href="women.php">Women Empowerment</a></li>
+                                                    <li> <a href="tourism.php">Toursim</a></li>
+                                                    <li> <a href="suggestion.php">Journey & Suggestion</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.php">Contact Us</a></li>
+                                            <li class="uk-margin-bottom uk-margin-top">
+                                                <div class="uk-text-center uk-margin-top    ">
+                                                    <a href="plan.php" class="inquiry-btn">Plan Your Trip</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="uk-padding uk-padding-remove-top uk-text-center">
+                                            <a href="" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
+                                            <a href="" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
+                                            <a href="" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- end mobile menu -->
-    </div>
-    <!-- end header    -->
-    <div class="uk-sticky-right uk-position-fixed uk-position-bottom-right  uk-margin" style="z-index:900;"> 
-        <div id="google_translate_element" style="position:absolute; right:0px; top:-25px; z-index:100000;"></div>
-    </div>
-    
 
+            <!-- end mobile menu -->
+            </div>
+            </div>
+        </header>
+
+        <!-- Header end -->
+
+        

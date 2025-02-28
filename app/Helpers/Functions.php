@@ -202,6 +202,12 @@ function trip_byDestinations($id)
     }
     return false;
 }
+    function getDestinationNameByTripId($tripId)
+    {
+        return DestinationModel::whereHas('trips', function ($query) use ($tripId) {
+            $query->where('trip_id', $tripId);
+        })->value('title');
+    }
 
 function populartrip_byDestinations($id)
 {

@@ -46,9 +46,17 @@ h1,h2,h3,.uk-font span{
   font-size: 3.5rem;
   letter-spacing: 2px;
 }
+.uk-sub-banner-font p{
+    color: var(--white);
+    margin: 0;
+}
 .uk-title-font span{
   font-family: "Bebas Neue", serif;
   font-size: 17px;
+}
+.uk-accordion-font {
+  font-family: "Bebas Neue", serif !important;
+  font-size: 22px !important;
 }
 .uk-title-font h1,.uk-title-font h2{
   margin: 0;
@@ -181,6 +189,10 @@ h1,h2,h3,.uk-font span{
   height: 205px;
   width: 100%;
 }
+.uk-media-220{
+  height: 224px;
+  width: 100%;
+}
 .uk-media-260{
   height: 260px;
   width: 100%;
@@ -201,6 +213,7 @@ h1,h2,h3,.uk-font span{
   height: 500px;
 }
 .uk-media-205 img,
+.uk-media-220 img,
 .uk-media-260 img,
 .uk-media-270 img,
 .uk-media-280 img,
@@ -208,7 +221,7 @@ h1,h2,h3,.uk-font span{
 .uk-media-400 img,
 .uk-media-500 img{
   height: 100%;
-  width: 100%;
+  width: 100% !important;
   object-fit: cover;
 }
 
@@ -257,4 +270,7 @@ h1,h2,h3,.uk-font span{
 }
 .pt-150{
   padding-top: 150px;
+}
+.pb-23{
+  padding-bottom: 23px;
 }

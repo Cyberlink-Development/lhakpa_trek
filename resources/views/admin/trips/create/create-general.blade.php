@@ -23,6 +23,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <label>Slogan</label>
+                            <input type="text" name="discount" class="form-control" value="{{ old('discount') }}" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel">
@@ -44,12 +52,12 @@
                             @endif
                         </div>
                     </div>  
-                    {{-- <div class="col-lg-6">
+                    <div class="col-lg-6">
                         <div class="bs-component">
                             <label>Grade Message</label>
                             <input type="text" name="status_text" class="form-control" value="{{ old('status_text') }}" />
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="col-lg-6">
                         <div class="bs-component">
                             <label>Max Elevation</label>
@@ -66,7 +74,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Season</label>
+                            <label>Start / End</label>
                             <input type="text" name="best_season" class="form-control" value="{{ old('best_season') }}" />
                         </div>
                     </div>
@@ -131,16 +139,6 @@
                 <!--        </div>-->
                 <!--    </div>-->
                 <!--</div>-->
-                 <!--<div class="form-group">-->
-                
-                      <!--<div class="col-lg-6">-->
-                    <!--    <div class="bs-component">-->
-                    <!--        <label>Discount</label>-->
-                    <!--        <input type="text" name="discount" class="form-control"-->
-                    <!--            value="{{ old('discount') }}" />-->
-                    <!--    </div>-->
-                    <!--</div>-->
-                <!--</div>-->
                  <div class="form-group">
                     <!-- <div class="col-lg-6">-->
                     <!--    <div class="bs-component">-->
@@ -179,7 +177,7 @@
 
         <div class="panel">
         <div class="panel-heading">
-        <span class="panel-title">Equipments</span>
+        <span class="panel-title">Important notice</span>
         </div>
         <div class="panel-body">
         <div class="form-group">
@@ -483,22 +481,22 @@
                 </div>
             </div>
 
-            <!-- <div class="sid_bvijay mb10">-->
-            <!--    <h4> Upload PDF </h4>-->
-            <!--    <div class="hd_show_con">-->
-            <!--        <div id="xedit" class="bs-component">-->
-            <!--         <label class="field prepend-icon append-button file mb20">-->
-            <!--            <span class="button btn btn-primary">Choose File</span>-->
-            <!--            <input type="file" class="gui-file" name="upload_pdf" id="file2" onChange="document.getElementById('upload_pdf').value = this.value;">-->
-            <!--            <input type="text" class="gui-input" id="upload_pdf" placeholder="Please select a File">-->
-            <!--            <label class="field-icon">-->
-            <!--              <i class="fa fa-upload"></i>-->
-            <!--            </label>-->
-            <!--          </label>-->
-            <!--        </div>-->
-            <!--       <small> (Less Than 2MB) </small>-->
-            <!--    </div>-->
-            <!--</div>-->
+            <div class="sid_bvijay mb10">
+                <h4> Upload PDF </h4>
+                <div class="hd_show_con">
+                    <div id="xedit" class="bs-component">
+                     <label class="field prepend-icon append-button file mb20">
+                        <span class="button btn btn-primary">Choose File</span>
+                        <input type="file" class="gui-file" name="upload_pdf" id="file2" onChange="document.getElementById('upload_pdf').value = this.value;">
+                        <input type="text" class="gui-input" id="upload_pdf" placeholder="Please select a File">
+                        <label class="field-icon">
+                          <i class="fa fa-upload"></i>
+                        </label>
+                      </label>
+                    </div>
+                   <small> (Less Than 2MB) </small>
+                </div>
+            </div>
 
         </div>
     </div>

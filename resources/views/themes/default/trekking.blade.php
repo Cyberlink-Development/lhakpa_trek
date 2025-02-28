@@ -4,77 +4,201 @@
 @section('meta_description', $item->meta_description)
 @section('thumbnail', $item->thumbnail)
 @section('content')
-<section class="bg-black-light  uk-hero-banner uk-cover-container uk-position-relative uk-flex uk-flex-bottom 
-   uk-background-norepeat uk-background-cover uk-background-top-center uk-background-fixed" uk-height-viewport data-src="{{asset('uploads/banners/'.$item->banner)}}" uk-img>
-    <div class="uk-overlay-banner uk-position-cover"></div>
-    <div class="uk-position-center uk-text-center uk-inner-banner" uk-scrollspy="cls: uk-animation-slide-left-small; target:  h5,p;  delay: 50; repeat: false;">
-        <h5 class="uk-margin-top white-center-underline ">{{ ucfirst($item->activity_parent) }}</h5>
-        <p class="banner-heading  uk-margin-remove">{{ $item->title }}</p>
-        <p class="text-white bottom-font">{{ $item->sub_title }}</p>
-    </div>
-</section>
-<section class="uk-section bg-light why-bg bottom-pattern">
-    <div class="uk-container">
-        <div class="section-title uk-text-center">
-            <h5 class="uk-margin-top uk-margin-remove-bottom center-underline"> Adventures for a lifetime Experience</h5>
-            <h2 class="uk-margin-remove">{{ $item->title }}</h2>
-        </div>
-        <p class="uk-text-justify">
-          {!! $item->content !!}   
-        </p>
-    </div>
-</section>
-<section class="uk-section">
-    <div class="uk-container">
-        <ul class="uk-child-width-1-1  uk-child-width-1-2@m  uk-child-width-1-3@l uk-flex uk-flex-center uk-grid" uk-grid uk-height-match="target:.uk-trek-description">
-            <!--trek -->
-            @if($data->count() > 0)
-            @foreach ($data as $item)
-            <li>
-                <div class="uk-trek-list ">
-                    <div class="uk-trek-image uk-inline uk-width-1-1">
-                         @if($item->thumbnail)
-                    <img src="{{asset('uploads/original/'.$item->thumbnail)}}" class="uk-media-260" alt="{{$item->trip_title}}">
-                @else
-                    <img src="{{asset('theme-assets/images/default-thumbnail.png')}}" class="uk-media-260" alt="{{$item->trip_title}}">
-                @endif
-                        <div class="uk-position-top-right uk-overlay uk-overlay-default">{{ get_trip_type($item->trip_type) }}</div>
+
+<section class=" uk-cover-container uk-position-relative uk-flex uk-flex-middle uk-background-norepeat uk-background-cover uk-background-top-center uk-background-fixed" uk-height-viewport data-src="{{ $item->banner ? asset('uploads/banners/'.$item->banner) : asset('theme-assets/img/mountain/mountain6.jpeg') }}" alt="" uk-img>
+    <div class="uk-container uk-width-1-1 pt-150">
+        <div class="uk-flex uk-flex-middle uk-grid-collapse " uk-grid uk-height-match="target: .uk-same-height">
+            <div class="uk-width-3-4@m" id="container">
+                <div id="originalDiv">
+                    <ul class="uk-breadcrumb">
+                        <li><a href="{{ url('/') }}" class="uk-white">Home</a></li>
+                        <li><span class="uk-secondary">{{ ucfirst($item->activity_parent) }}</span></li>
+                    </ul>
+                    <div class="uk-sub-banner-font">
+                        <h1>{{ $item->title }}</h1>
                     </div>
-                    <div class="uk-trek-description uk-padding-small uk-panel">
-                        <h3 class="uk-margin-small">{{$item->trip_title}}</h3>
-                        <div class="uk-grid-small uk-child-width-expand  uk-grid" uk-grid="">
-                            <div class="uk-flex uk-flex-middle">
-                                <div>
-                                    <img class="uk-margin-small-right" src="{{ asset('theme-assets/images/blue-icons/duration.png') }}" width="30" alt="duration">
-                                </div>
-                                <div>
-                                    <span class="uk-font-primary ">Duration</span>
-                                    <br>{{$item->duration}}
-                                </div>
+                    <!-- when video is availabe otherwise hiddeb -->
+                    <div class="uk-margin-bottom">
+                        <span class="uk-video">PLAY VIDEO</span>
+                        <a class=" uk-margin-small-left bg-secondary uk-play-button" href="#modal-media-youtube" uk-toggle><i class="fa-solid fa-play"></i></a>
+                        <div id="modal-media-youtube" class="uk-flex-top" uk-modal>
+                            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+                                <button class="uk-modal-close-outside" type="button" uk-close></button>
+                                <iframe src="https://www.youtube-nocookie.com/embed/c2pz2mlSfXA" width="1920" height="1080" loading="lazy" uk-video uk-responsive></iframe>
                             </div>
-                            <div class="uk-flex uk-flex-middle">
-                                <div> <img class="uk-margin-small-right" src="{{ asset('theme-assets/images/blue-icons/difficult.png') }}" width="30" alt="difficulty"> </div>
-                                <div> <span class="uk-font-primary">Max Altitude</span>
-                                    <br>{{$item->max_altitude}}
-                                </div>
-                            </div>
-                            <!--  -->
                         </div>
                     </div>
-                    <div class="uk-trek-button">
-                        <a href="{{ url('page/' . tripurl($item->uri)) }}" class="uk-button uk-button-default uk-margin-remove uk-width-1-1 ">EXPLORE MORE</a>
+                    <!--  -->
+                </div>
+                <!-- photos section start -->
+                <div id="newDiv1" class="hidden uk-grey-bg uk-same-height">
+                    <div class="uk-padding uk-list-modal uk-inline uk-width-1-1">
+                        <div class="uk-position-right">
+                            <button id="closeBtn1"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
+                            <div class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@m uk-grid" uk-lightbox="animation: slide">
+                                @foreach ($dataAll as $row)
+                                    <div>
+                                        <a class="uk-inline uk-media-270" href="{{ !empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain4.jpeg')}}">
+                                            <img src="{{ !empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain4.jpeg')}}" class="border" alt="abc">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slider-item="previous"></a>
+                            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slider-item="next"></a>
+
+                        </div>
                     </div>
                 </div>
-            </li>
-                        @endforeach
-            @endif
-            <!--trek end  -->
+                <!-- photos section end -->
 
-
-        </ul>
+                <!-- information section start -->
+                <div id="newDiv2" class="hidden uk-grey-bg uk-same-height">
+                    <div class="uk-padding uk-list-modal uk-inline">
+                        <div class="uk-position-right">
+                            <button id="closeBtn2"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <h2 class="uk-secondary uk-margin-remove-top">{{ $item->title }}</h2>
+                        <hr>
+                        <p>
+                            {!!$item->content!!}
+                        </p>
+                    </div>
+                </div>
+                <!-- information section end -->
+            </div>
+            <div class="uk-width-1-4@m uk-same-height ">
+                <div class="uk-grey-bg  uk-padding-dicovery  uk-pattern-bg">
+                    <h2 class="uk-white uk-text-uppercase">Discovery</h2>
+                    <hr style="border-color: var(--secondary);">
+                    <p class="uk-white uk-text-justify line-five">
+                        {{$item->excerpt}}
+                    </p>
+                    <div class="uk-margin uk-text-center">
+                        <!-- this button will open the photo section -->
+                        <button id="changeBtn1" class="uk-buttons">
+                            <span class="uk-secondary uk-margin-right"><i class="fa-solid fa-photo-film uk-margin-small-right"></i> Photos</span>
+                        </button>
+                    </div>
+                    <div class="uk-flex uk-text-center">
+                        <!-- this button will open the information section -->
+                        <button class="uk-button uk-padding-remove uk-btn uk-btn-secondary uk-width-1-1" id="changeBtn2">Know More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-     <div class="uk-margin-top">
-    {!! $data->links('themes.default.common.pagination') !!}
-    </div> 
 </section>
+
+<!-- list section start -->
+<section class="uk-section">
+    <div class="uk-container">
+        <div uk-grid>
+            <div class="uk-width-1-4@m">
+                <div class="uk-sidebar uk-grey-bg uk-padding-small " uk-sticky="offset: 90; end: !" style="border-top: 5px solid var(--primary);"> 
+                    <div class="uk-title-font">
+                        <span class="uk-white  dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>Search your way</span>
+                    </div>
+                    <form action="">
+                        <div class="uk-margin">
+                            <select class="uk-select uk-list-select" aria-label="Difficulty">
+                                <option>Difficulty</option>
+                                <option>Easy</option>
+                                <option>Moderate</option>
+                                <option>Difficult</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <select class="uk-select uk-list-select" aria-label="Difficulty">
+                                <option>Duration</option>
+                                <option>One Week</option>
+                                <option>Two Week</option>
+                                <option>Long Stay</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin uk-list-select">
+                            <select class="uk-select" aria-label="Difficulty">
+                                <option>Price Range</option>
+                                <option>Easy</option>
+                                <option>Moderate</option>
+                                <option>Difficult</option>
+                            </select>
+                        </div>
+                        <div class="uk-flex uk-text-center">
+                            <button class="uk-button uk-padding-remove uk-btn uk-btn-secondary uk-width-1-1">Search NOw</a>
+                        </div>
+                    </form>
+                </div>
+                <div id="my-id"></div>
+            </div>
+            <div class="uk-width-3-4@m">
+                <!--  -->
+                @foreach ($data as $row)
+                    <div class="uk-margin-bottom">
+                        <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
+                            <div class="uk-width-2-5@m">
+                                <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-270">
+                                    <img src="{{!empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain9.jpeg')}}" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
+                                <div class="uk-star-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="uk-text-title uk-text-title uk-flex uk-flex-between">
+                                    <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-news-title">
+                                        <h2>{{$row->trip_title}}</h2>
+                                    </a>
+                                    @if($row->price)
+                                        <h2>US ${{$row->price}}</h2>
+                                    @endif
+                                </div>
+                                <p class="uk-margin-remove line-three">
+                                    {{$row->sub_title}}
+                                </p>
+                                <hr style="border-color: var(--grey);">
+                                <div class="uk-flex uk-flex-between uk-margin-small-top uk-margin-small-bottom">
+                                    <div class="uk-flex uk-flex-middle uk-trip">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <div>
+                                            <p class="uk-trip-title uk-margin-remove">Duration</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{$row->duration}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="uk-flex uk-flex-middle uk-trip ">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <div>
+                                            <p class="uk-trip-title uk-margin-remove">Location</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{getDestinationNameByTripId($row->id)}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="uk-flex uk-flex-middle uk-trip ">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <div>
+                                            <p class="uk-trip-title uk-margin-remove">Difficulty</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{$row->trip_grade}}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-btn uk-btn-secondary">Know more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <!--paginate  -->
+                {!! $data->links('themes.default.common.pagination') !!}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- list section end -->
+
 @stop

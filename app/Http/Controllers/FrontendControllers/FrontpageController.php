@@ -223,6 +223,7 @@ class FrontpageController extends Controller
         $activity = TripModel::find($data->id)->activities()->get();
 
         $setting = SettingModel::where('id',1)->first();
+        // dd($data);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
             'photo_videos', 'activity','similar_trips','photos','videos','local','banner','setting','schedules','faqs'));
@@ -758,8 +759,11 @@ class FrontpageController extends Controller
     public function trekking(Request $request)  
     {
         $item= ActivityModel::where('uri',$request->uri)->first();
-        $data = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc')->paginate(6); 
-        return view('themes.default.trekking', compact('data','item'));
+        $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
+        $dataAll = $query->get(); 
+        $data = $query->paginate(3);
+        // dd($data);
+        return view('themes.default.trekking', compact('dataAll','data','item'));
     }
 
     public function activitylist()

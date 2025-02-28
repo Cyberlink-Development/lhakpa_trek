@@ -90,6 +90,7 @@ class TripController extends Controller
 
 
             $data = $request->all();
+            // dd($data);
 
             /*************Banner Upload************/
             $file = $request->file('banner');
@@ -307,6 +308,7 @@ class TripController extends Controller
                     }
                     $bannerData->ordering = $request->banner_ordering[$key];
                     $bannerData->title = $request->banner_title[$key];
+                    $bannerData->content = $request->banner_content[$key];
                     $bannerData->save();
                     $sn_banner++;
                 }
@@ -325,6 +327,7 @@ class TripController extends Controller
                   $tripTestimonial->trip_detail_id = $last_id;       
                   $tripTestimonial->ordering = $request->testimonial_ordering[$key];   
                   $tripTestimonial->title = $request->testimonial_title[$key];    
+                  $tripTestimonial->content = $request->testimonial_content[$key];    
                   $tripTestimonial->save(); 
                   $sn_testimonial++;     
                 }
@@ -342,6 +345,7 @@ class TripController extends Controller
                   $tripInfo->trip_detail_id = $last_id;       
                   $tripInfo->ordering = $request->info_ordering[$key];   
                   $tripInfo->title = $request->info_title[$key];    
+                  $tripInfo->content = $request->info_content[$key];    
                   $tripInfo->save(); 
                   $sn_info++;     
                 }
@@ -819,6 +823,7 @@ class TripController extends Controller
                         // dd($banner);
                         $bannerData->ordering = $request->banner_ordering[$key];
                         $bannerData->title = $request->banner_title[$key];
+                        $bannerData->content = $request->banner_content[$key];
                
                         $bannerData->save();
                     } else if ($request->banner_id[$value] !== null && $request->banner_id[$value] !== "") {
@@ -841,6 +846,7 @@ class TripController extends Controller
                         $bannerData->trip_detail_id = $data->id;
                         $bannerData->ordering = $request->banner_ordering[$key];
                         $bannerData->title = $request->banner_title[$key];
+                        $bannerData->content = $request->banner_content[$key];
                     
                         $bannerData->save();
                     }
@@ -862,7 +868,7 @@ class TripController extends Controller
                         $testimonialData->trip_detail_id = $data->id;
                         $testimonialData->ordering = $request->testimonial_ordering[$key];
                         $testimonialData->title = $request->testimonial_title[$key];
-                        // $testimonialData->content = $request->testimonial_content[$key];
+                        $testimonialData->content = $request->testimonial_content[$key];
                         $testimonialData->save();
                     } else if ($request->testimonial_id[$value] !== null && $request->testimonial_id[$value] !== "") {
                         $testimonial_id = $request->testimonial_id[$value];
@@ -870,7 +876,7 @@ class TripController extends Controller
                         $testimonialData->trip_detail_id = $data->id;
                         $testimonialData->ordering = $request->testimonial_ordering[$key];
                         $testimonialData->title = $request->testimonial_title[$key];
-                        // $testimonialData->content = $request->testimonial_content[$key];
+                        $testimonialData->content = $request->testimonial_content[$key];
                         $testimonialData->save();
                     }
                     $sn_testimonial++;
@@ -890,7 +896,7 @@ class TripController extends Controller
                         $infoData->trip_detail_id = $data->id;
                         $infoData->ordering = $request->info_ordering[$key];
                         $infoData->title = $request->info_title[$key];
-                        // $infoData->content = $request->info_content[$key];
+                        $infoData->content = $request->info_content[$key];
                         $infoData->save();
                     } else if ($request->info_id[$value] !== null && $request->info_id[$value] !== "") {
                         $info_id = $request->info_id[$value];
@@ -898,7 +904,7 @@ class TripController extends Controller
                         $infoData->trip_detail_id = $data->id;
                         $infoData->ordering = $request->info_ordering[$key];
                         $infoData->title = $request->info_title[$key];
-                        // $infoData->content = $request->info_content[$key];
+                        $infoData->content = $request->info_content[$key];
                         $infoData->save();
                     }
                     $sn_info++;

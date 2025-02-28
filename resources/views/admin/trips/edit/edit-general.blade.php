@@ -23,6 +23,12 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="bs-component">
+                    <label>Slogan</label>
+                    <input type="text" name="discount" class="form-control" value="{{ $data->discount }}" />
+                </div>
+            </div>
         </div>
     </div>
 
@@ -48,12 +54,12 @@
 
                     </div>
                 </div>
-                 {{-- <div class="col-lg-6">
+                 <div class="col-lg-6">
                     <div class="bs-component">
                          <label>Grade Message</label>
                          <input type="text" name="status_text" class="form-control" value="{{$data->status_text}}" />
                         </div>
-                    </div>                  --}}
+                    </div>                 
                          <div class="col-lg-6">
                     <div class="bs-component">
                         <label>Max Elevation</label>
@@ -75,7 +81,7 @@
                 
                 <div class="col-lg-6">
                     <div class="bs-component">
-                        <label>Season</label>
+                        <label>Start / End</label>
                         <input type="text" name="best_season" class="form-control"
                                 value="{{ $data->best_season }}" />
                        
@@ -112,15 +118,7 @@
         </div>
     </div>
 </div>
-            <!--       <div class="col-lg-6">-->
-            <!--        <div class="bs-component">-->
-            <!--            <label>Staffs</label>-->
-            <!--            <input type="text" name="peak_name" class="form-control" value="{{ $data->peak_name }}"-->
-            <!--                placeholder="Staff" />-->
-            <!--        </div>-->
-            <!--    </div>-->
                  
-            <!--</div>-->
           
             <!--<div class="form-group">                -->
             <!--    <div class="col-lg-6">-->
@@ -193,7 +191,7 @@
     </div>
     <div class="panel">
     <div class="panel-heading">
-    <span class="panel-title">Equipments</span>
+    <span class="panel-title">Important notice</span>
     </div>
      <div class="panel-body">
          <div class="form-group">

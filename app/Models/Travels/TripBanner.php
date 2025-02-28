@@ -9,5 +9,5 @@ class TripBanner extends Model
 {
     use HasFactory;
     protected $table = 'trip_banners';
-    protected $fillable = ['trip_detail_id','title','banner','video','ordering'];
+    protected $fillable = ['trip_detail_id','title','banner','video','ordering','content'];
 }

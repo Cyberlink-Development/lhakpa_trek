@@ -100,22 +100,23 @@
     <!--        </div>-->
     <!--    </div>-->
     <!--</div>-->
-<!--     <div class="panel">-->
-<!--    <div class="panel-heading">-->
-<!--        <span class="panel-title"> Video ID </span>-->
-<!--    </div>-->
-<!--    <div class="panel-body">-->
-<!--        <div class="form-group">-->
-<!--            <div class="col-lg-12">-->
-<!--                <div class="bs-component">-->
-<!--                    <input type="text" class="form-control" name="category_video" value="{{ $data->category_video}}"-->
-<!--                       placeholder="Unique Video ID of youtube video"/>-->
-<!--                       <span>https://youtu.be/<b>iwhpS4ow7Zc</b></span>                        -->
-<!--                </div>-->
-<!--            </div>             -->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+    <div class="panel">
+      <div class="panel-heading">
+          <span class="panel-title"> Video ID </span>
+      </div>
+      <div class="panel-body">
+          <div class="form-group">
+              <div class="col-lg-12">
+                  <div class="bs-component">
+                      <input type="text" class="form-control" name="category_video" value="{{ $data->category_video}}"
+                        placeholder="Unique Video ID of youtube video"/>
+                        <span>https://youtu.be/<b>iwhpS4ow7Zc</b></span>                        
+                  </div>
+              </div>             
+          </div>
+      </div>
+    </div>
+    
     <div class="panel">
      <div class="panel-heading">
       <span class="panel-title">Map and Meta data </span>
