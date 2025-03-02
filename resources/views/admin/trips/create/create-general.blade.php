@@ -30,6 +30,12 @@
                             <input type="text" name="discount" class="form-control" value="{{ old('discount') }}" />
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <label>Overview</label>
+                            <input type="text" name="route" class="form-control" value="{{ old('route') }}"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,8 +60,15 @@
                     </div>  
                     <div class="col-lg-6">
                         <div class="bs-component">
+                            <label>Reference No:</label>
+                            <input type="text" name="trip_code" class="form-control" value="{{ old('trip_code') }}"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="bs-component">
                             <label>Grade Message</label>
-                            <input type="text" name="status_text" class="form-control" value="{{ old('status_text') }}" />
+                            {{-- <input type="text" name="status_text" class="form-control" value="{{ old('status_text') }}" /> --}}
+                            <textarea class="my-editor form-control" value="{{ old('status_text') }}" name="status_text"></textarea>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -125,12 +138,7 @@
                 <!--</div>-->
 
                 <!--<div class="form-group">-->
-                <!--    <div class="col-lg-6">-->
-                <!--        <div class="bs-component">-->
-                <!--        <label>Transportation</label>-->
-                <!--            <input type="text" name="route" class="form-control" value="{{ old('route') }}" />-->
-                <!--        </div>-->
-                <!--    </div>-->
+                <!--    -->
                 <!--    <div class="col-lg-6">-->
                 <!--        <div class="bs-component">-->
                 <!--            <label>Start / End</label>-->

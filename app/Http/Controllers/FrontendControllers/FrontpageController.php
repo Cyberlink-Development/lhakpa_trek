@@ -746,8 +746,11 @@ class FrontpageController extends Controller
     public function expedition(Request $request)
     {
         $item= ActivityModel::where('uri',$request->uri)->first();
-        $data = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc')->paginate(6); 
-        return view('themes.default.expedition', compact('data','item'));
+        $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
+        $dataAll = $query->get(); 
+        $data = $query->paginate(3);
+
+        return view('themes.default.expedition',compact('data','dataAll','item'));
     }
 
     public function tour()
@@ -762,7 +765,7 @@ class FrontpageController extends Controller
         $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
         $dataAll = $query->get(); 
         $data = $query->paginate(3);
-        // dd($data);
+        
         return view('themes.default.trekking', compact('dataAll','data','item'));
     }
 
