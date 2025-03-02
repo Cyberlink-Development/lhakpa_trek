@@ -79,6 +79,7 @@ class TripController extends Controller
         if ($request->ajax()) {
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title',
+                'upload_pdf' => 'nullable|mimes:pdf|max:2048',
                 
             ]);
             if ($validator->fails()) {
@@ -207,7 +208,7 @@ class TripController extends Controller
                     $tripSchedule->trip_detail_id = $last_id;
                     $tripSchedule->start_date = $request->schedule_start_date[$key];
                     $tripSchedule->end_date = $request->schedule_end_date[$key];
-                    // $tripSchedule->group_size = $request->schedule_group_size[$key];
+                    $tripSchedule->group_size = $request->schedule_group_size[$key];
                     $tripSchedule->availability = $request->schedule_availability[$key];
                     $tripSchedule->price = $request->schedule_price[$key];
                     $tripSchedule->remarks = $request->schedule_remarks[$key];
@@ -465,6 +466,7 @@ class TripController extends Controller
             // dd('test', $request->all());
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
+                'upload_pdf' => 'nullable|mimes:pdf|max:2048',
                 
             ]);
             if ($validator->fails()) {
@@ -654,7 +656,7 @@ class TripController extends Controller
                         $scheduleData->ordering = $request->schedule_ordering[$key];
                         $scheduleData->start_date = $request->schedule_start_date[$key];
                         $scheduleData->end_date = $request->schedule_end_date[$key];
-                        // $scheduleData->group_size = $request->schedule_group_size[$key];
+                        $scheduleData->group_size = $request->schedule_group_size[$key];
                         $scheduleData->availability = $request->schedule_availability[$key];
                         $scheduleData->price = $request->schedule_price[$key];
                         $scheduleData->remarks = $request->schedule_remarks[$key];
@@ -666,7 +668,7 @@ class TripController extends Controller
                         $scheduleData->ordering = $request->schedule_ordering[$key];
                         $scheduleData->start_date = $request->schedule_start_date[$key];
                         $scheduleData->end_date = $request->schedule_end_date[$key];
-                        // $scheduleData->group_size = $request->schedule_group_size[$key];
+                        $scheduleData->group_size = $request->schedule_group_size[$key];
                         $scheduleData->availability = $request->schedule_availability[$key];
                         $scheduleData->price = $request->schedule_price[$key];
                         $scheduleData->remarks = $request->schedule_remarks[$key];

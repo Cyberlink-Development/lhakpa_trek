@@ -199,7 +199,7 @@
                                                                         <div>
                                                                             <div class="uk-child-width-1-2 uk-grid-small uk-grid">
                                                                                 <div>
-                                                                                    <img src="{{ $value->thumbnail ? asset('uploads/icon/'.$value->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" alt="{{$value->title}}" class="border uk-media-140">
+                                                                                    <img src="{{ !empty($value->thumbnail) ? asset('uploads/icon/'.$value->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" alt="{{$value->title}}" class="border uk-media-140">
                                                                                 </div>
                                                                                 <div>
                                                                                     <img src="{{ !empty($value->banner) ? asset('uploads/banners/'.$value->banner) : asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="{{$value->title}}" class="border uk-media-140">
@@ -441,138 +441,59 @@
                                 <li>
                                     <a href="#">Expedition <span uk-navbar-parent-icon></span></a>
                                     <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
-                                            <div class=" uk-container">
-                                        <div class="mega-border-top">
-                                            <div uk-grid class="uk-grid-small">
-                                                <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
-                                                    <li> <a href="">6000</a> </li>
-                                                    <li> <a href="">7000</a> </li>
-                                                    <li> <a href="">8000</a> </li>
-                                                </ul>
-                                                <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
-                                                    <!-- Annapurna Region -->
-                                                    <div>
-                                                        <div class="uk-child-width-1-2@m uk-grid">
+                                        <div class=" uk-container">
+                                            <div class="mega-border-top">
+                                                <div uk-grid class="uk-grid-small">
+                                                    <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
+                                                        @foreach ($expedition as $row)
+                                                            <li> <a href="#">{{ $row->title }}</a> </li>
+                                                        @endforeach
+                                                    </ul>
+                                                    <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
+                                                        <!-- Annapurna Region -->
+                                                        @foreach ($expedition as $key => $value)
                                                             <div>
-                                                                <div class="uk-title-fonts">
-                                                                    <h2 class="uk-secondary">6000</h2>
-                                                                    <p class="uk-margin-bottom">The 6000 Region is one of Nepal’s most famous trekking destinations, known for its breathtaking mountain landscapes, diverse ecosystems, and rich cultural heritage.</p>
-                                                                    <a href="list.php" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="uk-child-width-1-2 uk-grid-small uk-grid">
+                                                                <div class="uk-child-width-1-2@m uk-grid">
                                                                     <div>
-                                                                        <img src="assets/img/mountain/mountain3.jpeg" alt="" class="border uk-media-140">
+                                                                        <div class="uk-title-fonts">
+                                                                            <h2 class="uk-secondary">{{$value->title}}</h2>
+                                                                            <p class="uk-margin-bottom">{{ $value->excerpt }}</p>
+                                                                            <a href="{{ route('expedition-list', $value->uri) }}" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
+                                                                        </div>
                                                                     </div>
                                                                     <div>
-                                                                        <img src="assets/img/mountain/mountain4.jpeg" alt="" class="border uk-media-140">
+                                                                        <div class="uk-child-width-1-2 uk-grid-small uk-grid">
+                                                                            <div>
+                                                                                <img src="{{!empty($value->thumbnail) ? asset('uploads/icon/'.$value->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" alt="" class="border uk-media-140">
+                                                                            </div>
+                                                                            <div>
+                                                                                <img src="{{!empty($value->banner) ? asset('uploads/banners/'.$value->banner) : asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="" class="border uk-media-140">
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
-                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
-                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp (ABC) Trek</a>
-                                                                        <li> <a href="trip-detail.php">Annapurna Circuit Trek</a>
-                                                                        <li> <a href="trip-detail.php">Mardi Himal Trek</a>
-                                                                    </ul>
-                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
-                                                                        <li> <a href="trip-detail.php">Ghorepani Poon Hill Trek</a>
-                                                                        <li> <a href="trip-detail.php">Tilicho Lake Trek</a>
-                                                                        <li> <a href="trip-detail.php">Upper Mustang Trek</a>
+                                                                <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
+                                                                    @php
+                                                                        $tripList = get_triplist($value->id)->take(9)->toArray();
+                                                                        $tripChunks = array_chunk($tripList, 3); 
+                                                                    @endphp
+                                                                    
+                                                                    @foreach ($tripChunks as $chunk)
+                                                                        <ul class="uk-list uk-highlight uk-navbar-list">
+                                                                            @foreach ($chunk as $item)
+                                                                                <li> <a href="{{ url('page/' . tripurl($item['uri'])) }}">{{ $item['trip_title'] }}</a>
+                                                                            @endforeach
                                                                         </ul>
-                                                                    <ul class=" uk-list uk-highlight uk-navbar-list">
-                                                                        <li> <a href="trip-detail.php">Khopra Danda Trek</a>
-                                                                        <li> <a href="trip-detail.php"> Annapurna Short Trek (Ideal for beginners)</a>
-                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp Trek</a>
-                                                                    </ul>
-                                                                </div>
-                                                    </div>
-                                                    <!-- Dhaulagiri Region -->
-                                                    <div>
-                                                        <div class="uk-child-width-1-2@m uk-grid">
-                                                            <div>
-                                                                <div class="uk-title-fonts">
-                                                                    <h2 class="uk-secondary">7000</h2>
-                                                                    <p class="uk-margin-bottom">The 7000 is one of Nepal’s most famous trekking destinations, known for its breathtaking mountain landscapes, diverse ecosystems, and rich cultural heritage.</p>
-                                                                    <a href="list.php" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
+                                                                    @endforeach
                                                                 </div>
                                                             </div>
-                                                            <div>
-                                                                <div class="uk-child-width-1-2 uk-grid-small uk-grid">
-                                                                    <div>
-                                                                        <img src="assets/img/mountain/mountain6.jpeg" alt="" class="border uk-media-140">
-                                                                    </div>
-                                                                    <div>
-                                                                        <img src="assets/img/mountain/mountain9.jpeg" alt="" class="border uk-media-140">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
-                                                            <ul class="uk-list uk-highlight uk-navbar-list">
-                                                                <li> <a href="">Annapurna Base Camp (ABC) Trek</a>
-                                                                <li> <a href="">Annapurna Circuit Trek</a>
-                                                                <li> <a href="">Mardi Himal Trek</a>
-                                                            </ul>
-                                                            <ul class="uk-list uk-highlight uk-navbar-list">
-                                                                <li> <a href="">Ghorepani Poon Hill Trek</a>
-                                                                <li> <a href="">Tilicho Lake Trek</a>
-                                                                <li> <a href="">Upper Mustang Trek</a>
-                                                                </ul>
-                                                                <ul class=" uk-list uk-highlight uk-navbar-list">
-                                                                <li> <a href="">Khopra Danda Trek</a>
-                                                                <li> <a href=""> Annapurna Short Trek (Ideal for beginners)</a>
-                                                                <li> <a href="">Annapurna Base Camp Trek</a>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Everest Region -->
-                                                    <div>
-                                                        <div class="uk-child-width-1-2@m uk-grid">
-                                                            <div>
-                                                                <div class="uk-title-fonts">
-                                                                    <h2 class="uk-secondary">8000</h2>
-                                                                    <p class="uk-margin-bottom">The 8000 is one of Nepal’s most famous trekking destinations, known for its breathtaking mountain landscapes, diverse ecosystems, and rich cultural heritage.</p>
-                                                                    <a href="list.php" class="uk-btn uk-btn-secondary uk-margin-top">VIEW ALL PACKAGES</a>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="uk-child-width-1-2 uk-grid-small uk-grid">
-                                                                    <div>
-                                                                        <img src="assets/img/mountain/mountain7.jpeg" alt="" class="border uk-media-140">
-                                                                    </div>
-                                                                    <div>
-                                                                        <img src="assets/img/mountain/mountain2.jpeg" alt="" class="border uk-media-140">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                       <div class="uk-margin-medium-top uk-child-width-1-3 uk-grid">
-                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
-                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp (ABC) Trek</a>
-                                                                        <li> <a href="trip-detail.php">Annapurna Circuit Trek</a>
-                                                                        <li> <a href="trip-detail.php">Mardi Himal Trek</a>
-                                                                    </ul>
-                                                                    <ul class="uk-list uk-highlight uk-navbar-list">
-                                                                        <li> <a href="trip-detail.php">Ghorepani Poon Hill Trek</a>
-                                                                        <li> <a href="trip-detail.php">Tilicho Lake Trek</a>
-                                                                        <li> <a href="trip-detail.php">Upper Mustang Trek</a>
-                                                                        </ul>
-                                                                    <ul class=" uk-list uk-highlight uk-navbar-list">
-                                                                        <li> <a href="trip-detail.php">Khopra Danda Trek</a>
-                                                                        <li> <a href="trip-detail.php"> Annapurna Short Trek (Ideal for beginners)</a>
-                                                                        <li> <a href="trip-detail.php">Annapurna Base Camp Trek</a>
-                                                                    </ul>
-                                                                </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                        </div>
-                        </li>
+                                </li>
                         <!-- <li><a href="">Advanced Search</a></li> -->
                         <li class="uk-flex uk-flex-middle">
                             <form class="uk-search uk-search-default">

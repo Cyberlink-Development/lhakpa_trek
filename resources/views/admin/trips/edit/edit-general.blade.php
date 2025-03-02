@@ -29,6 +29,12 @@
                     <input type="text" name="discount" class="form-control" value="{{ $data->discount }}" />
                 </div>
             </div>
+            <div class="col-lg-12">
+                <div class="bs-component">
+                    <label>Overview</label>
+                    <input type="text" name="route" class="form-control" value="{{ $data->route }}"/>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -54,12 +60,19 @@
 
                     </div>
                 </div>
-                 <div class="col-lg-6">
+                <div class="col-lg-6">
                     <div class="bs-component">
-                         <label>Grade Message</label>
-                         <input type="text" name="status_text" class="form-control" value="{{$data->status_text}}" />
-                        </div>
-                    </div>                 
+                        <label>Reference No:</label>
+                        <input type="text" name="trip_code" class="form-control" value="{{ $data->trip_code }}"/>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="bs-component">
+                        <label>Grade Message</label>
+                        {{-- <input type="text" name="status_text" class="form-control" value="{{$data->status_text}}" /> --}}
+                        <textarea class="my-editor form-control" value="{{$data->status_text}}" name="status_text">{{$data->status_text}}</textarea>
+                    </div>
+                </div>                 
                          <div class="col-lg-6">
                     <div class="bs-component">
                         <label>Max Elevation</label>
@@ -121,13 +134,6 @@
                  
           
             <!--<div class="form-group">                -->
-            <!--    <div class="col-lg-6">-->
-            <!--        <div class="bs-component">-->
-            <!--            <label>Transportation</label>-->
-            <!--            <input type="text" name="route" class="form-control" value="{{ $data->route }}"-->
-            <!--                placeholder="Transportation" />-->
-            <!--        </div>-->
-            <!--    </div>-->
             <!--    <div class="col-lg-6">-->
             <!--        <div class="bs-component">-->
             <!--            <label>Start / End</label>-->
@@ -560,31 +566,30 @@
                  <small> (Width: 1600px Height: 550px) </small>
             </div>
         </div>
-         <!-- trip PDF -->
-        <!--<div class="sid_bvijay mb10">-->
-        <!--    <h4> Upload PDF </h4>-->
-        <!--    <div class="hd_show_con">-->
-        <!--        <div id="xedit" class="bs-component">-->
-        <!--             <label class="field prepend-icon append-button file mb20">-->
-        <!--            <span class="button btn btn-primary">{{$data->trip_pdf?'Change':'Choose File'}}</span>-->
-        <!--            <input type="file" class="gui-file" name="upload_pdf" id="file1" onChange="document.getElementById('upload_pdf').value = this.value;">-->
-        <!--            <input type="text" class="gui-input" id="upload_pdf" placeholder="Please select a photo">-->
-        <!--            <label class="field-icon">-->
-        <!--              <i class="fa fa-upload"></i>-->
-        <!--            </label>-->
-        <!--          </label>-->
-        <!--        </div>-->
-        <!--        @if ($data->trip_pdf)-->
-        <!--            <div class="delete-fe-image pdf_id{{ $data->id }}">-->
-        <!--                <embed src="{{ asset(env('PUBLIC_PATH') . 'uploads/pdf/' . $data->trip_pdf) }}"-->
-        <!--                    width="200px" />-->
-        <!--                <a href="#{{ $data->id }}" class="pdfdelete">X</a>-->
-        <!--            </div>-->
-        <!--        @endif-->
-        <!--        <small> (Less Than 2MB) </small>-->
-        <!--    </div>-->
+        <div class="sid_bvijay mb10">
+            <h4> Upload PDF </h4>
+            <div class="hd_show_con">
+                <div id="xedit" class="bs-component">
+                     <label class="field prepend-icon append-button file mb20">
+                    <span class="button btn btn-primary">{{$data->trip_pdf?'Change':'Choose File'}}</span>
+                    <input type="file" class="gui-file" name="upload_pdf" id="file1" onChange="document.getElementById('upload_pdf').value = this.value;">
+                    <input type="text" class="gui-input" id="upload_pdf" placeholder="Please select a photo">
+                    <label class="field-icon">
+                      <i class="fa fa-upload"></i>
+                    </label>
+                  </label>
+                </div>
+                @if ($data->trip_pdf)
+                    <div class="delete-fe-image pdf_id{{ $data->id }}">
+                        <embed src="{{ asset(env('PUBLIC_PATH') . 'uploads/pdf/' . $data->trip_pdf) }}"
+                            width="200px" />
+                        <a href="#{{ $data->id }}" class="pdfdelete">X</a>
+                    </div>
+                @endif
+                <small> (Less Than 2MB) </small>
+            </div>
 
-        <!--</div>-->
+        </div>
     </div>
 </div>
 </div>

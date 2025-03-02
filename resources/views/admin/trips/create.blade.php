@@ -112,6 +112,7 @@
           /******** For Schedule *******/
         jQuery(document).delegate('a.add-schedule', 'click', function(e) {
             e.preventDefault();
+            jQuery('#schedule-headingg').hide();
             var content = jQuery('#row_schedule_additional .row'),
                 size = jQuery('#row_schedule_body >.row').length + 1,
                 element = null,

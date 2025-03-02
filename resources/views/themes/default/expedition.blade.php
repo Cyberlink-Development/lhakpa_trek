@@ -1,8 +1,5 @@
 @extends('themes.default.common.master')
-@section('title', $item->trip_title)
-@section('meta_keyword', $item->meta_keyword)
-@section('meta_description', $item->meta_description)
-@section('thumbnail', $item->thumbnail)
+@section('title','Expedition List')
 @section('content')
 
 <section class=" uk-cover-container uk-position-relative uk-flex uk-flex-middle uk-background-norepeat uk-background-cover uk-background-top-center uk-background-fixed" uk-height-viewport data-src="{{ $item->banner ? asset('uploads/banners/'.$item->banner) : asset('theme-assets/img/mountain/mountain6.jpeg') }}" alt="" uk-img>
@@ -20,7 +17,7 @@
                     <!-- when video is availabe otherwise hiddeb -->
                     <div class="uk-margin-bottom">
                         @if ($item->category_video)
-                            <span class="uk-video">PLAY VIDEO</span>
+                            <span class="uk-video">PLAY -VIDEO</span>
                             <a class=" uk-margin-small-left bg-secondary uk-play-button" href="#modal-media-youtube" uk-toggle><i class="fa-solid fa-play"></i></a>
                         @endif
                         <div id="modal-media-youtube" class="uk-flex-top" uk-modal>
@@ -64,9 +61,7 @@
                         </div>
                         <h2 class="uk-secondary uk-margin-remove-top">{{ $item->title }}</h2>
                         <hr>
-                        <p>
                             {!!$item->content!!}
-                        </p>
                     </div>
                 </div>
                 <!-- information section end -->

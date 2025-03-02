@@ -56,24 +56,15 @@
                             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
 
                                 <ul class="uk-slider-items uk-grid uk-child-width-1-2@m">
-                                    <li>
-                                        <div class="video-container">
-                                            <iframe src="https://www.youtube.com/embed/kuTQ7JhchJU?si=fSOEpNWO7FviVaiB" title="YouTube video"
-                                                frameborder="0" allowfullscreen></iframe>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="video-container">
-                                            <iframe src="https://www.youtube.com/embed/LXb3EKWsInQ" title="YouTube video"
-                                                frameborder="0" allowfullscreen></iframe>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="video-container">
-                                            <iframe src="https://www.youtube.com/embed/gAIwWeFURPk?si=Q2pu2xh0h5lS5noZ" title="YouTube video"
-                                                frameborder="0" allowfullscreen></iframe>
-                                        </div>
-                                    </li>
+                                    @foreach ($photos as $row)
+                                        <li>
+                                            <div class="video-container">
+                                                @if ($row->video)
+                                                    <iframe src="https://www.youtube.com/embed/{{$row->video}}" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+                                                @endif
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
 
                                 <!-- Navigation -->
@@ -172,18 +163,24 @@
                         <div class="uk-grid uk-flex uk-flex-middle ">
                             <div class="uk-width-1-2@m uk-margin-top">
                                 <div class="uk-text-title">
-                                    <h1 class="uk-primary uk-margin-remove">Wellness in the Himalayas</h1>
+                                    <h1 class="uk-primary uk-margin-remove">{{$data->route}}</h1>
                                 </div>
                             </div>
                             <div class="uk-width-1-2@m uk-text-right@m uk-text-left uk-margin-top">
                                <div>
-                                    <a href="#" class="uk-btn uk-btn-secondary" uk-toggle><i class="fa-solid fa-download uk-margin-small-right"></i>Download Itinerary</a>
+                                    @if($data->trip_pdf)
+                                        <a href="{{ asset(env('PUBLIC_PATH') . 'uploads/pdf/' . $data->trip_pdf) }}" class="uk-btn uk-btn-secondary" download>
+                                            <i class="fa-solid fa-download uk-margin-small-right"></i>Download Itinerary
+                                        </a>
+                                    @endif
                                </div>
                             </div>
                         </div>
-                        <div class="uk-margin-top">
-                           <p><b class="uk-text-uppercase uk-secondary">Reference No: </b>123WER</p>
-                        </div>
+                        @if ($data->trip_code)
+                            <div class="uk-margin-top">
+                                <p><b class="uk-text-uppercase uk-secondary">Reference No: </b>{{$data->trip_code}}</p>
+                            </div>
+                        @endif
                         <p>
                             {!!$data->trip_content!!}
                         </p>
@@ -258,16 +255,12 @@
                                             <p class="uk-margin-remove"><strong>Trip Grade</strong></p>
                                             <div class="tooltip-container">
                                                 {{ grade_message_trek($data->trip_grade) }}
-                                                <div class="tooltip-content">
-                                                    <strong>Toolkit Options:</strong>
-                                                    <ul>
-                                                        <li>Level 2: 4 to 5 hours walk on trails.</li>
-                                                        <li>Level 3: 5 hours walk, 600-800m elevation.</li>
-                                                        <li>Level 4: 6 hours walk, 700-1000m elevation.</li>
-                                                        <li>Level 5: 6+ hours, 1000m+ elevation.</li>
-                                                        <li>Level 6: 7-8 hours, 1000m+ elevation.</li>
-                                                    </ul>
-                                                </div>
+                                                @if ($data->status_text)
+                                                    <div class="tooltip-content">
+                                                        {{-- <strong>Toolkit Options:</strong> --}}
+                                                        {!! $data->status_text !!}
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -370,50 +363,62 @@
 <section class="uk-position-relative uk-section  uk-background-norepeat uk-background-cover" uk-parallax="bgx: -100; easing: 1;" data-src="{{asset('theme-assets/img/bg/01.jpg')}}" id="information" uk-img>
     <div class="uk-overlay-pink uk-position-cover"></div>
     <div class="uk-container uk-position-relative">
-        <ul class="uk-subnav uk-subnav-pill uk-why-us-tab uk-flex-center " uk-switcher="animation: uk-animation-fade">
-            <li><a href="#" class="green-border">Holiday</a></li>
-            <li><a href="#" class="green-border">General</a></li>
-            <li><a href="#" class="green-border">Equipment</a></li>
+        <ul class="uk-subnav uk-subnav-pill uk-why-us-tab uk-flex-center" uk-switcher="animation: uk-animation-fade">           
+            @if ($cost_includes->count() > 0)
+                <li><a href="#" class="green-border">Holiday</a></li>
+            @endif
+            @if ($banner->count() > 0)
+                <li><a href="#" class="green-border">General</a></li>
+            @endif
+            @if ($cost_excludes->count() > 0)
+                <li><a href="#" class="green-border">Equipment</a></li>
+            @endif
         </ul>
         <div class="uk-switcher uk-margin">
-            <div class="uk-light-bg border uk-padding-small">
-                <ul uk-accordion class="uk-information-ul">
-                    @foreach ($cost_includes as $item)
-                        <li class="uk-information-li">
-                            <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
-                            <div class="uk-accordion-content uk-padding-remove uk-margin-remove">
-                                <ul class="uk-includes uk-margin-top uk-margin-bottom">
-                                    {!! $item->content !!}
-                                </ul>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="uk-light-bg border uk-padding-small">
-                <ul uk-accordion class="uk-information-ul">
-                    @foreach ($banner as $item)
-                        <li class="uk-information-li">
-                            <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
-                            <div class="uk-accordion-content uk-padding uk-margin-remove">
-                                <p>{!! $item->content !!}</p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="uk-light-bg border uk-padding-small">
-                <ul uk-accordion class="uk-information-ul">
-                    @foreach ($cost_excludes as $item)
-                        <li class="uk-information-li">
-                            <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
-                            <div class="uk-accordion-content uk-padding uk-margin-remove">
-                                <p>{!! $item->content !!}</p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            @if ($cost_includes->count() > 0)
+                <div class="uk-light-bg border uk-padding-small">
+                    <ul uk-accordion class="uk-information-ul">
+                        @foreach ($cost_includes as $item)
+                            <li class="uk-information-li">
+                                <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                <div class="uk-accordion-content uk-padding-remove uk-margin-remove">
+                                    <ul class="uk-includes uk-margin-top uk-margin-bottom">
+                                        {!! $item->content !!}
+                                    </ul>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if ($banner->count() > 0)
+                <div class="uk-light-bg border uk-padding-small">
+                    <ul uk-accordion class="uk-information-ul">
+                        @foreach ($banner as $item)
+                            <li class="uk-information-li">
+                                <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                <div class="uk-accordion-content uk-padding uk-margin-remove">
+                                    <p>{!! $item->content !!}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if ($cost_excludes->count() > 0)
+                <div class="uk-light-bg border uk-padding-small">
+                    <ul uk-accordion class="uk-information-ul">
+                        @foreach ($cost_excludes as $item)
+                            <li class="uk-information-li">
+                                <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                <div class="uk-accordion-content uk-padding uk-margin-remove">
+                                    <p>{!! $item->content !!}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
     </div>
@@ -563,7 +568,7 @@
             </h3>
         </div>
         <div class="uk-padding uk-padding-remove-top">
-            <h3 class="uk-primary uk-margin-remove">2025</h3>
+            {{-- <h3 class="uk-primary uk-margin-remove">2025</h3> --}}
             <div class="uk-container uk-padding-remove uk-black uk-margin-remove">
                 <!-- Table Header -->
                 <div class=" uk-grid-small uk-child-width-1-5 uk-text-bold uk-background-muted uk-margin-top uk-padding-small uk-visible@s" uk-grid>
@@ -575,53 +580,32 @@
                 </div>
                 <!-- Table Rows -->
                 <ul uk-accordion class="uk-list-divider uk-margin-remove">
-                    <li class="uk-price-li">
-                        <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom uk-accordion-title custom-accordion-title" uk-grid>
-                            <div class="uk-black"><span class="uk-block uk-hidden@m">Dates: </span>Sat 31 May – Sat 14 Jun</div>
-                            <div class="uk-black"><span class="uk-block uk-hidden@m">Prices: </span>US$75</div>
-                            <div class="uk-black"><span class="uk-block uk-hidden@m">Deposit: </span>US$475</div>
-                            <div class="uk-text-success"><span class="uk-block uk-hidden@m">Status: </span>Spot Available</div>
-                            <div class="uk-black"></span><a href="book.php" class="uk-btn uk-btn-secondary">Book Now</a></div>
-                        </div>
-                        </a>
-                        <div class="uk-accordion-content ">
-                            <h3 class="uk-secondary">More Information</h3>
-                            <ul class="uk-list uk-highlight uk-padding uk-light-bg border uk-margin-remove">
-                                <li>Walking in La Palma Without Flights</li>
-                                <li>Departure Reference: TLP /02/25/</li>
-                                <li>This trip begins on Thu 2 Oct and ends on Thu 9 Oct</li>
-                                <li>This departure is available to book. Secure your place today with a deposit of
-                                    US$350</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="uk-price-li">
-                        <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom uk-accordion-title custom-accordion-title" uk-grid>
-                            <div class="uk-black"><span class="uk-block uk-hidden@m">Dates: </span>Sat 31 May – Sat 14 Jun</div>
-                            <div class="uk-black"><span class="uk-block uk-hidden@m">Prices: </span>US$75</div>
-                            <div class="uk-black"><span class="uk-block uk-hidden@m">Deposit: </span>US$475</div>
-                            <div class="uk-text-success"><span class="uk-block uk-hidden@m">Status: </span>Spot Available</div>
-                            <div class="uk-black"></span><a href="book.php" class="uk-btn uk-btn-secondary">Book Now</a></div>
-                        </div>
-                        </a>
-                        <div class="uk-accordion-content ">
-                            <h3 class="uk-secondary">More Information</h3>
-                            <ul class="uk-list uk-highlight uk-padding uk-light-bg border uk-margin-remove">
-                                <li>Walking in La Palma Without Flights</li>
-                                <li>Departure Reference: TLP /02/25/</li>
-                                <li>This trip begins on Thu 2 Oct and ends on Thu 9 Oct</li>
-                                <li>This departure is available to book. Secure your place today with a deposit of
-                                    US$350</li>
-                            </ul>
-                        </div>
-                    </li>
+                    @foreach ($schedules as $item)
+                        <li class="uk-price-li">
+                            <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom uk-accordion-title custom-accordion-title" uk-grid>
+                                <div class="uk-black"><span class="uk-block uk-hidden@m">Dates: </span>{{ $item->start_date }} – {{ $item->end_date }}</div>
+                                <div class="uk-black"><span class="uk-block uk-hidden@m">Prices: </span>US ${{$item->price}}</div>
+                                <div class="uk-black"><span class="uk-block uk-hidden@m">Deposit: </span>US ${{$item->group_size}}</div>
+                                <div class="uk-text-success"><span class="uk-block uk-hidden@m">Status: </span>{{$item->availability}}</div>
+                                <div class="uk-black"></span><a href="book.php" class="uk-btn uk-btn-secondary">Book Now</a></div>
+                            </div>
+                            </a>
+                            @if ($item->remarks)
+                                <div class="uk-accordion-content ">
+                                    <h3 class="uk-secondary">More Information</h3>
+                                    {{-- <ul class="uk-list uk-highlight uk-padding uk-light-bg border uk-margin-remove"> --}}
+                                        {!! $item->remarks !!}
+                                    {{-- </ul> --}}
+                                </div>
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="uk-margin-top">
-                <h3 class="uk-primary">LAND ONLY INFORMATION</h3>
+                <h3 class="uk-primary">{{$setting->text3_title}}</h3>
                 <div class="uk-light-bg uk-padding-small border">
-                    <p>Please refer to the 'Joining Arrangements & Transfers' within Holiday Information for further details.
-                        Flights and other transport to your destination should not be booked until you have received your booking confirmation and the departure is showing 'Guaranteed to Run' or 'Limited'.</p>
+                    <p>{{$setting->text3_sub_title}}</p>
                 </div>
             </div>
         </div>

@@ -28,11 +28,11 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label">Text 3</label>
+                        <label for="inputStandard" class="col-lg-2 control-label">Date and Prices</label>
                         <div class="col-lg-8">
                             <div class="bs-component">
                                 <input type="text" class="form-control" id="contentEditor4" name="text3_title" placeholder="title" value="{{$data->text3_title}}"/>
-                                <input type="text" class="form-control" id="contentEditor4" name="text3_sub_title" placeholder="sub_title" value="{{$data->text3_sub_title}}"/>
+                                <textarea type="text" class="form-control" id="contentEditor4" name="text3_sub_title" placeholder="sub_title" value="{{$data->text3_sub_title}}">{{$data->text3_sub_title}}</textarea>
                             </div>
                         </div>
                     </div>
