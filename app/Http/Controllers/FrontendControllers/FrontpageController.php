@@ -243,6 +243,7 @@ class FrontpageController extends Controller
         $banner =  ActivityBannerModel::where('activity_id', $data->id)->get();
         $similar_activity = $data->relatedActivities;
         $extension = TripGroupModel::where('id', 4)->first();
+        // dd($template,$data,$trips);
         return view('themes.default.' . $template, compact('data', 'trips', 'trips_activity', 'similar_activity', 'activity', 'destination', 'banner', 'tailor_made', 'extension'));
     }
 
@@ -751,6 +752,15 @@ class FrontpageController extends Controller
         $data = $query->paginate(3);
 
         return view('themes.default.expedition',compact('data','dataAll','item'));
+    }
+    public function activity(Request $request)
+    {
+        $item= ActivityModel::where('uri',$request->uri)->first();
+        $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
+        $dataAll = $query->get(); 
+        $data = $query->paginate(3);
+
+        return view('themes.default.activity',compact('data','dataAll','item'));
     }
 
     public function tour()
