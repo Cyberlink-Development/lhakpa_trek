@@ -280,50 +280,32 @@
                                         <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                             <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
                                                 <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
-                                                    <div>
-                                                        <a href="list.php">
-                                                            <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain3.jpeg " />
-                                                                <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                    <h2 class="uk-secondary uk-margin-remove">Family Trip</h2>
+                                                    @foreach ($travels as $travel)
+                                                        <div>
+                                                            <a href="{{ route('travel-list', $travel->uri) }}">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="{{ $travel->title }}" src="{{ $travel->thumbnail ? asset('uploads/icon/'.$travel->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg') }}" />
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">{{ $travel->title }}</h2>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="list.php">
-                                                            <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain2.jpeg " />
-                                                                <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                    <h2 class="uk-secondary uk-margin-remove">Guided Trip</h2>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                    @if ($your_group)
+                                                        <div>
+                                                            <a href="{{route('page.posttype_detail',$your_group->uri)}}">
+                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="{{ $your_group->post_type }}" src="{{ $your_group->banner ? asset('uploads/original/'.$your_group->banner) : asset('theme-assets/img/mountain/mountain8.jpeg')}} "/>
+                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                        <h2 class="uk-secondary uk-margin-remove">{{ $your_group->post_type }}</h2>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="#">
-                                                            <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
-                                                                <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                    <h2 class="uk-secondary uk-margin-remove">Self Guieded TRip</h2>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="group.php">
-                                                            <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain8.jpeg " />
-                                                                <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                    <h2 class="uk-secondary uk-margin-remove">Your Group</h2>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="uk-flex uk-flex-middle uk-flex-center uk-margin uk-margin-remove-bottom">
                                                     <a class="uk-nav-slider-btn prev-btn" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous" style="padding:6px 3px !important;"></a>

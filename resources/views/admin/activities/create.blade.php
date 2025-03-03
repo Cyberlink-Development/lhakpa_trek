@@ -151,6 +151,7 @@
           <option value="expedition">Expedition</option>
            <option value="trekking">Trekking</option>
            <option value="activity">Activity</option>
+           <option value="travel">Travels</option>
         </select>
         <i class="arrow"></i>
       </label>

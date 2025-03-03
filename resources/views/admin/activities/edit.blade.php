@@ -177,8 +177,9 @@
       <label class="field select">
         <select name="activity_parent">
           <option value="expedition" {{ ($data->activity_parent == 'expedition')?'selected':'' }}>Expedition</option>
-           <option value="trekking" {{ ($data->activity_parent == 'trekking')?'selected':'' }}>Trekking</option>
-            <option value="activity" {{ ($data->activity_parent == 'activity')?'selected':'' }} >Activity</option>
+          <option value="trekking" {{ ($data->activity_parent == 'trekking')?'selected':'' }}>Trekking</option>
+          <option value="activity" {{ ($data->activity_parent == 'activity')?'selected':'' }} >Activity</option>
+          <option value="travel" {{ ($data->activity_parent == 'travel')?'selected':'' }} >Travels</option>
         </select>
         <i class="arrow"></i>
       </label>
