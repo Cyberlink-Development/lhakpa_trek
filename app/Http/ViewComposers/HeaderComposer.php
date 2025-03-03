@@ -31,7 +31,7 @@ class HeaderComposer
 		$view->with('exp_6000ers', ActivityModel::find(47)->trips()->where('status','1')->orderBy('ordering','asc')->get());
 		$view->with('trekking',ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get());
 		$view->with('random_tour', TripModel::where('status','1')->inRandomOrder()->first());
-		$view->with('activity', ActivityModel::where('activity_parent','activity')->orderBy('ordering','asc')->get());
+		$view->with('activity', ActivityModel::where('activity_parent','activity')->whereNotIn('id', [58, 59])->orderBy('ordering','asc')->get());
 		$view->with('random', ActivityModel::where('activity_parent','trekking')->inRandomOrder()->get());   
         $view->with('contact_us', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '26'])->first());
 		$view->with('useful_info', PostModel::where(['post_type' => '24', 'status' => '1'])->orderBy('post_order', 'asc')->get());

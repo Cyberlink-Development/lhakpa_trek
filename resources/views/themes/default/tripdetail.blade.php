@@ -4,7 +4,9 @@
 @section('meta_description', $data->meta_description)
 @section('thumbnail', $data->thumbnail)
 @section('content')
-
+@php
+    $photo_videos = $photos->pluck('video')->filter();
+@endphp
 <section class=" uk-cover-container uk-position-relative uk-flex uk-flex-middle uk-background-norepeat uk-background-cover uk-background-top-center uk-background-fixed" uk-height-viewport data-src="{{ asset('uploads/banners/' . $data->banner) }}" alt="{{$data->trip_title}}" uk-img>
      <div class="uk-overlay-banner uk-position-cover"></div>
     <div class="uk-container uk-width-1-1 pt-150 pb-23 uk-position-relative">
@@ -68,8 +70,10 @@
                                 </ul>
 
                                 <!-- Navigation -->
-                                <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-                                <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                                @if ($photo_videos->count() > 2)
+                                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -97,9 +101,11 @@
                         <button id="changeBtn1" class="uk-buttons uk-text-center">
                             <span class="uk-secondary"><i class="fa-solid fa-photo-film f-20 uk-margin-small-bottom"></i><br> Photos</span>
                         </button>
-                        <button id="changeBtn2" class="uk-buttons uk-text-center">
-                            <span class="uk-secondary "><i class="fa-solid fa-video f-20 uk-margin-small-bottom"></i><br>Videos</span>
-                        </button>
+                        @if ($photo_videos->isNotEmpty())
+                            <button id="changeBtn2" class="uk-buttons uk-text-center">
+                                <span class="uk-secondary "><i class="fa-solid fa-video f-20 uk-margin-small-bottom"></i><br>Videos</span>
+                            </button>
+                        @endif
                         <a href="#review" uk-scroll class="uk-buttons uk-text-center">
                             <span class="uk-secondary "><i class="fa-solid fa-users f-20 uk-margin-small-bottom "></i><br>Reviews</span>
                         </a>
@@ -129,12 +135,16 @@
                             <li>
                                 <a href="#features" uk-scroll>Overview </a>
                             </li>
-                            <li>
-                                <a href="#itinerary" uk-scroll>Itinerary & Maps </a>
-                            </li>
-                            <li>
-                                <a href="#information" uk-scroll>Information</a>
-                            </li>
+                            @if($itinerary->count() > 0)
+                                <li>
+                                    <a href="#itinerary" uk-scroll>Itinerary & Maps </a>
+                                </li>
+                            @endif
+                            @if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty())
+                                <li>
+                                    <a href="#information" uk-scroll>Information</a>
+                                </li>
+                            @endif
                             @if ($faqs->count() > 0)
                                 <li>
                                     <a href="#faq" uk-scroll>FAQ </a>
@@ -145,7 +155,9 @@
                             </li>
                         </ul>
                         <div class="uk-width-1-3 uk-flex uk-flex-right">
-                            <a href="#offcanvas-usage" class="uk-btn uk-btn-secondary" uk-toggle>Dates & Prices</a>
+                            @if ($schedules->count() > 0)
+                                <a href="#offcanvas-usage" class="uk-btn uk-btn-secondary" uk-toggle>Dates & Prices</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -349,9 +361,11 @@
                     <div class="uk-secondary-bg uk-book-btn border uk-margin-small-top">
                         <a href="#modal-customize" uk-toggle>Customize Your Trip</a>
                     </div>
-                    <div class="uk-primary-bg uk-book-btn border uk-margin-small-top">
-                        <a href="#offcanvas-usage" uk-toggle>View Dates and prices</a>
-                    </div>
+                    @if ($schedules->count() > 0)
+                        <div class="uk-primary-bg uk-book-btn border uk-margin-small-top">
+                            <a href="#offcanvas-usage" uk-toggle>View Dates and prices</a>
+                        </div>
+                    @endif
                 </div>
                 <!-- facilities end -->
             </div>
@@ -360,69 +374,71 @@
     </div>
 </section>
 <!-- cost includes / excludes section start-->
-<section class="uk-position-relative uk-section  uk-background-norepeat uk-background-cover" uk-parallax="bgx: -100; easing: 1;" data-src="{{asset('theme-assets/img/bg/01.jpg')}}" id="information" uk-img>
-    <div class="uk-overlay-pink uk-position-cover"></div>
-    <div class="uk-container uk-position-relative">
-        <ul class="uk-subnav uk-subnav-pill uk-why-us-tab uk-flex-center" uk-switcher="animation: uk-animation-fade">           
-            @if ($cost_includes->count() > 0)
-                <li><a href="#" class="green-border">Holiday</a></li>
-            @endif
-            @if ($banner->count() > 0)
-                <li><a href="#" class="green-border">General</a></li>
-            @endif
-            @if ($cost_excludes->count() > 0)
-                <li><a href="#" class="green-border">Equipment</a></li>
-            @endif
-        </ul>
-        <div class="uk-switcher uk-margin">
-            @if ($cost_includes->count() > 0)
-                <div class="uk-light-bg border uk-padding-small">
-                    <ul uk-accordion class="uk-information-ul">
-                        @foreach ($cost_includes as $item)
-                            <li class="uk-information-li">
-                                <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
-                                <div class="uk-accordion-content uk-padding-remove uk-margin-remove">
-                                    <ul class="uk-includes uk-margin-top uk-margin-bottom">
-                                        {!! $item->content !!}
-                                    </ul>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if ($banner->count() > 0)
-                <div class="uk-light-bg border uk-padding-small">
-                    <ul uk-accordion class="uk-information-ul">
-                        @foreach ($banner as $item)
-                            <li class="uk-information-li">
-                                <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
-                                <div class="uk-accordion-content uk-padding uk-margin-remove">
-                                    <p>{!! $item->content !!}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if ($cost_excludes->count() > 0)
-                <div class="uk-light-bg border uk-padding-small">
-                    <ul uk-accordion class="uk-information-ul">
-                        @foreach ($cost_excludes as $item)
-                            <li class="uk-information-li">
-                                <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
-                                <div class="uk-accordion-content uk-padding uk-margin-remove">
-                                    <p>{!! $item->content !!}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+@if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty())
+    <section class="uk-position-relative uk-section  uk-background-norepeat uk-background-cover" uk-parallax="bgx: -100; easing: 1;" data-src="{{asset('theme-assets/img/bg/01.jpg')}}" id="information" uk-img>
+        <div class="uk-overlay-pink uk-position-cover"></div>
+        <div class="uk-container uk-position-relative">
+            <ul class="uk-subnav uk-subnav-pill uk-why-us-tab uk-flex-center" uk-switcher="animation: uk-animation-fade">           
+                @if ($cost_includes->count() > 0)
+                    <li><a href="#" class="green-border">Holiday</a></li>
+                @endif
+                @if ($banner->count() > 0)
+                    <li><a href="#" class="green-border">General</a></li>
+                @endif
+                @if ($cost_excludes->count() > 0)
+                    <li><a href="#" class="green-border">Equipment</a></li>
+                @endif
+            </ul>
+            <div class="uk-switcher uk-margin">
+                @if ($cost_includes->count() > 0)
+                    <div class="uk-light-bg border uk-padding-small">
+                        <ul uk-accordion class="uk-information-ul">
+                            @foreach ($cost_includes as $item)
+                                <li class="uk-information-li">
+                                    <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                    <div class="uk-accordion-content uk-padding-remove uk-margin-remove">
+                                        <ul class="uk-includes uk-margin-top uk-margin-bottom">
+                                            {!! $item->content !!}
+                                        </ul>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if ($banner->count() > 0)
+                    <div class="uk-light-bg border uk-padding-small">
+                        <ul uk-accordion class="uk-information-ul">
+                            @foreach ($banner as $item)
+                                <li class="uk-information-li">
+                                    <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                    <div class="uk-accordion-content uk-padding uk-margin-remove">
+                                        <p>{!! $item->content !!}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if ($cost_excludes->count() > 0)
+                    <div class="uk-light-bg border uk-padding-small">
+                        <ul uk-accordion class="uk-information-ul">
+                            @foreach ($cost_excludes as $item)
+                                <li class="uk-information-li">
+                                    <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                    <div class="uk-accordion-content uk-padding uk-margin-remove">
+                                        <p>{!! $item->content !!}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
-    </div>
-</section>
+        </div>
+    </section>
+@endif
 <!-- cost includes / excludes section end -->
 
 <!-- faq section -->
