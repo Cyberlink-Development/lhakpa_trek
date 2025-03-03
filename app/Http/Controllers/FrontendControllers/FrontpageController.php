@@ -778,6 +778,15 @@ class FrontpageController extends Controller
         
         return view('themes.default.trekking', compact('dataAll','data','item'));
     }
+    public function travel(Request $request)  
+    {
+        $item= ActivityModel::where('uri',$request->uri)->first();
+        $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
+        $dataAll = $query->get(); 
+        $data = $query->paginate(3);
+        
+        return view('themes.default.travel', compact('dataAll','data','item'));
+    }
 
     public function activitylist()
     {

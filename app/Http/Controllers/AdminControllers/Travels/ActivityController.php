@@ -21,7 +21,9 @@ class ActivityController extends Controller
         $expedition = ActivityModel::where('activity_parent','expedition')->orderBy('id','desc')->get();
         $activity = ActivityModel::where('activity_parent','activity')->orderBy('id','desc')->get();
         $trekking = ActivityModel::where('activity_parent','trekking')->orderBy('id','desc')->get();
-        return view('admin.activities.index',compact('expedition','trekking','activity'));
+        $travels = ActivityModel::where('activity_parent','travel')->orderBy('id','desc')->get();
+
+        return view('admin.activities.index',compact('expedition','trekking','activity','travels'));
     }
 
     /**
@@ -220,7 +222,7 @@ class ActivityController extends Controller
       $data->title = $request->title;
       $data->sub_title = $request->sub_title;
       $data->template = $request->template;
-       $data->activity_parent = $request->activity_parent;
+      $data->activity_parent = $request->activity_parent;
       $data->excerpt = $request->excerpt;  
       $data->content = $request->content;
       $data->external_link = $request->external_link;

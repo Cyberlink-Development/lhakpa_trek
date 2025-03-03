@@ -457,6 +457,32 @@
             </div>
         </div>
     </div>
+      <div class="sid_bvijay mb10 onchange 4"> 
+        <h4>  Travels </h4>
+        <div class="hd_show_con">
+             <!--<div class=" has-feedback has-search">-->
+             <!--     <input class="category-search1 form-control" type="text" placeholder="Search.."> -->
+             <!--     <span class="glyphicon glyphicon-search form-control-feedback"></span>-->
+             <!--   </div>-->
+            <div class="tab-content mb15">
+                <div id="tab1" class="tab-pane active">
+                    @if ( $travels->count() > 0)
+                        <ul class="">
+                            @foreach ($travels as $row)
+                                <li>
+                                    <label class="option">
+                                        <input type="radio" name="activity[]" value="{{ $row->id }}"
+                                            {{ in_array($row->id, $checked_activities) ? 'checked' : '' }}>
+                                        <span class="checkbox"></span> {{ $row->title }}
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
     
         <div class="sid_bvijay mb10">
             <h4> Trip Ordering </h4>

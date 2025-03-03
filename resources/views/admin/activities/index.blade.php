@@ -21,6 +21,9 @@
            <li>
           <a href="#tab1_3" data-toggle="tab">Activity</a>
         </li>
+        <li>
+          <a href="#tab1_4" data-toggle="tab">Travels</a>
+        </li>
       </ul>
     </div>
     <div class="panel-body">
@@ -202,6 +205,59 @@
                     </tr>
                     @endforeach
           			@endif
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab1_4" class="tab-pane">
+          <div class="_row">
+            <div class="col-md-12">
+              <div id="users" class="tab-pane active">
+               <div class="table-responsive mhn20 mvn15">
+                <table class="table admin-form theme-warning fs13"  id="datatable2">
+                  <thead>
+                    <tr class="bg-light">
+                      <th class="text-center"> SN </th>
+                      <th>Title</th>
+                      <!--<th>Show in Home</th>-->
+                      <!--<th>Manage Banner</th>-->
+                      <th>Photo/Video</th>
+                      <th class="text-center">Order</th>                                                   
+                      <th>Published</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @if(count($travels) > 0)
+          			      @foreach($travels as $row)
+                        <tr class="id{{$row->id}}">
+                          <td class="text-center"> {{$loop->iteration}} </td>
+                          <td class=""> 
+                            <strong> {{ ucfirst($row->title) }} </strong>                
+                            <div class="">
+                              <span class="id">ID: {{$row->id}} | </span>
+                              <span class="edit">
+                                <a href="{{url( 'admin/'.Request::segment(2) .'/'. $row->id. '/edit')}}" aria-label="">Edit</a> 
+                              </span>  | 
+                              <span class="trash"><a href="#{{$row->id}}" class="submitdelete1">Delete</a> </span>
+                          </td>
+                          <?php /*<td>{{$row->status == '1'?'YES':'NO'}}</td>
+                          <td><a href="{{route('activity.banner.index',$row->id)}}" title="Manage Banner"><i class="fa fa-file-image-o fa fa-2x" aria-hidden="true"></i></a></td> */?>
+                          <td>
+                            @if($row->thumbnail)
+                              <img src="{{url(env('PUBLIC_PATH').'uploads/icon/' . $row->thumbnail )}}" width="100" />
+                            @endif                  
+                          </td>
+                          <td class="text-center">                  
+                            {{ $row->ordering }}
+                          </td>
+                          <td class="date"> {{$row->created_at}} </td>             
+                        </tr>
+                      @endforeach
+          			    @endif
                   </tbody>
                 </table>
               </div>

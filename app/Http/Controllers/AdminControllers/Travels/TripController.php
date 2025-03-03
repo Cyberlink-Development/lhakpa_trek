@@ -63,9 +63,10 @@ class TripController extends Controller
         $trekking = ActivityModel::where('activity_parent','trekking')->get();
         $expeditions = ActivityModel::where('activity_parent','expedition')->get();
         $activity=ActivityModel::where('activity_parent','activity')->get();
+        $travels=ActivityModel::where('activity_parent','travel')->get();
         // dd($expeditions);
         return view('admin.trips.create', compact('trek','all_trips', 'trip_type', 'grades', 'ordering', 'destinations', 'regions', 'activities', 
-        'trip_groups','expeditions','trekking','availability','activity'));
+        'trip_groups','expeditions','trekking','availability','activity','travels'));
     }
 
     /**
@@ -425,6 +426,7 @@ class TripController extends Controller
         $trekking = ActivityModel::where('activity_parent','trekking')->get();
         $expeditions = ActivityModel::where('activity_parent','expedition')->get();
         $activity=ActivityModel::where('activity_parent','activity')->get();
+        $travels=ActivityModel::where('activity_parent','travel')->get();
         return view('admin.trips.edit', compact(
           'trek',
             'all_trips',
@@ -449,7 +451,7 @@ class TripController extends Controller
             'trekking',
              'availability',
              'faqs',
-             'activity'
+             'activity','travels'
          ));
     }
 

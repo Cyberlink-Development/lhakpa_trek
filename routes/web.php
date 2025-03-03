@@ -42,6 +42,7 @@ Route::get('page/expedition/{uri}.html', 'FrontendControllers\FrontpageControlle
 Route::get('page/tour.html', 'FrontendControllers\FrontpageController@tour')->name('tour');
 Route::get('page/trekking-region/{uri}.html', 'FrontendControllers\FrontpageController@trekking')->name('trekking-list');
 Route::get('page/activity/{uri}.html', 'FrontendControllers\FrontpageController@activity')->name('activity-list');
+Route::get('page/travel/{uri}.html', 'FrontendControllers\FrontpageController@travel')->name('travel-list');
 
 // for captcha
 Route::get('captcha', 'CaptchaController@refreshCaptcha');
