@@ -106,20 +106,22 @@ class FrontpageController extends Controller
             abort(404);
         }
         $data = PostTypeModel::where('uri', $uri)->first();
+        $setting = SettingModel::where('id',1)->first();
+        $reviews = TripReview::where('status', 1)->get();
         $tmpl['template'] = 'page';
         if ($tmpl['template']) {
             $data['template'] = $data['template'];
         }
         if ($data) {
             // $posts = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc')->paginate(12);
-            $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc');
+            $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'asc');
             if($query){
                 $posts = $query->paginate(12);
                 $your_group_post = $query->first();
             }
         }
-        // dd($data,$posts,$your_group_post);
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','your_group_post'));
+        // dd($data,$posts,$your_group_post,$setting);
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','your_group_post','setting','reviews'));
     }
 
 

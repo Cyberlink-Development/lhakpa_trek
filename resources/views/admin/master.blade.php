@@ -117,8 +117,12 @@
                     <li class="">
                         @if (Request::segment(2) == 'posttype' ||
                                 Request::segment(2) == 'postcategory' ||
-                                Request::segment(2) == 'useful-info' ||
-                                Request::segment(2) == 'about-us')
+                                Request::segment(2) == 'about-us' ||
+                                Request::segment(2) == 'mingmar-foundation' ||
+                                Request::segment(2) == 'need-an-agent' ||
+                                Request::segment(2) == 'safety-security' ||
+                                Request::segment(2) == 'suggestion' ||
+                                Request::segment(2) == 'why-us')
                             <a class="accordion-toggle menu-open">
                             @else
                                 <a class="accordion-toggle">

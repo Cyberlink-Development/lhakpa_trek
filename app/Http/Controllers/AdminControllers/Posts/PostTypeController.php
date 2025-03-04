@@ -183,6 +183,7 @@ class PostTypeController extends Controller
         $data->banner = $file_name;
         } 
         $data->post_type = $request->post_type;
+        $data->sub_title = $request->sub_title;
         $data->template = $request->template;
         $data->uri = Str::slug($request->uri);
         $data->ordering = $request->ordering;

@@ -31,6 +31,14 @@
         </div>
       </div> 
       <div class="form-group">
+        <label for="inputStandard" class="col-lg-3 control-label">Post Subtitle</label>
+        <div class="col-lg-8">
+          <div class="bs-component">
+            <input type="text" id="sub_title" name="sub_title" class="form-control" placeholder=""/>
+          </div>
+        </div>
+      </div>  
+      <div class="form-group">
         <label for="inputStandard" class="col-lg-3 control-label"> Associated Title</label>
         <div class="col-lg-8">
           <div class="bs-component">
@@ -63,7 +71,7 @@
     <label class="col-lg-3 control-label" for="textArea3">Content  </label>
     <div class="col-lg-8">
       <div class="bs-component">
-       <textarea class="form-control" id="editor2" name="content" rows="3"> </textarea>
+       <textarea class="my-editor form-control" id="editor2" name="content" rows="3"> </textarea>
      </div>
    </div>
  </div> 
