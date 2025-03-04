@@ -111,9 +111,15 @@ class FrontpageController extends Controller
             $data['template'] = $data['template'];
         }
         if ($data) {
-            $posts = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc')->paginate(12);
+            // $posts = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc')->paginate(12);
+            $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc');
+            if($query){
+                $posts = $query->paginate(12);
+                $your_group_post = $query->first();
+            }
         }
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts'));
+        // dd($data,$posts,$your_group_post);
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','your_group_post'));
     }
 
 
