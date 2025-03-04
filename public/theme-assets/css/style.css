@@ -1308,3 +1308,9 @@ footer p {
   padding: 10px 0;
   margin: 0 !important;
 }
+
+/****************** By anil ****************/
+.uk-contents p{
+  color: var(--white)!important;
+}
+/********************************************/

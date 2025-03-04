@@ -75,94 +75,19 @@
                                             <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                                 <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
                                                     <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
-                                                        <div>
-                                                            <a href="about.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain1.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">About Us</h2>
+                                                        @foreach ($navigations as $nav)
+                                                            <div>
+                                                                <a href="{{route('page.posttype_detail',$nav->uri)}}">
+                                                                    <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                        <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="{{ $nav->post_type }}" src="{{ $nav->banner ? asset('uploads/original/'.$nav->banner) : asset('theme-assets/img/mountain/mountain1.jpeg') }}" />
+                                                                        <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
+                                                                        <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
+                                                                            <h2 class="uk-secondary uk-margin-remove">{{$nav->post_type}}</h2>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="why-us.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain2.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">Why Us</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="message.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain3.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">Message from us</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="migmar.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain4.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">Migmar Foundation</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="agent.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain5.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">Need an agent</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="team.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain6.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">Team Member</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="safety.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain7.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">SAFETY & SECURITY</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div>
-                                                            <a href="suggestion.php">
-                                                                <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                    <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src=" assets/img/mountain/mountain9.jpeg " />
-                                                                    <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
-                                                                    <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
-                                                                        <h2 class="uk-secondary uk-margin-remove">Suggestion</h2>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                     <div class="uk-flex uk-flex-middle uk-flex-center uk-margin uk-margin-remove-bottom">
                                                         <a class="uk-nav-slider-btn prev-btn" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous" style="padding:6px 3px !important;"></a>

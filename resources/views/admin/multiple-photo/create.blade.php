@@ -51,9 +51,9 @@
 		@if($data->count() > 0)               
     		@foreach($data as $row)
         		<div class="col-lg-4 id{{$row->id}}">
-        		    @if($data->count() > 1)
+        		    {{-- @if($data->count() > 1) --}}
         			    <a href="#{{$row->id}}" class="delete_image"><span class="trash" style="color:red;">Delete</span></a> |
-        			@endif
+        			{{-- @endif --}}
         			<a href="{{url( 'adminimg/'.Request::segment(2) .'/'. $row->post_id.'/'. $row->id. '/edit')}}" class="">Edit</a>
         			<img src="{{ asset('/uploads/medium/' . $row->file_name) }}" width="100%" height="100%" />
         			<p>{{$row->title}}</p>

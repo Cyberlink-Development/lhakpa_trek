@@ -18,5 +18,10 @@ class PostModel extends Model
     {
       return $this->hasMany('App\Models\Posts\AssociatedPostModel','post_id');
     }
+
+    public function images()
+    {
+        return $this->hasMany('App\Models\Posts\PostImageModel', 'post_id');
+    }
     
 }

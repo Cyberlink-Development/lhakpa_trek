@@ -50,12 +50,7 @@
                                                 </span>
                                                 @if (
                                                     !check_child_post($row->id) > 0 &&
-                                                        !has_associatedpost($row->id) > 0 &&
-                                                        $row->id != '118' &&
-                                                        $row->id != '120' &&
-                                                        $row->id != '125' &&
-                                                        $row->id != '134' &&
-                                                        $row->id != '137')
+                                                        !has_associatedpost($row->id) > 0)
                                                     
                                                     @if (has_postimage($row->id) <= 0)
                                                         | <span class="trash"><a href="#{{ $row->id }}" class="submitdelete1">Delete</a></span>
@@ -75,7 +70,7 @@
                                             @endif
                                             {{-- @endif --}}
 
-                                            @if (has_postimage($row->id) > 0)
+                                            @if (has_postimage($row->id) > 0 || Request::segment(2) == 'why-us' || Request::segment(2) == 'mingmar-foundation')
                                                 <a href="{{ route('admin.multiplephoto', $row->id) }}" title="Photo">
                                                     <i class="fa fa-file-image-o" aria-hidden="true" style="color:#ff5000;"></i>
                                                 </a>
