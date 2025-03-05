@@ -70,7 +70,7 @@
                                             @endif
                                             {{-- @endif --}}
 
-                                            @if (has_postimage($row->id) > 0 || Request::segment(2) == 'why-us' || Request::segment(2) == 'mingmar-foundation' || Request::segment(2) == 'news-blogs')
+                                            @if (has_postimage($row->id) > 0 || Request::segment(2) == 'why-us' || Request::segment(2) == 'mingmar-foundation' || Request::segment(2) == 'news-blogs' || Request::segment(2) == 'associate-and-partners')
                                                 <a href="{{ route('admin.multiplephoto', $row->id) }}" title="Photo">
                                                     <i class="fa fa-file-image-o" aria-hidden="true" style="color:#ff5000;"></i>
                                                 </a>

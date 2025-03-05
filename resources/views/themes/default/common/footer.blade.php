@@ -4,16 +4,17 @@
             <div class=" uk-flex" style="align-items: baseline; " uk-scrollspy="cls:uk-animation-fade; delay: 500;">
                 <h3 class="uk-margin-remove">Associated With</h3>
                 <div class="uk-margin-top uk-top-img uk-margin-small-left">
-                    <img src="assets/img/partner/1.png"  loading="lazy" alt="">
-                    <img src="assets/img/partner/2.png"loading="lazy" alt="">
-                    <img src="assets/img/partner/3.png"  loading="lazy" alt="">
-                    <img src="assets/img/partner/4.png"  loading="lazy" alt="">
+                    @foreach ($associated as $value)
+                        <img src="{{ asset('uploads/medium/' . $value->file_name) }}" loading="lazy">
+                    @endforeach
                 </div>
             </div>
             <div  class=" uk-flex uk-flex-left uk-flex-right@m " style="align-items: baseline;" uk-scrollspy="cls:uk-animation-fade; delay: 500;">
                 <h3 class="uk-margin-remove">We Accept</h3>
                 <div class="uk-margin-top uk-payment uk-margin-small-left">
-                    <img src="assets/img/partner/payment.png"  loading="lazy" alt="">
+                    @foreach ($pay_partners as $value)
+                        <img src="{{ asset('uploads/medium/' . $value->file_name) }}" loading="lazy">
+                    @endforeach
                 </div>
             </div>
             
@@ -24,7 +25,7 @@
         <div uk-grid  uk-scrollspy="cls: uk-animation-fade;  delay: 300; repeat: false">
             <div class="uk-width-1-3@m uk-text-left@m uk-text-center">
                 <a class="uk-logo" href="index.php">
-                    <img src="assets/img/logo.png" class="footer-logo" width="180" alt="">
+                    <img src="{{asset('theme-assets/img/logo.png')}}" class="footer-logo" width="180" alt="">
                 </a>
                 <hr style="border-top: 1px solid #e5e5e530;">
                 <p class="text-white">Copyright © 2025, Lhakpa Treks.</p>
@@ -35,41 +36,39 @@
                     <div>
                         <p class="uk-margin-remove "><a href="region-list.php" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Destination</a></p>
                         <ul class=" footer-list">
-                            <li><a href="list.php">Langtang Region</a></li>
-                            <li><a href="list.php">Everest Region</a></li>
-                            <li><a href="list.php">Annapurna Region</a></li>
-                            <li><a href="list.php">Mustang Region</a></li>
-                            <li><a href="list.php">Manasulu Region</a></li>
+                            @foreach ($trekking as $trek)
+                                <li> <a href="{{ route('trekking-list',$trek->uri) }}">{{$trek->title}}</a> </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div>
                         <p class="uk-margin-remove "><a href="region-list.php" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Activities</a></p>
                         <ul class=" footer-list">
-                            <li><a href="list.php">Biking</a></li>
-                            <li><a href="list.php">Family Trip</a></li>
-                            <li><a href="list.php">Cycling</a></li>
-                            <li><a href="list.php">Hiking & Trekking</a></li>
-                            <li><a href="list.php">Wildlife & Safari</a></li>
+                            @foreach ($activity as $row)
+                                <li> <a href="{{ route('activity-list', $row->uri) }}">{{ $row->title }}</a> </li>
+                            @endforeach
     
                         </ul>
                     </div>
                     <div>
                         <p class="uk-margin-remove "><a href="region-list.php" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Expedition</a></p>
                         <ul class=" footer-list">
-                            <li><a href="list.php">8000ERS</a></li>
-                            <li><a href="list.php">7000ERS</a></li>
-                            <li><a href="list.php">6000ERS</a></li>
+                            @foreach ($expedition as $row)
+                                <li> <a href="{{ route('expedition-list', $row->uri) }}">{{ $row->title }}</a> </li>
+                            @endforeach
                         </ul>
                     </div>
     
                     <div>
                         <p class="uk-margin-remove "><a href="#" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Useful Links</a></p>
                         <ul class=" footer-list">
-                            <li><a href="about.php">About Us</a></li>
-                            <li><a href="team.php">Team Members</a></li>
+                            @foreach ($navigations as $nav)
+                            <li><a href="{{route('page.posttype_detail',$nav->uri)}}">{{$nav->post_type}} </a></li>
+                            {{-- <li><a href="team.php">Team Members</a></li>
                             <li><a href="list.php">Travelling Style</a></li>
                             <li><a href="news.php">News / Blogs</a></li>
-                            <li><a href="women.php">Women Empowerment</a></li>
+                            <li><a href="women.php">Women Empowerment</a></li> --}}
+                            @endforeach
                         </ul>
                     </div>
                 </div>

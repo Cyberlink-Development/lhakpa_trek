@@ -21,10 +21,18 @@
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Favicon -->
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('assets/skin/default_skin/css/bootstrap3-wysihtml5.min.css') }}">
-    <link rel="shortcut icon" href="{{ asset('theme-assets/images/favicon.png') }}">
+    <!---------------- Fav icon starts --------------------->
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/favicon/favicon.ico')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('assets/favicon/android-chrome-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{asset('assets/favicon/android-chrome-512x512.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('assets/favicon/apple-touch-icon.png')}}">
+    <link rel="manifest" href="{{asset('assets/favicon/site.webmanifest')}}">
+    <!---------------- Fav icon stops ----------------------->
+    
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/skin/default_skin/css/bootstrap3-wysihtml5.min.css') }}">
+    {{-- <link rel="shortcut icon" href="{{ asset('theme-assets/images/favicon.png') }}"> --}}
     <style>
         span.panel-controls {
             display: none;
