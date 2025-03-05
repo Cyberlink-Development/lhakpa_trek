@@ -114,14 +114,15 @@ class FrontpageController extends Controller
         }
         if ($data) {
             // $posts = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc')->paginate(12);
-            $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'asc');
+            $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0']);
             if($query){
-                $posts = $query->paginate(12);
+                $posts = (clone $query)->orderBy('post_order', 'asc')->paginate(12);
+                $news = (clone $query)->orderBy('post_order', 'desc')->paginate(4);
                 $your_group_post = $query->first();
             }
         }
         // dd($data,$posts,$your_group_post,$setting);
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','your_group_post','setting','reviews'));
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews'));
     }
 
 
@@ -146,7 +147,7 @@ class FrontpageController extends Controller
         }
         $post_type = PostTypeModel::where('id', $data['post_type'])->first();
         $data_child = PostModel::where('post_parent', $data['id'])->orderBy('post_order', 'desc')->paginate(9);
-        $related = PostModel::where('post_type', $data['post_type'])->where('post_parent', '=', 0)->orderBy('post_order', 'asc')->get();
+        $related = PostModel::where('post_type', $data['post_type'])->where('post_parent', '=', 0)->orderBy('post_order', 'desc')->get();
         $related_child = PostModel::where('post_parent', $data['post_parent'])->orderBy('post_order', 'desc')->take(5)->get();
         $multiphotos = PostImageModel::where('post_id', $data['id'])->orderBy('id', 'desc')->take(3)->get();
         $terms_policy = PostModel::where(['post_type' => '16', 'status' => '1', 'post_parent' => '0'])->get();
@@ -164,6 +165,7 @@ class FrontpageController extends Controller
         // dd($useful);
         $review = TripReview::where('status', '1')->orderBy('id', 'desc')->paginate(5);
         $setting = SettingModel::where('id', 1)->first();
+        // dd($data,$related,$related_child,$multiphotos);
         return view('themes.default.' . $data['template'] . '', compact(
             'data',
             'blog_child',

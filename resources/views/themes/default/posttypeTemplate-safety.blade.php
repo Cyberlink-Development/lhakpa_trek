@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="uk-width-1-3@m uk-media-280 uk-flex-first uk-flex-last@m uk-margin-bottom">
-                            <img src="{{ !empty($row->page_thumbnail) ? asset('uploads/original/'.$row->page_thumbnail) : asset('theme-assets/img/mountain/mountain8.jpeg')}}" class="border uk-same-height cover" alt="">
+                            <img src="{{ !empty($row->page_thumbnail) ? asset('uploads/original/'.$row->page_thumbnail) : asset('theme-assets/img/mountain/mountain8.jpeg')}}" class="border uk-same-height cover" alt="{{$row->post_title}}">
                         </div>
                     </div>
                 </div>

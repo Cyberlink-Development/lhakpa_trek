@@ -46,13 +46,10 @@
         <header class="navbar navbar-fixed-top">
             <div class="navbar-branding">
                 <a class="navbar-brand" href="{{ url('/') }}" target="_blank">
-                    @if ($setting->logo)
-                        <img src="{{ asset('uploads/original/' . $setting->logo) }}" alt="{{ config('app.name') }}"
-                            width="100" />
-                    @else
-                        <img src="{{ asset('theme-assets/images/adventure-logo.png') }}"
-                            alt="{{ config('app.name') }}" />
-                    @endif
+                    <div class="uk-width-auto@m">
+                        <img src="{{asset('theme-assets/img/logo.png')}}" width="180" alt="{{ config('app.name') }}">
+                    </div>
+                    
                 </a>
                 <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
             </div>
@@ -122,10 +119,15 @@
                                 Request::segment(2) == 'need-an-agent' ||
                                 Request::segment(2) == 'safety-security' ||
                                 Request::segment(2) == 'suggestion' ||
+                                Request::segment(2) == 'news-blogs' ||
+                                Request::segment(2) == 'women-empowerment' ||
+                                Request::segment(2) == 'your-group' ||
+                                Request::segment(2) == 'tourism' ||
+                                Request::segment(2) == 'contact-us' ||
                                 Request::segment(2) == 'why-us')
                             <a class="accordion-toggle menu-open">
-                            @else
-                                <a class="accordion-toggle">
+                        @else
+                            <a class="accordion-toggle">
                         @endif
                         <span class="fa fa-archive "></span>
                         <span class="sidebar-title"> Manage Posts </span>
