@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Models\Posts\PostModel;
+use App\Models\Settings\SettingModel;
 use App\Models\Travels\TripModel;
 use App\Models\Posts\PostTypeModel;
 use Illuminate\Contracts\View\view;
@@ -37,5 +38,10 @@ class HeaderComposer
         $view->with('contact_us', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '26'])->first());
 		$view->with('useful_info', PostModel::where(['post_type' => '24', 'status' => '1'])->orderBy('post_order', 'asc')->get());
         $view->with('your_group', PostTypeModel::where(['is_menu' => '0'])->where(['id' => '29'])->first());
+        $view->with('news', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '32'])->first());
+        $view->with('women', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '33'])->first());
+        $view->with('tourism', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '34'])->first());
+        $view->with('plan_trip', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '35'])->first());
+        $view->with('setting',SettingModel::where('id',1)->first());
 	}
 }

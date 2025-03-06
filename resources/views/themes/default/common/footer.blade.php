@@ -24,7 +24,7 @@
     <footer class="uk-padding bg-primary ">
         <div uk-grid  uk-scrollspy="cls: uk-animation-fade;  delay: 300; repeat: false">
             <div class="uk-width-1-3@m uk-text-left@m uk-text-center">
-                <a class="uk-logo" href="index.php">
+                <a class="uk-logo" href="{{ url('/') }}">
                     <img src="{{asset('theme-assets/img/logo.png')}}" class="footer-logo" width="180" alt="">
                 </a>
                 <hr style="border-top: 1px solid #e5e5e530;">
@@ -34,7 +34,7 @@
             <div class="uk-width-expand@m">
                 <div class="uk-child-width-1-4@m uk-child-width-1-2 uk-grid-small" uk-grid>
                     <div>
-                        <p class="uk-margin-remove "><a href="region-list.php" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Destination</a></p>
+                        <p class="uk-margin-remove "><a href="{{ route('page.trekkinglist') }}" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Destination</a></p>
                         <ul class=" footer-list">
                             @foreach ($trekking as $trek)
                                 <li> <a href="{{ route('trekking-list',$trek->uri) }}">{{$trek->title}}</a> </li>
@@ -42,7 +42,7 @@
                         </ul>
                     </div>
                     <div>
-                        <p class="uk-margin-remove "><a href="region-list.php" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Activities</a></p>
+                        <p class="uk-margin-remove "><a href="{{ route('page.activitylist') }}" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Activities</a></p>
                         <ul class=" footer-list">
                             @foreach ($activity as $row)
                                 <li> <a href="{{ route('activity-list', $row->uri) }}">{{ $row->title }}</a> </li>
@@ -51,7 +51,7 @@
                         </ul>
                     </div>
                     <div>
-                        <p class="uk-margin-remove "><a href="region-list.php" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Expedition</a></p>
+                        <p class="uk-margin-remove "><a href="{{ route('page.expeditionlist') }}" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Expedition</a></p>
                         <ul class=" footer-list">
                             @foreach ($expedition as $row)
                                 <li> <a href="{{ route('expedition-list', $row->uri) }}">{{ $row->title }}</a> </li>

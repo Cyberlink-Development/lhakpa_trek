@@ -8,21 +8,21 @@
                 <div class="panel-body">
 
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label">Text 1</label>
+                        <label for="inputStandard" class="col-lg-2 control-label">Activity</label>
                         <div class="col-lg-8">
                             <div class="bs-component">
                                 <input type="text" class="form-control" id="contentEditor4" name="text1_title" placeholder="title" value="{{$data->text1_title}}"/>
-                                <input type="text" class="form-control" id="contentEditor4" name="text1_sub_title" placeholder="sub_title" value="{{$data->text1_sub_title}}"/>
+                                <textarea type="text" class="form-control" id="contentEditor4" name="text1_sub_title" placeholder="sub_title" value="{{$data->text1_sub_title}}">{{$data->text1_sub_title}}</textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label">Text 2</label>
+                        <label for="inputStandard" class="col-lg-2 control-label">Famous trip</label>
                         <div class="col-lg-8">
                             <div class="bs-component">
                                 <input type="text" class="form-control" id="contentEditor4" name="text2_title" placeholder="title" value="{{$data->text2_title}}"/>
-                                <input type="text" class="form-control" id="contentEditor4" name="text2_sub_title" placeholder="sub_title" value="{{$data->text2_sub_title}}"/>
+                                <textarea type="text" class="form-control" id="contentEditor4" name="text2_sub_title" placeholder="sub_title" value="{{$data->text2_sub_title}}">{{$data->text2_sub_title}}</textarea>
                             </div>
                         </div>
                     </div>
