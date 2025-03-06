@@ -4,30 +4,22 @@
    <!-- start banner section -->
    <div class="swiper mySwiper  banner-carousel">
       <div class="swiper-wrapper">
-         <div class="swiper-slide">
-               <div class="uk-inline hero-items">
-                  <img src="{{asset('theme-assets/img/mountain/mountain5.jpeg')}}" width="1800" height="1200" alt="">
-                  <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column
-                     ">
-                     <div class="uk-banner-font uk-width-1-1 uk-width-1-3@m uk-text-center uk-margin-large-top">
-                           <h1>MT. AMA DABLAM EXPEDITION</h1>
+         @foreach ($banners as $banner)
+            <div class="swiper-slide">
+                  <div class="uk-inline hero-items">
+                     <img src="{{ $banner->picture ? asset('uploads/banners/'.$banner->picture) : asset('theme-assets/img/mountain/mountain5.jpeg')}}" width="1800" height="1200" alt="">
+                     <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column
+                        ">
+                        <div class="uk-banner-font uk-width-1-1 uk-width-1-3@m uk-text-center uk-margin-large-top">
+                              <h1>{{$banner->title}}</h1>
+                        </div>
+                        @if ($banner->link)
+                           <a href="{{ $banner->link }}" class="uk-btn uk-btn-secondary">Discover Trip</a>
+                        @endif
                      </div>
-                     <a href="trip-detail.php" class="uk-btn uk-btn-secondary">Discover Trip</a>
                   </div>
-               </div>
-         </div>
-         <div class="swiper-slide">
-               <div class="uk-inline hero-items">
-                  <img src="assets/img/mountain/mountain4.jpeg" width="1800" height="1200" alt="">
-                  <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column
-                     ">
-                     <div class="uk-banner-font uk-width-1-1 uk-width-1-3@m uk-text-center uk-margin-large-top">
-                           <h1>MT. EVEREST EXPEDITION</h1>
-                     </div>
-                     <a href="trip-detail.php" class="uk-btn uk-btn-secondary">Discover Trip</a>
-                  </div>
-               </div>
-         </div>
+            </div>
+         @endforeach
       </div>
       <div class="swiper-pagination"></div>
    </div>
@@ -40,60 +32,34 @@
                <div class="uk-width-1-3@m">
                   <div class="uk-title-font">
                      <span class="uk-secondary  dotted-line-black"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
-                     <h1 class="uk-primary">Discover our activities</h1>
-                     <p>Trekking in Nepal is a truly amazing experience and the ultimate opportunity for intrepid explorers who are in quest of adventure in the Himalayas. This beautiful adventure is best enjoyed with the best .</p>
-                     <a href="region-list.php" class="uk-btn uk-btn-secondary">Discover All Activities</a>
+                     <h1 class="uk-primary">{{$setting->text1_title}}</h1>
+                     <p>{{$setting->text1_sub_title}}</p>
+                     <a href="{{ route('page.activitylist') }}" class="uk-btn uk-btn-secondary">Discover All Activities</a>
                   </div>
                </div>
                <div class="uk-width-2-3@m">
                   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
-
                      <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-2@m  uk-child-width-1-3@l uk-grid">
+                        @foreach ($activity_list as $row )
                            <div class="uk-media-400 uk-activities">
-                              <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-height-1-1">
-                                 <img src="assets/img/mountain/mountain4.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
+                              @if($row->external_link)
+                                 <a href="{{$row->external_link}}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-height-1-1">
+                              @else
+                                 <a href="{{ route('activity-list', $row->uri) }}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-height-1-1">
+                              @endif
+                                 <img src="{{ $row->thumbnail ? asset('uploads/icon/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain1.jpeg')}} " class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="{{ $row->title }}">
                                  <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
                                  <div class="uk-overlay uk-position-bottom uk-light uk-text-center">
-                                       <span class="uk-white uk-text-uppercase">Biking</span>
-                                       <div class="dot-line uk-text-center"></div>
+                                    <span class="uk-white uk-text-uppercase">{{ $row->title }}</span>
+                                    <div class="dot-line uk-text-center"></div>
                                  </div>
                               </a>
                            </div>
-                           <div class="uk-media-400 uk-activities">
-                              <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-height-1-1">
-                                 <img src="assets/img/mountain/mountain2.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
-                                 <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
-                                 <div class="uk-overlay uk-position-bottom uk-light uk-text-center">
-                                       <span class="uk-white uk-text-uppercase">Cycling</span>
-                                       <div class="dot-line uk-text-center"></div>
-                                 </div>
-                              </a>
-                           </div>
-                           <div class="uk-media-400 uk-activities">
-                              <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-height-1-1">
-                                 <img src="assets/img/mountain/mountain5.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
-                                 <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
-                                 <div class="uk-overlay uk-position-bottom uk-light uk-text-center">
-                                       <span class="uk-white uk-text-uppercase">Safari and Hiking</span>
-                                       <div class="dot-line uk-text-center"></div>
-                                 </div>
-                              </a>
-                           </div>
-                           <div class="uk-media-400 uk-activities">
-                              <a href="" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-height-1-1">
-                                 <img src="assets/img/mountain/mountain1.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
-                                 <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
-                                 <div class="uk-overlay uk-position-bottom uk-light uk-text-center">
-                                       <span class="uk-white uk-text-uppercase">Tailormade Trips</span>
-                                       <div class="dot-line uk-text-center"></div>
-                                 </div>
-                              </a>
-                           </div>
-
+                        @endforeach
                      </div>
                      <div class="uk-flex uk-flex-center">
-                           <a class=" uk-position-small prev-btn" href uk-slidenav-previous uk-slider-item="previous"></a>
-                           <a class=" uk-position-small next-btn" href uk-slidenav-next uk-slider-item="next"></a>
+                        <a class=" uk-position-small prev-btn" href uk-slidenav-previous uk-slider-item="previous"></a>
+                        <a class=" uk-position-small next-btn" href uk-slidenav-next uk-slider-item="next"></a>
                      </div>
                   </div>
 
@@ -107,17 +73,19 @@
    <section class=" uk-primary-bg">
       <div class="uk-child-width-1-2@m uk-grid-match uk-grid-collapse" uk-grid>
          <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text">
-               <div class="uk-container uk-flex uk-flex-middle">
+               <div class="uk-contents uk-container uk-flex uk-flex-middle">
                   <div class="uk-title-font">
                      <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
-                     <h1 class="uk-secondary">Discover our activities</h1>
-                     <p class="uk-white">We, the Lhakpa Trekking are a team of professionals and are a top-quality trekking and travel company in Kathmandu valley. We are one of the leading and popular trekking company and we are also registered with the Nepalese government. <br> <br>We offer visitors with thousands of trekking and tour packages across Nepal, India, Tibet, and Bhutan. We also believe in full customer satisfaction and great trekking experience.</p>
-                     <a href="about.php" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
+                     <h1 class="uk-secondary">{{$about_us->post_type}}</h1>
+                     {{-- <p class="uk-white"> --}}
+                        {!! $about_us->content !!}
+                     {{-- </p> --}}
+                     <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
                   </div>
                </div>
          </div>
          <div class="uk-media-500">
-               <img src="assets/img/mountain/mountain5.jpeg" alt="">
+               <img src="{{ $about_us->banner ? asset('uploads/original/'.$about_us->banner) : asset('theme-assets/img/mountain/mountain5.jpeg')}}" alt="">
          </div>
       </div>
    </section>
@@ -130,30 +98,31 @@
                <div class="uk-width-1-4@m">
                   <div class="uk-title-font">
                      <span class="uk-secondary dotted-line-black"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>PACKAGES</span>
-                     <h1 class="uk-primary">Latest Viewed Trip</h1>
+                     <h1 class="uk-primary">{{$setting->text2_title}}</h1>
                   </div>
                </div>
                <div class="uk-width-expand@m uk-flex uk-flex-between uk-flex-middle">
-                  <p>Discover your next great soft and adventurous holidays,<br>
-                     Get start now! Discover your next great soft and adventurous holidays,
+                  <p>
+                     {{$setting->text2_sub_title}}
                   </p>
                </div>
-               <div class="uk-width-1-4@m uk-flex uk-flex-baseline uk-flex-right uk-flex-top uk-visible@m"">
-                  <a href=" trip-detail.php" class="uk-btn uk-btn-secondary">View All</a>
+               <div class="uk-width-1-4@m uk-flex uk-flex-baseline uk-flex-right uk-flex-top uk-visible@m">
+                  {{-- <a href=" trip-detail.php" class="uk-btn uk-btn-secondary">View All</a> --}}
                </div>
          </div>
          <div class="uk-child-width-1-2@m" uk-grid uk-height-match>
+            @foreach ($famous_trips as $row)
                <div>
                   <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
                      <div class="uk-width-2-5@m">
-                           <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle ">
-                              <img src="assets/img/mountain/mountain3.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
+                           <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle ">
+                              <img src="{{!empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
                            </a>
                      </div>
                      <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
                            <div class="uk-text-title uk-text-title">
-                              <a href="" class="uk-news-title">
-                                 <h2>Bali and Gili in a Lodge</h2>
+                              <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-news-title">
+                                 <h2>{{$row->trip_title}}</h2>
                               </a>
                            </div>
                            <div class="uk-star-rating">
@@ -168,172 +137,32 @@
                                  <i class="fa-solid fa-calendar"></i>
                                  <div>
                                        <p class="uk-trip-title uk-margin-remove">Duration</p>
-                                       <p class="uk-trip-description uk-margin-remove">14 Days</p>
+                                       <p class="uk-trip-description uk-margin-remove">{{$row->duration}}</p>
                                  </div>
                               </div>
                               <div class="uk-flex uk-flex-middle uk-trip ">
                                  <i class="fa-solid fa-location-dot"></i>
                                  <div>
                                        <p class="uk-trip-title uk-margin-remove">Location</p>
-                                       <p class="uk-trip-description uk-margin-remove">Nepal</p>
+                                       <p class="uk-trip-description uk-margin-remove">{{ $row->destinations()->first()->title }}</p>
                                  </div>
                               </div>
                               <div class="uk-flex uk-flex-middle uk-trip ">
                                  <i class="fa-solid fa-calendar"></i>
                                  <div>
                                        <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                       <p class="uk-trip-description uk-margin-remove">Moderate</p>
+                                       <p class="uk-trip-description uk-margin-remove">{{$row->trip_grade}}</p>
                                  </div>
                               </div>
                            </div>
-                           <p class="uk-margin-remove line-three">Enjoy breathtaking mountain scenery and panoramic views of the Himalayan range on one of the world's classic high </p>
+                           <p class="uk-margin-remove line-three">{{$row->sub_title}}</p>
                      </div>
                   </div>
                </div>
-               <div>
-                  <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
-                     <div class="uk-width-2-5@m">
-                           <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle ">
-                              <img src="assets/img/mountain/mountain4.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
-                           </a>
-                     </div>
-                     <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
-                           <div class="uk-text-title uk-text-title">
-                              <a href="" class="uk-news-title">
-                                 <h2>Bali and Gili in a Lodge</h2>
-                              </a>
-                           </div>
-                           <div class="uk-star-rating">
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                           </div>
-                           <div class="uk-flex uk-flex-between uk-margin-small-top uk-margin-small-bottom">
-                              <div class="uk-flex uk-flex-middle uk-trip">
-                                 <i class="fa-solid fa-calendar"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Duration</p>
-                                       <p class="uk-trip-description uk-margin-remove">14 Days</p>
-                                 </div>
-                              </div>
-                              <div class="uk-flex uk-flex-middle uk-trip ">
-                                 <i class="fa-solid fa-location-dot"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Location</p>
-                                       <p class="uk-trip-description uk-margin-remove">Nepal</p>
-                                 </div>
-                              </div>
-                              <div class="uk-flex uk-flex-middle uk-trip ">
-                                 <i class="fa-solid fa-calendar"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                       <p class="uk-trip-description uk-margin-remove">Moderate</p>
-                                 </div>
-                              </div>
-                           </div>
-                           <p class="uk-margin-remove line-three">Enjoy breathtaking mountain scenery and panoramic views of the Himalayan range on one of the world's classic high </p>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
-                     <div class="uk-width-2-5@m">
-                           <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle ">
-                              <img src="assets/img/mountain/mountain5.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
-                           </a>
-                     </div>
-                     <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
-                           <div class="uk-text-title uk-text-title">
-                              <a href="" class="uk-news-title">
-                                 <h2>Bali and Gili in a Lodge</h2>
-                              </a>
-                           </div>
-                           <div class="uk-star-rating">
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                           </div>
-                           <div class="uk-flex uk-flex-between uk-margin-small-top uk-margin-small-bottom">
-                              <div class="uk-flex uk-flex-middle uk-trip">
-                                 <i class="fa-solid fa-calendar"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Duration</p>
-                                       <p class="uk-trip-description uk-margin-remove">14 Days</p>
-                                 </div>
-                              </div>
-                              <div class="uk-flex uk-flex-middle uk-trip ">
-                                 <i class="fa-solid fa-location-dot"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Location</p>
-                                       <p class="uk-trip-description uk-margin-remove">Nepal</p>
-                                 </div>
-                              </div>
-                              <div class="uk-flex uk-flex-middle uk-trip ">
-                                 <i class="fa-solid fa-calendar"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                       <p class="uk-trip-description uk-margin-remove">Moderate</p>
-                                 </div>
-                              </div>
-                           </div>
-                           <p class="uk-margin-remove line-three">Enjoy breathtaking mountain scenery and panoramic views of the Himalayan range on one of the world's classic high </p>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
-                     <div class="uk-width-2-5@m">
-                           <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle ">
-                              <img src="assets/img/mountain/mountain1.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
-                           </a>
-                     </div>
-                     <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
-                           <div class="uk-text-title uk-text-title">
-                              <a href="" class="uk-news-title">
-                                 <h2>Bali and Gili in a Lodge</h2>
-                              </a>
-                           </div>
-                           <div class="uk-star-rating">
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                           </div>
-                           <div class="uk-flex uk-flex-between uk-margin-small-top uk-margin-small-bottom">
-                              <div class="uk-flex uk-flex-middle uk-trip">
-                                 <i class="fa-solid fa-calendar"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Duration</p>
-                                       <p class="uk-trip-description uk-margin-remove">14 Days</p>
-                                 </div>
-                              </div>
-                              <div class="uk-flex uk-flex-middle uk-trip ">
-                                 <i class="fa-solid fa-location-dot"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Location</p>
-                                       <p class="uk-trip-description uk-margin-remove">Nepal</p>
-                                 </div>
-                              </div>
-                              <div class="uk-flex uk-flex-middle uk-trip ">
-                                 <i class="fa-solid fa-calendar"></i>
-                                 <div>
-                                       <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                       <p class="uk-trip-description uk-margin-remove">Moderate</p>
-                                 </div>
-                              </div>
-                           </div>
-                           <p class="uk-margin-remove line-three">Enjoy breathtaking mountain scenery and panoramic views of the Himalayan range on one of the world's classic high </p>
-                     </div>
-                  </div>
-               </div>
+            @endforeach
          </div>
          <div class="uk-text-center uk-margin-medium-top uk-hidden@m">
-               <a href=" trip-detail.php" class="uk-btn uk-btn-secondary">View All</a>
+               {{-- <a href=" trip-detail.php" class="uk-btn uk-btn-secondary">View All</a> --}}
          </div>
       </div>
    </section>
@@ -357,7 +186,7 @@
                            <div class="uk-child-width-1-2@m uk-grid-collapse uk-grid-match" uk-grid>
                               <div>
                                  <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-400">
-                                       <img src="assets/img/mountain/mountain5.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
+                                       <img src="{{asset('theme-assets/img/mountain/mountain5.jpeg')}}" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
                                  </a>
                               </div>
                               <div class="uk-primary-bg uk-padding uk-mountain-bg">
@@ -411,7 +240,7 @@
                            <div class="uk-child-width-1-2@m uk-grid-collapse uk-grid-match" uk-grid>
                               <div>
                                  <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-400">
-                                       <img src="assets/img/mountain/mountain3.jpeg" class=" uk-transition-scale-up uk-transition-opaque" alt="">
+                                       <img src="{{asset('theme-assets/img/mountain/mountain3.jpeg')}}" class=" uk-transition-scale-up uk-transition-opaque" alt="">
                                  </a>
                               </div>
                               <div class="uk-primary-bg uk-padding uk-mountain-bg">
@@ -480,46 +309,31 @@
                   </div>
                </div>
                <div class="uk-width-1-2@m uk-flex uk-flex-right uk-flex-middle">
-                  <a href="region-list.php" class="uk-btn uk-btn-secondary">View All</a>
+                  <a href="{{ route('page.trekkinglist') }}" class="uk-btn uk-btn-secondary">View All</a>
                </div>
          </div>
       </div>
       <div class="uk-position-relative uk-visible-toggle uk-light uk-margin-top" tabindex="-1" uk-slider="sets: true">
          <div class="uk-slider-items uk-child-width-1-1  uk-child-width-1-2@m uk-child-width-1-3@l">
+            @foreach ($trekking as $trek)
                <div class="uk-media-500 uk-activities" style="overflow:hidden;">
-                  <a href="list.php" class="uk-inline uk-transition-toggle uk-link-toggle uk-height-1-1">
-                     <img src="assets/img/mountain/mountain3.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
+                  <a href="{{ route('trekking-list',$trek->uri) }}" class="uk-inline uk-transition-toggle uk-link-toggle uk-height-1-1">
+                     <img src="{{ !empty($trek->thumbnail) ? asset('uploads/icon/'.$trek->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
                      <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
                      <div class="uk-overlay uk-position-center uk-light uk-text-center uk-title-font">
-                           <h1 class="uk-white uk-text-uppercase">Annapurna Region</h1>
-                           <p class="uk-white">Annapurna Region is one of the demanding and popular touristic destinations of the world</p>
-                           <a href="" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
+                        <div>
+                           <h1 class="uk-white uk-text-uppercase">{{$trek->title}}</h1>
+                        </div>
+                        <div>
+                           <p class="uk-white">{{$trek->sub_title}}</p><br> <br>
+                        </div>
+                        <div>
+                           <a href="{{ route('trekking-list',$trek->uri) }}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
+                        </div>
                      </div>
                   </a>
                </div>
-               <div class="uk-media-500 uk-activities" style="overflow:hidden;">
-                  <a href="list.php" class="uk-inline uk-transition-toggle uk-link-toggle uk-height-1-1">
-                     <img src="assets/img/mountain/mountain2.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
-                     <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
-                     <div class="uk-overlay uk-position-center uk-light uk-text-center uk-title-font">
-                           <h1 class="uk-white uk-text-uppercase">Dhaulagiri Region</h1>
-                           <p class="uk-white">Dhaulagiri Region, one of the forbidden lands in Asia is one of the most demanding travel destination.</p>
-                           <a href="" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
-                     </div>
-                  </a>
-               </div>
-               <div class="uk-media-500 uk-activities" style="overflow:hidden;">
-                  <a href="list.php" class="uk-inline uk-transition-toggle uk-link-toggle uk-height-1-1">
-                     <img src="assets/img/mountain/mountain5.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" width="1800" height="1200" alt="">
-                     <div class="uk-overlay-primary  uk-banner-overlay uk-position-cover"></div>
-                     <div class="uk-overlay uk-position-center uk-light uk-text-center uk-title-font">
-                           <h1 class="uk-white uk-text-uppercase">Everest Region</h1>
-                           <p class="uk-white">Everest Region, also known as “The Land of Tunder Dragon” is one of the popular and demanding travelling destinations .</p>
-                           <a href="" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
-                     </div>
-                  </a>
-               </div>
-
+            @endforeach
          </div>
 
          <a class="uk-position-center-left uk-position-small prev-btn uk-white" href uk-slidenav-previous uk-slider-item="previous"></a>
@@ -540,46 +354,30 @@
                   </div>
                </div>
                <div class="uk-width-3-4@m uk-flex uk-flex-right uk-flex-middle">
-                  <a href=" trip-detail.php" class="uk-btn uk-btn-secondary">View All</a>
+                  <a href="{{route('page.posttype_detail',$blog->uri)}}" class="uk-btn uk-btn-secondary">View All</a>
                </div>
          </div>
          <div class="uk-child-width-1-2@m" uk-grid>
+            @foreach ($blogs as $row)
                <div>
-                  <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-280">
-                     <img src="assets/img/mountain/mountain5.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
+                  <a href="{{ route('page.pagedetail', $row->uri) }}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-280">
+                     <img src="{{ !empty($row->page_thumbnail) ? asset('uploads/original/'.$row->page_thumbnail) : asset('theme-assets/img/mountain/mountain5.jpeg')}} " class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
                   </a>
                   <div class="uk-flex uk-flex-between uk-flex-middle">
                      <div class="uk-text-title uk-margin-top">
-                           <span class="uk-primary"><i class="fa-solid fa-calendar uk-margin-small-right"></i> Wednesday July 3, 2025</span>
-                           <a href="" class="uk-news-title">
-                              <h2>Top 10 Great Reasons to Visit Nepal</h2>
+                           <span class="uk-primary"><i class="fa-solid fa-calendar uk-margin-small-right"></i> {{ date('l F j, Y', strtotime($row->post_date)) }}</span>
+                           <a href="{{ route('page.pagedetail', $row->uri) }}" class="uk-news-title">
+                              <h2>{{$row->post_title}}</h2>
                            </a>
                      </div>
                      <div>
-                           <a href="">
-                              <i class="fa-solid fa-circle-arrow-right uk-secondary f-30"></i>
-                           </a>
+                        <a href="{{ route('page.pagedetail', $row->uri) }}">
+                           <i class="fa-solid fa-circle-arrow-right uk-secondary f-30"></i>
+                        </a>
                      </div>
                   </div>
                </div>
-               <div>
-                  <a href="#" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-280">
-                     <img src="assets/img/mountain/mountain3.jpeg" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
-                  </a>
-                  <div class="uk-flex uk-flex-between uk-flex-middle">
-                     <div class="uk-text-title uk-margin-top">
-                           <span class="uk-primary"><i class="fa-solid fa-calendar uk-margin-small-right"></i> Wednesday July 3, 2025</span>
-                           <a href="" class="uk-news-title">
-                              <h2>Top 10 Great Reasons to Visit Nepal</h2>
-                           </a>
-                     </div>
-                     <div>
-                           <a href="">
-                              <i class="fa-solid fa-circle-arrow-right uk-secondary f-30"></i>
-                           </a>
-                     </div>
-                  </div>
-               </div>
+            @endforeach
          </div>
       </div>
    </section>
@@ -589,7 +387,7 @@
    <section class="uk-primary-bg">
       <div class="uk-child-width-1-2@m uk-grid-match uk-grid-collapse" uk-grid>
          <div class="uk-media-500">
-               <img src="assets/img/mountain/mountain4.jpeg" alt="">
+               <img src="{{asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="">
          </div>
          <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text">
                <div class="uk-container uk-flex uk-flex-middle">
@@ -600,7 +398,25 @@
                      <div uk-slider>
                            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
                               <div class="uk-slider-items">
-                                 <div>
+                                 @foreach ($reviews as $value)
+                                    <div>
+                                          <div class="uk-star-rating">
+                                             @for($i=0; $i < $value->rating; $i++)
+                                                <i class="fa-solid fa-star"></i>
+                                             @endfor
+                                          </div>
+                                          <p class="uk-white uk-margin-top">{!! $value->message !!} <br> <br><b>Greeting from Sherpa Family,</b>
+                                             <div class="uk-flex">
+                                                <img src="{{$value->image ? asset('uploads/reviews/'.$value->image) : asset('theme-assets/img/user.png')}}" class="uk-client-img" alt="">
+                                                <div class="uk-title-font">
+                                                   <h2 class="uk-secondary">{{ $value->full_name }}</h2>
+                                                   <span class="uk-white">{{ $value->country }}</span>
+                                                </div>
+                                             </div>
+                                          </p>
+                                    </div>
+                                 @endforeach
+                                 {{-- <div>
                                        <div class="uk-star-rating">
                                           <i class="fa-solid fa-star"></i>
                                           <i class="fa-solid fa-star"></i>
@@ -617,25 +433,7 @@
                                           </div>
                                        </div>
                                        </p>
-                                 </div>
-                                 <div>
-                                       <div class="uk-star-rating">
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                       </div>
-                                       <p class="uk-white uk-margin-top">We, the Lhakpa Trekking are a team of professionals and are a top-quality trekking and travel company in Kathmandu valley. We are one of the leading and popular trekking company and we are also registered with the Nepalese government. <br> <br><b>Greeting from Sherpa Family,</b>
-                                       <div class="uk-flex">
-                                          <img src="assets/img/user.png" class="uk-client-img" alt="">
-                                          <div class="uk-title-font">
-                                             <h2 class="uk-secondary">John Smith</h2>
-                                             <span class="uk-white">From USA</span>
-                                          </div>
-                                       </div>
-                                       </p>
-                                 </div>
+                                 </div> --}}
                               </div>
 
                               <ul class="uk-slider-nav uk-dotnav uk-flex uk-flex-center"></ul>

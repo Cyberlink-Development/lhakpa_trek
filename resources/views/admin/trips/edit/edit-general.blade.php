@@ -80,6 +80,12 @@
                             value="{{ $data->max_altitude }}" />
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="bs-component">
+                    <label>Transportation</label>
+                        <input type="text" name="peak_name" class="form-control" value="{{ $data->peak_name }}" />
+                    </div>
+                </div>
             </div>
               <div class="form-group">
            
@@ -168,12 +174,6 @@
                             <option @if($data->video_status==1)selected @endif value="1">Yes</option>
                             <option @if($data->video_status==0)selected @endif value="0">No</option>
                         </select>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="bs-component">
-                    <label>Transportation</label>
-                        <input type="text" name="peak_name" class="form-control" value="{{ $data->peak_name }}" />
                     </div>
                 </div>
             </div>

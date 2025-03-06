@@ -77,6 +77,12 @@
                             <input type="text" name="max_altitude" class="form-control" value="{{ old('max_altitude') }}" />
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                        <label>Transportation</label>
+                            <input type="text" name="peak_name" class="form-control" value="{{ old('peak_name') }}" />
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-6">
@@ -126,12 +132,6 @@
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="bs-component">
-                        <label>Transportation</label>
-                            <input type="text" name="peak_name" class="form-control" value="{{ old('peak_name') }}" />
                         </div>
                     </div>
                 </div>  

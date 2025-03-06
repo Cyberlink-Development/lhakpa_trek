@@ -62,24 +62,27 @@ class FrontpageController extends Controller
 {
     public function index()
     {
-        $banners = BannerModel::where('status', '1')->first();
+        $banners = BannerModel::where('status', '1')->get();
         $homeBrief = HomeBriefModel::where('id', 1)->first();
         $whoweare = PostModel::where('id', '148')->first();
         $whywork= PostModel::where('id',149)->first();
-        $images=PostImageModel::where('post_id',148)->get();
-        $famous_trips = TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->get();
-        $trekking = TripModel::where(['trip_type' => '1', 'status' => '1'])->take(8)->get();
+        $images= PostImageModel::where('post_id',148)->get();
+        $famous_trips = TripModel::where(['video_status' => '1', 'status' => '1'])->orderBy('ordering', 'asc')->take(4)->get();
+        $trekking = ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get();
         $expedition = TripModel::where(['trip_type' => '2', 'status' => '1'])->take(8)->get();
         $tripofMonth = TripModel::where('trip_of_the_month', '1')->first();
-        $blog = PostModel::where('id', '122')->first();
-        $blogs = PostModel::where(['post_parent' => '122'])->orderBy('post_order', 'desc')->take(4)->get();
+        $blog = PostTypeModel::where('id', '32')->first();
+        $blogs = PostModel::where('post_type',$blog->id)->orderBy('post_order', 'desc')->take(4)->get();
         $reviews = TripReview::where('status', 1)->get();
         $team = AssociatedPostModel::where(['post_id' => '125'])->where('show_in_home',1)->limit(2)->get();
         $contact = PostTypeModel::where('id', 26)->first();
         $guide= PostModel::where('id',125)->first();
         $activity_list =  ActivityModel::where(['activity_parent'=>'activity'])->orderBy('ordering', 'asc')->limit(5)->get();
+        $about_us = PostTypeModel::where(['is_menu' => '1','id' => '22'])->first();
+        $setting = SettingModel::where('id',1)->first();
+        // dd($blog,$blogs);
         return view('themes.default.frontpage', compact(
-            'banners',
+            'banners','about_us','setting',
             'homeBrief',
             'whoweare',
             'famous_trips',
@@ -800,19 +803,21 @@ class FrontpageController extends Controller
 
     public function activitylist()
     {
-        $data = ActivityModel::where('activity_parent','activity')->orderBy('ordering','asc')->get();
-        return view('themes.default.activitylist', compact('data'));
+        $parent = ActivityModel::where(['activity_parent' => 'activity'])->first();
+        $data = ActivityModel::where('activity_parent','activity')->orderBy('ordering','asc')->paginate(4);
+        // dd($data,$parent);
+        return view('themes.default.activitylist', compact('data','parent'));
     }
     public function trekkinglist()
     {
         $parent = ActivityModel::where(['activity_parent' => 'activity', 'uri' => 'trekking'])->first();
-        $data = ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get();
+        $data = ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->paginate(4);
         return view('themes.default.trekkinglist', compact('parent','data'));
     }
     public function expeditionlist()
     {
         $parent = ActivityModel::where(['activity_parent' => 'activity', 'uri' => 'expeditions-1'])->first();
-        $data = ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->get();
+        $data = ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->paginate(4);
         return view('themes.default.expeditionlist', compact('parent','data'));
     }
 }

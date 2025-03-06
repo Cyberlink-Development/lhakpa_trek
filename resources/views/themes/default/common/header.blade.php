@@ -156,13 +156,19 @@
                     </div>
                     <div class="uk-width-expand@m">
                         <ul class="uk-flex uk-flex-right uk-topnavbar-ul uk-margin-bottom">
-                            <li class="border-right"><a href="news.php">News / Blogs</a></li>
-                            <li class="border-right"><a href="">Women Empowerment</a></li>
-                            <li class="border-right"><a href="tourism.php">Toursim</a></li>
+                            @if($news)
+                                <li class="border-right"><a href="{{route('page.posttype_detail',$news->uri)}}">{{ $news->post_type }}</a></li>
+                            @endif
+                            @if($women)
+                                <li class="border-right"><a href="{{route('page.posttype_detail',$women->uri)}}">{{ $women->post_type }}</a></li>
+                            @endif
+                            @if($tourism)
+                                <li class="border-right"><a href="{{route('page.posttype_detail',$tourism->uri)}}">{{ $tourism->post_type }}</a></li>
+                            @endif
                         </ul>
                         <ul class="uk-flex uk-flex-right uk-topnavbar-ul">
                             <li class="border-right">
-                                <i class="fa-solid fa-phone uk-margin-small-right"></i> +123 456 7890 , +789 456 6786
+                                <i class="fa-solid fa-phone uk-margin-small-right"></i> {{ $setting->phone }}
                             </li>
                             <!--<li class="border-right">-->
                             <!--    <a href="#">-->
@@ -175,7 +181,9 @@
                             <!--    </a>-->
                             <!--</li>-->
                             <li class="uk-margin-small-left">
-                                <a href="plan.php" class="inquiry-btn">Plan Your Trip</a>
+                            @if($plan_trip)
+                                <a href="{{route('page.posttype_detail',$plan_trip->uri)}}" class="inquiry-btn">{{ $plan_trip->post_type }}</a>
+                            @endif
                             </li>
                         </ul>
                     </div>
