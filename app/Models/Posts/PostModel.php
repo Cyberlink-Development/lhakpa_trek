@@ -16,7 +16,7 @@ class PostModel extends Model
 
     public function associated_posts()
     {
-      return $this->hasMany('App\Models\Posts\AssociatedPostModel','post_id');
+      return $this->hasMany('App\Models\Posts\AssociatedPostModel','post_id')->where('show_in_home', '1');
     }
 
     public function images()

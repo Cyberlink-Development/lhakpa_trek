@@ -134,6 +134,15 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Last Moment trip</label>
+                            <select class="form-control" name="show_in_home">  
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>  
                 <!--</div>-->
 

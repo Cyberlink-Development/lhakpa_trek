@@ -132,6 +132,8 @@
                                 Request::segment(2) == 'your-group' ||
                                 Request::segment(2) == 'tourism' ||
                                 Request::segment(2) == 'contact-us' ||
+                                Request::segment(2) == 'mesage-from-us' ||
+                                Request::segment(3) == 'mesage-from-us' ||
                                 Request::segment(2) == 'why-us')
                             <a class="accordion-toggle menu-open">
                         @else
@@ -157,7 +159,7 @@
                             <!-- Post Type List -->
                             @if ($posttype)
                                 @foreach ($posttype as $row)
-                                    <li class="{{ Request::segment(2) == $row->uri ? 'active' : '' }}">
+                                    <li class="{{ ((Request::segment(2) == $row->uri)  || (Request::segment(3) == $row->uri)) ? 'active' : ''}}">
                                         @if (has_posts($row->id))
                                             <a href="{{ url('admin/' . $row->uri) }}">
                                             @else
@@ -189,13 +191,13 @@
                         <span class="caret"></span>
                         </a>
                         <ul class="nav sub-nav">
-                            <li
+                            {{-- <li
                                 class="{{ Request::segment(2) == 'destination' || Request::segment(2) == 'tour-trip' ? 'active' : '' }}">
                                 <a href="{{ route('destination.index') }}">
                                     <span class="fa fa fa-arrows-h"></span>
                                     Destinations
                                 </a>
-                            </li>
+                            </li> --}}
                             <?php /* <li class="{{ (Request::segment(2) == 'tripgroup')?'active':'' }}">
                     <a href="{{ route('tripgroup.index') }}">
                       <span class="fa fa fa-arrows-h"></span>
