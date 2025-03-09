@@ -64,7 +64,7 @@
                                         <td> {{ $row->post_order }}</td>
                                         <td>
                                             {{-- @if ($row->id == '118' || $row->id == '121' || $row->id == '125' || $row->id == '130' || $row->id == '137') --}}
-                                            @if(has_associatedpost($row->id) > 0)
+                                            @if(has_associatedpost($row->id) > 0 || Request::segment(2) == 'mesage-from-us')
                                                 <a href="{{ url('admin/associated/' . Request::segment(2) . '/' . $row->id) }}"><i
                                                     class="fa fa-plus fa fa-2x"></i></a>
                                             @endif

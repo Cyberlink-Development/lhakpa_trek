@@ -71,6 +71,7 @@ class FrontpageController extends Controller
         $trekking = ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get();
         $expedition = TripModel::where(['trip_type' => '2', 'status' => '1'])->take(8)->get();
         $tripofMonth = TripModel::where('trip_of_the_month', '1')->first();
+        $lastMomentTrip = TripModel::with('activities')->where(['show_in_home'=> '1', 'status' => '1'])->get();
         $blog = PostTypeModel::where('id', '32')->first();
         $blogs = PostModel::where('post_type',$blog->id)->orderBy('post_order', 'desc')->take(4)->get();
         $reviews = TripReview::where('status', 1)->get();
@@ -80,9 +81,9 @@ class FrontpageController extends Controller
         $activity_list =  ActivityModel::where(['activity_parent'=>'activity'])->orderBy('ordering', 'asc')->limit(5)->get();
         $about_us = PostTypeModel::where(['is_menu' => '1','id' => '22'])->first();
         $setting = SettingModel::where('id',1)->first();
-        // dd($blog,$blogs);
+        // dd($lastMomentTrip);
         return view('themes.default.frontpage', compact(
-            'banners','about_us','setting',
+            'banners','about_us','setting','lastMomentTrip',
             'homeBrief',
             'whoweare',
             'famous_trips',
@@ -119,12 +120,12 @@ class FrontpageController extends Controller
             // $posts = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0'])->orderBy('post_order', 'desc')->paginate(12);
             $query = PostModel::where(['post_type' => $data->id, 'status' => '1', 'post_parent' => '0']);
             if($query){
-                $posts = (clone $query)->orderBy('post_order', 'asc')->paginate(12);
+                $posts = (clone $query)->orderBy('post_order', 'asc')->with('associated_posts')->paginate(12);
                 $news = (clone $query)->orderBy('post_order', 'desc')->paginate(4);
                 $your_group_post = $query->first();
             }
         }
-        // dd($data,$posts,$your_group_post,$setting);
+        
         return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews'));
     }
 

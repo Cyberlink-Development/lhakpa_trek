@@ -176,6 +176,15 @@
                         </select>
                     </div>
                 </div>
+               <div class="col-lg-6">
+                    <div class="bs-component">
+                        <label>Last Moment trip</label>
+                         <select class="form-control" name="show_in_home">
+                            <option @if($data->show_in_home==1)selected @endif value="1">Yes</option>
+                            <option @if($data->show_in_home==0)selected @endif value="0">No</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

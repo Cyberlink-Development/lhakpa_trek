@@ -22,7 +22,7 @@
                 <div class="panel-body">
                     <input type="hidden" name="post_id" value="{{ Request::segment(4) }}" />
                     <div class="form-group">
-                        <label for="title" class="col-lg-2 control-label">Title</label>
+                        <label for="title" class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
                                 <input type="text" id="title" name="title" class="form-control"
@@ -32,17 +32,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label">Brief</label>
+                        <label for="inputStandard" class="col-lg-2 control-label">Designation</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
                                 <div class="bs-component">
-                                    <textarea class="form-control" id="" name="brief" rows="3" autocomplete="off">{{ $data->brief }}</textarea>
+                                    {{-- <textarea class="form-control" id="" name="brief" rows="3" autocomplete="off">{{ $data->brief }}</textarea> --}}
+                                    <input class="form-control" id="" name="brief" rows="3" autocomplete="off" value="{{ $data->brief }}"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label">detail</label>
+                        <label for="inputStandard" class="col-lg-2 control-label">Message</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
                                 <div class="bs-component">
@@ -73,7 +74,7 @@
                 </div>
                 
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label">Thumbnail</label>
+                        <label for="inputStandard" class="col-lg-2 control-label">Photo</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
                                 <div class="bs-component">

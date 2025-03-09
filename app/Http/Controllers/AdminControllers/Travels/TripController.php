@@ -627,6 +627,7 @@ class TripController extends Controller
             $data->meta_title = $request->meta_title;
             $data->is_draft = $is_draft;
             $data->video_status=$request->video_status;
+            $data->show_in_home=$request->show_in_home;
             $data->start_date = $request->start_date;
             $data->price = $request->price;
             $data->discount = $request->discount;
