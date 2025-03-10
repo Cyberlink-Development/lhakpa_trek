@@ -86,7 +86,11 @@
             <div class="uk-width-1-4@m uk-same-height">
                 <div class="uk-grey-bg  uk-padding-dicovery  uk-pattern-bg">
                     <div class="uk-flex uk-flex-between uk-flex-middle">
-                        <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{  optional($data->destinations()->first())->title }}</h2>
+                        {{-- <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{  optional($data->destinations()->first())->title }}</h2> --}}
+                        <div class="uk-flex uk-flex-middle">
+                            <button class="uk-wish-button" onclick="toggleActive(this)"><i class="fa-solid fa-heart"></i></button>
+                            <h2 class="uk-white uk-text-uppercase uk-margin-remove">Nepal</h2>
+                        </div>
                         <div class="uk-star-rating">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -754,5 +758,10 @@
 
     </div>
 </div>
+<script>
+    function toggleActive(button) {
+        button.classList.toggle("active");
+    }
+</script>
 <!-- inquiry form modal end -->
 @stop
