@@ -144,7 +144,7 @@
                                  <i class="fa-solid fa-location-dot"></i>
                                  <div>
                                        <p class="uk-trip-title uk-margin-remove">Location</p>
-                                       <p class="uk-trip-description uk-margin-remove">{{ $row->destinations()->first()->title }}</p>
+                                       <p class="uk-trip-description uk-margin-remove">{{ optional($row->destinations()->first())->title }}</p>
                                  </div>
                               </div>
                               <div class="uk-flex uk-flex-middle uk-trip ">

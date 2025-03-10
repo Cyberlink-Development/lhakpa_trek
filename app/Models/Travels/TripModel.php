@@ -28,7 +28,7 @@ class TripModel extends Model
     /* The regions that belongs to the trip */
     public function regions()
     {
-        return $this->belongsToMany('App\Models\Travels\RegionModel', 'cl_trip_region_rel', 'trip_id', 'region_id');
+        return $this->belongsToMany('App\Models\Travels\RegionModel', 'cl_trip_region_rel', 'trip_id', 'region_id');  
     }
 
     /* The activities that belongs to the trip */

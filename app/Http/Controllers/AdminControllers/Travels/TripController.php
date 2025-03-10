@@ -64,7 +64,7 @@ class TripController extends Controller
         $expeditions = ActivityModel::where('activity_parent','expedition')->get();
         $activity=ActivityModel::where('activity_parent','activity')->get();
         $travels=ActivityModel::where('activity_parent','travel')->get();
-        // dd($expeditions);
+        // dd($trip_type);
         return view('admin.trips.create', compact('trek','all_trips', 'trip_type', 'grades', 'ordering', 'destinations', 'regions', 'activities', 
         'trip_groups','expeditions','trekking','availability','activity','travels'));
     }
@@ -92,7 +92,7 @@ class TripController extends Controller
 
 
             $data = $request->all();
-            // dd($data);
+            // dd($request->all());
 
             /*************Banner Upload************/
             $file = $request->file('banner');
@@ -175,9 +175,9 @@ class TripController extends Controller
             }
             /*****************************/
 
-            if ($request->trip_code == NULL) {
-                $data['trip_code'] = rand() . '-' . time();
-            }
+            // if ($request->trip_code == NULL) {
+            //     $data['trip_code'] = rand() . '-' . time();
+            // }
 
             $data['uri'] = Str::slug($request->uri);
             $data['banner'] = $banner_name;
@@ -355,11 +355,21 @@ class TripController extends Controller
 
         /************Attach******************/
         $_data = TripModel::find($last_id);
-        $_data->destinations()->attach($request->destination);
+
         $_data->regions()->attach($request->region);
-        $_data->activities()->attach($request->activity);
+        // $_data->activities()->attach($request->activity);
         $_data->tripgroups()->attach($request->tripgroup);      
        
+        /************************************/
+        $allActivities = array_unique(array_merge(
+            $request->activity ?? [], 
+            $request->activity_type ?? [], 
+            $request->travel_type ?? []
+        ));
+        if (!empty($allActivities)) {
+            $_data->activities()->attach($allActivities);
+        }
+
         /************************************/
         return response()->json(['status' => 'success', 'message' => 'Trip Added Successfully']);
     }
@@ -465,7 +475,7 @@ class TripController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->ajax()) {
-            // dd('test', $request->all());
+            
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
                 'upload_pdf' => 'nullable|mimes:pdf|max:2048',
@@ -477,6 +487,7 @@ class TripController extends Controller
                     'errors' => $validator->errors()->all()
                 ]);
             }
+            // dd('test', $request->all());
 
             $is_draft = 0;
             if ($request->submit == 'publish') {
@@ -637,8 +648,18 @@ class TripController extends Controller
             $_data->destinations()->attach($request->destination);
             $_data->regions()->detach();
             $_data->regions()->attach($request->region);
-            $_data->activities()->detach();
-            $_data->activities()->attach($request->activity);
+            // $_data->activities()->detach();
+            // $_data->activities()->attach($request->activity);  
+
+            /**start */
+            $allActivities = array_unique(array_merge(
+                $request->activity ?? [], 
+                $request->activity_type ?? [], 
+                $request->travel_type ?? []
+            ));
+            $_data->activities()->sync($allActivities);
+
+            /**end */
             $_data->tripgroups()->detach();
             $_data->tripgroups()->attach($request->tripgroup);
             $_data->relatedtrips()->detach();

@@ -94,44 +94,9 @@
     <section class="uk-section">
         <div class="uk-container">
             <div uk-grid>
-                <div class="uk-width-1-4@m">
-                    <div class="uk-sidebar uk-grey-bg uk-padding-small " uk-sticky="offset: 90; end: !" style="border-top: 5px solid var(--primary);"> 
-                        <div class="uk-title-font">
-                            <span class="uk-white  dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>Search your way</span>
-                        </div>
-                        <form action="">
-                            <div class="uk-margin">
-                                <select class="uk-select uk-list-select" aria-label="Difficulty">
-                                    <option>Difficulty</option>
-                                    <option>Easy</option>
-                                    <option>Moderate</option>
-                                    <option>Difficult</option>
-                                </select>
-                            </div>
-                            <div class="uk-margin">
-                                <select class="uk-select uk-list-select" aria-label="Difficulty">
-                                    <option>Duration</option>
-                                    <option>One Week</option>
-                                    <option>Two Week</option>
-                                    <option>Long Stay</option>
-                                </select>
-                            </div>
-                            <div class="uk-margin uk-list-select">
-                                <select class="uk-select" aria-label="Difficulty">
-                                    <option>Price Range</option>
-                                    <option>Easy</option>
-                                    <option>Moderate</option>
-                                    <option>Difficult</option>
-                                </select>
-                            </div>
-                            <div class="uk-flex uk-text-center">
-                                <button class="uk-button uk-padding-remove uk-btn uk-btn-secondary uk-width-1-1">Search NOw</a>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="my-id"></div>
-                </div>
-                <div class="uk-width-3-4@m">
+                @include('themes.default.common.sidebar-search')
+                
+                <div class="uk-width-3-4@m" id="tripsearchResult">
                     <!--  -->
                     @foreach ($data as $row)
                         <div class="uk-margin-bottom">
@@ -180,7 +145,7 @@
                                             <i class="fa-solid fa-calendar"></i>
                                             <div>
                                                 <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                                <p class="uk-trip-description uk-margin-remove">{{$row->trip_grade}}</p>
+                                                <p class="uk-trip-description uk-margin-remove">{{grade_message_trek($row->trip_grade)}}</p>
                                             </div>
                                         </div>
                                         <div>
@@ -202,4 +167,6 @@
 @endif
 <!-- list section end -->
 
+
+    
 @stop
