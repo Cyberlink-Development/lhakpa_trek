@@ -307,7 +307,7 @@
                                                                     @endphp
                                                                     @foreach ($tripList as $item)
                                                                         <div>
-                                                                            <a href="trip-detail.php">
+                                                                            <a href="{{ url('page/' . tripurl($item['uri'])) }}">
                                                                                 <div class="uk-media-205 uk-border-rounded uk-cover-container  uk-display-block uk-transition-toggle uk-link-toggle " href="detail.php">
                                                                                     <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="" src="{{ $item['thumbnail'] ? asset('uploads/original/'.$item['thumbnail']) : asset('theme-assets/img/mountain/mountain1.jpeg')}} " />
                                                                                     <div class="uk-overlay-banner  uk-position-cover"></div>

@@ -86,7 +86,7 @@
             <div class="uk-width-1-4@m uk-same-height">
                 <div class="uk-grey-bg  uk-padding-dicovery  uk-pattern-bg">
                     <div class="uk-flex uk-flex-between uk-flex-middle">
-                        <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{ $data->destinations()->first()->title }}</h2>
+                        <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{  optional($data->destinations()->first())->title }}</h2>
                         <div class="uk-star-rating">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>

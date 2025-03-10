@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontendControllers;
 
 use App\Models\Inquiry\Emergency;
 use App\Models\Inquiry\Insurance;
+use App\Models\Travels\TripGradeModel;
 use Newsletter;
 use App\Mail\BookTrip;
 use App\Mail\SendMail;
@@ -653,6 +654,39 @@ class FrontpageController extends Controller
         }
     }
 
+    public function search_trip(Request $request)
+    {
+        $query = ActivityModel::find($request->id)->trips();
+        // dd($query->get(), $request->all());
+
+        if (!$query) {
+            return response()->json(['error' => 'Activity not found'], 404);
+        }
+
+        if ($request->trek_grade != 0) {
+            $query->where('trip_grade', $request->trek_grade);
+            // if ($query->count() < 1) {
+            //     $query = ActivityModel::find($request->id)->trips();
+            // }
+        }
+    
+        if ($request->duration) {
+            $query->where('duration', '<=', $request->duration)->orderBy('duration', 'desc');
+        }
+
+        if ($request->price_range) {
+            $query->where('price', '<=', $request->price_range)->orderBy('price', 'desc');
+        }
+
+        $trips = $query->take(7)->get();
+        $html = view('themes.default.search-results', compact('trips'))->render();
+
+        return response()->json([
+            'success' => true,
+            'html' => $html
+        ]);
+    }
+
     public function show_search_form(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -764,8 +798,10 @@ class FrontpageController extends Controller
         $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
         $dataAll = $query->get(); 
         $data = $query->paginate(3);
+        $trekGrade = TripGradeModel::get();
+        // dd($data,$item);
 
-        return view('themes.default.expedition',compact('data','dataAll','item'));
+        return view('themes.default.expedition',compact('data','dataAll','item','trekGrade'));
     }
     public function activity(Request $request)
     {
@@ -773,8 +809,9 @@ class FrontpageController extends Controller
         $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
         $dataAll = $query->get(); 
         $data = $query->paginate(3);
+        $trekGrade = TripGradeModel::get();
 
-        return view('themes.default.activity',compact('data','dataAll','item'));
+        return view('themes.default.activity',compact('data','dataAll','trekGrade','item'));
     }
 
     public function tour()
@@ -789,8 +826,9 @@ class FrontpageController extends Controller
         $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
         $dataAll = $query->get(); 
         $data = $query->paginate(3);
+        $trekGrade = TripGradeModel::get();
         
-        return view('themes.default.trekking', compact('dataAll','data','item'));
+        return view('themes.default.trekking', compact('dataAll','data','item','trekGrade'));
     }
     public function travel(Request $request)  
     {
@@ -798,8 +836,9 @@ class FrontpageController extends Controller
         $query = ActivityModel::find($item->id)->trips()->where('status','1')->orderBy('ordering','asc');
         $dataAll = $query->get(); 
         $data = $query->paginate(3);
+        $trekGrade = TripGradeModel::get();
         
-        return view('themes.default.travel', compact('dataAll','data','item'));
+        return view('themes.default.travel', compact('dataAll','data','item','trekGrade'));
     }
 
     public function activitylist()
