@@ -743,6 +743,8 @@ class FrontpageController extends Controller
         $trips = TripModel::all();
         $activity = ActivityModel::where('activity_parent', 'trekking')->get();
         $terms = PostModel::where('id', '134')->first();
+        // dd($request->all(), $uri, $booking);
+
         return view('themes.default.booking', compact('booking', 'terms', 'trips', 'activity', 'start_date', 'end_date'));
     }
 

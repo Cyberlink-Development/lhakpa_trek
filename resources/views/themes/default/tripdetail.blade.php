@@ -113,7 +113,7 @@
                 </div>
                 <div class="uk-child-width-1-2 uk-grid-collapse" uk-grid>
                     <div class="uk-secondary-bg uk-book-btn">
-                        <a href="book.php">BOOK NOW</a>
+                        <a href="{{route('page.booking', $data->uri)}}">BOOK NOW</a>
                     </div>
                     <div class="uk-primary-bg uk-book-btn">
                         <a href="#modal-inquiry" class="uk-inquiry-btn" uk-toggle>Inquiry Now</a>
