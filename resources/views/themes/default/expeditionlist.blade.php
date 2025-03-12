@@ -1,11 +1,11 @@
 @extends('themes.default.common.master')
-@section('title',$parent->title)
+{{-- @section('title',$parent->title)
 @section('meta_keyword',$parent->title)
 @section('meta_description',$parent->brief)
-@section('thumbnail',$parent->thumbnail)
+@section('thumbnail',$parent->thumbnail) --}}
 @section('content')
 
-<section class=" uk-cover-container uk-position-relative uk-flex uk-flex-middle uk-background-norepeat uk-background-cover uk-background-top-center uk-background-fixed" uk-height-viewport data-src="{{ asset('uploads/banners/'.$parent->banner)}} " alt="" uk-img>
+<section class=" uk-cover-container uk-position-relative uk-flex uk-flex-middle uk-background-norepeat uk-background-cover uk-background-top-center uk-background-fixed" uk-height-viewport data-src="{{ ($data->count() > 0 ) ? asset('uploads/icon/'.$data[0]->thumbnail) : asset('theme-assets/img/mountain/mountain6.jpeg')}}" alt="" uk-img>
     <div class="uk-overlay-banner uk-position-cover"></div>
     <div class="uk-container uk-width-1-1 pt-150 uk-position-relative">
         <div class="uk-flex uk-flex-middle uk-grid-collapse " uk-grid>

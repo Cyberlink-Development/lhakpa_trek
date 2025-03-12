@@ -41,6 +41,7 @@ class HeaderComposer
         $view->with('news', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '32'])->first());
         $view->with('women', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '33'])->first());
         $view->with('tourism', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '34'])->first());
+        $view->with('suggestion', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '31'])->first());
         $view->with('plan_trip', PostTypeModel::where(['is_menu' => '1'])->where(['id' => '35'])->first());
         $view->with('setting',SettingModel::where('id',1)->first());
 	}
