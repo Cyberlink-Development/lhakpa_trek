@@ -182,7 +182,7 @@
                              </li>
                              <li class="border-right">
                                 <a href="#modal-form" uk-toggle>
-                                    <i class="fa-solid fa-user uk-margin-small-right"></i>User Login
+                                    <i class="fa-solid fa-user uk-margin-small-right"></i>User Login.
                                 </a>
                              </li>
                             <li class="uk-margin-small-left">
@@ -487,79 +487,76 @@
                                                 Company <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                             </a>
                                             <ul class="uk-nav-sub">
-                                                <li><a href="about.php">About Us</a></li>
-                                                <li><a href="why-us.php">Why US</a></li>
-                                                <li><a href="message.php">Messafe from us</a></li>
-                                                <li><a href="migmar.php">Migmar Foundation</a></li>
-                                                <li><a href="agent.php">Need an Agent</a></li>
-                                                <li><a href="team.php">Team Member</a></li>
-                                                <li><a href="safety.php">Safety & Security</a></li>
-                                                <li><a href="suggestion.php">Suggestion</a></li>
+                                                @foreach ($navigations as $nav)
+                                                    <li><a href="{{route('page.posttype_detail',$nav->uri)}}">{{$nav->post_type}}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="js-accordion uk-parent">
-                                            <a href="activities.php" aria-expanded="false"> Destination
+                                            <a aria-expanded="false"> Destination
                                                 <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                             </a>
                                             <ul class="uk-nav-sub">
-                                            <li><a href="list.php">Everest Region</a></li>
-                                                <li><a href="list.php">Manasulu Region</a></li>
-                                                <li><a href="list.php">Annapurna Region</a></li>
-                                                <li><a href="list.php">Langtang Region</a></li>
-                                                <li><a href="list.php">Makalu Region</a></li>
+                                                @foreach ($trekking as $trek)
+                                                    <li><a href="{{ route('trekking-list',$trek->uri) }}">{{$trek->title}}</a></li>
+                                                @endforeach
+                                                <li><a href="{{ route('page.trekkinglist') }}">View All</a></li>
                                             </ul>
                                         </li>
                                         <li class="js-accordion uk-parent">
-                                            <a href="region-list.php" aria-expanded="false">Expedition
+                                            <a aria-expanded="false">Expedition
                                                 <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                             </a>
                                             <ul class="uk-nav-sub">
-                                                <li><a href="list.php">8000ers</a></li>
-                                                <li><a href="list.php">7000ers</a></li>
-                                                <li><a href="list.php">6000ers</a></li>
-                                                <li><a href="list.php">5000ers</a></li>
-                                                <li><a href="list.php">All</a></li>
+                                                @foreach ($expedition as $row)
+                                                <li><a href="{{ route('expedition-list', $row->uri) }}">{{ $row->title }}</a></li>
+                                                @endforeach
+                                                <li><a href="{{ route('page.expeditionlist') }}"> View All</a></li>
                                             </ul>
                                         </li>
                                         <li class="js-accordion uk-parent">
-                                            <a href="region-list.php" aria-expanded="false"> Activities
+                                            <a aria-expanded="false"> Activities
                                                 <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                             </a>
                                             <ul class="uk-nav-sub">
-                                                <li><a href="list.php">Biking</a></li>
-                                                <li><a href="list.php">Culture</a></li>
-                                                <li><a href="list.php">Cycling</a></li>
-                                                <li><a href="list.php">Family</a></li>
+                                                @foreach ($activity as $row)
+                                                    <li><a href="{{ route('trekking-list',$row->uri) }}">{{ $row->title }}</a></li>
+                                                @endforeach
+                                                <li><a href="{{ route('page.activitylist') }}">View All</a></li>
                                             </ul>
                                         </li>
                                         <li class="js-accordion uk-parent">
-                                            <a href="region-list.php" aria-expanded="false"> Travelling Style
+                                            <a aria-expanded="false"> Travelling Style
                                                 <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                             </a>
                                             <ul class="uk-nav-sub">
-                                                <li><a href="list.php">Family Trip</a></li>
-                                                <li><a href="list.php">Guided Trip</a></li>
-                                                <li><a href="list.php">Self Guided Group</a></li>
-                                                <li><a href="group.php">Your Group</a></li>
+                                                @foreach ($travels as $travel)
+                                                    <li><a href="{{ route('travel-list', $travel->uri) }}">{{ $travel->title }}</a></li>
+                                                @endforeach
+                                                @if ($your_group)
+                                                    <li><a href="{{route('page.posttype_detail',$your_group->uri)}}">{{ $your_group->post_type }}</a></li>
+                                                @endif
                                             </ul>
                                         </li>
-                                        <li><a href="news.php">News / Blogs</a></li>
+                                        <li><a href="{{route('page.posttype_detail',$news->uri)}}">{{ $news->post_type }}</a></li>
                                         <li class="js-accordion uk-parent">
                                             <a href="" aria-expanded="false">Useful Info
                                                 <span uk-nav-parent-icon="" class="uk-icon uk-nav-parent-icon"></span>
                                             </a>
                                             <ul class="uk-nav-sub">
-                                                <li><a href="women.php">Women Empowerment</a></li>
-                                                <li> <a href="tourism.php">Toursim</a></li>
-                                                <li> <a href="suggestion.php">Journey & Suggestion</a></li>
+                                                <li><a href="{{route('page.posttype_detail',$women->uri)}}">{{ $women->post_type }}</a></li>
+                                                <li> <a href="{{route('page.posttype_detail',$tourism->uri)}}">{{ $tourism->post_type }}</a></li>
+                                                <li> <a href="{{route('page.posttype_detail',$suggestion->uri)}}">{{ $suggestion->post_type }}</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.php">Contact Us</a></li>
-                                        <li class="uk-margin-bottom uk-margin-top">
-                                            <div class="uk-text-center uk-margin-top    ">
-                                                <a href="plan.php" class="inquiry-btn">Plan Your Trip</a>
-                                            </div>
-                                        </li>
+                                        <li><a href="{{ route('page.posttype_detail',$contact_us->uri) }}">Contact Us</a></li>
+                                        @if($plan_trip)
+                                            <li class="uk-margin-bottom uk-margin-top">
+                                                <div class="uk-text-center uk-margin-top    ">
+                                                    <a href="{{route('page.posttype_detail',$plan_trip->uri)}}" class="inquiry-btn">{{ $plan_trip->post_type }}</a>
+                                                </div>
+                                            </li>
+                                        @endif
                                     </ul>
                                     <div class="uk-padding uk-padding-remove-top uk-text-center">
                                         <a href="" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>

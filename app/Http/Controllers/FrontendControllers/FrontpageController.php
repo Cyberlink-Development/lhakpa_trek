@@ -856,15 +856,16 @@ class FrontpageController extends Controller
     }
     public function trekkinglist()
     {
-        $parent = ActivityModel::where(['activity_parent' => 'activity', 'uri' => 'trekking'])->first();
+        // $parent = ActivityModel::where(['activity_parent' => 'activity', 'uri' => 'trekking'])->first();
         $data = ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->paginate(4);
-        return view('themes.default.trekkinglist', compact('parent','data'));
+        // dd($data);
+        return view('themes.default.trekkinglist', compact('data'));
     }
     public function expeditionlist()
     {
-        $parent = ActivityModel::where(['activity_parent' => 'activity', 'uri' => 'expeditions-1'])->first();
+        // $parent = ActivityModel::where(['activity_parent' => 'activity', 'uri' => 'expeditions-1'])->first();
         $data = ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->paginate(4);
-        return view('themes.default.expeditionlist', compact('parent','data'));
+        return view('themes.default.expeditionlist', compact('data'));
     }
 
     // public function teamdetail($uri)

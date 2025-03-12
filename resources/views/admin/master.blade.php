@@ -134,8 +134,8 @@
                                 Request::segment(2) == 'international-team' ||
                                 Request::segment(3) == 'international-team' ||
                                 Request::segment(2) == 'contact-us' ||
-                                Request::segment(2) == 'mesage-from-us' ||
-                                Request::segment(3) == 'mesage-from-us' ||
+                                Request::segment(2) == 'message-from-us' ||
+                                Request::segment(3) == 'message-from-us' ||
                                 Request::segment(2) == 'why-us')
                             <a class="accordion-toggle menu-open">
                         @else
