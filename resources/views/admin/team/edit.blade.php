@@ -27,7 +27,10 @@
               <div class="card-header d-flex p-0">
                 <!-- <h3 class="card-title p-3">Manage Trips</h3> -->
                 <ul class="nav nav-pills ml-auto p-2">
-                  <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab"> GENERAL</a></li>                                   
+                  <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab"> GENERAL</a></li>
+            
+                  <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> Certificates </a></li>
+                                  
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -37,8 +40,12 @@
                   @include('admin.team.edit.edit-general')
                    <!--//-->
                   </div>
-                  <!-- /.tab-pane general -->
-                  
+            
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="tab_4">
+                  @include('admin.team.edit.edit-certificates')
+                  </div>                 
+                 
                   </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -58,6 +65,58 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
+
+
+  /******** For certificates *******/
+  jQuery(document).delegate('a.add-certificates', 'click', function(e) {
+     e.preventDefault();    
+     var content = jQuery('#row_certificates_additional .row'),
+     size = jQuery('#row_certificates_body >.row').length + 1,
+     element = null,    
+     element = content.clone();
+     element.attr('id', 'certificates-rec-'+size);
+     element.find('.delete-certificates').attr('certificates-data-id', size);
+     element.appendTo('#row_certificates_body');
+     element.find('.sn').html(size);
+   });
+
+    jQuery(document).delegate('button.delete-certificates', 'click', function(e) {
+     e.preventDefault();    
+     var makeConfirm = confirm("Are you sure You want to delete");
+     if (makeConfirm == true) {
+      var id = jQuery(this).attr('certificates-data-id');
+      var targetDiv = jQuery(this).attr('targetDiv');
+      // For delete certificates individually.              
+        var csrf = $('meta[name="csrf-token"]').attr('content');
+        var certificates_rowid = jQuery(this).attr('certificates-rowid');         
+        var team_id = '{{$data->id}}';
+        var url = '{{ route("certificates.destroy",["id"=>':id',"info_id"=>':info_id']) }}';
+          url = url.replace(':id',team_id);
+          url = url.replace(':info_id',certificates_rowid);   
+          if(certificates_rowid) {
+            $.ajax({
+              type:'DELETE',
+              url:url,
+              data:{_token:csrf},  
+
+              success:function(data){ 
+                $('#certificates-rec-' + certificates_rowid ).remove();                
+              },
+              error:function(data){       
+              alert('Error occurred!');
+            }
+          });  
+          }   
+      //End for delete
+      jQuery('#certificates-rec-' + id).remove();
+      return true;
+    } else {
+      return false;
+    }
+  });
+/******** End For certificates *******/
+
+
 
  $(function () {
           $.ajaxSetup({
@@ -177,6 +236,12 @@ $('.backlink').click(function(){
   var url = '<?=url()->previous(); ?>';
   window.location=url;
 });
+ $(function() {
+        $('.team-select').change(function(){
+            $('.team-category').hide();
+            $('.' + $(this).val()).show();
+        });
+    });
 
 </script>
 @endsection

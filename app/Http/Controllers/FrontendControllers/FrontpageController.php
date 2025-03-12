@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontendControllers;
 
 use App\Models\Inquiry\Emergency;
 use App\Models\Inquiry\Insurance;
+use App\Models\Team\TeamCategory;
 use App\Models\Travels\TripGradeModel;
 use Newsletter;
 use App\Mail\BookTrip;
@@ -126,8 +127,11 @@ class FrontpageController extends Controller
                 $your_group_post = $query->first();
             }
         }
-        
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews'));
+        $team_category = TeamCategory::where('team_parent','0')->get();
+        $related_teams = TeamModel::all()->groupBy('category');
+        $international = PostTypeModel::where('uri','international-team')->first();
+        // dd($international);
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international'));
     }
 
 
@@ -862,4 +866,15 @@ class FrontpageController extends Controller
         $data = ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->paginate(4);
         return view('themes.default.expeditionlist', compact('parent','data'));
     }
+
+    // public function teamdetail($uri)
+    // {
+    //     $data = TeamModel::where(['uri'=> $uri])->orWhere('team_key', $uri)->first();
+        
+    //     $certificates = $data->certificates()->orderBy('ordering','asc')->get();
+    //     $related=$relatedData = TeamModel::where('id', '!=', optional($data)->id)
+    //     ->where('category', optional($data)->category)
+    //     ->get();
+    //     return view('themes.default.team-single', compact('data',  'certificates','related'));
+    // }
 }
