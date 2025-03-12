@@ -26,7 +26,11 @@
               <div class="card-header d-flex p-0">
                 <!-- <h3 class="card-title p-3">Manage Trips</h3> -->
                 <ul class="nav nav-pills ml-auto p-2">
-                <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab"> GENERAL</a></li> </ul>
+                  <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab"> GENERAL</a></li>
+              
+                  <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> Certificates </a></li>
+                                  
+                </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
@@ -35,7 +39,11 @@
                   @include('admin.team.create.create-general')
                    <!--//-->
                   </div>
-                  <!-- /.tab-pane general -->
+           
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="tab_4">
+                  @include('admin.team.create.create-certificates')
+                  </div>                 
                  
                   </div>
                   <!-- /.tab-pane -->
@@ -57,28 +65,57 @@
 @section('scripts')
 <script type="text/javascript">
 
+
+  /******** For certificates *******/
+  jQuery(document).delegate('a.add-certificates', 'click', function(e) {
+     e.preventDefault();    
+     var content = jQuery('#row_certificates_additional .row'),
+     size = jQuery('#row_certificates_body >.row').length + 1,
+     element = null,    
+     element = content.clone();
+     element.attr('id', 'certificates-rec-'+size);
+     element.find('.delete-certificates').attr('certificates-data-id', size);
+     element.appendTo('#row_certificates_body');
+     element.find('.sn').html(size);
+   });
+
+   jQuery(document).delegate('button.delete-certificates', 'click', function(e) {
+     e.preventDefault();    
+     var makeConfirm = confirm("Are you sure You want to delete");
+     if (makeConfirm == true) {
+      var id = jQuery(this).attr('certificates-data-id');
+      var targetDiv = jQuery(this).attr('targetDiv');
+      jQuery('#certificates-rec-' + id).remove();
+      return true;
+    } else {
+      return false;
+    }
+  });   
+/******** End For certificates *******/
+
+
  $(function () {
      $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
     });
-    $("#teamData").on('submit',function(e){     
+    $("#teamData").on('submit',function(e){
+      // tinymce.triggerSave();
     e.preventDefault();    
     let url = "{{route('teams.store')}}";
     let teamData = document.getElementById('teamData');
     let data = new FormData(teamData);    
     $.ajax({
         url: url,
-        type: 'POST',
+        type: 'POST', 
         data: data,
         cache: false,
         processData: false,
         contentType : false,
         beforeSend:function() {},
         success: function (data) {     
-          console.log('test'); 
-            location.reload();     
+            // location.reload();     
             document.getElementById("teamData").reset();
             const Toast = Swal.mixin({
                 toast: true,
@@ -130,6 +167,12 @@ $('.backlink').click(function(){
   var url = '<?=url()->previous(); ?>';
   window.location=url;
 });
+ $(function() {
+        $('.team-select').change(function(){
+            $('.team-category').hide();
+            $('.' + $(this).val()).show();
+        });
+    });
 
 </script>
 @endsection

@@ -97,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
         'admin/tripgroup' => 'AdminControllers\Travels\TripGroupController',
         'admin/destination' => 'AdminControllers\Destinations\DestinationController',
         'admin/teams' => 'AdminControllers\Teams\TeamController',
+        'admin/teamcategory'=>'AdminControllers\Teams\TeamCategoryController',
         'admin.testimonials' => 'AdminControllers\Cost\CostIncludesController',
         'admin.trip-gear' => 'AdminControllers\Travels\TripGearController',
         'category-inquiry' => 'AdminControllers\Inquiry\TripFilmMakingController',
@@ -247,6 +248,8 @@ Route::middleware(['auth'])->group(function () {
         $view->with('posttype', $posttype);
     });
 
+    Route::delete('admin/certificates/{id}/{info_id}','AdminControllers\Teams\TeamController@certificatesdestroy')->name('certificates.destroy');
+    
     /************** Sangam Starts ****************/
     Route::get('/payment/index',[DirectPayController::class,'index'])->name('payment.index');
     Route::get('/payment/show/{id}',[DirectPayController::class,'show'])->name('payment.show');

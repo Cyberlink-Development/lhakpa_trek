@@ -171,8 +171,8 @@
                                 <i class="fa-solid fa-phone uk-margin-small-right"></i> {{ $setting->phone }}
                             </li> --}}
                             <li class="border-right">
-                                <a href="contact.php">
-                                    <i class="fa-solid fa-phone uk-margin-small-right"></i> +123 456 7890 , +789 456 6786
+                                <a href="{{ route('page.posttype_detail',$contact_us->uri) }}">
+                                    <i class="fa-solid fa-phone uk-margin-small-right"></i> {{ $setting->phone }}
                                 </a>
                             </li>
                             <li class="border-right">

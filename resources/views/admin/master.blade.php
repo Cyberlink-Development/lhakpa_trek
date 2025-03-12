@@ -131,6 +131,8 @@
                                 Request::segment(2) == 'women-empowerment' ||
                                 Request::segment(2) == 'your-group' ||
                                 Request::segment(2) == 'tourism' ||
+                                Request::segment(2) == 'international-team' ||
+                                Request::segment(3) == 'international-team' ||
                                 Request::segment(2) == 'contact-us' ||
                                 Request::segment(2) == 'mesage-from-us' ||
                                 Request::segment(3) == 'mesage-from-us' ||
@@ -225,6 +227,33 @@
                             </li>
                         </ul>
                     </li>
+                    
+                    <li class="">
+                        @if(Request::segment(2) == 'teamcategory'||Request::segment(2) == 'teams')
+                            <a class="accordion-toggle menu-open">
+                        @else
+                            <a class="accordion-toggle">
+                        @endif
+                          <span class="fa fa-users text-info"></span>
+                          <span class="sidebar-title">  Manage Team </span>
+                          <span class="caret"></span>
+                        </a>
+                        <ul class="nav sub-nav">
+                            <li class="{{ (Request::segment(2) == 'teamcategory')?'active':'' }}">
+                                <a href="{{ url('admin/teamcategory') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    Team Category                
+                                </a>                
+                            </li>               
+                            <li class="{{ (Request::segment(2) == 'teams')?'active':'' }}">
+                                <a href="{{ url('admin/teams') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    Teams                 
+                                </a>                
+                            </li>              
+                        </ul>
+                    </li>
+
                     <?php /*
                 <!-- <li class="{{ (Request::segment(2) == 'teams')?'active':'' }}">-->
                 <!--    <a href="{{ url('admin/teams') }}">-->

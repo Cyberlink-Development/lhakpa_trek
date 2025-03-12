@@ -1383,3 +1383,9 @@ footer p {
 .uk-wish-button.active {
   background-color: var(--secondary);
 }  
+
+/****************** By anil ****************/
+.uk-contents p{
+  color: var(--white)!important;
+}
+/********************************************/
