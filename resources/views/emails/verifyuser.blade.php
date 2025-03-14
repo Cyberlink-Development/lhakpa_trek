@@ -198,7 +198,7 @@
                 <tr>
                     <td class="email-masthead">
 
-                        <img src="{{asset('theme-assets/images/logo.png')}}" style="max-height: 100px" alt="{{ $setting->site_name }}">
+                        <img src="{{asset('theme-assets/img/logo.png')}}" style="max-height: 100px" alt="{{ $setting->site_name }}"> 
                     </td>
                 </tr>
                 <!-- Email Body -->
@@ -208,7 +208,7 @@
                             <!-- Body content -->
                             <tr>
                                 <td class="content-cell">
-                                    <p>Thanks {{$email}} for signing up to One Himalaya’s e-newsletter! We're excited to have you as a subscriber.</p>
+                                    <p>Thanks {{$email}} for signing up to {{ $setting->site_name }}.We're excited to have you as a user.</p>
                                     <br/>
                                     <p>Your registered email-id is {{$email}}. Please click on the link below to verify your email account.</p>
                                     <br/>
@@ -224,7 +224,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <p>Best Wishes,<br>{{ $setting->site_name }}</p>
+                                    <p>Best Wishes,<br>{{ $setting->site_name }}</p>  
                                     <!-- Sub copy -->
                                 </td>
                             </tr>

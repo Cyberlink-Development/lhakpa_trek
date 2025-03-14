@@ -7,7 +7,14 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use App\Model\VerifyUser;
+use Illuminate\Support\Str;
+use App\Mail\VerifyMail;
+
 
 class RegisterController extends Controller
 {
@@ -69,5 +76,35 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function store(Request $request)
+    {
+
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'roles' => 'user'
+        ]);
+
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->id,
+            'token' => Str::random(20)
+        ]);
+        if ($user && $verifyUser) {
+            return new VerifyMail($verifyUser->token, $user->id, $user->name);
+            // Mail::send(new VerifyMail($verifyUser->token, $user->id, $user->name));
+        }
+
+        Session::flash('success', 'Please verify your email to complete registration process');
+        return redirect()->intended(route('index.front'));  
     }
 }

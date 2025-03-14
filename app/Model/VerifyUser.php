@@ -10,6 +10,6 @@ class VerifyUser extends Model
 
     public function users()
     {
-        return $this->belongsTo('App\Model\Subscriber', 'user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 }

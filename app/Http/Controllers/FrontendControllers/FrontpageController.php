@@ -523,7 +523,7 @@ class FrontpageController extends Controller
         if (isset($verifyUser)) {
             $user = $verifyUser->users;
             if (!$user->verified) {
-                $verifyUser->users->verified = 1;
+                $verifyUser->users->verified = 1;  
                 $verifyUser->users->save();
                 $status = "Your e-mail is verified. You can now login.";
             } else {

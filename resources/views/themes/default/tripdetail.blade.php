@@ -88,7 +88,8 @@
                     <div class="uk-flex uk-flex-between uk-flex-middle">
                         {{-- <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{  optional($data->destinations()->first())->title }}</h2> --}}
                         <div class="uk-flex uk-flex-middle">
-                            <button class="uk-wish-button" onclick="toggleActive(this)"><i class="fa-solid fa-heart"></i></button>
+                            <button class="uk-wish-button" id="wish-button" data-id="{{ $data->id }}"><i class="fa-solid fa-heart"></i></button>
+                            <!-- <button class="uk-wish-button" id="wish-button" onclick="toggleActive(this)"><i class="fa-solid fa-heart"></i></button> -->
                             <h2 class="uk-white uk-text-uppercase uk-margin-remove">Nepal</h2>
                         </div>
                         <div class="uk-star-rating">
@@ -765,3 +766,45 @@
 </script>
 <!-- inquiry form modal end -->
 @stop
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '#wish-button', function (e) {
+            e.preventDefault();
+
+            // alert('ok'); // Debugging: Check if button click is detected
+
+            let itemId = $(this).data('id'); // Get the item ID from the button
+            let url = "{{ route('add-wishlist', ':id') }}".replace(':id', itemId);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status === 'success') {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
+                    $.each(data.errors, function (key, value) {
+                        toastr.error(value);
+                    });
+                },
+                error: function (xhr) {
+                    alert("An error occurred.\nError code: " + xhr.statusText);
+                }
+            });
+        });
+    });
+</script>
+            @endpush
