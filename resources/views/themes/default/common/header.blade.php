@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Lhakpa Trekking</title>
     <link rel="stylesheet" href="{{asset('theme-assets/css/uikit.css')}}">
     <link rel="stylesheet" href="{{asset('theme-assets/css/style.css')}}">
@@ -24,6 +25,8 @@
         <link rel="icon" type="image/png" sizes="512x512" href="{{asset('assets/favicon/android-chrome-512x512.png')}}">
         <link rel="apple-touch-icon" href="{{asset('assets/favicon/apple-touch-icon.png')}}">
         <link rel="manifest" href="{{asset('assets/favicon/site.webmanifest')}}">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
     <!---------------- Fav icon stops ----------------------->
 
     <style>
@@ -91,7 +94,7 @@
             top: 10px !important; /* Adjust as needed */
             right: 10px !important; /* Adjust as needed */
             z-index: 100000 !important;
-        }
+        }  
     </style>
 </head>
 
@@ -166,7 +169,7 @@
                                 <li class="border-right"><a href="{{route('page.posttype_detail',$tourism->uri)}}">{{ $tourism->post_type }}</a></li>
                             @endif
                         </ul>
-                        <ul class="uk-flex uk-flex-right uk-topnavbar-ul">
+                        <ul class="uk-flex uk-flex-right uk-topnavbar-ul">  
                             {{-- <li class="border-right">
                                 <i class="fa-solid fa-phone uk-margin-small-right"></i> {{ $setting->phone }}
                             </li> --}}
@@ -176,15 +179,29 @@
                                 </a>
                             </li>
                             <li class="border-right">
-                                <a href="wishlist.php">
-                                    <i class="fa-solid fa-heart uk-margin-small-right"></i>My Favourite [3]
+                                @if(Auth::check())
+                                <a href="{{ route('user-wishlist') }}">
+                                    <i class="fa-solid fa-heart uk-margin-small-right"></i>My Favourite [{{ Auth::user()->wishlists->count()}}]
+                                </a>
+                                @else
+                                <a href="{{ route('user-wishlist') }}">
+                                    <i class="fa-solid fa-heart uk-margin-small-right"></i>My Favourite 
+                                </a>
+                                @endif
+                             </li>
+                             @if(Auth::check() && Auth::user()->roles=='user')
+                             <li class="border-right">
+                                <a href="{{ route('user-profile') }}" >
+                                    <i class="fa-solid fa-user uk-margin-small-right"></i>Hi, {{Auth::user()->name}}
                                 </a>
                              </li>
+                             @else
                              <li class="border-right">
                                 <a href="#modal-form" uk-toggle>
                                     <i class="fa-solid fa-user uk-margin-small-right"></i>User Login.
                                 </a>
                              </li>
+                             @endif
                             <li class="uk-margin-small-left">
                             @if($plan_trip)
                                 <a href="{{route('page.posttype_detail',$plan_trip->uri)}}" class="inquiry-btn">{{ $plan_trip->post_type }}</a>
@@ -577,6 +594,7 @@
     </header>
     <div id="modal-form" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="padding-bottom:60px;">
+            
             <ul class="uk-login-tab" uk-tab>
                 <li><a href="#"><i class="fa-solid fa-unlock login-logo"></i> Sign In </a></li>
                 <li><a href="#"><i class="fa-solid fa-user login-logo"></i>Sign Up</a></li>
@@ -584,18 +602,19 @@
 
             <div class="uk-switcher uk-margin">
                 <div> 
-                    <form class="uk-contact-form" action="" method="">
+                    <form class="uk-contact-form" action="{{route('user.login')}}" method="POST">
+                        @csrf
                         <div class=" uk-child-width-1-1@m uk-grid">
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="user_email">Email Address</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="user_email" name="user_email" required type="email">
+                                    <input class="uk-input" id="user_email" name="email" required type="email">
                                 </div>
                             </div>
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="pwd">Password</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="pwd" name="pwd" required type="password">
+                                    <input class="uk-input" id="pwd" name="password" required type="password">
                                 </div>
                             </div>
                         </div>
@@ -608,40 +627,41 @@
                             </div>
                         </div>
                         <div class="uk-margin-top uk-text-center">
-                            <a href="profile.php" class="uk-btn uk-btn-secondary">Sign In <span uk-icon="chevron-right"></span></a>
+                            <button type="submit" class="uk-btn uk-btn-secondary">Sign In <span uk-icon="chevron-right"></span></button>
                         </div>
                     </form>
                 </div>
                 <div> 
-                    <form class="uk-contact-form" action="" method="">
+                    <form class="uk-contact-form" action="{{route('user-registration')}}" method="POST">
+                        @csrf
                         <div class=" uk-child-width-1-1@m uk-grid">
                             <div class="uk-margin-small-top">
-                                <label class="uk-form-label uk-text-bold" for="users_name">Full Name</label>
+                                <label class="uk-form-label uk-text-bold" for="full_name">Full Name</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="users_name" name="users_name" required type="email">
+                                    <input class="uk-input" id="full_name" name="name" required type="text">
                                 </div>
                             </div>
                             <div class="uk-margin-small-top">
-                                <label class="uk-form-label uk-text-bold" for="users_email">Email Address</label>
+                                <label class="uk-form-label uk-text-bold" for="email">Email Address</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="users_email" name="users_email" required type="email">
+                                    <input class="uk-input" id="email" name="email" required type="email">
                                 </div>
                             </div>
                             <div class="uk-margin-small-top">
-                                <label class="uk-form-label uk-text-bold" for="r_pwd">Password</label>
+                                <label class="uk-form-label uk-text-bold" for="password">Password</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="r_pwd" name="r_pwd" required type="password">
+                                    <input class="uk-input" id="password" name="password" required type="password">
                                 </div>
                             </div>
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="c_pwd">Confirm Password</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="c_pwd" name="c_pwd" required type="password">
+                                    <input class="uk-input" id="c_pwd" name="password_confirmation" required type="password">
                                 </div>
                             </div>
                         </div>
                         <div class="uk-margin-top uk-text-center">
-                            <a href="" class="uk-btn uk-btn-secondary">Sign Up <span uk-icon="chevron-right"></span></a>
+                            <button type="submit" class="uk-btn uk-btn-secondary">Sign Up <span uk-icon="chevron-right"></span></button>
                         </div>
                     </form>
                 </div>

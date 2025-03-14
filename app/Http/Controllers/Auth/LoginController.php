@@ -35,10 +35,10 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
 
     public function login(Request $request){
         $g_recaptcha_response = $request->input('g_recaptcha_response');
@@ -56,7 +56,7 @@ class LoginController extends Controller
          return redirect()->intended('adminisclient')->with('status', 'Invalid Username, Password or PIN!');
         }else{
             return redirect('adminisclient')->with('status', 'You are Robot!');
-        }
+        } 
     }
 
 
@@ -64,7 +64,49 @@ class LoginController extends Controller
         $secret_key = env('SECRET_KEY');
         $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret_key."&response={$secretKey}");
         $result = json_decode($response);
-        return $result;
+        return $result; 
+    }
+
+    public function login_user(Request $request)  
+    {
+        if ($request->isMethod('post')) {   
+            $request->validate([
+                'email' => 'required',
+                'password' => 'required'  
+            ]);
+            $email = $request->email;
+            $password = $request->password;
+
+            $remember = $request->has('remember') ? true : false;  
+            // if($remember==false)
+            // {
+            //     return back()->with('error',"Please check remember me!");
+            // }
+
+            if (Auth::attempt(['email' => $email, 'password' => $password],$remember)) {
+                if (Auth::user()->verified == '1' && Auth::user()->roles == 'user') {
+                    return redirect()->route('user-profile')->with('success', 'Logged in');
+                }
+                if (Auth::user()->verified == '0') {
+                    Auth::logout();
+                    return back()->with('error', 'Please verify first');
+                }
+            } else {
+                return back()->with('error', 'No account found with this email!'); 
+            }
+        }
+    }
+
+    public function user_profile()
+    {
+        return view('themes.default.user.profile');  
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->intended(route('index.front'));
+
     }
 
 }

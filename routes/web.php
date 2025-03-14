@@ -6,6 +6,30 @@ use App\Http\Controllers\HBLController;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 
+/************************** Bibek Routes Starts *********************************/
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('/register-page', 'RegisterController@register_page')->name('register');
+    Route::post('/register', 'RegisterController@store')->name('user-registration');
+    Route::get('/login', 'LoginController@login_page')->name('login-page');
+    Route::post('/user-login', 'LoginController@login_user')->name('user.login');
+    Route::any('/logout', 'LoginController@logout')->name('logout');
+    Route::get('/user/verify/{token}', 'RegisterController@verifyUser')->name('verify-user');
+    Route::get('/forgot-password', 'ForgotPasswordController@forgot_password_page')->name('forgot-password');
+    Route::post('/recovery-mail', 'ForgotPasswordController@recovery_mail')->name('recovery-mail');
+    Route::any('/reset-password/{token}', 'ForgotPasswordController@reset_password')->name('reset-password');  
+
+});
+Route::get('/user-profile', 'UserController@user_profile')->name('user-profile');
+Route::get('/user-history', 'UserController@user_history')->name('user-history');
+Route::get('/user-recommendation', 'UserController@user_recommendation')->name('user-recommendation');
+Route::get('/user-wishlist', 'UserController@user_wishlist')->name('user-wishlist');
+Route::get('/user-review', 'UserController@user_review')->name('user-review');
+Route::get('wishlist/{id?}', 'UserController@add_wishlist')->name('add-wishlist');
+Route::get('delete-wishlist/{id}', 'UserController@delete_wishlist')->name('delete-wishlist');
+
+
+/************************** Bibek Routes Ends ***********************************/
+
 
 /************************** Sangam Routes Starts *********************************/
 Route::get('/himalayan/payment/verify/{data}',[HBLController::class,'payment_verify'])->name('himalayan.payment.verify');
