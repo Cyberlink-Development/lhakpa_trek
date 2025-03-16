@@ -116,6 +116,7 @@ Route::middleware(['auth'])->group(function () {
         'admin/postcategory' => 'AdminControllers\Posts\PostCategoryController',
         'admin/settings' => 'AdminControllers\Settings\SettingController',
         'admin/trip' => 'AdminControllers\Travels\TripController',
+        'admin/trips-tag' => 'AdminControllers\Travels\TripsTagController',
         'admin/region' => 'AdminControllers\Travels\RegionController',
         'admin/activity' => 'AdminControllers\Travels\ActivityController',
         'admin/tripgroup' => 'AdminControllers\Travels\TripGroupController',

@@ -183,6 +183,7 @@
                                 Request::segment(2) == 'trip-region' ||
                                 Request::segment(2) == 'activity' ||
                                 Request::segment(2) == 'trip' ||
+                                Request::segment(2) == 'trips-tag' ||
                                 Request::segment(2) == 'tripgroup')
                             <a class="accordion-toggle menu-open">
                             @else
@@ -223,6 +224,12 @@
                                 <a href="{{ url('admin/trip') }}">
                                     <span class="fa fa fa-arrows-h"></span>
                                     <span class="sidebar-title"> Trip List </span>
+                                </a>
+                            </li>
+                            <li class="{{ Request::segment(2) == 'trips-tag' ? 'active' : '' }}">
+                                <a href="{{ url('admin/trips-tag') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    <span class="sidebar-title"> Trip Tags </span>
                                 </a>
                             </li>
                         </ul>
