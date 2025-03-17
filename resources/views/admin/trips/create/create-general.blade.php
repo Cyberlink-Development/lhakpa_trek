@@ -50,7 +50,6 @@
                             <label>Trip Difficulty</label>
                             @if ($trek->count() > 0)
                                 <select class="form-control" name="trip_grade">
-                                    <option value=""> Select Grade </option>
                                     @foreach ($trek as $row)
                                         <option value="{{ $row->id }}">{{ $row->trip_grade }} </option>
                                     @endforeach
@@ -176,20 +175,39 @@
             </div>
         </div>
 
-         <div class="panel">
-    <div class="panel-heading">
-     <span class="panel-title">Trip Highlights</span>
-     </div>
-    <div class="panel-body">
-    <div class="form-group">
-     <div class="col-lg-12">
-    <div class="bs-component">
-     <textarea class="my-editor form-control" name="trip_highlight" rows="6"
-     placeholder="Trip Highlights">{{ old('trip_highlight') }}</textarea>
-     </div>
-    </div>
-     </div>
-    </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Trip Tags</span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <select class="form-control tripTags" name="tripTags[]" multiple="multiple">
+                                    @foreach($tripsTags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                    @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="panel">
+        <div class="panel-heading">
+        <span class="panel-title">Trip Highlights</span>
+        </div>
+        <div class="panel-body">
+        <div class="form-group">
+        <div class="col-lg-12">
+        <div class="bs-component">
+        <textarea class="my-editor form-control" name="trip_highlight" rows="6"
+        placeholder="Trip Highlights">{{ old('trip_highlight') }}</textarea>
+        </div>
+        </div>
+        </div>
+        </div>
     </div>
 
         <div class="panel">

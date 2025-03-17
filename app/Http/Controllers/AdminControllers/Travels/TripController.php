@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminControllers\Travels;
 
+use App\Models\Travels\TripsTag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Travels\TripModel;
@@ -64,9 +65,10 @@ class TripController extends Controller
         $expeditions = ActivityModel::where('activity_parent','expedition')->get();
         $activity=ActivityModel::where('activity_parent','activity')->get();
         $travels=ActivityModel::where('activity_parent','travel')->get();
+        $tripsTags = TripsTag::all();
         // dd($trip_type);
         return view('admin.trips.create', compact('trek','all_trips', 'trip_type', 'grades', 'ordering', 'destinations', 'regions', 'activities', 
-        'trip_groups','expeditions','trekking','availability','activity','travels'));
+        'trip_groups','expeditions','trekking','availability','activity','travels','tripsTags'));
     }
 
     /**
@@ -370,6 +372,11 @@ class TripController extends Controller
             $_data->activities()->attach($allActivities);
         }
 
+        // Add Trip Tags Relationship
+        if (isset($request->tripTags) && !empty($request->tripTags)) {
+            $_data->tripTags()->attach($request->tripTags);
+        }
+
         /************************************/
         return response()->json(['status' => 'success', 'message' => 'Trip Added Successfully']);
     }
@@ -395,7 +402,7 @@ class TripController extends Controller
      */
     public function edit($id)
     {
-        $data = TripModel::find($id);
+        $data = TripModel::with('tripTags')->find($id);
         $checked_destinations = array();
         $checked_regions = array();
         $checked_activities = array();
@@ -422,7 +429,7 @@ class TripController extends Controller
         $regions = RegionModel::all();
         $activities = ActivityModel::all();
         $trip_groups = TripGroupModel::all();
-         $schedules = $data->schedules()->orderBy('ordering','asc')->get();
+        $schedules = $data->schedules()->orderBy('ordering','asc')->get();
         $faqs = $data->faqs()->orderBy('ordering','asc')->get();
         $itineraries = $data->itineraries()->orderBy('ordering','asc')->get();
         $gears = $data->gears()->orderBy('ordering','asc')->get();
@@ -437,9 +444,11 @@ class TripController extends Controller
         $expeditions = ActivityModel::where('activity_parent','expedition')->get();
         $activity=ActivityModel::where('activity_parent','activity')->get();
         $travels=ActivityModel::where('activity_parent','travel')->get();
+        $tripsTags = TripsTag::all();
+
         return view('admin.trips.edit', compact(
           'trek',
-            'all_trips',
+            'all_trips','tripsTags',
             'data',
             'trip_type',
             'destinations',
@@ -664,6 +673,12 @@ class TripController extends Controller
             $_data->tripgroups()->attach($request->tripgroup);
             $_data->relatedtrips()->detach();
             $_data->relatedtrips()->attach($request->related_trips);
+
+            if (isset($request->tripTags) && !empty($request->tripTags)) {
+                $_data->tripTags()->sync($request->tripTags);
+            } else {
+                $_data->tripTags()->detach();
+            }
             
               // Update Schedule
             if (isset($request->schedule_ordering)) {

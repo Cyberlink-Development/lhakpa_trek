@@ -651,6 +651,7 @@
 
     // Select Related Trips
     $('.realted-trips').select2();
+    $('.tripTags').select2();
 });
 
 </script>
