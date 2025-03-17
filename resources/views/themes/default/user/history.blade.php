@@ -26,6 +26,7 @@
                         <tr>
                             <th style="width: 80px;"></th>
                             <th>Trip Name</th>
+                            <th>Departure Type</th>
                             <th>Trip Status</th>
                             <th>Trip Date</th>      
                         </tr>
@@ -36,6 +37,7 @@
                         <tr>
                             <td><img src="{{!empty(tripdetail($row->trip_id)->thumbnail) ? asset('uploads/original/'.tripdetail($row->trip_id)->thumbnail) : asset('theme-assets/img/mountain/mountain9.jpeg')}}" class="uk-history-img" alt="{{ tripname($row->trip_id) }}"></td>
                             <td class="uk-text-uppercase">{{ tripname($row->trip_id) }}</td>
+                            <td>{{ $row->depature_type  == 1 ? 'Fixed' : 'normal' }}</td>
                             <td>{{ $row->status == 0 ? 'In Review' :
                             ($row->status === 1 ? 'Confirmed' : 
                             ($row->status === 2 ? 'Completed' : 'Pending')) 

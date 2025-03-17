@@ -26,7 +26,7 @@ class UserController extends Controller
      public function user_wishlist(Request $request)
     {
         if ($request->isMethod('get')) {
-            if (Auth::check()){
+            if (Auth::check() && (Auth::user()->roles == 'user') ){
                 $wishlist = Wishlist::where('user_id',Auth::user()->id)->get();
                 $trip_ids=$wishlist->pluck('trip_id');
                 $data=TripModel::whereIn('id',$trip_ids)->paginate(3);
@@ -46,7 +46,7 @@ class UserController extends Controller
     public function add_wishlist($id)
     {
         if ($_GET) {
-            if (Auth::check() && Auth::user()) {
+            if (Auth::check() && Auth::user() && (Auth::user()->roles == 'user')) {
                 $old_wishlist = Wishlist::where('trip_id', $id)->where('user_id', Auth::user()->id)->first();
                 if ($old_wishlist != null) {
                     return response()->json(['status'=>'error', 'message'=>'Trip already added to wishlist.']);

@@ -16,7 +16,7 @@
                                     <th>Name</th>                                 
                                     <th class="">Email</th>
                                     <th class="">Trip</th>
-                                    <th>Payment</th>
+                                    <th>Departure Type</th>
                                     <th class="text-left">Action</th>
                                 </tr>
                                 </thead>
@@ -35,15 +35,15 @@
                                     {{ $row->title }}
                                   </td>
                                   <td>
-                                    {{ucfirst($row->payment_type)}} | {{$row->paid_status == 0 ? 'Unpaid' : 'Paid'}}
+                                    {{$row->depature_type == 1 ? 'Fixed' : 'Normal'}}
                                   </td>
                                   <td class="text-left">
                                     <a href="{{route('view-trip-booking',$row->id)}}">View</a> |
                                     <span class="trash"><a href="{{route('delete-booking',$row->id)}}" onclick="return confirm('Confirm Delete?')" class="btn-btn-danger">Delete</a></span> 
-                                    @if($row->paid_status == 0)
+                                    {{-- @if($row->paid_status == 0)
                                       |
                                       <a href="{{route('booking.update.status',$row->id)}}" onclick="return confirm('Confirm as paid?')" class="btn-btn-danger">Mark as paid</a>
-                                    @endif
+                                    @endif--}}
                                   </td>
                                 </tr>
 

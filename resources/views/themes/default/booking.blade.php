@@ -18,8 +18,10 @@
         <div uk-grid>
             <div class="uk-width-3-4@m">
                 <form action="{{ route('post-trip') }}" method="POST">
-                <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                     @csrf
+                    <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
+                    <input type="hidden" name="depature_type" value="{{ $schedule ? 1 : 0 }}">
+                    <input type="hidden" name="schedule_id" value="{{ $schedule ? $schedule->id : ''}}">
                     <h3 class="uk-primary">Personal Details</h3>
                     <hr>
                     <div class="uk-grid">
@@ -48,15 +50,54 @@
                     <hr>
                     <div class="uk-grid">
                         <div class="uk-width-1-1 uk-margin-small-top">
-                            <label class="uk-form-label " for="activity"> Package Name *</label>
-                            <select name="trip_id" class="uk-select border" id="activity" required>
+                            <label class="uk-form-label " for="trip_id"> Package Name *</label>
+                            <select name="trip_id" class="uk-select border" id="trip_id" required>
                                 <option value="{{ $trip->id }}">{{ $trip->trip_title }}</option>
                             </select>
                         </div>
                         <div class="uk-width-1-2@s uk-margin-small-top">
                             <label class="uk-form-label " for="start">Trip Start Date *</label>
-                            <input class="uk-input border" name="trip_start_date" type="date" aria-label="start" required>
+                            <input class="uk-input border" name="trip_start_date" type="date" aria-label="start" value="{{ $start_date }}" {{ $start_date ? 'readonly' : '' }} required>
                         </div>
+                        @if($end_date)
+                            <div class="uk-width-1-2@s uk-margin-small-top">
+                                <label class="uk-form-label " for="end">Trip End Date *</label>
+                                <input class="uk-input border" name="trip_end_date" type="date" aria-label="end" value="{{ $end_date }}" {{ $end_date ? 'readonly' : '' }} required>
+                            </div>
+                        @endif
+                        @if($schedule && $schedule->price && $schedule->group_size)
+                            <div class="uk-width-1-2@s uk-margin-small-top">
+                                <label class="uk-form-label " for="meal">Meal*</label>
+                                <select name="meal" class="uk-select border" id="meal" required>
+                                    <option value="" disabled>Choose you option</option>
+                                    <option value="1" selected>Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <script>
+                                $('#meal').on('change', function() {
+                                    const selectedValue = this.value;
+                                    let price;
+                                    if (selectedValue === '1') {
+                                        price = {{ $schedule->price }};
+                                    } else if (selectedValue === '0') {
+                                        price = {{ $schedule->group_size }}; 
+                                    }
+                                    $('#price').val(price);
+                                });
+                            </script>
+                        @endif
+                        @if(($schedule && $schedule->price) || ($schedule && $schedule->group_size))
+                            <div class="uk-width-1-2@s uk-margin-small-top">
+                                <label class="uk-form-label " for="price">Price*</label>
+                                <input class="uk-input border" name="price" id="price" type="number" min="1" value="{{ $schedule->price ?? $schedule->group_size }}" aria-label="price" style="cursor: not-allowed;" readonly required>
+                            </div>
+                        @elseif($trip->price)
+                            <div class="uk-width-1-2@s uk-margin-small-top">
+                                <label class="uk-form-label " for="price">Price*</label>
+                                <input class="uk-input border" name="price" id="price" type="number" min="1" value="{{ $trip->price }}" aria-label="price" style="cursor: not-allowed;" readonly required>
+                            </div>
+                        @endif
                         <div class="uk-width-1-2@s uk-margin-small-top">
                             <label class="uk-form-label " for="people">No of People *</label>
                             <input class="uk-input border" name="total_travellers" type="number" min="1" aria-label="people" required>

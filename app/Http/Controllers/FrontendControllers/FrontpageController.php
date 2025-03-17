@@ -316,12 +316,14 @@ class FrontpageController extends Controller
                     'phone' => 'required',
                     'country' => 'required',
                     'total_travellers' => 'required',
-                     'trip_start_date'=>'required'
+                    'trip_start_date'=>'required',
 
+                    'depature_type' => 'required',
                 ]);
                 $trip = TripModel::where('id', $request->trip_id)->first();
                 $create = BookingModel::create([
                     'trip_id' => $request->trip_id,
+                    'title' => $trip->trip_title,
                     'user_id'=> Auth::user()->id,
                     'full_name' => $request->full_name,
                     'total_travellers' => $request->total_travellers,
@@ -332,6 +334,11 @@ class FrontpageController extends Controller
                     'trip_start_date'=>$request->trip_start_date,
                     'message'=>$request->message,
                     'paid_status' => 0,
+                    
+                    'depature_type' => $request->depature_type,
+                    'trip_end_date'=>$request->trip_end_date ?? null,
+                    'meal' => $request->meal ?? null,
+                    'price' => $request->price ?? null,
                 ]);
                 if ($create) {
              
@@ -669,22 +676,27 @@ class FrontpageController extends Controller
 
     public function showbooking(Request $request,$uri)
     {
-        if (Auth::check() && Auth::user())
+        if (Auth::check() && Auth::user() && (Auth::user()->roles == 'user'))
         {
-            $start_date = $request->start_date ? $request->start_date: null;  
-            $end_date = $request->end_date ? $request->end_date : null;
             $trip = TripModel::where('uri', $uri)->first();
+
+            $schedule = $request->schedule_id ? $trip->schedules()->where('id', $request->schedule_id)->first() : null;
+            $start_date = $schedule && $schedule->start_date ? $schedule->start_date : null; 
+            $end_date = $schedule && $schedule->end_date ? $schedule->end_date : null;
+
             $trips = TripModel::all();
             $activity = ActivityModel::where('activity_parent', 'trekking')->get();
             $terms = PostModel::where('id', '134')->first();
             // dd($request->all(), $uri, $booking);
-            return view('themes.default.booking', compact('trip', 'terms', 'trips', 'activity', 'start_date', 'end_date'));
+            return view('themes.default.booking', compact('trip', 'terms', 'trips', 'activity', 'start_date', 'end_date', 'schedule'));
         }
         else{
             return back()->with('error','Please login first');
         }
       
     }
+
+    
 
 
     public function showbookingsuccess()

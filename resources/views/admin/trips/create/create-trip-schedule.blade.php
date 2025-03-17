@@ -12,8 +12,8 @@
             <div class="col-md-1"><label>Ordering</label></div>
             <div class="col-md-2"><label>Start Date</label></div>
             <div class="col-md-2"><label>End Date</label></div>
-            <div class="col-md-2"><label>Price</label></div>
-            <div class="col-md-2"><label>Deposit</label></div>
+            <div class="col-md-2"><label>With Meal Price</label></div>
+            <div class="col-md-2"><label>Without Meal Price</label></div>
             <div class="col-md-2"> <label>Availability</label></div>
             <div class="col-md-1"></div>
 
@@ -53,8 +53,8 @@
                         <div class="col-md-1"><label>Ordering</label></div>
                         <div class="col-md-2"><label>Start Date</label></div>
                         <div class="col-md-2"><label>End Date</label></div>
-                        <div class="col-md-2"><label>Price</label></div>
-                        <div class="col-md-2"><label>Deposit</label></div>
+                        <div class="col-md-2"><label>With Meal Price</label></div>
+                        <div class="col-md-2"><label>Without Meal Price</label></div>
                         <div class="col-md-2"> <label>Availability</label></div>
                         <div class="col-md-1"></div>
                     </div>
@@ -72,11 +72,11 @@
                     </div>
                     <div class="col-md-2">
                         <input type="number" min="0" name="schedule_price[]" 
-                        class="form-control" />
+                        class="form-control" placeholder="price with meal" />
                     </div>
                     <div class="col-md-2">
                         <input type="number" name="schedule_group_size[]"
-                        class="form-control" placeholder="" />
+                        class="form-control" placeholder="price without meal" />
                     </div>
                     <div class="col-md-2">
                         <select name="schedule_availability[]" class="form-control">
