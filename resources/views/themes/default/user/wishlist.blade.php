@@ -23,8 +23,8 @@
                 </p>
          
                 <!--  -->
-                @if($trips->count() > 0)
-                @foreach ($trips as $row)
+                @if($data->count() > 0)
+                @foreach ($data as $row)
                 <div class="uk-margin-bottom uk-inline">
                     <div class="uk-position-top-right uk-overlay uk-flex uk-flex-right">
                         <a href="{{ route('delete-wishlist',$row->id) }}" class="uk-delete-button"><span uk-icon="icon: close; ratio: 0.9"></span></a>
@@ -87,7 +87,7 @@
                 <h3>Wishlist is empty!</h3>
                 @endif
                 <!--  -->
-                @if($trips->count() > 0)
+                @if($data->count() > 0)
                 @include('themes.default.user.pagination')
                 @endif
                 </div>

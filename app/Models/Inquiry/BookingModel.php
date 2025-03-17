@@ -11,7 +11,7 @@ class BookingModel extends Model
     use HasFactory;
 
     protected $table = 'cl_trip_booking';
-    protected $fillable = ['trip_id','title','full_name', 'total_travellers', 'nationality', 'country', 'address', 'zip', 'email', 'gender', 'tshirt_size', 'phone', 'medication', 'restrictions', 'trip_start_date', 'trip_end_date', 'trip_days', 'dob', 'passport_number', 'passport_expire', 'paid_status', 'payment_type', 'hear'];
+    protected $fillable = ['trip_id','user_id','title','full_name', 'total_travellers', 'nationality', 'country', 'address', 'zip', 'email', 'gender', 'tshirt_size', 'phone', 'medication', 'restrictions', 'trip_start_date', 'trip_end_date', 'trip_days', 'dob', 'passport_number', 'passport_expire', 'paid_status', 'payment_type', 'hear','message'];
     
     public function bookTrips()
     {

@@ -198,7 +198,7 @@
                              @else
                              <li class="border-right">
                                 <a href="#modal-form" uk-toggle>
-                                    <i class="fa-solid fa-user uk-margin-small-right"></i>User Login.
+                                    <i class="fa-solid fa-user uk-margin-small-right"></i>User Login
                                 </a>
                              </li>
                              @endif

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inquiry\BookingModel;
 use App\Models\Travels\TripModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,11 +12,12 @@ class UserController extends Controller
 {
     public function user_profile()
     {
-        return view('themes.default.user.profile');  
+        return view('themes.default.user.profile');   
     }
     public function user_history()
     {
-        return view('themes.default.user.history');  
+        $data=BookingModel::orderBy('id','desc')->paginate(3);
+        return view('themes.default.user.history',compact('data'));  
     }
     public function user_recommendation()
     {
@@ -27,10 +29,10 @@ class UserController extends Controller
             if (Auth::check()){
                 $wishlist = Wishlist::where('user_id',Auth::user()->id)->get();
                 $trip_ids=$wishlist->pluck('trip_id');
-                $trips=TripModel::whereIn('id',$trip_ids)->paginate(3);
-                return view('themes.default.user.wishlist', compact('wishlist','trips'));
+                $data=TripModel::whereIn('id',$trip_ids)->paginate(3);
+                return view('themes.default.user.wishlist', compact('wishlist','data'));
             }
-            else{
+            else{ 
                 return back()->with('error','Please login first');
             }
         }    

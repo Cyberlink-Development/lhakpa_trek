@@ -73,8 +73,8 @@ Route::get('/search-trips', 'FrontendControllers\FrontpageController@search_trip
 Route::get('captcha', 'CaptchaController@refreshCaptcha');
 
 // Trip Pages
-Route::get('book-now', 'FrontendControllers\FrontpageController@book_now');
-Route::any('book/{uri}.html', 'FrontendControllers\FrontpageController@showbooking')->name('page.booking');
+Route::get('book-now', 'FrontendControllers\FrontpageController@book_now');  
+Route::any('book/{uri}.html', 'FrontendControllers\FrontpageController@showbooking')->name('page.booking'); 
 Route::get('booking-success', 'FrontendControllers\FrontpageController@showbookingsuccess')->name('page.bookingsuccess');
 Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@tripdetail')->name('page.tripdetail');
 Route::get('activity/{uri}.html', 'FrontendControllers\FrontpageController@travellist')->name('page.activitydetail');
