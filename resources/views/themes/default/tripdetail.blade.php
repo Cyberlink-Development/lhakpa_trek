@@ -594,8 +594,8 @@
                 <!-- Table Header -->
                 <div class=" uk-grid-small uk-child-width-1-5 uk-text-bold uk-background-muted uk-margin-top uk-padding-small uk-visible@s" uk-grid>
                     <div>Dates</div>
-                    <div>Prices</div>
-                    <div>Deposit</div>
+                    <div>With Meal</div>
+                    <div>Without Meal</div>
                     <div>Status</div>
                     <div></div>
                 </div>
@@ -603,14 +603,27 @@
                 <ul uk-accordion class="uk-list-divider uk-margin-remove">
                     @foreach ($schedules as $item)
                         <li class="uk-price-li">
-                            <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom uk-accordion-title custom-accordion-title" uk-grid>
-                                <div class="uk-black"><span class="uk-block uk-hidden@m">Dates: </span>{{ $item->start_date }} – {{ $item->end_date }}</div>
-                                <div class="uk-black"><span class="uk-block uk-hidden@m">Prices: </span>US ${{$item->price}}</div>
-                                <div class="uk-black"><span class="uk-block uk-hidden@m">Deposit: </span>US ${{$item->group_size}}</div>
-                                <div class="uk-text-success"><span class="uk-block uk-hidden@m">Status: </span>{{$item->availability}}</div>
-                                <div class="uk-black"></span><a href="book.php" class="uk-btn uk-btn-secondary">Book Now</a></div>
+                            <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom uk-accordion-title custom-accordion-title" uk-grid>    
+                                <div class="uk-black">
+                                    <span class="uk-block uk-hidden@m">Dates: </span>{{ $item->start_date }} – {{ $item->end_date }}
+                                </div>
+                                <div class="uk-black">
+                                    <span class="uk-block uk-hidden@m">With Meal: </span>US ${{$item->price}}</div>
+                                <div class="uk-black">
+                                    <span class="uk-block uk-hidden@m">Without Meal: </span>US ${{$item->group_size}}
+                                </div>
+                                <div class="uk-text-success">
+                                    <span class="uk-block uk-hidden@m">Status: </span>{{$item->availability}}
+                                </div>
+                                <div class="uk-black">
+                                    <form action="{{ route('page.booking', $data->uri) }}" method="post" id="form-{{ $item->id }}">
+                                        @csrf
+                                        <input type="hidden" name="schedule_id" id="schedule_id" value="{{ $item->id }}">
+                                        <button type="button" onclick="document.getElementById('form-{{ $item->id }}').submit();" class="uk-btn uk-btn-secondary">Book Now</button>
+                                    </form>
+                                    <!-- <button  class="uk-btn uk-btn-secondary" onclick="window.location.href='{{ route('page.booking', $data->uri) }}'">Book Now</button> -->
+                                </div>
                             </div>
-                            </a>
                             @if ($item->remarks)
                                 <div class="uk-accordion-content ">
                                     <h3 class="uk-secondary">More Information</h3>
