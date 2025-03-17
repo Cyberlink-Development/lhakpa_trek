@@ -19,12 +19,14 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::any('/reset-password/{token}', 'ForgotPasswordController@reset_password')->name('reset-password');  
 
 });
-Route::get('/user-profile', 'UserController@user_profile')->name('user-profile');
+Route::get('/account-profile', 'UserController@user_profile')->name('user-profile');
+Route::post('/account-profile', 'UserController@user_profile')->name('user-profile');
 Route::get('/user-history', 'UserController@user_history')->name('user-history');
 Route::get('/user-recommendation', 'UserController@user_recommendation')->name('user-recommendation');
 Route::get('/user-wishlist', 'UserController@user_wishlist')->name('user-wishlist');
 Route::get('/user-review', 'UserController@user_review')->name('user-review');
-Route::get('wishlist/{id?}', 'UserController@add_wishlist')->name('add-wishlist');
+Route::post('/user-review', 'UserController@user_review')->name('user-review');  
+Route::get('wishlist/{id?}', 'UserController@add_wishlist')->name('add-wishlist');  
 Route::get('delete-wishlist/{id}', 'UserController@delete_wishlist')->name('delete-wishlist');
 
 
@@ -49,7 +51,7 @@ Route::get('/', 'FrontendControllers\FrontpageController@index')->name('index.fr
 /* Authentication Routes... */
 Route::get('adminisclient', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('adminisclient', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('logout', 'Auth\LoginController@logout')->name('user-logout');
 Route::redirect('/dashboard', '/admin/dashboard', 301);
 //for captcha refresh
 

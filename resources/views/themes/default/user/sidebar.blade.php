@@ -1,11 +1,12 @@
 <div class="uk-box-shadow-medium uk-border-rounded uk-white-bg ">
     <div class="uk-flex uk-flex-middle uk-padding-small">
-        <img src="{{ asset('theme-assets/img/user.png') }}" class="uk-profile-img" alt="">
+        <img src="{{Auth::user()->image ? asset('user-profile/'.Auth::user()->image) : asset('theme-assets/img/user.png')}}" class="uk-profile-img" alt="">
+        
         @if(Auth::check())
         <div class="uk-title-font">
             <h3 class="uk-secondary uk-margin-remove">{{ Auth::user()->name }}
             </h3>
-            <p class="uk-margin-remove">{{ Auth::user()->email }}</p>
+            <p class="uk-margin-remove" style="line-break: anywhere;">{{ Auth::user()->email }}</p>
         </div>
         @endif
     </div>
@@ -27,7 +28,7 @@
                 <a href="{{ route('user-review') }}" class="uk-flex"><i class="fa-solid fa-comment login-logo uk-margin-small-right"></i>Your Opinion</a>
             </li>
             <li class="uk-div uk-padding-small">
-                <a href="{{ route('logout') }}" class="uk-flex"><i class="fa-solid fa-comment login-logo uk-margin-small-right"></i>Log Out</a>
+                <a href="{{ route('user-logout') }}" class="uk-flex"><i class="fa-solid fa-comment login-logo uk-margin-small-right"></i>Log Out</a>
             </li>
         </ul>
     </div>

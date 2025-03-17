@@ -183,6 +183,7 @@
                                     <h1 class="uk-primary uk-margin-remove">{{$data->route}}</h1>
                                 </div>
                             </div>
+                            @if(Auth::check())
                             <div class="uk-width-1-2@m uk-text-right@m uk-text-left uk-margin-top">
                                <div>
                                     @if($data->trip_pdf)
@@ -192,6 +193,7 @@
                                     @endif
                                </div>
                             </div>
+                            @endif
                         </div>
                         @if ($data->trip_code)
                             <div class="uk-margin-top">
@@ -517,6 +519,7 @@
 <!-- review section end -->
 
 <!-- review form modal start -->
+ 
 <div id="offcanvas-review" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-padding-remove-top uk-padding-remove-left uk-padding-remove-right uk-padding-bottom">
         <div class="uk-padding uk-padding-remove-bottom">
@@ -571,9 +574,9 @@
                     </div>
                 </div>
                 <div class="uk-margin-top uk-text-center">
-                    <a href="" class="uk-btn uk-btn-secondary">Learn More <span uk-icon="chevron-right"></span></a>
+                    <button type="submit" class="uk-btn uk-btn-secondary">Submit</button>
                 </div>
-            </form>
+            </form> 
         </div>
     </div>
 </div>
