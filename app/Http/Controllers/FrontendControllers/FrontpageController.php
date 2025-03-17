@@ -6,6 +6,7 @@ use App\Models\Inquiry\Emergency;
 use App\Models\Inquiry\Insurance;
 use App\Models\Team\TeamCategory;
 use App\Models\Travels\TripGradeModel;
+use Illuminate\Support\Facades\Auth;
 use Newsletter;
 use App\Mail\BookTrip;
 use App\Mail\SendMail;
@@ -306,115 +307,42 @@ class FrontpageController extends Controller
     {
         $setting = SettingModel::where('id', 1)->first();
         $g_recaptcha_response = $request->input('g_recaptcha_response');
-        $result = $this->getCaptcha($g_recaptcha_response);
+        $result = $this->getCaptcha($g_recaptcha_response); 
         if ($result->success == true) {
             if ($request->isMethod('post')) {
                 $request->validate([
-                    'trip_name' => 'required',
-                    'total_travellers' => 'required',
                     'full_name' => 'required',
                     'email' => 'required',
                     'phone' => 'required',
-                    'nationality' => 'required',
-                    'address' => 'required',
-                    'zip' => 'required',
                     'country' => 'required',
-                    'passport_number' => 'required',
-                    'passport_expire' => 'required',
-                    'dob' => 'required',
-                    'emergency_fullname' => 'required',
-                    'emergency_relation' => 'required',
-                    'emergency_phone_no' => 'required',
-                    'emergency_email' => 'required',
-                    'emergency_address' => 'required',
-                    'emergency_zip' => 'required',
-                    'emergency_country' => 'required',
-                    'payment_type' => 'required|in:hbl-pay,wire,cheque',
+                    'total_travellers' => 'required',
+                     'trip_start_date'=>'required'
+
                 ]);
                 $trip = TripModel::where('id', $request->trip_id)->first();
                 $create = BookingModel::create([
                     'trip_id' => $request->trip_id,
-                    'title' => $trip->trip_title,
+                    'user_id'=> Auth::user()->id,
                     'full_name' => $request->full_name,
                     'total_travellers' => $request->total_travellers,
-                    'nationality' => $request->nationality,
                     'country' => $request->country,
                     'address' => $request->address,
-                    'zip' => $request->zip,
                     'email' => $request->email,
-                    'gender' => $request->gender,
-                    'tshirt_size' => $request->tshirt_size,
-                    'phone' => $request->phone,
-                    'medication' => $request->medication,
-                    'restrictions' => $request->restrictions,
-                    'trip_start_date' => $request->trip_start_date,
-                    'trip_end_date' => $request->trip_end_date,
-                    'trip_days' => $request->trip_days,
-                    'dob' => $request->dob,
-                    'passport_number'=> $request->passport_number,
-                    'passport_expire'=> $request->passport_expire,
-                    'payment_type'=> $request->payment_type,
-                    'hear' => $request->hear,
+                    'phone' => $request->phone,  
+                    'trip_start_date'=>$request->trip_start_date,
+                    'message'=>$request->message,
                     'paid_status' => 0,
                 ]);
                 if ($create) {
-                    if($request->has_arrival_detail == 1){
-                        $flight = FlightDetails::create([
-                            'booking_id'=> $create->id,
-                            'airline_name' => $request->airline_name,
-                            'airline_no' => $request->airline_no,
-                            'arrival_from' => $request->arrival_from,
-                            'arrival_date'=> $request->arrival_date,
-                            'arrival_time'=> $request->arrival_time. ' '.$request->time1
-                            
-                        ]);
-                        if($flight && $request->has_departure_detail == 1){
-                            $flight->update([
-                                'departure_airline_name' => $request->departure_airline_name,
-                                'departure_airline_no' => $request->departure_airline_no,
-                                'departure_from' => $request->departure_from,
-                                'departure_date'=> $request->departure_date,
-                                'departure_time'=> $request->departure_time. ' '.$request->time2
-                            ]);
-                        }
-                    }
-                    if($request->has_insurance_detail == 1){
-                        $insurance = Insurance::create([
-                            'booking_id'=> $create->id,
-                            'insurance_company' => $request->insurance_company,
-                            'insurance_phone' => $request->insurance_phone,
-                            'policy_no' => $request->policy_no
-                        ]);
-
-                    }
-                    $emergency_info = Emergency::create([
-                        'booking_id'=> $create->id,
-                        'emergency_fullname' => $request->emergency_fullname,
-                        'emergency_relation' => $request->emergency_relation,
-                        'emergency_phone_no' => $request->emergency_phone_no,
-                        'emergency_email' => $request->emergency_email,
-                        'emergency_address' => $request->emergency_address,
-                        'emergency_zip' => $request->emergency_zip,
-                        'emergency_country' => $request->emergency_country
-                    ]);
-                    if($request->payment_type == 'hbl-pay'){
-                        $data = [
-                            'booking_id' => $create->id,
-                            'total_price' => $trip->price * $request->total_travellers,
-                            'trip_id' => $request->trip_id
-                        ];
-                        $dataJson = urlencode(json_encode($data));
-                        return redirect()->route('himalayan.payment.verify', ['data' => $dataJson]);
-                    }
+             
                     // return new AdminBookingMail();
-                    // return new BookTrip($request->email);  
-                    Mail::send(new AdminBookingMail($setting->email_secondary));
-                    Mail::send(new BookTrip($request->email));
+                    // return new BookTrip($request->email);    
+                    // Mail::send(new AdminBookingMail($setting->email_secondary));
+                    // Mail::send(new BookTrip($request->email));
                     $name = $request->full_name;
                     $message = "<p>Thanks for your booking request. One of our team will be in touch soon to confirm details.</p>
-                    <p>We’re looking forward to welcoming you to Adventure Sherpa Tracks!</p>";
+                    <p>We’re looking forward to welcoming you to Lhakpa Trekking!</p>";
                     return view('themes.default.booking-success', compact('name', 'message'));
-                    //  return back()->with('success','Booking form submitted successfully');
                 }
             }
         } else {
@@ -741,15 +669,21 @@ class FrontpageController extends Controller
 
     public function showbooking(Request $request,$uri)
     {
-        $start_date = $request->start_date ? $request->start_date: null;
-        $end_date = $request->end_date ? $request->end_date : null;
-        $booking = TripModel::where('uri', $uri)->first();
-        $trips = TripModel::all();
-        $activity = ActivityModel::where('activity_parent', 'trekking')->get();
-        $terms = PostModel::where('id', '134')->first();
-        // dd($request->all(), $uri, $booking);
-
-        return view('themes.default.booking', compact('booking', 'terms', 'trips', 'activity', 'start_date', 'end_date'));
+        if (Auth::check() && Auth::user())
+        {
+            $start_date = $request->start_date ? $request->start_date: null;  
+            $end_date = $request->end_date ? $request->end_date : null;
+            $trip = TripModel::where('uri', $uri)->first();
+            $trips = TripModel::all();
+            $activity = ActivityModel::where('activity_parent', 'trekking')->get();
+            $terms = PostModel::where('id', '134')->first();
+            // dd($request->all(), $uri, $booking);
+            return view('themes.default.booking', compact('trip', 'terms', 'trips', 'activity', 'start_date', 'end_date'));
+        }
+        else{
+            return back()->with('error','Please login first');
+        }
+      
     }
 
 

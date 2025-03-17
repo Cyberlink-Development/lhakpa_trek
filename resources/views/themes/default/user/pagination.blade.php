@@ -2,15 +2,15 @@
     <nav aria-label="Pagination">
         <ul class="uk-pagination" uk-margin>
             {{-- Previous Page Link --}}
-            @if ($trips->onFirstPage())
+            @if ($data->onFirstPage())
                 <li class="uk-disabled"><span uk-pagination-previous></span></li>
             @else
-                <li><a href="{{ $trips->previousPageUrl() }}"><span uk-pagination-previous></span></a></li>
+                <li><a href="{{ $data->previousPageUrl() }}"><span uk-pagination-previous></span></a></li>
             @endif
 
             {{-- Pagination Links --}}
-            @foreach ($trips->getUrlRange(1, $trips->lastPage()) as $page => $url)
-                @if ($page == $trips->currentPage())
+            @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
+                @if ($page == $data->currentPage())
                     <li class="uk-active"><span aria-current="page">{{ $page }}</span></li>
                 @else
                     <li><a href="{{ $url }}">{{ $page }}</a></li>
@@ -18,8 +18,8 @@
             @endforeach
 
             {{-- Next Page Link --}}
-            @if ($trips->hasMorePages())
-                <li><a href="{{ $trips->nextPageUrl() }}"><span uk-pagination-next></span></a></li>
+            @if ($data->hasMorePages())
+                <li><a href="{{ $data->nextPageUrl() }}"><span uk-pagination-next></span></a></li>
             @else
                 <li class="uk-disabled"><span uk-pagination-next></span></li>
             @endif

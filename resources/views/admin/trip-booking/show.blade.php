@@ -10,7 +10,7 @@
 			<div class="panel-body">  
 				<div class="form-group">
 				    <div class="col-lg-12">
-						<div class="bs-component">
+						<div class="bs-component">  
 						    <h3>Trip Information</h3>
 						    <table class="table admin-form table-striped dataTable" id="datatable3">
                                 <tbody>

@@ -94,6 +94,25 @@
     <script src="{{asset('theme-assets/js/main.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script src="https://www.google.com/recaptcha/api.js?render={{env('SITE_KEY')}}"></script>
+
+<script>
+    grecaptcha.ready(function () {
+        function executeRecaptcha() {
+            grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
+                document.getElementById('g_recaptcha_response').value = token;
+            });
+        }
+
+        // Initial execution of reCAPTCHA
+        executeRecaptcha();
+
+        // Refresh the reCAPTCHA token every 100 seconds (less than 2 minutes)
+        setInterval(executeRecaptcha, 900000);
+    });
+
+</script>
+
 
     </body>
     </html> 
