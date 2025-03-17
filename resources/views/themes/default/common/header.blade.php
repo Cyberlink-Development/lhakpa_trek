@@ -451,12 +451,16 @@
                                     </div>
                                 </li>
                     <!-- <li><a href="">Advanced Search</a></li> -->
-                    <li class="uk-flex uk-flex-middle">
-                        <form class="uk-search uk-search-default">
-                            <input class="uk-search-input " type="search" placeholder="Search" aria-label="Search">
-                            <span class="uk-search-icon-flip" uk-search-icon></span>
-                        </form>
-                    </li>
+                        <li class="uk-flex uk-flex-middle">
+                            <form class="uk-search uk-search-default" action="{{ route('searchtrip') }}" method="GET" >
+                                <input class="uk-search-input" type="search" name="query" id="search-input" placeholder="Search" aria-label="Search" autocomplete="off">
+   
+                                <button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
+
+                                <ul id="search-results" class="uk-list uk-dropdown uk-dropdown-bottom-left uk-width-large" style="display: none; position: absolute; background: #fff; border: 1px solid #ccc; z-index: 1000;">
+                                </ul>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 </nav>
@@ -671,4 +675,52 @@
 
     <!-- Header end -->
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("search-input");
+            const resultsDropdown = document.getElementById("search-results");
+        
+            searchInput.addEventListener("input", function() {
+                let query = this.value.trim();
+        
+                if (query.length < 2) {
+                    resultsDropdown.style.display = "none";
+                    return;
+                }
+        
+                fetch(`/search-suggestions?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultsDropdown.innerHTML = "";
+                        
+                        if (data.length > 0) {
+                            data.forEach(item => {
+                                let listItem = document.createElement("li");
+                                listItem.innerHTML = `<a href="/page/${item.uri}.html" class="uk-link-text">${item.trip_title}</a>`;
+                                listItem.style.padding = "8px";
+                                listItem.style.cursor = "pointer";
+        
+                                listItem.addEventListener("click", function() {
+                                    searchInput.value = item.trip_title;
+                                    resultsDropdown.style.display = "none";
+                                });
+        
+                                resultsDropdown.appendChild(listItem);
+                            });
+        
+                            resultsDropdown.style.display = "block";
+                        } else {
+                            resultsDropdown.style.display = "none";
+                        }
+                    })
+                    .catch(error => console.error("Error fetching search suggestions:", error));
+            });
+        
+            document.addEventListener("click", function(e) {
+                if (!searchInput.contains(e.target) && !resultsDropdown.contains(e.target)) {
+                    resultsDropdown.style.display = "none";
+                }
+            });
+        });
+    </script>
         

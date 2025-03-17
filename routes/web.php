@@ -84,11 +84,13 @@ Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@tripdetai
 Route::get('activity/{uri}.html', 'FrontendControllers\FrontpageController@travellist')->name('page.activitydetail');
 Route::get('region/{uri}.html', 'FrontendControllers\FrontpageController@regionlist')->name('page.regionlist');
 Route::get('tours/{uri}.html', 'FrontendControllers\FrontpageController@destinationlist')->name('page.destinationlist');
-Route::any('search-trip', 'FrontendControllers\FrontpageController@show_search_form')->name('search-trip');
+Route::any('search-trip', 'FrontendControllers\FrontpageController@show_search_form')->name('searchtrip');
+Route::any('search-suggestions', 'FrontendControllers\FrontpageController@searchSuggestions')->name('search.suggestions');
 Route::post('store/trip/tailormade', 'FrontendControllers\FrontpageController@store_tailormade')->name('tailormade');
 Route::post('store/trip/filmmaking', 'FrontendControllers\FrontpageController@store_filmmaking')->name('filmmaking');
 // Route::post('trip-booking', 'FrontendControllers\FrontpageController@post_tripbooking')->name('post-trip');
 Route::post('trip-booking', [FrontpageController::class, 'post_tripbooking'])->name('post-trip');
+Route::post('inquiry', [FrontpageController::class, 'inquiry'])->name('inquiry');
 Route::post('inquiry-now', 'FrontendControllers\FrontpageController@post_inquiry')->name('post-inquiry');
 Route::get('inquiry-now/{uri}.html', 'FrontendControllers\FrontpageController@post_inquiry')->name('get-inquiry');
 Route::post('contact', 'FrontendControllers\FrontpageController@contact_us')->name('contact');
