@@ -58,5 +58,5 @@
         </div>
     @endforeach
 @else
-    <div class="uk-section uk-text-center">No trips found matching your criteria.</div>
+    <div class="uk-section uk-text-center uk-text-bold uk-text-lead"><strong>No trips found matching your criteria.</strong></div>
 @endif

@@ -406,6 +406,47 @@ class FrontpageController extends Controller
         }
 
     }
+    public function inquiry(Request $request)
+    {
+        // dd($request->all());
+        $setting = SettingModel::where('id', 1)->first();
+        $g_recaptcha_response = $request->input('g_recaptcha_response');
+        $result = $this->getCaptcha($g_recaptcha_response); 
+        if ($result->success == true) {
+            if ($request->isMethod('post')) {
+                $request->validate([
+                    'name' => 'required',
+                    'emailid' => 'required',
+                    'contact' => 'required',
+                    'country' => 'required',
+                ]);
+                $trip = TripModel::where('id', $request->trip_title)->first();
+                $create = TripInquiryModel::create([
+                    'trip_id' => $request->trip_title,
+                    'title' => $trip->trip_title,
+                    'name' => $request->name,
+                    'country' => $request->country,
+                    'email' => $request->emailid,
+                    'number' => $request->contact,
+                    'message' => $request->message,
+                ]);
+                if ($create) {
+             
+                    // return new AdminBookingMail();
+                    // return new BookTrip($request->email);    
+                    // Mail::send(new AdminBookingMail($setting->email_secondary));
+                    // Mail::send(new BookTrip($request->email));
+                    $name = $request->name;
+                    $message = "<p>Thanks for your inquiry. One of our team will be in touch soon to confirm details.</p>
+                    <p>We’re looking forward to welcoming you to Lhakpa Trekking!</p>";
+                    return view('themes.default.inquiry', compact('name', 'message'));
+                }
+            }
+        } else {
+            return back()->with('error', 'You are a robot');
+        }
+
+    }
 
     public function subscribe(Request $request)
     {
@@ -630,16 +671,36 @@ class FrontpageController extends Controller
 
     public function show_search_form(Request $request)
     {
-        if ($request->isMethod('get')) {
-            if ($request->days != NULL) {
-                $trips = ActivityModel::find($request->activity)->trips()
-                    ->where('duration', '<=', $request->days)
-                    ->get();
-                return  view('themes.default.search-trip', compact('trips'));
-            } else {
-                return back()->with('error', 'Please enter the number of days.');
-            }
+        $query = trim($request->input('query'));
+
+        if (!$query) {
+            return redirect()->back()->with('error', 'Please enter text to search.');
         }
+
+        $searchQuery = TripModel::where('trip_title', 'like', "%{$query}%")->orWhere('sub_title', 'like', "%{$query}%");
+
+        $results = $searchQuery->orderBy('created_at', 'asc')->paginate(5)->appends(['query' => $query]);
+
+        $totalResults = $searchQuery->count();
+
+        return view('themes.default.search', compact('results', 'query', 'totalResults'));
+    }
+
+    public function searchSuggestions(Request $request)
+    {
+        $query = trim($request->input('query'));
+
+        if (!$query) {
+            return response()->json([]);
+        }
+
+        $results = TripModel::where('trip_title', 'like', "%{$query}%")
+            ->orWhere('sub_title', 'like', "%{$query}%")
+            ->orderBy('created_at', 'asc')
+            ->limit(5)
+            ->get(['id', 'trip_title','uri']);
+
+        return response()->json($results);
     }
 
     public function search_all(Request $request)

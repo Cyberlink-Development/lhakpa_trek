@@ -656,10 +656,14 @@
 <div id="modal-inquiry" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <h3 class="uk-modal-title uk-text-center uk-white uk-margin-remove  uk-primary-bg border">Have Questions?</h3>
-        <h3 class="uk-text-center uk-margin-remove">VVIP MANASLU EXPEDITION (8163M)</h3>
+        <h3 class="uk-text-center uk-margin-remove">{{ $data->trip_title }}</h3>
         <button class="uk-modal-close-default" type="button" uk-close></button>
-        <form class="uk-contact-form uk-margin-top" action="" method="">
+
+        <form class="uk-contact-form uk-margin-top" action="{{ route('inquiry') }}" method="POST">
+            @csrf
             <div class=" uk-child-width-1-2@m uk-grid">
+                <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
+                <input type="hidden" name="trip_title" value="{{$data->id}}" />
                 <div class="uk-margin-small-top">
                     <label class="uk-form-label uk-text-bold" for="name">Full Name*</label>
                     <div class="uk-form-controls">
@@ -673,14 +677,13 @@
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
-                    <label class="uk-form-label uk-text-bold" for="country">Country</label>
-                    <select class="uk-select" aria-label="Select">
-                        <option>Nepal</option>
-                        <option>Option 02</option>
+                    <label class="uk-form-label uk-text-bold" for="country">Country*</label>
+                    <select name="country" class="uk-select" id="country" required>
+                        @include('themes.default.common.country')
                     </select>
                 </div>
                 <div class="uk-margin-small-top">
-                    <label class="uk-form-label uk-text-bold" for="number">Contact</label>
+                    <label class="uk-form-label uk-text-bold" for="number">Contact*</label>
                     <div class="uk-form-controls">
                         <input class="uk-input" id="contact" name="contact" required type="number">
                     </div>
@@ -693,7 +696,8 @@
                 </div>
             </div>
             <div class="uk-margin-top uk-text-center">
-                <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a>
+                {{-- <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a> --}}
+                <button type="submit" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></button>
             </div>
         </form>
 
