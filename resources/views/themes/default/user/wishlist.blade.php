@@ -88,7 +88,7 @@
                 @endif
                 <!--  -->
                 @if($data->count() > 0)
-                @include('themes.default.user.pagination')
+                    @include('themes.default.user.pagination')
                 @endif
                 </div>
         </div>

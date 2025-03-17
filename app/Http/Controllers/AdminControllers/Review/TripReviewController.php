@@ -16,6 +16,11 @@ class TripReviewController extends Controller
        $trip=TripModel::all();
        return view('admin.trip-reviews.index',compact('review','trip'));
    }
+   public function reivew_show($id)
+   {
+       $data=TripReview::where('id',$id)->first();
+       return view('admin.trip-reviews.show',compact('data'));
+   }
 
    public function post_trip_review(Request $request)
    {

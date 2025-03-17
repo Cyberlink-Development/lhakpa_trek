@@ -44,6 +44,8 @@ Route::get('/payment-verify/{id}', [DirectPayController::class,'payment_verify']
 Route::any('/payment/success', [DirectPayController::class,'success'])->name('payment.success');
 Route::any('/payment/failed', [DirectPayController::class,'failure'])->name('payment.failure');
 Route::get('/payment/response/{id?}', [DirectPayController::class, 'response'])->name('payment.response');
+Route::get('/login-form',[FrontpageController::class, 'login_form'])->name('login.form');
+Route::post('/review',[FrontpageController::class, 'reviewCreate'])->name('review.create');
 /************************** Sangam Routes Ends ***********************************/
 
 Route::get('/', 'FrontendControllers\FrontpageController@index')->name('index.front');
@@ -231,6 +233,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin-review-status', 'AdminControllers\Review\TripReviewController@review_status')->name('review-status');
     Route::get('admin-trip-edit-review/{id?}/edit', 'AdminControllers\Review\TripReviewController@edit_trip_review');
     Route::post('admin-trip-edit-review/{id?}', 'AdminControllers\Review\TripReviewController@edit_trip_review')->name('edit-trip-review');
+    Route::get('admin-trip-show-review/{id}', 'AdminControllers\Review\TripReviewController@reivew_show')->name('review.show');//By Sangam
     Route::get('admin-trip-delete-review/{id?}', 'AdminControllers\Review\TripReviewController@delete_trip_review')->name('delete-trip-review');
 
     //Trip Booking (Bibek)

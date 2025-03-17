@@ -691,7 +691,7 @@ class FrontpageController extends Controller
             return view('themes.default.booking', compact('trip', 'terms', 'trips', 'activity', 'start_date', 'end_date', 'schedule'));
         }
         else{
-            return back()->with('error','Please login first');
+            return redirect()->route('login.form')->with('error','Please login first');
         }
       
     }
@@ -824,4 +824,56 @@ class FrontpageController extends Controller
     //     ->get();
     //     return view('themes.default.team-single', compact('data',  'certificates','related'));
     // }
+
+    /*********************** By Sangam Starts ***********************/
+    public function login_form(){
+        return view('themes.default.login');
+    }
+
+    public function reviewCreate(Request $request){
+        if (Auth::check() && Auth::user() && (Auth::user()->roles == 'user'))
+        {
+            try{
+
+                $request->validate([
+                    'full_name'=>'required',
+                    'image' => 'mimes:jpeg,png,jpg,gif',
+                    'email' => 'required',
+                    'country' => 'required',
+                    'message' => 'required',
+                    'rating' => 'required',
+                    'trip_id' => 'exists:cl_trip_details,id'
+                ]);
+                $trip = TripModel::where('id', $request->trip_id)->first();
+                $data = [
+                    'trip_id' => $trip->id,
+                    'user_id' => Auth::user()->id ?? null,
+                    'full_name' => $request->full_name,
+                    'email' => $request->email,
+                    'rating' => $request->rating,
+                    'country' => $request->country,
+                    'message' => $request->message,
+                ];
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $name = time() . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('/uploads/reviews/');
+                    $image->move($destinationPath, $name);
+                    $data['image'] = $name;
+                }
+                
+                // $data=$request->all();
+                $create=TripReview::create($data);
+        
+                return redirect()->back()->with('success','Review posted successfully');
+            }
+            catch(\Exception $e){
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+        else{
+            return redirect()->route('login.form')->with('error','Please login first');
+        }
+    }
+    /*********************** By Sangam Ends *************************/
 }

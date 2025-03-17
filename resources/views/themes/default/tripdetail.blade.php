@@ -525,7 +525,9 @@
         <div class="uk-padding uk-padding-remove-bottom">
             <h3 class="uk-modal-title uk-text-center uk-white uk-margin-remove uk-primary-bg border">write a review</h3>
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <form class="uk-contact-form" action="" method="">
+            <form class="uk-contact-form" action="{{ route('review.create') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="trip_id" value="{{ $data->id }}">
                 <div class=" uk-child-width-1-2@m uk-grid">
                     <div class="uk-margin-small-top">
                         <label class="uk-form-label uk-text-bold" for="full_name">Full Name</label>
@@ -568,7 +570,7 @@
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
-                    <label class="uk-form-label uk-text-bold" for="contact">Message</label>
+                    <label class="uk-form-label uk-text-bold" for="message">Message</label>
                     <div class="uk-form-controls">
                         <textarea name="message" class="uk-textarea" rows="3" required></textarea>
                     </div>
