@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendControllers;
 
+use App\Mail\AdminContactMail;
 use App\Models\Inquiry\Emergency;
 use App\Models\Inquiry\Insurance;
 use App\Models\Team\TeamCategory;
@@ -488,10 +489,11 @@ class FrontpageController extends Controller
                     'full_name' => $request->full_name,
                     'email' => $request->email,
                     'number' => $request->number,
-                    'message' => $request->comments,
+                    'message' => $request->message,
                     'country' => $request->country
                 ]);
-                Mail::send(new \App\Mail\AdminContactMail($request->email));
+                return new AdminContactMail();
+                // Mail::send(new \App\Mail\AdminContactMail($request->email));
                 $name = $request->full_name;
                 $message = "<p>Thanks for contacting us. One of our team will be in touch with you soon.</p>";
                 return view('themes.default.booking-success', compact('message', 'name'));

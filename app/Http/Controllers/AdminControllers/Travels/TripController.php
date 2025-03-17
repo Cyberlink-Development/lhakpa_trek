@@ -83,7 +83,7 @@ class TripController extends Controller
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title',
                 'upload_pdf' => 'nullable|mimes:pdf|max:2048',
-                
+                'reference_no' => 'unique:cl_trip_details,trip_code'
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -91,9 +91,8 @@ class TripController extends Controller
                     'errors' => $validator->errors()->all()
                 ]);
             }
-
-
             $data = $request->all();
+            $data['trip_code'] = strtoupper($request->reference_no);
             // dd($request->all());
 
             /*************Banner Upload************/
@@ -488,7 +487,7 @@ class TripController extends Controller
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
                 'upload_pdf' => 'nullable|mimes:pdf|max:2048',
-                
+                'reference_no' => 'unique:cl_trip_details,trip_code,' . $id
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -641,7 +640,7 @@ class TripController extends Controller
             $data->status_text = $request->status_text;
             $data->uri = Str::slug($request->uri);
             $data->ordering = $request->ordering;
-            $data->trip_code = $request->trip_code;
+            $data->trip_code = strtoupper($request->reference_no);
             $data->meta_key = $request->meta_key;
             $data->meta_description = $request->meta_description;
             $data->meta_title = $request->meta_title;
