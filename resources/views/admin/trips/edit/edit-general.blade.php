@@ -63,7 +63,7 @@
                 <div class="col-lg-6">
                     <div class="bs-component">
                         <label>Reference No:</label>
-                        <input type="text" name="trip_code" class="form-control" value="{{ $data->trip_code }}"/>
+                        <input type="text" name="reference_no" class="form-control" value="{{ $data->trip_code }}"/>
                     </div>
                 </div>
                 <div class="col-lg-12">

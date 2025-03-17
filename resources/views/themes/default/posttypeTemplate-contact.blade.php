@@ -59,28 +59,33 @@
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44668.49294806555!2d85.3261328!3d27.708960349999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198a307baabf%3A0xb5137c1bf18db1ea!2sKathmandu%2044600!5e1!3m2!1sen!2snp!4v1733741373198!5m2!1sen!2snp" width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="uk-primary-bg uk-pattern-bg uk-padding uk-margin-top">
-                <form action="" class="uk-grid-small" uk-grid>
+                <form action="{{ route('contact') }}" method="post" class="uk-grid-small" uk-grid>
+                    @csrf
+                    <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="Name">Full Name</label>
-                        <input class="uk-input border" type="text" aria-label="Name">
+                        <input class="uk-input border" name="full_name" type="text" aria-label="Name">
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="Contact">Contact</label>
-                        <input class="uk-input border" type="number" aria-label="Contact">
+                        <input class="uk-input border" name="number" type="number" aria-label="Contact">
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="Email">Email</label>
-                        <input class="uk-input border" type="email" aria-label="Email">
+                        <input class="uk-input border" name="email" type="email" aria-label="Email">
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="country">Country</label>
-                        <input class="uk-input border" type="text" aria-label="country">
+                        <select class="uk-input border" name="country" id="country">
+                            @include('themes.default.common.country')
+                        </select>
+                        <!-- <input class="uk-input border" name="country" type="text" aria-label="country"> -->
                     </div>
                     <div class="uk-width-1-1">
-                        <textarea class="uk-textarea border" rows="5" placeholder="Message" aria-label="Message"></textarea>
+                        <textarea class="uk-textarea border" rows="5" name="message" placeholder="Message" aria-label="Message"></textarea>
                     </div>
                     <div class="uk-width-1-1 uk-text-center uk-margin-top">
-                        <a href="#" class="uk-btn uk-btn-secondary ">SUBMIT</a>
+                        <button type="submit" class="uk-btn uk-btn-secondary ">SUBMIT</button>
                     </div>
                 </form>
             </div>
