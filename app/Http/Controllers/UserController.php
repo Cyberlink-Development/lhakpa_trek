@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\TripReview;
 use App\Models\Inquiry\BookingModel;
 use App\Models\Travels\TripModel;
 use Illuminate\Http\Request;
@@ -71,14 +72,20 @@ class UserController extends Controller
                 return view('themes.default.user.wishlist', compact('wishlist','data'));
             }
             else{ 
-                return back()->with('error','Please login first');
+                return redirect()->route('login.form')->with('error','Please login first');
             }
         }    
     }   
     
     public function user_review()
     {
-        return view('themes.default.user.review');  
+        if (Auth::check() && (Auth::user()->roles == 'user') ){
+            $data = TripReview::where('user_id', Auth::user()->id)->paginate(2);
+            return view('themes.default.user.review', compact('data'));  
+        }
+        else{
+            return redirect()->route('login.form')->with('error','Please login first');
+        }
     }
 
     public function add_wishlist($id)

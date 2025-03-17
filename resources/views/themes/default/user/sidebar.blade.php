@@ -28,7 +28,7 @@
                 <a href="{{ route('user-review') }}" class="uk-flex"><i class="fa-solid fa-comment login-logo uk-margin-small-right"></i>Your Opinion</a>
             </li>
             <li class="uk-div uk-padding-small">
-                <a href="{{ route('user-logout') }}" class="uk-flex"><i class="fa-solid fa-comment login-logo uk-margin-small-right"></i>Log Out</a>
+                <a href="{{ route('user-logout') }}" class="uk-flex"><i class="fa-solid fa-right-from-bracket login-logo uk-margin-small-right"></i>Log Out</a>
             </li>
         </ul>
     </div>

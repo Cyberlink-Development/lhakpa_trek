@@ -20,43 +20,30 @@
             <div class="uk-width-3-4@m">
                 <p class="uk-visible@m uk-white" style="margin:2rem 0px 5rem 0;">Your review about the travel :
                 </p>
-                <!--  -->
-                <div class="uk-margin-bottom">
-                    <div class="uk-light-bg border uk-padding">
-                    <a href="trip-detail.php" class="uk-news-title">
-                        <h2 class="uk-margin-remove">Mardi Himal Trek</h2>
-                    </a>
-                    <div class="uk-star-rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p >“We, the Lhakpa Trekking are a team of professionals and are a top-quality trekking and travel company in Kathmandu valley. We are one of the leading and popular trekking company and we are also registered with the Nepalese government. <br><br>
-                    We offer visitors with thousands of trekking and tour packages across Nepal, India, Tibet, and Bhutan. We also believe in full customer satisfaction and great trekking experience.We, the Lhakpa Trekking are a team of professionals and are a top-quality trekking and travel company in Kathmandu valley. We are one of the leading and popular trekking company and we are also registered with the Nepalese government. “</p>
-                    </div>
-                </div>
-                <!--  -->
-                <!--  -->
-                <div class="uk-margin-bottom">
-                    <div class="uk-light-bg border uk-padding">
-                    <a href="trip-detail.php" class="uk-news-title">
-                        <h2 class="uk-margin-remove">Annapurna Circuit Trek</h2>
-                    </a>
-                    <div class="uk-star-rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p >“We, the Lhakpa Trekking are a team of professionals and are a top-quality trekking and travel company in Kathmandu valley. We are one of the leading and popular trekking company and we are also registered with the Nepalese government. <br><br>
-                    We offer visitors with thousands of trekking and tour packages across Nepal, India, Tibet, and Bhutan. We also believe in full customer satisfaction and great trekking experience.We, the Lhakpa Trekking are a team of professionals and are a top-quality trekking and travel company in Kathmandu valley. We are one of the leading and popular trekking company and we are also registered with the Nepalese government. “</p>
-                    </div>
-                </div>
-                <!--  -->
-                @include('themes.default.user.pagination')
+                @if($data->count() > 0)
+                    @foreach ($data as $row)
+                        <!--  -->
+                        <div class="uk-margin-bottom">
+                            <div class="uk-light-bg border uk-padding">
+                                <a href="{{ url('page/' . tripurl($row->trips->uri)) }}" class="uk-news-title">
+                                    <h2 class="uk-margin-remove">{{ $row->trips->trip_title }}</h2>
+                                </a>
+                                <div class="uk-star-rating">
+                                    @for ($i = 0; $i < $row->rating; $i++)
+                                        <i class="fa-solid fa-star"></i>
+                                    @endfor
+                                </div>
+                                <p >“{{ $row->message }}“</p>
+                            </div>
+                        </div>
+                        <!--  -->
+                    @endforeach
+                @else
+                    <h3>Review is empty!</h3>
+                @endif
+                @if($data->count() > 0)
+                    @include('themes.default.user.pagination')
+                @endif
             </div>
         </div>
     </div>

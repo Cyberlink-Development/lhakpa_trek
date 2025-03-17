@@ -26,7 +26,9 @@
         				@foreach($review as $key=>$row)
                             <tr class="bg-light">
                             <td class="">{{$key+=1}}</td>
-        					<td class="">{{$row->trips->trip_title}}</td>
+        					          <td class="">
+                              <a href="{{ route('review.show', $row->id) }}">{{$row->trips->trip_title}}</a>
+                            </td>
         					<td class="">
                     {{ ucfirst($row->full_name)}} - {{ $row->country }} <br>
                     @if($row->image)<img src="{{asset('uploads/reviews/'.$row->image)}}" width="100px">@endif  </td>						
