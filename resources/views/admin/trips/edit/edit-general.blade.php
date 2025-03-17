@@ -49,7 +49,7 @@
                         <label>Trip Difficulty</label>
                         @if ($trek->count() > 0)
                             <select class="form-control" name="trip_grade">
-                                <option value="0"> Select Grade </option>
+                                {{-- <option value=""> Select Grade </option> --}}
                                 @foreach ($trek as $row)
                                     <option value="{{ $row->id }}"
                                     {{ $row->id == $data->trip_grade ? 'selected' : '' }}>{{ $row->trip_grade }}
@@ -182,6 +182,28 @@
                          <select class="form-control" name="show_in_home">
                             <option @if($data->show_in_home==1)selected @endif value="1">Yes</option>
                             <option @if($data->show_in_home==0)selected @endif value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Trip Tags</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <div class="bs-component">
+                        <select class="form-control tripTags" name="tripTags[]" multiple="multiple">
+                            @foreach($tripsTags as $tag)
+                            <option value="{{ $tag->id }}" 
+                                {{ isset($data) && $data->tripTags->contains('id', $tag->id) ? 'selected' : '' }}>
+                                {{ $tag->title }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

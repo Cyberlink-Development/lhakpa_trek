@@ -23,9 +23,9 @@
             <div class="uk-margin uk-list-select">
                 <select class="uk-select" aria-label="Difficulty" id="priceRange">
                     <option selected disabled>Price Range</option>
-                    <option value="1501">Budget Friendly</option>
-                    <option value="5001">Standard</option>
-                    <option value="100001">Premium</option>
+                    <option value="1501">Budget Friendly (Below $1500)</option>
+                    <option value="5001">Standard (Below $5000)</option>
+                    <option value="100001">Premium </option>
                 </select>
             </div>
             <div class="uk-flex uk-text-center">

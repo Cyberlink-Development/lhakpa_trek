@@ -131,7 +131,7 @@
                                             <i class="fa-solid fa-calendar"></i>
                                             <div>
                                                 <p class="uk-trip-title uk-margin-remove">Duration</p>
-                                                <p class="uk-trip-description uk-margin-remove">{{$row->duration}}</p>
+                                                <p class="uk-trip-description uk-margin-remove">{{$row->duration}} Days</p>
                                             </div>
                                         </div>
                                         <div class="uk-flex uk-flex-middle uk-trip ">

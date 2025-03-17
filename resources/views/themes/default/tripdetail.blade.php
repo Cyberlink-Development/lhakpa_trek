@@ -291,7 +291,7 @@
                                     <div>
                                         <div class="uk-feature-font">
                                             <p class="uk-margin-remove"><strong>Duration</strong></p>
-                                            <p class="uk-margin-remove">{{ $data->duration }}</p>
+                                            <p class="uk-margin-remove">{{ $data->duration }} Days</p>
                                         </div>
                                     </div>
                                 </div>
