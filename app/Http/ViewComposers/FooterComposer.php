@@ -21,7 +21,7 @@ class FooterComposer{
 
 	public function compose(View $view){
 	  
-		$view->with('navigations', PostTypeModel::where(['is_menu' => '1']) ->orderBy('ordering', 'asc') ->get());
+		$view->with('navigations', PostTypeModel::where(['is_menu' => '1']) ->orderBy('ordering', 'asc')->take( 6)->get());
 		$view->with('expedition', ActivityModel::where('activity_parent','expedition')->orderBy('ordering','asc')->get());
 		$view->with('trekking',ActivityModel::where('activity_parent','trekking')->orderBy('ordering','asc')->get());
 		$view->with('destination',DestinationModel::get());
