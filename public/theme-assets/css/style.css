@@ -1396,3 +1396,17 @@ footer p {
   color: var(--white)!important;
 }
 /********************************************/
+
+
+/************ New changes added *************/
+.trigger{
+  display:flex;
+}
+.pointer{
+color: var(--secondary) !important;
+  padding: 1px 8px;
+  font-size: 16px;
+  border-radius: 100%;
+  cursor: pointer;
+  text-decoration:underline;
+}

@@ -274,3 +274,7 @@ h1,h2,h3,.uk-font span{
 .pb-23{
   padding-bottom: 23px;
 }
+
+button{
+  border:0!important;
+}

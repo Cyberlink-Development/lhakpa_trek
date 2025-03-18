@@ -44,9 +44,25 @@ function toggleDiv(showDiv) {
   divs[showDiv].classList.remove("hidden");
 }
 
+//New changes added
+
+document.querySelectorAll(".trigger").forEach(function (toggler) {
+  toggler.addEventListener("click", function () {
+    var target = document.querySelector(toggler.getAttribute("data-target"));
+    if (target.hidden) {
+      target.hidden = false;
+    } else {
+      target.hidden = true;
+    }
+  });
+});
+
+//New changes ended
+
 // Event listeners
 buttons.change1.addEventListener("click", () => toggleDiv("new1"));
 buttons.change2.addEventListener("click", () => toggleDiv("new2"));
 buttons.close1.addEventListener("click", () => toggleDiv("original"));
 buttons.close2.addEventListener("click", () => toggleDiv("original"));
+
 
