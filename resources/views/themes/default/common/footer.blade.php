@@ -63,11 +63,11 @@
                         <p class="uk-margin-remove "><a href="#" class="uk-secondary f-20 fw-600 uk-text-uppercase ">Useful Links</a></p>
                         <ul class=" footer-list">
                             @foreach ($navigations as $nav)
-                            <li><a href="{{route('page.posttype_detail',$nav->uri)}}">{{$nav->post_type}} </a></li>
-                            {{-- <li><a href="team.php">Team Members</a></li>
-                            <li><a href="list.php">Travelling Style</a></li>
-                            <li><a href="news.php">News / Blogs</a></li>
-                            <li><a href="women.php">Women Empowerment</a></li> --}}
+                                <li><a href="{{route('page.posttype_detail',$nav->uri)}}">{{$nav->post_type}} </a></li>
+                                {{-- <li><a href="team.php">Team Members</a></li>
+                                <li><a href="list.php">Travelling Style</a></li>
+                                <li><a href="news.php">News / Blogs</a></li>
+                                <li><a href="women.php">Women Empowerment</a></li> --}}
                             @endforeach
                         </ul>
                     </div>
