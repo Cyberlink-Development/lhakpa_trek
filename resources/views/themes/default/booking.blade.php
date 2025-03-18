@@ -27,16 +27,16 @@
                     <div class="uk-grid">
                         <div class="uk-width-1-2@s uk-margin-small-top">
                             <label class="uk-form-label " for="name">Full Name *</label>
-                            <input class="uk-input border" name="full_name" type="text" aria-label="name" required>
+                            <input class="uk-input border" name="full_name" type="text" aria-label="name" value="{{ Auth::user()->name }}" required>
 
                         </div>
                         <div class="uk-width-1-2@s uk-margin-small-top">
                             <label class="uk-form-label " for="email">Email *</label>
-                            <input class="uk-input border" name="email" type="email" aria-label="email" required>
+                            <input class="uk-input border" name="email" type="email" value="{{ Auth::user()->email }}" aria-label="email" required>
                         </div>
                         <div class="uk-width-1-2@s uk-margin-small-top">
                             <label class="uk-form-label " for="contact">Contact *</label>
-                            <input class="uk-input border" name="phone" type="number" aria-label="contact" required>
+                            <input class="uk-input border" name="phone" value="{{ Auth::user()->phone }}" type="number" aria-label="contact" required>
                         </div>
                         <div class="uk-width-1-2@s uk-margin-small-top">
                             <label class="uk-form-label " for="country">Nationality *</label>
