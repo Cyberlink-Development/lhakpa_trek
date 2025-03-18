@@ -39,7 +39,12 @@ class User extends Authenticatable
     ];
     public function wishlists()
     {
-        return $this->hasMany(Wishlist::class);
+        return $this->hasMany(Wishlist::class);  
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Travels\TripsTag', 'user_trip_tags_rel', 'user_id', 'tag_id')->withTimestamps(); 
     }
 
 }

@@ -55,9 +55,9 @@
                         <h3 class="uk-primary uk-margin-top">Update your Profile</h3>
                         <hr>
                         <div class="uk-grid">  
-                            <div class="uk-width-1-2@s uk-margin-small-top">
+                            <div class="uk-width-1-1@s uk-margin-small-top">
                                 <div class="uk-flex uk-flex-column" uk-form-custom>
-                                    <label class="uk-form-label " for="image">Profile Image</label>
+                                    <label class="uk-form-label " for="image">Profile Image:</label>
                                     <div class="uk-flex uk-flex-middle">
                                         <input type="file" aria-label="Custom controls" name="imageProfile">
                                         <button class="uk-button uk-button-default uk-margin-small-right" type="button" tabindex="-1">Change Profile</button>
@@ -66,30 +66,35 @@
                                 </div>
                             </div>
                             <div class="uk-width-1-2@s uk-margin-small-top">
-                                <label class="uk-form-label " for="name">Full Name</label>
+                                <label class="uk-form-label " for="name">Full Name:</label>
                                 <input class="uk-input border" type="text" aria-label="name" name="name" value="{{ Auth::user()->name }}">
                             </div>
                             <div class="uk-width-1-2@s uk-margin-small-top">
-                                <label class="uk-form-label " for="address">Address</label>
+                                <label class="uk-form-label " for="address">Address:</label>
                                 <input class="uk-input border" type="text" aria-label="address" name="address"  value="{{ Auth::user()->address }}">
                             </div>
                             <div class="uk-width-1-2@s uk-margin-small-top">
-                                <label class="uk-form-label " for="email">Email </label>
+                                <label class="uk-form-label " for="email">Email: </label>
                                 <input class="uk-input border" type="email" name="email" aria-label="email" value="{{ Auth::user()->email }}" readonly>
                             </div>
                             <div class="uk-width-1-2@s uk-margin-small-top">
-                                <label class="uk-form-label " for="contact">Contact </label>
+                                <label class="uk-form-label " for="contact">Contact:</label>
                                 <input class="uk-input border" type="number" name="phone" aria-label="contact" 
                                 value="{{ Auth::user()->phone }}">
                             </div>
-                            <div class="uk-width-1-2@s uk-margin-small-top">
-                                <label class="uk-form-label " for="Category">Category </label>
-                                <select class="uk-select border" id="Category">
-                                    <option>Select Destination</option>
-                                    <option>Budget-Friendly</option>
-                                    <option>Luxury</option>
-                                    <option>Family Trip</option>
-                                </select>
+                            <div class="uk-width-1-1@s uk-margin-small-top">
+                                <label class="uk-form-label " for="Category">Your way of Travelling:</label>
+                                <div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+                                @foreach($tripsTags as $tag)
+    <label>
+        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" 
+               class="uk-checkbox uk-margin-small-right"
+               {{ in_array($tag->id, $selectedTags ?? []) ? 'checked' : '' }}>
+        {{ $tag->title }}
+    </label>
+@endforeach
+                                          
+                                 </div>
                             </div>
                         </div>
                         <div class="uk-width-1-1 uk-margin-medium-top">
@@ -102,3 +107,14 @@
     </div>
 </section>
 @stop
+
+@push('scripts')
+<script type="text/javascript">
+document.getElementById('Category').addEventListener('change', function() {
+    let selectedValues = Array.from(this.selectedOptions).map(option => option.value);
+    console.log("Selected Categories: ", selectedValues);
+});
+</script>
+
+
+@endpush

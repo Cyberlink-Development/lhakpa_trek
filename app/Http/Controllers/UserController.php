@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Model\TripReview;
 use App\Models\Inquiry\BookingModel;
+use App\Models\Travels\TripGearModel;
 use App\Models\Travels\TripModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
 use App\User;
+use App\Models\Travels\TripsTag;
 
-class UserController extends Controller
+
+class UserController extends Controller 
 {
     public function user_profile(Request $request)
     {
         if($request->isMethod('get')){
-            return view('themes.default.user.profile');     
+            $tripsTags = TripsTag::all();
+            $selectedTags = auth()->user()->tags->pluck('id')->toArray(); // Fetch user's selected tags
+            return view('themes.default.user.profile',compact('tripsTags','selectedTags'));     
         }
         if($request->isMethod('post'))
         {
@@ -48,6 +53,12 @@ class UserController extends Controller
                     $user->image = $name;
                     $user->save();    
                 } 
+
+                if (isset($request->tags) && !empty($request->tags)) {
+                    $user->tags()->sync($request->tags);
+                } else {
+                    $user->tags()->detach();
+                }
             }
             if ($find) {
                 return redirect()->back()->with('success', 'User profile updated');        
@@ -60,7 +71,16 @@ class UserController extends Controller
     }
     public function user_recommendation()
     {
-        return view('themes.default.user.recommendation');  
+    $user = auth()->user(); // Get logged-in user
+    $userTags = $user->tags()->pluck('tag_id'); // Get user preference tags
+    if (empty($userTags)) {
+        return TripModel::all(); // If no preferences, return all trips
+    }
+    // Get trips where tags intersect with user tags 
+    $data = TripModel::whereHas('tripTags', function ($query) use ($userTags) {
+        $query->whereIn('cl_trip_tags_rel.trip_tag_id', $userTags);
+    })->distinct()->paginate(3);
+     return view('themes.default.user.recommendation',compact('data'));  
     }  
      public function user_wishlist(Request $request)
     {
