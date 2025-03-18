@@ -48,14 +48,19 @@
         <div class="uk-grid">
             <div class="uk-width-3-4@m">
                 <div>
-                    <form class="uk-contact-form uk-margin-top" action="" method="">
+                    <form class="uk-contact-form uk-margin-top" action="{{ route('customize-trip.post') }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                         <h3 class="uk-secondary uk-margin-remove">Trip Information</h3>
                         <div class=" uk-child-width-1-2@m uk-grid">
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="pname">Package Name*</label>
-                                <div class="uk-form-controls">
-                                    <input class="uk-input" id="pname" name="pname" required type="text">
-                                </div>
+                                <select class="uk-select" aria-label="Select" name="trip_id" id="trip_id" required>
+                                    <option value="" selected disabled>Select Trip</option>
+                                    @foreach ($trips as $trip)
+                                        <option value="{{$trip->id}}">{{$trip->trip_title}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="people">Number of People*</label>
@@ -88,14 +93,13 @@
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="emails">Email*</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="emails" name="emails" required type="email">
+                                    <input class="uk-input" id="email" name="email" required type="email">
                                 </div>
                             </div>
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="fcountry">Country*</label>
-                                <select class="uk-select" aria-label="Select">
-                                    <option>Nepal</option>
-                                    <option>Option 02</option>
+                                <select name="country" class="uk-select" id="country" required>
+                                    @include('themes.default.common.country')
                                 </select>
                             </div>
                             <div class="uk-margin-small-top">
@@ -108,11 +112,12 @@
                         <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="contact">Special Requirement</label>
                             <div class="uk-form-controls">
-                                <textarea name="message" class="uk-textarea" rows="3" required></textarea>
+                                <textarea name="message" class="uk-textarea" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="uk-margin-top uk-text-center">
-                            <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a>
+                            {{-- <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a> --}}
+                            <button type="submit" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></button>
                         </div>
                     </form>
                 </div>
@@ -150,5 +155,10 @@
     </div>
 </section>
 
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let today = new Date().toISOString().split("T")[0]; 
+        document.getElementById("date").setAttribute("min", today);
+    });
+</script>
 @endsection

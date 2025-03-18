@@ -101,6 +101,7 @@
         function executeRecaptcha() {
             grecaptcha.execute('<?php echo env("SITE_KEY"); ?>', {action: 'homepage'}).then(function (token) {
                 document.getElementById('g_recaptcha_response').value = token;
+                document.getElementById('g_recaptcha_response2').value = token;
             });
         }
 
