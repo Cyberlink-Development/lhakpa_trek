@@ -597,23 +597,25 @@
             {{-- <h3 class="uk-primary uk-margin-remove">2025</h3> --}}
             <div class="uk-container uk-padding-remove uk-black uk-margin-remove">
                 <!-- Table Header -->
-                <div class=" uk-grid-small uk-child-width-1-5 uk-text-bold uk-background-muted uk-margin-top uk-padding-small uk-visible@s" uk-grid>
-                    <div>Dates</div>
-                    <div>With Meal</div>
-                    <div>Without Meal</div>
-                    <div>Status</div>
-                    <div></div>
+                <div class=" uk-grid-small uk-child-width-1-6 uk-text-bold uk-background-muted uk-margin-top uk-padding-small uk-visible@m" uk-grid>
+                    <div class="uk-padding-remove">Dates</div>
+                    <div class="uk-padding-remove">With Meal</div>
+                    <div class="uk-padding-remove">Without Meal</div>
+                    <div class="uk-padding-remove">Status</div>
+                    <div class="uk-padding-remove"></div>
+                    <div class="uk-padding-remove"></div>
                 </div>
                 <!-- Table Rows -->
-                <ul uk-accordion class="uk-list-divider uk-margin-remove">
+                <ul class=" uk-margin-remove uk-padding-remove" style="list-style: none;">
                     @foreach ($schedules as $item)
                         <li class="uk-price-li">
-                            <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom uk-accordion-title custom-accordion-title" uk-grid>    
+                            <div class="uk-grid-small uk-child-width-expand@m uk-child-width-1-1 uk-flex-middle uk-border-bottom" uk-grid>
                                 <div class="uk-black">
-                                    <span class="uk-block uk-hidden@m">Dates: </span>{{ $item->start_date }} – {{ $item->end_date }}
+                                    <span class="uk-block uk-hidden@m">Dates: </span>{{ date('d M, Y', strtotime($item->start_date)) }} – {{ date('d M, Y', strtotime($item->end_date)) }}
                                 </div>
                                 <div class="uk-black">
-                                    <span class="uk-block uk-hidden@m">With Meal: </span>US ${{$item->price}}</div>
+                                    <span class="uk-block uk-hidden@m">With Meal: </span>US ${{$item->price}}
+                                </div>
                                 <div class="uk-black">
                                     <span class="uk-block uk-hidden@m">Without Meal: </span>US ${{$item->group_size}}
                                 </div>
@@ -621,20 +623,21 @@
                                     <span class="uk-block uk-hidden@m">Status: </span>{{$item->availability}}
                                 </div>
                                 <div class="uk-black">
+                                    <!-- <a href="book.php" class="uk-btn uk-btn-secondary">Book Now</a> -->
                                     <form action="{{ route('page.booking', $data->uri) }}" method="post" id="form-{{ $item->id }}">
                                         @csrf
-                                        <input type="hidden" name="schedule_id" id="schedule_id" value="{{ $item->id }}">
+                                        <input type="hidden" name="schedule_id" id="schedule_id{{ $item->id }}" value="{{ $item->id }}">
                                         <button type="button" onclick="document.getElementById('form-{{ $item->id }}').submit();" class="uk-btn uk-btn-secondary">Book Now</button>
                                     </form>
-                                    <!-- <button  class="uk-btn uk-btn-secondary" onclick="window.location.href='{{ route('page.booking', $data->uri) }}'">Book Now</button> -->
+                                </div>
+                                <div class="trigger" data-target="#sidebar{{ $item->id }}">
+                                    <span class="pointer">View Info</span>
                                 </div>
                             </div>
-                            @if ($item->remarks)
-                                <div class="uk-accordion-content ">
-                                    <h3 class="uk-secondary">More Information</h3>
-                                    {{-- <ul class="uk-list uk-highlight uk-padding uk-light-bg border uk-margin-remove"> --}}
-                                        {!! $item->remarks !!}
-                                    {{-- </ul> --}}
+                            @if($item->remarks )
+                                <div class="sidebar" id="sidebar{{ $item->id }}" hidden>
+                                    <h3 class="uk-secondary uk-margin-top">More Information</h3>
+                                    {!! $item->remarks !!}
                                 </div>
                             @endif
                         </li>
