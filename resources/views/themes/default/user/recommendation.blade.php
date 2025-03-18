@@ -66,8 +66,8 @@
                                 <div class="uk-flex uk-flex-middle uk-trip ">
                                     <i class="fa-solid fa-calendar"></i>
                                     <div>
-                                        <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                        <p class="uk-trip-description uk-margin-remove">{{$row->trip_grade}}</p>
+                                        <p class="uk-trip-title uk-margin-remove">Difficulty</p> 
+                                        <p class="uk-trip-description uk-margin-remove">{{ grade_message_trek($row->trip_grade) }}</p>
                                     </div>
                                 </div>
                                 <div class="uk-visible@s">

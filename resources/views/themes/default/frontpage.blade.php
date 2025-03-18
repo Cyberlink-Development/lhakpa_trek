@@ -70,25 +70,26 @@
    <!-- end activities section -->
 
    <!-- start about section -->
-   <section class=" uk-primary-bg">
-      <div class="uk-child-width-1-2@m uk-grid-match uk-grid-collapse" uk-grid>
-         <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text">
-               <div class="uk-contents uk-container uk-flex uk-flex-middle">
-                  <div class="uk-title-font">
-                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
-                     <h1 class="uk-secondary">{{$about_us->post_type}}</h1>
-                     {{-- <p class="uk-white"> --}}
-                        {!! $about_us->content !!}
-                     {{-- </p> --}}
-                     <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
-                  </div>
-               </div>
-         </div>
-         <div class="uk-media-500">
-               <img src="{{ $about_us->banner ? asset('uploads/original/'.$about_us->banner) : asset('theme-assets/img/mountain/mountain5.jpeg')}}" alt="">
-         </div>
-      </div>
-   </section>
+
+   <section class="uk-primary-bg">
+    <div class=" uk-grid-match uk-grid-collapse" uk-grid>  
+        <div class=" uk-width-expand@m uk-primary-bg uk-padding uk-padding-left uk-about-text">
+            <div class="uk-container uk-flex uk-flex-middle uk-margin-top uk-margin-bottom">
+                <div class="uk-title-font"  uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 500;">
+                    <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
+                    <h1 class="uk-secondary">{{$about_us->post_type}}</h1>
+                    <p class="uk-white"> 
+                    {!! $about_us->content !!}
+                    </p>
+                    <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-auto@m uk-padding uk-flex uk-flex-center uk-flex-middle uk-visible@s"  uk-scrollspy="cls: uk-animation-fade;  delay: 500;">
+            <img src="{{asset('theme-assets/img/new-logo.png')}}" alt="{{$about_us->post_type}}" style="height:300px; width:100%; object-fit:contain; margin-right: 80px;">
+        </div>
+    </div>
+</section>
    <!-- end about section -->
 
    <!--start trip section -->
@@ -339,10 +340,10 @@
    <!-- start testimonial section-->
    <section class="uk-primary-bg">
       <div class="uk-child-width-1-2@m uk-grid-match uk-grid-collapse" uk-grid>
-         <div class="uk-media-500">
-               <img src="{{asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="">
+         <div>
+               <img src="{{asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="" style="height:100%;">
          </div>
-         <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text">
+         <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
                <div class="uk-container uk-flex uk-flex-middle">
                   <div class="uk-title-font">
                      <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
@@ -352,13 +353,16 @@
                            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
                               <div class="uk-slider-items">
                                  @foreach ($reviews as $value)
-                                    <div>
+                                       <div class="uk-width-1-1">
                                           <div class="uk-star-rating">
                                              @for($i=0; $i < $value->rating; $i++)
                                                 <i class="fa-solid fa-star"></i>
                                              @endfor
                                           </div>
-                                          <p class="uk-white uk-margin-top">{!! $value->message !!} <br> <br><b>Greeting from Sherpa Family,</b>
+                                          <span class="uk-contents">
+                                             
+                                          {!! $value->message !!}
+                                           </span>
                                              <div class="uk-flex">
                                                 <img src="{{$value->image ? asset('uploads/reviews/'.$value->image) : asset('theme-assets/img/user.png')}}" class="uk-client-img" alt="">
                                                 <div class="uk-title-font">
@@ -366,9 +370,9 @@
                                                    <span class="uk-white">{{ $value->country }}</span>
                                                 </div>
                                              </div>
-                                          </p>
-                                    </div>
+                                       </div>
                                  @endforeach
+                          
                               </div>
 
                               <ul class="uk-slider-nav uk-dotnav uk-flex uk-flex-center"></ul>
