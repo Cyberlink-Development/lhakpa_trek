@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\FrontendControllers;
 
 use App\Mail\AdminContactMail;
+use App\Mail\ResetPasswordMail;
 use App\Models\Inquiry\Emergency;
 use App\Models\Inquiry\Insurance;
+use App\Models\PasswordReset;
 use App\Models\Team\TeamCategory;
 use App\Models\Travels\TripGradeModel;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Newsletter;
 use App\Mail\BookTrip;
 use App\Mail\SendMail;
@@ -58,6 +62,7 @@ use App\Models\Destinations\DestinationModel;
 use App\Models\Destinations\DestinationBannerModel;
 use App\Models\Destinations\DestinationActivityrelModel;
 use App\Models\Posts\PostImageModel;
+use DB;
 /******************* Sangam starts *****************/
 use App\Http\Controllers\HBLController;
 /******************* Sangam ends *****************/
@@ -936,6 +941,78 @@ class FrontpageController extends Controller
         }
         else{
             return redirect()->route('login.form')->with('error','Please login first');
+        }
+    }
+
+    public function forgot_password(){
+        return view('themes.default.forgot-password');
+    }
+    public function reset_password(Request $request){
+        try{
+            $request->validate(['email' => 'required|email']);
+            $user = User::where('email', $request->email)->first();
+            if($user){
+                $token = Str::random(40);
+                // Store token in password_reset_tokens table
+                PasswordReset::updateOrCreate(
+                    ['email' => $user->email],
+                    [
+                        'token' => $token,
+                        'created_at' => now(),
+                    ]
+                );
+
+                $data = (object) [
+                    'email' => $user->email,
+                    'token' => $token,
+                ];
+
+                return new ResetPasswordMail($data);
+                // Mail::to($user->email)->send(new ResetPasswordMail($data));
+                return redirect()->route('home')-with('success', 'Please check your email to reset password.');
+            }
+            else{
+                return redirect()->back()->with('error', 'Email not found. Please enter a valid email.');
+            }
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function showResetForm(Request $request)
+    {
+        return view('themes.default.update-password', [
+            'token' => $request->token,
+            'email' => $request->email,
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        try{
+            $request->validate([
+                'email' => 'required|email',
+                'token' => 'required',
+                'password' => 'required|confirmed|min:8',
+            ]);
+    
+            $reset = PasswordReset::where('email', $request->email)->where('token', $request->token)->first();
+    
+            if (!$reset || now()->diffInMinutes($reset->created_at) > 5) {
+                return back()->with(['error' => 'Invalid or expired token']);
+            }
+    
+            $user = User::where('email', $request->email)->first();
+            $user->password = Hash::make($request->password);
+            $user->save();
+    
+            PasswordReset::where('email', $request->email)->delete();
+    
+            return redirect()->route('login.form')->with('success', 'Password reset successfully!');
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     /*********************** By Sangam Ends *************************/

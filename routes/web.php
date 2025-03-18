@@ -46,6 +46,10 @@ Route::any('/payment/failed', [DirectPayController::class,'failure'])->name('pay
 Route::get('/payment/response/{id?}', [DirectPayController::class, 'response'])->name('payment.response');
 Route::get('/login-form',[FrontpageController::class, 'login_form'])->name('login.form');
 Route::post('/review',[FrontpageController::class, 'reviewCreate'])->name('review.create');
+Route::get('/forgot-password',[FrontpageController::class, 'forgot_password'])->name('forgot.password');
+Route::post('/reset-password',[FrontpageController::class, 'reset_password'])->name('reset.password');
+Route::get('/reset-password-form', [FrontpageController::class, 'showResetForm'])->name('reset.password.form');
+Route::post('/update-password', [FrontpageController::class, 'updatePassword'])->name('password.update');
 /************************** Sangam Routes Ends ***********************************/
 
 Route::get('/', 'FrontendControllers\FrontpageController@index')->name('index.front');
