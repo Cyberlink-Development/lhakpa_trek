@@ -77,6 +77,6 @@ class TripModel extends Model
 
     public function tripTags()
     {
-        return $this->belongsToMany('App\Models\Travels\TripsTag', 'cl_trip_tags_rel', 'trip_id', 'trip_tag_id')->withTimestamps();
+        return $this->belongsToMany('App\Models\Travels\TripsTag', 'cl_trip_tags_rel', 'trip_id', 'trip_tag_id')->withTimestamps(); 
     }
 }
