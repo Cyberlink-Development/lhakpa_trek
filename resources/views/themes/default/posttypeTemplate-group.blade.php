@@ -45,20 +45,31 @@
             <span class="dotted-line-black"></span>
             <p>{{$data->content}}</p>
             <div class=" border border uk-box-shadow-large">
-                <form action="" class="uk-padding">
-                    
+                <form action="{{ route('customize-trip.post') }}" method="POST" class="uk-padding">
+                    @csrf
+                    <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                     <h3 class="uk-secondary uk-margin-remove">Trip Information</h3>
                     <div class=" uk-child-width-1-2@m uk-grid">
                         <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="pname">Package Name*</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="pname" name="pname" required type="text">
+                                <select class="uk-select" aria-label="Select" name="trip_id" id="trip_id" required>
+                                    <option value="" selected disabled>Select Trip</option>
+                                    @foreach ($trips as $trip)
+                                        <option value="{{$trip->id}}">{{$trip->trip_title}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="pname">Travlling Style Type*</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="pname" name="pname" required type="text">
+                                <select class="uk-select" aria-label="Select" name="travel_type" id="travel_type" required>
+                                    <option value="" selected disabled>Select Type</option>
+                                    @foreach ($travels as $trip)
+                                        <option value="{{$trip->id}}">{{$trip->title}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="uk-margin-small-top">
@@ -75,18 +86,16 @@
                         </div>
                         <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="date">Trip Start Date*</label>
-                            <select class="uk-select" aria-label="Select">
-                                <option>Family Trip</option>
-                                <option>Guided Trip</option>
-                                <option>Self Guided Trip</option>
-                            </select>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="date" name="date" required type="date">
+                            </div>
                         </div>
-                        <div class="uk-margin-small-top">
+                        {{-- <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="budget">Budget*</label>
                             <div class="uk-form-controls">
                                 <input class="uk-input" id="budget" name="budget" required type="number">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <hr>
                     <h3 class="uk-secondary uk-margin-remove">Personal Information</h3>
@@ -100,14 +109,13 @@
                         <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="emails">Email*</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="emails" name="emails" required type="email">
+                                <input class="uk-input" id="email" name="email" required type="email">
                             </div>
                         </div>
                         <div class="uk-margin-small-top">
                             <label class="uk-form-label uk-text-bold" for="fcountry">Country*</label>
-                            <select class="uk-select" aria-label="Select">
-                                <option>Nepal</option>
-                                <option>Option 02</option>
+                            <select name="country" class="uk-select" id="country" required>
+                                @include('themes.default.common.country')
                             </select>
                         </div>
                         <div class="uk-margin-small-top">
@@ -120,16 +128,22 @@
                     <div class="uk-margin-small-top">
                         <label class="uk-form-label uk-text-bold" for="contact">Special Requirement</label>
                         <div class="uk-form-controls">
-                            <textarea name="message" class="uk-textarea" rows="3" required></textarea>
+                            <textarea name="message" class="uk-textarea" rows="3" ></textarea>
                         </div>
                     </div>
                     <div class="uk-margin-top uk-text-center">
-                        <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a>
+                        {{-- <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a> --}}
+                        <button type="submit" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></button>
                     </div>
                 </form>
             </div>
 
         </div>
     </section>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let today = new Date().toISOString().split("T")[0]; 
+            document.getElementById("date").setAttribute("min", today);
+        });
+    </script>
 @endsection

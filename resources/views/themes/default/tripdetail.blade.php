@@ -705,19 +705,23 @@
 </div>
 <!-- inquiry form modal end -->
 
-<!-- inquiry form modal start-->
+<!-- Customize form modal start-->
 <div id="modal-customize" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
         <h3 class="uk-modal-title uk-text-center uk-white uk-margin-remove  uk-primary-bg border">Customize Trip</h3>
-        <h3 class="uk-text-center uk-margin-remove">VVIP MANASLU EXPEDITION (8163M)</h3>
+        <h3 class="uk-text-center uk-margin-remove">{{ $data->trip_title }}</h3>
         <button class="uk-modal-close-default" type="button" uk-close></button>
-        <form class="uk-contact-form uk-margin-top" action="" method="">
+        <form class="uk-contact-form uk-margin-top" action="{{ route('customize-trip.post') }}" method="POST">
+            @csrf
+            <input type="hidden" id="g_recaptcha_response2" name="g_recaptcha_response"/>
             <h3 class="uk-secondary uk-margin-remove">Trip Information</h3>
             <div class=" uk-child-width-1-2@m uk-grid">
                 <div class="uk-margin-small-top">
                     <label class="uk-form-label uk-text-bold" for="pname">Package Name*</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" id="pname" name="pname" required type="text">
+                        <select class="uk-select" aria-label="Select" name="trip_id" id="trip_id" required>
+                            <option value="{{$data->id}}">{{$data->trip_title}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
@@ -727,9 +731,9 @@
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
-                    <label class="uk-form-label uk-text-bold" for="days">Duration*</label>
+                    <label class="uk-form-label uk-text-bold" for="days">Duration (In Days)*</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" id="days" name="days" required type="number">
+                        <input class="uk-input" id="days" name="days" required type="number" placeholder="In Days">
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
@@ -749,16 +753,15 @@
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
-                    <label class="uk-form-label uk-text-bold" for="emails">Email*</label>
+                    <label class="uk-form-label uk-text-bold" for="email">Email*</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" id="emails" name="emails" required type="email">
+                        <input class="uk-input" id="email" name="email" required type="email">
                     </div>
                 </div>
                 <div class="uk-margin-small-top">
                     <label class="uk-form-label uk-text-bold" for="fcountry">Country*</label>
-                    <select class="uk-select" aria-label="Select">
-                        <option>Nepal</option>
-                        <option>Option 02</option>
+                    <select name="country" class="uk-select" id="country" required>
+                        @include('themes.default.common.country')
                     </select>
                 </div>
                 <div class="uk-margin-small-top">
@@ -769,13 +772,14 @@
                 </div>
             </div>
             <div class="uk-margin-small-top">
-                <label class="uk-form-label uk-text-bold" for="contact">Special Requirement</label>
+                <label class="uk-form-label uk-text-bold" for="requirement">Special Requirement</label>
                 <div class="uk-form-controls">
                     <textarea name="message" class="uk-textarea" rows="3" required></textarea>
                 </div>
             </div>
             <div class="uk-margin-top uk-text-center">
-                <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a>
+                {{-- <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a> --}}
+                <button type="submit" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></button>
             </div>
         </form>
 
@@ -789,44 +793,50 @@
 <!-- inquiry form modal end -->
 @stop
 @push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(document).on('click', '#wish-button', function (e) {
-            e.preventDefault();
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let today = new Date().toISOString().split("T")[0]; 
+            document.getElementById("date").setAttribute("min", today);
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#wish-button', function (e) {
+                e.preventDefault();
 
-            // alert('ok'); // Debugging: Check if button click is detected
+                // alert('ok'); // Debugging: Check if button click is detected
 
-            let itemId = $(this).data('id'); // Get the item ID from the button
-            let url = "{{ route('add-wishlist', ':id') }}".replace(':id', itemId);
+                let itemId = $(this).data('id'); // Get the item ID from the button
+                let url = "{{ route('add-wishlist', ':id') }}".replace(':id', itemId);
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                type: 'GET',
-                url: url,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data) {
-                    if (data.status === 'success') {
-                        toastr.success(data.message);
-                    } else {
-                        toastr.error(data.message);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                    $.each(data.errors, function (key, value) {
-                        toastr.error(value);
-                    });
-                },
-                error: function (xhr) {
-                    alert("An error occurred.\nError code: " + xhr.statusText);
-                }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                        $.each(data.errors, function (key, value) {
+                            toastr.error(value);
+                        });
+                    },
+                    error: function (xhr) {
+                        alert("An error occurred.\nError code: " + xhr.statusText);
+                    }
+                });
             });
         });
-    });
-</script>
-            @endpush
+    </script>
+@endpush

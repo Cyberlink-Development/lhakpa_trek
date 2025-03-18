@@ -137,8 +137,10 @@ class FrontpageController extends Controller
         $team_category = TeamCategory::where('team_parent','0')->get();
         $related_teams = TeamModel::all()->groupBy('category');
         $international = PostTypeModel::where('uri','international-team')->first();
+        $trips = TripModel::where(['status' => '1'])->get();
+        $travels = ActivityModel::where('activity_parent','travel')->get();
         // dd($international);
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international'));
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international','trips','travels'));
     }
 
 
@@ -413,7 +415,7 @@ class FrontpageController extends Controller
     }
     public function inquiry(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $setting = SettingModel::where('id', 1)->first();
         $g_recaptcha_response = $request->input('g_recaptcha_response');
         $result = $this->getCaptcha($g_recaptcha_response); 
@@ -774,41 +776,94 @@ class FrontpageController extends Controller
 
     public function customize_trip(Request $request)
     {
-        if($request->isMethod('get'))
-        {
-        $uri=$request->uri;
-        $data= TripModel::where('uri',$uri)->first();
-        return view('themes.default.customize-trip',compact('data'));
+        // dd($request->all());
+        $setting = SettingModel::where('id', 1)->first();
+        $g_recaptcha_response = $request->input('g_recaptcha_response');
+        $result = $this->getCaptcha($g_recaptcha_response); 
+        if ($result->success == true) {
+            if ($request->isMethod('post')) {
+                $request->validate([
+                    'trip_id' => 'required|integer|exists:cl_trip_details,id',
+                    'people' => 'required|integer|min:1',
+                    'days' => 'required|integer|min:1',
+                    'date' => 'required|date|after_or_equal:today',
+                    'fname' => 'required|string|max:255',
+                    'email' => 'required|email|max:255',
+                    'country' => 'required|string',
+                    'phone' => 'required|numeric',
+                    'message' => 'nullable|string|max:1000',
+                ]);
+                $trip = TripModel::where('id', $request->trip_id)->first();
+                if($request->travel_type)
+                {
+                    $travel_title = ActivityModel::where('id',$request->travel_type)->first();
+                }
+                // dd($travel_title);
+                $create = CustomizeModel::create([
+                    'trip_id' => $request->trip_id,
+                    'title' => $trip->trip_title,
+                    'name' => $request->fname,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'country' => $request->country,
+                    'travel_type' => $request->travel_type ?? Null,
+                    'travel_title' => $travel_title->title ?? Null,
+                    'comments' => $request->message,
+                    'no_of_people' => $request->people,
+                    'duration' => $request->days,
+                    'trip_start_date' => $request->date,
+                ]);
+                if ($create) {
+             
+                    // return new AdminBookingMail();
+                    // return new BookTrip($request->email);    
+                    // Mail::send(new AdminBookingMail($setting->email_secondary));
+                    // Mail::send(new BookTrip($request->email));
+                    $name = $request->fname;
+                    $message = "<p>Thanks for your booking. One of our team will be in touch soon to confirm details.</p>
+                    <p>We’re looking forward to welcoming you to Lhakpa Trekking!</p>";
+                    return view('themes.default.booking-success', compact('name', 'message'));
+                }
+            }
+        } else {
+            return back()->with('error', 'You are a robot');
         }
 
-        if($request->isMethod('post'))
-        {
-            $setting = SettingModel::where('id', 1)->first();
-            $g_recaptcha_response = $request->input('g_recaptcha_response');
-            $result = $this->getCaptcha($g_recaptcha_response);
-            if ($result->success == true) {
-                if ($request->isMethod('post')) {
-                    $request->validate([
-                        'name' => 'required',
-                        'phone' => 'required',
-                        'email' => 'required',
-                        'country' => 'required',
-                        'trip_start_date' => 'required',
-                    ]);
-                    $data = $request->all();
-                    $result = CustomizeModel::create($data);
-                    if ($result) {
-                        Mail::send(new AdminCustomizeTrip());
-                        Mail::send(new SendInquiry());
-                        $name = $request->name;
-                        $message = "<p>Thanks for your inquiry. One of our team will be in touch soon to discuss your interests and how we can help with your plans.</p>";
-                        return view('themes.default.booking-success', compact('name', 'message'));
-                    }
-                }
-            } else {
-                return back()->with('error', 'You are a robot');
-            }
-        }
+        // if($request->isMethod('get'))
+        // {
+        //     $uri=$request->uri;
+        //     $data= TripModel::where('uri',$uri)->first();
+        //     return view('themes.default.customize-trip',compact('data'));
+        // }
+
+        // if($request->isMethod('post'))
+        // {
+        //     $setting = SettingModel::where('id', 1)->first();
+        //     $g_recaptcha_response = $request->input('g_recaptcha_response');
+        //     $result = $this->getCaptcha($g_recaptcha_response);
+        //     if ($result->success == true) {
+        //         if ($request->isMethod('post')) {
+        //             $request->validate([
+        //                 'name' => 'required',
+        //                 'phone' => 'required',
+        //                 'email' => 'required',
+        //                 'country' => 'required',
+        //                 'trip_start_date' => 'required',
+        //             ]);
+        //             $data = $request->all();
+        //             $result = CustomizeModel::create($data);
+        //             if ($result) {
+        //                 Mail::send(new AdminCustomizeTrip());
+        //                 Mail::send(new SendInquiry());
+        //                 $name = $request->name;
+        //                 $message = "<p>Thanks for your inquiry. One of our team will be in touch soon to discuss your interests and how we can help with your plans.</p>";
+        //                 return view('themes.default.booking-success', compact('name', 'message'));
+        //             }
+        //         }
+        //     } else {
+        //         return back()->with('error', 'You are a robot');
+        //     }
+        // }
      
     }
 
