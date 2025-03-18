@@ -71,6 +71,7 @@ class UserController extends Controller
     }
     public function user_recommendation()
     {
+        if (Auth::check() && (Auth::user()->roles == 'user') ){
     $user = auth()->user(); // Get logged-in user
     $userTags = $user->tags()->pluck('tag_id'); // Get user preference tags
     if (empty($userTags)) {
@@ -82,6 +83,10 @@ class UserController extends Controller
     })->distinct()->paginate(3);
      return view('themes.default.user.recommendation',compact('data'));  
     }  
+    else{ 
+        return redirect()->route('login.form')->with('error','Please login first');
+    }
+}
      public function user_wishlist(Request $request)
     {
         if ($request->isMethod('get')) {

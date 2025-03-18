@@ -154,9 +154,13 @@
             <!-- top nav menu -->
             <div class="uk-visible@l uk-container uk-white " style="position:relative;z-index:1000;">
                 <div class=" uk-flex uk-flex-middle uk-grid-collapse uk-grid uk-margin-top uk-top-nav">
-                    <div class="uk-width-auto@m">
-                        <a href="{{ url('/') }}"> <img src="{{asset('theme-assets/img/logo.png')}}" width="180" alt=""></a>
-                    </div>
+                  
+                    <div class="uk-width-auto@m uk-flex">
+                            <a href="{{ url('/') }}"> <img src="{{asset('theme-assets/img/logoo.png')}}" width="200" alt=""></a>
+                            <h2  class="uk-dark text-container" style="font-size: 20px; color: white; margin-top: 22px; margin-left: 19px;">
+                                Your Travel Partner in Nepal
+                            </h2>
+                        </div>
                     <div class="uk-width-expand@m">
                         <ul class="uk-flex uk-flex-right uk-topnavbar-ul uk-margin-bottom">
                             @if($news)
@@ -218,10 +222,9 @@
                     <div class="uk-container">
                         <nav class="uk-navbar d-flex uk-flex-middle" uk-navbar="dropbar: true; uk-dropbar-top">
                             <div class="uk-navbar-left">
-                                <a href="{{ url('/') }}" class="uk-logo-dark"> <img src="{{asset('theme-assets/img/logo.png')}}" width="180" alt=""></a>
-                                <h2  class="uk-dark text-container" style="font-size: 20px; color: white; margin-top: 22px;">
-                                    Your Travel Partner in Nepal
-                                </h2>
+                            
+                                <a href="{{ url('/') }}" class="uk-logo-dark"> <img src="{{asset('theme-assets/img/logoo.png')}}" width="180" alt=""></a>
+                             
                             </div>
                             <div class="uk-navbar-right">
                                 <ul class="uk-navbar-nav uk-position-relative">
