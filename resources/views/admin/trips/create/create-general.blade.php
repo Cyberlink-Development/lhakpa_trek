@@ -279,7 +279,7 @@
         <div class="admin-form">
             <!-- // -->
             <div class="sid_bvijay mb10">
-                <h4> Destinations </h4>
+                <h4> Locations </h4>
                 <div class="hd_show_con">
                     <div class="tab-content mb15">
                         <div id="tab1" class="tab-pane active">
@@ -304,12 +304,16 @@
                 <h4> Trip Type </h4>
                 <div class="hd_show_con">
                     <select class="form-control onchange-select" name="trip_type">
-    				 <option value="0"> Select Trip Type </option>
-                     @foreach($trip_type as $row)
-                        @if ($row->trip_type == 'Trekking' || $row->trip_type == 'Expedition')
-                            <option value="{{$row->id}}">{{$row->trip_type}}</option>
-                        @endif
-                     @endforeach
+                        <option value="0"> Select Trip Type </option>
+                        @foreach($trip_type as $row)
+                            @if ($row->trip_type == 'Trekking' || $row->trip_type == 'Expedition')
+                                @if ($row->trip_type == 'Trekking')
+                                    <option value="{{$row->id}}">Destination</option>
+                                @else
+                                    <option value="{{$row->id}}">{{$row->trip_type}}</option>
+                                @endif
+                            @endif
+                        @endforeach
                     </select>
                 </div>
             </div> 
@@ -365,7 +369,7 @@
         
           <div class="onchange 1">
              <div class="sid_bvijay mb10" > 
-            <h4> Trekking </h4>
+            <h4> Destinations </h4>
             <div class="hd_show_con">
                  <div class=" has-feedback has-search">
                       <input class="category-search1 form-control" type="text" placeholder="Search.."> 

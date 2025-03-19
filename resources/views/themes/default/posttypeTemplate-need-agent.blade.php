@@ -49,7 +49,9 @@
         <div class="uk-grid">
             <div class="uk-width-3-4@m">
                 <div>
-                    <form action="">
+                    <form action="{{ route('need.agent') }}" method="post">
+                        @csrf
+                        <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                         <div class="uk-child-width-1-2@m uk-grid uk-margin-remove-top">
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="url">Company URL Address*</label>
@@ -71,9 +73,8 @@
                             </div>
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="fcountry">Country*</label>
-                                <select class="uk-select" aria-label="Select">
-                                    <option>Nepal</option>
-                                    <option>Option 02</option>
+                                <select name="country" class="uk-select" aria-label="Select" id="country" required>
+                                    @include('themes.default.common.country')
                                 </select>
                             </div>
                             <div class="uk-margin-small-top">
@@ -91,7 +92,7 @@
                             <div class="uk-margin-small-top">
                                 <label class="uk-form-label uk-text-bold" for="emails">Email*</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="emails" name="emails" required type="email">
+                                    <input class="uk-input" id="email" name="email" required type="email">
                                 </div>
                             </div>
 
@@ -109,7 +110,8 @@
                             </div>
                         </div>
                         <div class="uk-margin-top uk-text-center">
-                            <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a>
+                            {{-- <a href="" class="uk-btn uk-btn-secondary">Submit Now <span uk-icon="chevron-right"></span></a> --}}
+                            <button type="submit" class="uk-btn uk-btn-secondary ">SUBMIT<span uk-icon="chevron-right"></span></button>
                         </div>
                     </form>
                 </div>
@@ -139,8 +141,11 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $contactUs = 'contact-us';
+                @endphp
                 <div class="uk-secondary-bg uk-book-btn border uk-margin-small-top">
-                    <a href="contact.php">Inquiry us</a>
+                    <a href="{{route('page.posttype_detail',$contactUs)}}">Contact us</a>
                 </div>
             </div>
         </div>

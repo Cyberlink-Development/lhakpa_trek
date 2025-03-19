@@ -95,6 +95,7 @@ Route::post('store/trip/filmmaking', 'FrontendControllers\FrontpageController@st
 // Route::post('trip-booking', 'FrontendControllers\FrontpageController@post_tripbooking')->name('post-trip');
 Route::post('trip-booking', [FrontpageController::class, 'post_tripbooking'])->name('post-trip');
 Route::post('inquiry', [FrontpageController::class, 'inquiry'])->name('inquiry');
+Route::post('need-agents', [FrontpageController::class, 'needAgent'])->name('need.agent');
 Route::post('inquiry-now', 'FrontendControllers\FrontpageController@post_inquiry')->name('post-inquiry');
 Route::get('inquiry-now/{uri}.html', 'FrontendControllers\FrontpageController@post_inquiry')->name('get-inquiry');
 Route::post('contact', 'FrontendControllers\FrontpageController@contact_us')->name('contact');
@@ -140,6 +141,7 @@ Route::middleware(['auth'])->group(function () {
         'trip-inquiry' => 'AdminControllers\Inquiry\TripInquiryController',
         'contact-us' => 'AdminControllers\Inquiry\TripBookingController',
         'trip-customize' => 'AdminControllers\Inquiry\TripCustomizeController',
+        'need-agent' => 'AdminControllers\Inquiry\NeedAgentController',
         'admin.faq' => 'AdminControllers\Faqs\FaqController',
 
     ]);

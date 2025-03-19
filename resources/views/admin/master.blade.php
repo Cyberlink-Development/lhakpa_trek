@@ -131,6 +131,7 @@
                                 Request::segment(2) == 'women-empowerment' ||
                                 Request::segment(2) == 'your-group' ||
                                 Request::segment(2) == 'tourism' ||
+                                Request::segment(2) == 'associate-and-partners' ||
                                 Request::segment(2) == 'international-team' ||
                                 Request::segment(3) == 'international-team' ||
                                 Request::segment(2) == 'contact-us' ||
@@ -214,6 +215,12 @@
                     </a>
                     </li> */
                             ?>
+                            <li class="{{ Request::segment(2) == 'trips-tag' ? 'active' : '' }}">
+                                <a href="{{ url('admin/trips-tag') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    <span class="sidebar-title"> Trip Tags </span>
+                                </a>
+                            </li>
                             <li class="{{ Request::segment(2) == 'activity' ? 'active' : '' }}">
                                 <a href="{{ url('admin/activity') }}">
                                     <span class="fa fa fa-arrows-h"></span>
@@ -224,12 +231,6 @@
                                 <a href="{{ url('admin/trip') }}">
                                     <span class="fa fa fa-arrows-h"></span>
                                     <span class="sidebar-title"> Trip List </span>
-                                </a>
-                            </li>
-                            <li class="{{ Request::segment(2) == 'trips-tag' ? 'active' : '' }}">
-                                <a href="{{ url('admin/trips-tag') }}">
-                                    <span class="fa fa fa-arrows-h"></span>
-                                    <span class="sidebar-title"> Trip Tags </span>
                                 </a>
                             </li>
                         </ul>
@@ -310,6 +311,7 @@
                                 Request::segment(1) == 'category-inquiry' ||
                                 Request::segment(1) == 'tailor-made' ||
                                 Request::segment(1) == 'trip-inquiry' ||
+                                Request::segment(1) == 'need-agent' ||
                                 Request::segment(1) == 'trip-customize')
                             <a class="accordion-toggle menu-open">
                             @else
@@ -348,10 +350,16 @@
                 </li>
                 <li class="{{ (Request::segment(1) == 'trip-customize')?'active':'' }}">
                    <a href="{{ url('trip-customize') }}">
-                      <span class="fa fa-ticket "></span>
-                   <span class="sidebar-title">Trip Customize</span>
+                        <span class="fa fa-ticket "></span>
+                        <span class="sidebar-title">Trip Customize</span>
                    </a>
-                   </li>
+                </li>
+                <li class="{{ (Request::segment(1) == 'need-agent')?'active':'' }}">
+                   <a href="{{ url('need-agent') }}">
+                        <span class="fa fa-ticket "></span>
+                        <span class="sidebar-title">Agent Inquiry</span>
+                   </a>
+                </li>
                             <?php /*
                  <!--<li class="{{ (Request::segment(1) == 'category-inquiry')?'active':'' }}">-->
                  <!--   <a href="{{ url('category-inquiry') }}">-->
