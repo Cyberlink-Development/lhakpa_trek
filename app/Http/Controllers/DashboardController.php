@@ -10,6 +10,7 @@ use App\Models\Posts\PostModel;
 use App\Models\Travels\TripModel;
 use App\Model\Contact;
 use App\Models\Inquiry\BookingModel;
+use App\User;
 
 class DashboardController extends Controller
 {
@@ -34,7 +35,15 @@ class DashboardController extends Controller
         $total_trips = TripModel::count();
         $total_inquires = Contact::count();
         $total_booking = BookingModel::count();
-         return view('admin.dashboard',compact('total_posts','total_trips','total_inquires','total_booking'));
+         return view('admin.dashboard',compact('total_posts','total_trips','total_inquires','total_booking'));  
+    }
+
+    public function travel_history(Request $request)
+    {
+        $trips=TripModel::where('status','1')->get(); 
+        $user = User::with(['bookings.bookTrips'])->get();
+
+         return view('admin.travel-history',compact('trips'));
     }
 
 }

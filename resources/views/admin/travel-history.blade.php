@@ -10,7 +10,7 @@
 <section id="" class="table-layout animated fadeIn">
   <!-- begin: .tray-center -->
   <div class="">
-    <h4> Trip Tags </h4>
+    <h4> Travel History </h4>
     <!-- recent orders table -->
     <div class="panel">
       <div class="panel-body pn">
@@ -19,29 +19,24 @@
             <thead>
               <tr class="bg-light">
                 <th class="text-center"> SN </th>  
-                <th>Title</th>
+                <th>Name</th>
+                <th>REF ID</th>
                 <th>Published</th>
-              </tr>
+              </tr> 
             </thead>
             <tbody>
-              @foreach($tripsTags as $row)
+              @foreach($trips as $row)
               <tr class="id{{$row->id}}">
                 <td class="text-center">
                   {{$loop->iteration}}
                 </td>
-                <td class="post_title title_hi_sh">
-                  <strong> {{ ucfirst($row->title) }} </strong>
-                  <div class="row_actions">
-                    <span class="id">ID: {{$row->id}} | </span>
-                    <span class="edit">
-                      <a href="{{ url('admin/trips-tag/' . $row->id . '/edit') }}" aria-label="">Edit</a>
-                    </span>
-                    | <span class="trash">
-                      <!-- Attach data-id to the delete link -->
-                      <a href="#" class="submitdelete1" data-id="{{ $row->id }}">Delete</a>
-                    </span>
-                  </div>
+                <td >
+                  {{$row->trip_title}}
                 </td>
+                <td >
+                  {{$row->trip_code}}
+                </td>
+         
                 <td class="date">
                   {{$row->created_at}}
                 </td>
