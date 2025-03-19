@@ -2,6 +2,8 @@
 
 namespace App\Models\Travels;
 
+use App\Models\Inquiry\BookingModel;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class TripModel extends Model
@@ -79,4 +81,10 @@ class TripModel extends Model
     {
         return $this->belongsToMany('App\Models\Travels\TripsTag', 'cl_trip_tags_rel', 'trip_id', 'trip_tag_id')->withTimestamps(); 
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(BookingModel::class);
+    }
+
 }

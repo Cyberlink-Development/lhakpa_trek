@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Inquiry\BookingModel;
+use App\Models\Travels\TripModel;
 use App\Models\Wishlist;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,7 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime', 
     ];
     public function wishlists()
     {
@@ -47,4 +49,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Travels\TripsTag', 'user_trip_tags_rel', 'user_id', 'tag_id')->withTimestamps(); 
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(BookingModel::class);
+    }
 }

@@ -156,10 +156,10 @@
     <!-- review section start-->
     <section class="uk-primary-bg">
         <div class="uk-child-width-1-2@m uk-grid-match uk-grid-collapse" uk-grid>
-            <div class="uk-media-500">
-                <img src="{{asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="">
+            <div >
+                <img src="{{asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt=""  style="height:100%;">
             </div>
-            <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text">
+            <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
                 <div class="uk-container uk-flex uk-flex-middle">
                     <div class="uk-title-font">
                         <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
@@ -175,8 +175,10 @@
                                                 <i class="fa-solid fa-star"></i>
                                                 @endfor
                                             </div>
-                                            <p class="uk-white uk-margin-top">{!! $review->message !!}<br> <br>
-                                                <b>Greeting from Sherpa Family,</b>
+                                            <span class="uk-contents"> 
+                                             
+                                             {!! $review->message !!}
+                                              </span>
                                                 <div class="uk-flex">
                                                     <img src="{{$review->image ? asset('uploads/reviews/'.$review->image) : asset('theme-assets/img/user.png')}}" class="uk-client-img" alt="">
                                                     <div class="uk-title-font">

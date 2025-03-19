@@ -15,7 +15,7 @@
                                     <th class="">SN</th>  
                                     <th>Name</th>                                 
                                     <th class="">Email</th>
-                                    <th class="">Trip</th>
+                                    <th class="">Trip / REF ID</th>
                                     <th>Departure Type</th>
                                     <th class="text-left">Action</th>
                                 </tr>
@@ -24,18 +24,19 @@
                                 @if(count($book) > 0)
                                 @foreach($book as $key=>$row)
                                 <tr class="bg-light">
-                                  <td class="">{{$key+=1}}</td>
+                                  <td class="">{{$key+=1}}</td>  
                                   <td>
                                     <a href="{{route('view-trip-booking',$row->id)}}">{{ $row->full_name }}</a>
                                   </td>
                                   <td class="">
-                                    {{ $row->email }}
+                                    {{ $row->email }} 
                                   </td>
                                   <td class="">
-                                    {{ $row->title }}
+                                    {{ $row->title }}<br/>
+                                    {{ tripdetail($row->trip_id)->trip_code }}
                                   </td>
                                   <td>
-                                    {{$row->depature_type == 1 ? 'Fixed' : 'Normal'}}
+                                    {{$row->depature_type == 1 ? 'Fixed Departure' : 'Normal Booking'}}
                                   </td>
                                   <td class="text-left">
                                     <a href="{{route('view-trip-booking',$row->id)}}">View</a> |

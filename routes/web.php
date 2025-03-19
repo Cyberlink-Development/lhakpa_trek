@@ -117,6 +117,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 Route::middleware(['auth'])->group(function () {
 
     Route::get('admin/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('admin/travel-history', 'DashboardController@travel_history')->name('travel.history');
+
     Route::get('admin/userprofile', 'AdminControllers\Members\UserController@userprofile')->name('admin.userprofile');
     Route::put('admin/update_password', 'AdminControllers\Members\UserController@update_password')->name('admin.update_password');
     Route::get('admin/changepassword', 'AdminControllers\Members\UserController@changepassword')->name('admin.changepassword');
@@ -242,7 +244,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin-trip-edit-review/{id?}/edit', 'AdminControllers\Review\TripReviewController@edit_trip_review');
     Route::post('admin-trip-edit-review/{id?}', 'AdminControllers\Review\TripReviewController@edit_trip_review')->name('edit-trip-review');
     Route::get('admin-trip-show-review/{id}', 'AdminControllers\Review\TripReviewController@reivew_show')->name('review.show');//By Sangam
-    Route::get('admin-trip-delete-review/{id?}', 'AdminControllers\Review\TripReviewController@delete_trip_review')->name('delete-trip-review');
+    Route::get('admin-trip-delete-review/{id?}', 'AdminControllers\Review\TripReviewController@delete_trip_review')->name('delete-trip-review'); 
 
     //Trip Booking (Bibek)
     Route::get('admin-trip-booking', 'AdminControllers\Inquiry\TripBookingController@trip_booking')->name('trip-booking');

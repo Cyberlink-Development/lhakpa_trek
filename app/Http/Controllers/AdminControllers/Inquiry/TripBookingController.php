@@ -26,7 +26,7 @@ class TripBookingController extends Controller
         $del = Contact::findorfail($id);
        
            $del->delete();
-             return redirect()->back()->with('success','Contact deleted  successfully');     
+             return redirect()->back()->with('success','Contact deleted  successfully');       
         
     }
 

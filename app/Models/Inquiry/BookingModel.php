@@ -20,7 +20,7 @@ class BookingModel extends Model
     
     public function flight()
     {
-      return $this->hasOne(FlightDetails::class,'booking_id');
+      return $this->hasOne(FlightDetails::class,'booking_id');  
     }
 
     public function insurance()

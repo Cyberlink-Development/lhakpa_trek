@@ -473,10 +473,10 @@
 <!-- review section start-->
 <section class=" uk-primary-bg" id="review">
     <div class="uk-child-width-1-2@m uk-grid-match uk-grid-collapse" uk-grid>
-        <div class="uk-media-500">
-            <img src="{{$data->thumbnail ? asset('uploads/original/'.$data->thumbnail) : asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="{{$data->trip_title}}">
+        <div>
+            <img src="{{$data->thumbnail ? asset('uploads/original/'.$data->thumbnail) : asset('theme-assets/img/mountain/mountain4.jpeg')}}" alt="{{$data->trip_title}}" style="height:100%;">
         </div>
-        <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text">
+        <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
             <div class="uk-container uk-flex uk-flex-middle">
                 <div class="uk-title-font">
                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
@@ -492,7 +492,10 @@
                                                 <i class="fa-solid fa-star"></i>
                                             @endfor
                                         </div>
-                                        <p class="uk-white uk-margin-top">{!! $value->message !!} <br> <br><b>Greeting from Sherpa Family,</b>
+                                        <span class="uk-contents"> 
+                                             
+                                             {!! $value->message !!}
+                                              </span>
                                             <div class="uk-flex">
                                                 <img src="{{$value->image ? asset('uploads/reviews/'.$value->image) : asset('theme-assets/img/user.png')}}" class="uk-client-img" alt="">
                                                 <div class="uk-title-font">

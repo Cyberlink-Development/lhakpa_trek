@@ -75,13 +75,11 @@
     <div class=" uk-grid-match uk-grid-collapse" uk-grid>  
         <div class=" uk-width-expand@m uk-primary-bg uk-padding uk-padding-left uk-about-text">
             <div class="uk-container uk-flex uk-flex-middle uk-margin-top uk-margin-bottom">
-                <div class="uk-title-font"  uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 500;">
+                <div class="uk-title-font uk-contents"  uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 500;">
                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
                     <h1 class="uk-secondary">{{$about_us->post_type}}</h1>
-                    <p class="uk-white"> 
                     {!! $about_us->content !!}
-                    </p>
-                    <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
+                       <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
                 </div>
             </div>
         </div>
@@ -346,7 +344,7 @@
          <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
                <div class="uk-container uk-flex uk-flex-middle">
                   <div class="uk-title-font">
-                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
+                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking  uk-margin-small-right"></i>TRAVEL WITH US</span>
                      <h1 class="uk-secondary">Latest from our travellers</h1>
 
                      <div uk-slider>
