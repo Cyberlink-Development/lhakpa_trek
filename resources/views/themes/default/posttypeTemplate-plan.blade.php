@@ -147,8 +147,11 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $contactUs = 'contact-us';
+                @endphp
                 <div class="uk-secondary-bg uk-book-btn border uk-margin-small-top">
-                    <a href="contact.php">Inquiry us</a>
+                    <a href="{{route('page.posttype_detail',$contactUs)}}">Contact us</a>
                 </div>
             </div>
         </div>

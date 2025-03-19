@@ -42,9 +42,9 @@
                     <div class="uk-margin-top">
                         <p class="uk-white">FOLLOW US HERE: </p>
                         <div class="uk-footer-icon   uk-margin-bottom">
-                            <a href="" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
-                            <a href="" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="{{$setting->youtube_link}}" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="{{$setting->facebook_link}}" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="{{$setting->twitter_link}}" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
                         </div>
                     </div>
                 </div>

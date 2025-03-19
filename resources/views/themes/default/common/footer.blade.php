@@ -28,7 +28,7 @@
                     <img src="{{asset('theme-assets/img/logo.png')}}" class="footer-logo" width="180" alt="">
                 </a>
                 <hr style="border-top: 1px solid #e5e5e530;">
-                <p class="text-white">Copyright © 2025, Lhakpa Treks.</p>
+                <p class="text-white">{{$setting->copyright_text}}</p>
                
             </div>
             <div class="uk-width-expand@m">
@@ -82,9 +82,9 @@
             <a href="privacy.php" class="uk-white">Privacy Policy</a>--}}
         </div>
         <div class="uk-footer-icon uk-text-right@m uk-text-center uk-margin-top uk-margin-bottom" uk-scrollspy="cls: uk-animation-fade;  delay: 300; repeat: false">
-            <a href="" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
-            <a href="" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
+            <a href="{{$setting->youtube_link}}" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
+            <a href="{{$setting->facebook_link}}" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="{{$setting->twitter_link}}" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
         </div>
     </div>
     <script src=" {{ asset('theme-assets/js/uikit-icons.js') }}"></script>

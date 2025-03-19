@@ -6,6 +6,7 @@ use App\Mail\AdminContactMail;
 use App\Mail\ResetPasswordMail;
 use App\Models\Inquiry\Emergency;
 use App\Models\Inquiry\Insurance;
+use App\Models\Inquiry\NeedAgentModel;
 use App\Models\PasswordReset;
 use App\Models\Team\TeamCategory;
 use App\Models\Travels\TripGradeModel;
@@ -415,7 +416,7 @@ class FrontpageController extends Controller
     }
     public function inquiry(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $setting = SettingModel::where('id', 1)->first();
         $g_recaptcha_response = $request->input('g_recaptcha_response');
         $result = $this->getCaptcha($g_recaptcha_response); 
@@ -445,6 +446,53 @@ class FrontpageController extends Controller
                     // Mail::send(new BookTrip($request->email));
                     $name = $request->name;
                     $message = "<p>Thanks for your inquiry. One of our team will be in touch soon to confirm details.</p>
+                    <p>We’re looking forward to welcoming you to Lhakpa Trekking!</p>";
+                    return view('themes.default.inquiry', compact('name', 'message'));
+                }
+            }
+        } else {
+            return back()->with('error', 'You are a robot');
+        }
+
+    }
+    public function needAgent(Request $request)
+    {
+        // dd($request->all());
+        $setting = SettingModel::where('id', 1)->first();
+        $g_recaptcha_response = $request->input('g_recaptcha_response');
+        $result = $this->getCaptcha($g_recaptcha_response); 
+        if ($result->success == true) {
+            if ($request->isMethod('post')) {
+                $request->validate([
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|email|max:255',
+                    'phone' => 'required|string|max:20',
+                    'country' => 'required|string|max:100',
+                    'code' => 'nullable|string|max:255',
+                    'designation' => 'nullable|string|max:255',
+                    'message' => 'nullable|string',
+                    'url' => 'nullable|url|max:255',
+                    'cname' => 'nullable|string|max:255',
+                ]);
+                $create = NeedAgentModel::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'country' => $request->country,
+                    'pcode' => $request->code,
+                    'designation' => $request->designation,
+                    'message' => $request->message,
+                    'url' => $request->url,
+                    'cname' => $request->cname,
+                ]);
+                if ($create) {
+             
+                    // return new AdminBookingMail();
+                    // return new BookTrip($request->email);    
+                    // Mail::send(new AdminBookingMail($setting->email_secondary));
+                    // Mail::send(new BookTrip($request->email));
+                    $name = $request->cname;
+                    $message = "<p>Thanks for your collaborating with Lhakpa Trekking!. One of our team will be in touch soon to confirm details.</p>
                     <p>We’re looking forward to welcoming you to Lhakpa Trekking!</p>";
                     return view('themes.default.inquiry', compact('name', 'message'));
                 }

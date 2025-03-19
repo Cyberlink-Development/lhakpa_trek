@@ -16,7 +16,7 @@
           <a href="#tab1_1" data-toggle="tab">Expeditions</a>
         </li>
         <li>
-          <a href="#tab1_2" data-toggle="tab">Trekking</a>
+          <a href="#tab1_2" data-toggle="tab">Destination</a>
         </li>
            <li>
           <a href="#tab1_3" data-toggle="tab">Activity</a>

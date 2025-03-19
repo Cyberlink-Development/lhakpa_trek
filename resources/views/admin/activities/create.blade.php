@@ -149,7 +149,7 @@
         <select name="activity_parent">
           <option value="">---- Select ----</option>
           <option value="expedition">Expedition</option>
-           <option value="trekking">Trekking</option>
+           <option value="trekking">Destination</option>
            <option value="activity">Activity</option>
            <option value="travel">Travels</option>
         </select>
