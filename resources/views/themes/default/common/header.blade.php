@@ -229,7 +229,7 @@
                             <div class="uk-navbar-right">
                                 <ul class="uk-navbar-nav uk-position-relative">
                                     <li>
-                                        <a href="#"> Company <span uk-navbar-parent-icon></span></a>
+                                        <a> Company <span uk-navbar-parent-icon></span></a>
                                         <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                             <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
                                                 <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
@@ -255,14 +255,14 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <a href="#">Destination <span uk-navbar-parent-icon></span></a>
+                                        <a>Destination <span uk-navbar-parent-icon></span></a>
                                         <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                         <div class=" uk-container">
                                             <div class="mega-border-top">
                                                 <div uk-grid class="uk-grid-small">
                                                     <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
                                                         @foreach ($trekking as $trek)
-                                                            <li> <a href="">{{$trek->title}}</a> </li>
+                                                            <li> <a>{{$trek->title}}</a> </li>
                                                         @endforeach
                                                     </ul>
                                                     <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
@@ -312,14 +312,14 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#">Activities <span uk-navbar-parent-icon></span></a>
+                                    <a>Activities <span uk-navbar-parent-icon></span></a>
                                     <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                         <div class="uk-container">
                                             <div class="mega-border-top">
                                                 <div uk-grid class="uk-grid-small">
                                                     <ul class="tab-nav uk-mega-tab uk-padding-menu   uk-tab-left uk-margin-medium-right  " data-uk-tab="{connect:'.uk-switcher'}">
                                                         @foreach ($activity as $row)
-                                                            <li> <a href="">{{ $row->title }}</a> </li>
+                                                            <li> <a>{{ $row->title }}</a> </li>
                                                         @endforeach
                                                     </ul>
                                                     <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
@@ -359,7 +359,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#"> Travelling Style <span uk-navbar-parent-icon></span></a>
+                                    <a> Travelling Style <span uk-navbar-parent-icon></span></a>
                                     <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                         <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
                                             <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
@@ -398,7 +398,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#">Expedition <span uk-navbar-parent-icon></span></a>
+                                    <a>Expedition <span uk-navbar-parent-icon></span></a>
                                     <div class="uk-dropbar uk-dropbar-top" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                         <div class=" uk-container">
                                             <div class="mega-border-top">
@@ -583,9 +583,9 @@
                                         @endif
                                     </ul>
                                     <div class="uk-padding uk-padding-remove-top uk-text-center">
-                                        <a href="" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
-                                        <a href="" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
-                                        <a href="" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
+                                        <a href="{{ $setting->youtube_link }}" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
+                                        <a href="{{ $setting->facebook_link }}" class="uk-icon-button  uk-margin-small-right"><i class="fa-brands fa-facebook-f"></i></a>
+                                        <a href="{{ $setting->twitter_link }}" class="uk-icon-button"><i class="fa-brands fa-twitter"></i></a>
                                     </div>
                                 </div>
                             </div>
