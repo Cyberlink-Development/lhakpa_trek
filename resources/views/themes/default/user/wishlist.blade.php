@@ -84,7 +84,7 @@
                 </div>
                 @endforeach
                 @else
-                <h3>Wishlist is empty!</h3> 
+                <h3>Wishlist is Empty!</h3> 
                 @endif
                 <!--  -->
                 @if($data->count() > 0)
