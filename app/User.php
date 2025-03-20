@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Subscriber;
 use App\Models\Inquiry\BookingModel;
 use App\Models\Travels\TripModel;
 use App\Models\Wishlist;
@@ -52,5 +53,9 @@ class User extends Authenticatable
     public function bookings()
     {
         return $this->hasMany(BookingModel::class);
+    }
+
+    public function subscriber(){
+        return $this->hasOne(Subscriber::class, 'user_id');
     }
 }

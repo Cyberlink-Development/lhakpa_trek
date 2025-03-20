@@ -182,4 +182,31 @@ class SendMailController extends Controller
     return back()->with('success','User deleted successfully');
     
   }
+
+  private function convertToCsv($data){
+    $csv = '';
+    $headers = array_keys($data[0]->toArray());
+    $csv .= implode(',', $headers)."\n";
+    
+    foreach($data as $row){
+        $csv .= implode(',',$row->toArray())."\n";
+    }
+    return $csv;
+  }
+  public function downloadData(){
+      $data = Subscriber::all();
+  //   dd($data);
+      $csvData = $this->convertToCsv($data);
+  //   dd($csvData);
+      $filename  = 'Subscriber_List.csv';
+      
+      $headers = [
+          'Content-Type'=>'text/csv',
+          'Content-Disposition'=> 'attachment; filename="'. $filename . '"',
+      ];
+      
+      return response()->streamDownload(function() use($csvData){
+          echo $csvData;
+      }, $filename, $headers);
+  }
 }

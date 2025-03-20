@@ -559,6 +559,7 @@ class FrontpageController extends Controller
             if (!$user->verified) {
                 $verifyUser->users->verified = 1;  
                 $verifyUser->users->save();
+                $user->subscriber()->update(['verified' => 1]); // update the verified field in the subscriber table
                 $status = "Your e-mail is verified. You can now login.";
             } else {
                 $status = "Your e-mail is already verified. You can now login.";
