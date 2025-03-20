@@ -248,14 +248,16 @@ class FrontpageController extends Controller
             $data->visiter = $visiter;
             $data->save();
         }
-        $similar_trips = TripModel::where('uri', '!=', $uri)->orderBy('ordering', 'desc')->take(3)->get();
+        // $related_trips = TripModel::where('uri', '!=', $uri)->orderBy('ordering', 'desc')->take(4)->get();
+        $related_trips=$data->relatedtrips->where('status', '1');
+
         $activity = TripModel::find($data->id)->activities()->get();
 
         $setting = SettingModel::where('id',1)->first();
         // dd($data);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
             'cost_includes', 'cost_excludes', 'itinerary',
-            'photo_videos', 'activity','similar_trips','photos','videos','local','banner','setting','schedules','faqs'));
+            'photo_videos', 'activity','related_trips','photos','videos','local','banner','setting','schedules','faqs'));
     }  
 
     //<------------------------------------------Activity Frontend---------------------------------------------->
@@ -557,6 +559,7 @@ class FrontpageController extends Controller
             if (!$user->verified) {
                 $verifyUser->users->verified = 1;  
                 $verifyUser->users->save();
+                $user->subscriber()->update(['verified' => 1]); // update the verified field in the subscriber table
                 $status = "Your e-mail is verified. You can now login.";
             } else {
                 $status = "Your e-mail is already verified. You can now login.";

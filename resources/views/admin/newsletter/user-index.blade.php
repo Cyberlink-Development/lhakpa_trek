@@ -1,7 +1,8 @@
 @extends('admin.master')
 @section('title','User List')
 @section('breadcrumb')
-<a href="{{ route('subscriber.create') }}" class="btn btn-primary btn-sm">Add Subscriber</a>
+<!-- <a href="{{ route('subscriber.create') }}" class="btn btn-primary btn-sm">Add Subscriber</a> -->
+<a href="{{route('download')}}" class="btn btn-primary btn-sm">Download CSV</a>
 @endsection
 @section('content')
 <div class="tray tray-center" style="">
@@ -10,15 +11,13 @@
 		<div class="tab-content">
 			<div id="users" class="tab-pane active">
 				<div class="table-responsive mhn20 mvn15">
-                    <h4>Subscriber List </h4>
-                    <a href="{{route('download')}}" class="btn btn-secondary">Download CSV</a>
-                
+                    <h4 style="padding-left:5px;">Subscriber List </h4>
                     <table class="table admin-form theme-warning fs13" id="datatable3">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Email</th>
-                                <th>Action</th>
+                                {{--<th>Action</th>--}}
                             </tr>
                         </thead>
                         <tbody>
@@ -26,10 +25,10 @@
                                 <tr>
                                     <td>{{ $key+=1 }}</td>
                                     <td>{{ $value->email }}</td>
-                                    <td>
-                                        <a href="{{ route('subscriber.update',$value->id) }}">Edit</a>
+                                    {{--<td>
+                                        <a href="{{ route('subscriber.update',$value->id) }}">Edit </a> |
                                          <a href="{{ route('user.delete',$value->id) }}">Delete</a>
-                                    </td>
+                                    </td>--}}
                                 </tr>
                             @endforeach
                         </tbody>

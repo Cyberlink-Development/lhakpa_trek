@@ -359,7 +359,9 @@ class TripController extends Controller
 
         $_data->regions()->attach($request->region);
         // $_data->activities()->attach($request->activity);
-        $_data->tripgroups()->attach($request->tripgroup);      
+        $_data->tripgroups()->attach($request->tripgroup);     
+
+        $_data->relatedtrips()->attach($request->related_trips);
        
         /************************************/
         $allActivities = array_unique(array_merge(
@@ -636,6 +638,7 @@ class TripController extends Controller
             $data->trip_video = $request->trip_video;
             $data->trip_excerpt = $request->trip_excerpt;
             $data->trip_content = $request->trip_content;
+            $data->latest_info = $request->latest_info;
             $data->trip_grade = $request->trip_grade ? $request->trip_grade : '';
             $data->status_text = $request->status_text;
             $data->uri = Str::slug($request->uri);

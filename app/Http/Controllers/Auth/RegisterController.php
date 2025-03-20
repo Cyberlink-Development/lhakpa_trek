@@ -95,6 +95,12 @@ class RegisterController extends Controller
             'roles' => 'user'
         ]);
 
+        $user->subscriber()->create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'verified' => 0,
+        ]);
+
         $verifyUser = VerifyUser::create([
             'user_id' => $user->id,
             'token' => Str::random(20)

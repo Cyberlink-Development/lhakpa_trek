@@ -262,49 +262,51 @@
                         </ul>
                     </li>
 
-                    <?php /*
-                <!-- <li class="{{ (Request::segment(2) == 'teams')?'active':'' }}">-->
-                <!--    <a href="{{ url('admin/teams') }}">-->
-                <!--        <span class="fa fa fa-user"></span>-->
-                <!--        <span class="sidebar-title">  Manage Team  </span>-->
-                <!--    </a>-->
-                <!--</li>           -->
-                 
-         
+                    <?php
+                        /*
+                            <!-- <li class="{{ (Request::segment(2) == 'teams')?'active':'' }}">-->
+                            <!--    <a href="{{ url('admin/teams') }}">-->
+                            <!--        <span class="fa fa fa-user"></span>-->
+                            <!--        <span class="sidebar-title">  Manage Team  </span>-->
+                            <!--    </a>-->
+                            <!--</li>           -->
+                        
                 
-                <!--  <li class="">-->
-                <!--   @if(Request::segment(1) == 'newsletter-create' || Request::segment(1) == 'subscriber-create'|| Request::segment(1) == 'send-newsletter'|| Request::segment(1) == 'subscriber-index'|| Request::segment(1) == 'subscriber-edit'|| Request::segment(1) == 'newsletter-index'|| Request::segment(1) == 'newsletter-edit')-->
-                <!--    <a class="accordion-toggle menu-open">-->
-                <!--    @else-->
-                <!--     <a class="accordion-toggle">-->
-                <!--             @endif -->
-                <!--        <span class="glyphicon glyphicon-user"></span>-->
-                <!--        <span class="sidebar-title"> Manage Newsletter </span>-->
-                <!--        <span class="caret"></span>-->
-                <!--    </a>-->
-                <!--    <ul class="nav sub-nav">-->
-                <!--       <li class="{{ (Request::segment(1) == 'newsletter-create'|| Request::segment(1) == 'newsletter-index'|| Request::segment(1) == 'newsletter-edit')?'active':'' }}">-->
-                <!--            <a href="{{ route('newsletter.index') }}">-->
-                <!--                <span class="fa fa fa-arrows-h"></span>-->
-                <!--                Newsletters-->
-                <!--            </a>-->
-                <!--        </li>-->
-                <!--        <li class="{{ (Request::segment(1) == 'subscriber-create'|| Request::segment(1) == 'subscriber-index'|| Request::segment(1) == 'subscriber-edit')?'active':'' }}">-->
-                <!--            <a href="{{ route('subscriber.index') }}">-->
-                <!--                <span class="fa fa fa-arrows-h"></span>-->
-                <!--               Subscribers-->
-                <!--            </a>-->
-                <!--        </li>-->
-                <!--         <li class="{{ (Request::segment(1) == 'send-newsletter')?'active':'' }}">-->
-                <!--            <a href="{{ route('send.newsletter') }}">-->
-                <!--                <span class="fa fa fa-arrows-h"></span>-->
-                <!--               Send Newsletter-->
-                <!--            </a>-->
-                <!--        </li>-->
-                <!--    </ul>-->
-                <!--</li>  -->
-                */
+                        
+                        */
                     ?>
+                    <li class="">
+                        @if(Request::segment(1) == 'newsletter-create' || Request::segment(1) == 'subscriber-create'|| Request::segment(1) == 'send-newsletter'|| Request::segment(1) == 'subscriber-index'|| Request::segment(1) == 'subscriber-edit'|| Request::segment(1) == 'newsletter-index'|| Request::segment(1) == 'newsletter-edit')
+                            <a class="accordion-toggle menu-open">
+                        @else
+                            <a class="accordion-toggle">
+                        @endif
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span class="sidebar-title"> Manage Newsletter </span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="nav sub-nav">
+                            <li class="{{ (Request::segment(1) == 'newsletter-create'|| Request::segment(1) == 'newsletter-index'|| Request::segment(1) == 'newsletter-edit')?'active':'' }}">
+                                <a href="{{ route('newsletter.index') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    Newsletters
+                                </a>
+                            </li>
+                            <li class="{{ (Request::segment(1) == 'subscriber-create'|| Request::segment(1) == 'subscriber-index'|| Request::segment(1) == 'subscriber-edit')?'active':'' }}">
+                                <a href="{{ route('subscriber.index') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    Registered User
+                                </a>
+                            </li>
+                            <li class="{{ (Request::segment(1) == 'send-newsletter')?'active':'' }}">
+                                <a href="{{ route('send.newsletter') }}">
+                                    <span class="fa fa fa-arrows-h"></span>
+                                    Send Newsletter
+                                </a>
+                            </li>
+                        </ul>
+                    </li> 
+
                     <li class="">
                         @if (Request::segment(1) == 'contact-us' ||
                                 Request::segment(1) == 'admin-trip-booking' ||

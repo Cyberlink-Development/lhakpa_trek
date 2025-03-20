@@ -267,7 +267,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('subscriber-edit/{id?}', 'SendMailController@useredit')->name('subscriber.update');
     Route::post('subscriber-edit/{id?}', 'SendMailController@useredit')->name('subscriber.edit');
     Route::get('subscriber-delete/{id?}', 'SendMailController@userdelete')->name('user.delete');
-
+    //for downloading csv file 
+    Route::get('download', 'SendMailController@downloadData')->name('download');
     // Delete image
     Route::delete('delete_video/{id}', 'AdminControllers\Banners\BannerController@delete_video')->name('delete_video');
     Route::delete('delete_pic/{id}', 'AdminControllers\Banners\BannerController@delete_pic')->name('delete_pic');

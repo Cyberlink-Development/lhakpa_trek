@@ -346,6 +346,7 @@
             });
 
             $('.tripTags').select2();
+            $('.realtedTrips').select2();
         });
 
         // Go back link
