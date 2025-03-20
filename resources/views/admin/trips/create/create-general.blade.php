@@ -203,6 +203,27 @@
             </div>
         </div>
 
+        @if($all_trips->count () > 0)
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">Related Trips</span>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <div class="bs-component">
+                                <select class="form-control realtedTrips" name="related_trips[]" multiple="multiple">
+                                        @foreach ($all_trips as $row)
+                                            <option value="{{ $row->id }}">{{ $row->trip_title }}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
     <div class="panel">
         <div class="panel-heading">
         <span class="panel-title">Trip Highlights</span>

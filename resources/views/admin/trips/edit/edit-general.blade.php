@@ -221,6 +221,35 @@
     </div>
 
     <div class="panel">
+       <div class="panel-heading">
+           <span class="panel-title">Related Trips</span>
+       </div>
+       <div class="panel-body">
+           <div class="form-group">
+               <div class="col-lg-12">
+                   <div class="bs-component">
+
+                       <select class="form-control realted-trips" name="related_trips[]" multiple="multiple">
+                           @if ($all_trips->count() > 0)
+                               @foreach ($all_trips as $row)
+                                   @foreach ($data->relatedtrips as $_row)
+                                       @if ($row->id == $_row->pivot->related_trip_id)
+                                           <option value="{{ $row->id }}" selected> {{ $row->trip_title }}
+                                           </option>
+                                           @continue
+                                       @endif
+                                   @endforeach
+                                   <option value="{{ $row->id }}">{{ $row->trip_title }}</option>
+                               @endforeach
+                           @endif
+                       </select>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </div>
+
+    <div class="panel">
     <div class="panel-heading">
      <span class="panel-title">Trip Highlights</span>
      </div>
@@ -281,34 +310,7 @@
             </div>
         </div>
     </div>
-    <!--<div class="panel">-->
-    <!--    <div class="panel-heading">-->
-    <!--        <span class="panel-title">Related Trips</span>-->
-    <!--    </div>-->
-    <!--    <div class="panel-body">-->
-    <!--        <div class="form-group">-->
-    <!--            <div class="col-lg-12">-->
-    <!--                <div class="bs-component">-->
-
-    <!--                    <select class="form-control realted-trips" name="related_trips[]" multiple="multiple">-->
-    <!--                        @if ($all_trips->count() > 0)-->
-    <!--                            @foreach ($all_trips as $row)-->
-    <!--                                @foreach ($data->relatedtrips as $_row)-->
-    <!--                                    @if ($row->id == $_row->pivot->related_trip_id)-->
-    <!--                                        <option value="{{ $row->id }}" selected> {{ $row->trip_title }}-->
-    <!--                                        </option>-->
-    <!--                                        @continue-->
-    <!--                                    @endif-->
-    <!--                                @endforeach-->
-    <!--                                <option value="{{ $row->id }}">{{ $row->trip_title }}</option>-->
-    <!--                            @endforeach-->
-    <!--                        @endif-->
-    <!--                    </select>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
+    
     <div class="panel">
         <div class="panel-heading">
             <span class="panel-title"> Meta data </span>

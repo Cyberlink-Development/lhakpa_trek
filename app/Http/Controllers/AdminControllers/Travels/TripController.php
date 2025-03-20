@@ -359,7 +359,9 @@ class TripController extends Controller
 
         $_data->regions()->attach($request->region);
         // $_data->activities()->attach($request->activity);
-        $_data->tripgroups()->attach($request->tripgroup);      
+        $_data->tripgroups()->attach($request->tripgroup);     
+
+        $_data->relatedtrips()->attach($request->related_trips);
        
         /************************************/
         $allActivities = array_unique(array_merge(
