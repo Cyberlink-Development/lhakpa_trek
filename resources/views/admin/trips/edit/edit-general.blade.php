@@ -63,7 +63,7 @@
                 <div class="col-lg-6">
                     <div class="bs-component">
                         <label>Reference No:</label>
-                        <input type="text" name="reference_no" class="form-control" value="{{ $data->trip_code }}"/>
+                        <input type="text" name="reference_no" class="form-control" value="{{ $data->trip_code }}" required />
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -182,6 +182,15 @@
                          <select class="form-control" name="show_in_home">
                             <option @if($data->show_in_home==1)selected @endif value="1">Yes</option>
                             <option @if($data->show_in_home==0)selected @endif value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bs-component">
+                        <label>Guided trip</label>
+                         <select class="form-control" name="guided">
+                            <option @if($data->guided==1)selected @endif value="1">Yes</option>
+                            <option @if($data->guided==0)selected @endif value="0">No</option>
                         </select>
                     </div>
                 </div>

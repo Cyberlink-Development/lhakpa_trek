@@ -83,7 +83,7 @@ class TripController extends Controller
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title',
                 'upload_pdf' => 'nullable|mimes:pdf|max:2048',
-                'reference_no' => 'unique:cl_trip_details,trip_code'
+                'reference_no' => 'required|unique:cl_trip_details,trip_code'
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -487,7 +487,7 @@ class TripController extends Controller
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
                 'upload_pdf' => 'nullable|mimes:pdf|max:2048',
-                'reference_no' => 'unique:cl_trip_details,trip_code,' . $id
+                'reference_no' => 'required|unique:cl_trip_details,trip_code,' . $id
             ]);
             if ($validator->fails()) {
                 return response()->json([
@@ -647,6 +647,7 @@ class TripController extends Controller
             $data->is_draft = $is_draft;
             $data->video_status=$request->video_status;
             $data->show_in_home=$request->show_in_home;
+            $data->guided=$request->guided;
             $data->start_date = $request->start_date;
             $data->price = $request->price;
             $data->discount = $request->discount;

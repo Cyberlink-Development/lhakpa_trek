@@ -44,14 +44,13 @@
 									</form>
 								</td>
 								<td class="">
-							    @if($row->video)
-								<video uk-video uk-cover preload="auto" width="200" height="auto" loop playsinline
-                                   autoplay muted data-setup='{"fluid": true,"controls": false,"loop":true}'>
-                                   <source src="{{asset('uploads/banners/'.$row->video)}}" type="video/mp4" muted>
-                               </video>
-							    @else
-							    <img src="{{url(env('PUBLIC_PATH').'uploads/banners/' . $row->picture )}}" width="200" />
-							    @endif
+									@if($row->video)
+										<video uk-video uk-cover preload="auto" width="200" height="auto" loop playsinline autoplay muted data-setup='{"fluid": true,"controls": false,"loop":true}'>
+											<source src="{{asset('uploads/banners/'.$row->video)}}" type="video/mp4" muted>
+										</video>
+									@else
+										<img src="{{asset('uploads/banners/' . $row->picture )}}" width="200" />
+									@endif
 								</td>
 								<td class="">{{ ucfirst($row->created_at) }}</td>
 								<td class="text-center">  

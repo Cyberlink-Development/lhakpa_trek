@@ -15,14 +15,14 @@
             <div class="card login-card">
                <div class="row no-gutters">
                   <div class="col-md-6">
-                     <img src="{{asset('theme-assets/images/mountain-bg.jpg')}}" alt="login" class="login-card-img">
+                     <img src="{{asset('theme-assets/img/logoo.png')}}" alt="login" class="login-card-img">
                  
                   </div>
 
                   <div class="col-md-6">
                      <div class="card-body">
                         <div class="brand-wrapper">
-                           <img src="{{ asset('theme-assets/images/logo.png') }}" alt="logo" width="200">
+                           <img src="{{asset('theme-assets/img/logoo.png')}}" alt="logo" width="200">
                          
                         </div>
                           <!-- Error Message -->

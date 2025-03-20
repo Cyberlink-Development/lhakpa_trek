@@ -78,10 +78,12 @@
                 <div class="uk-title-font uk-contents"  uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 500;">
                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
                     <h1 class="uk-secondary">{{$about_us->post_type}}</h1>
-                    {!! $about_us->content !!}
-                       <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
+                    <!-- <span class="uk-white uk-contents">  -->
+                     {!! $about_us->content !!}
+                     <!-- </span> -->
+                    <a href="{{route('page.posttype_detail',$about_us->uri)}}" class="uk-about-btn">Learn More <i class="fa-solid fa-circle-arrow-right uk-margin-small-left"></i></a>
                 </div>
-            </div>
+            </div> 
         </div>
         <div class="uk-width-auto@m uk-padding uk-flex uk-flex-center uk-flex-middle uk-visible@s"  uk-scrollspy="cls: uk-animation-fade;  delay: 500;">
             <img src="{{asset('theme-assets/img/new-logo.png')}}" alt="{{$about_us->post_type}}" style="height:300px; width:100%; object-fit:contain; margin-right: 80px;">
@@ -344,10 +346,10 @@
          <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
                <div class="uk-container uk-flex uk-flex-middle">
                   <div class="uk-title-font">
-                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking  uk-margin-small-right"></i>TRAVEL WITH US</span>
+                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
                      <h1 class="uk-secondary">Latest from our travellers</h1>
 
-                     <div uk-slider="autoplay : true; autoplay-interval: 6000; pause-on-hover: true; finite: false;">
+                     <div uk-slider>
                            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
                               <div class="uk-slider-items">
                                  @foreach ($reviews as $value)

@@ -363,6 +363,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div>
+                                <div class="uk-flex  uk-flex-column uk-flex-center uk-text-center uk-margin-top">
+                                    <div class="uk-width-auto">
+                                        <img src="{{asset('theme-assets/img/icon/guided.png')}}" class="subnav-icon" alt="">
+                                    </div>
+                                    <div>
+                                        <div class="uk-feature-font">
+                                            <p class="uk-margin-remove"><strong>Guided</strong></p>
+                                            <p class="uk-margin-remove">{{ $data->guided == 1 ? 'Yes' : 'No' }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="uk-secondary-bg uk-book-btn border uk-margin-small-top">
