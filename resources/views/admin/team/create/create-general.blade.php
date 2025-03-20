@@ -62,22 +62,22 @@
       </div>
 
        <div class="form-group"> 
-     <label for="inputStandard" class="col-lg-2 control-label">HighLights</label>               
+     <label for="inputStandard" class="col-lg-2 control-label">Language</label>               
       <div class="col-lg-9">
         <div class="bs-component">
-          <textarea class="form-control textarea"   name="highlights" rows="3">{{old('highlights')}}</textarea>
+          <input class="form-control"   name="highlights" >{{old('highlights')}}</input>
         </div>
       </div>
     </div>
 
-      <div class="form-group"> 
+    {{--<div class="form-group"> 
      <label for="inputStandard" class="col-lg-2 control-label">Brief</label>               
       <div class="col-lg-9">
         <div class="bs-component">
           <textarea class="form-control textarea"   name="brief" rows="6">{{old('brief')}}</textarea>
         </div>
       </div>
-    </div>
+    </div>--}}
  
    
     <div class="form-group">
@@ -112,7 +112,7 @@
 </div>
 <div class="sid_bvijay mb10">
 <div class="hd_show_con">
- Show in Home
+ Make Expert
  <input type="hidden" name="show_in_home" value="0">
  <input type="checkbox" name="show_in_home" value="1">
 </div>

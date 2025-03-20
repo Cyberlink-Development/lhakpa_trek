@@ -118,6 +118,9 @@ class TeamController extends Controller
        $isChecked = $request->has('published');       
       $data['published'] = ($isChecked)?'1':'0';
       $data['is_draft'] = $is_draft; 
+      if($request->has('show_in_home')){
+        TeamModel::where('show_in_home', '1')->update(['show_in_home' => 0]);
+      }
       $result = TeamModel::create($data);
       $last_id = $result->id;
 
@@ -274,7 +277,10 @@ class TeamController extends Controller
       $data->published = ($isChecked)?'1':'0';   
       $isChecked = $request->has('status');
       $data->status = ($isChecked)?'1':'0';     
-      $data->show_in_home = $request->show_in_home;     
+      $data->show_in_home = $request->show_in_home;   
+      if($request->has('show_in_home')){
+        TeamModel::where('show_in_home', '1')->update(['show_in_home' => 0]);
+      }  
       $data->is_draft = $is_draft;      
       $_data = TeamModel::find($id);
         

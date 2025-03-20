@@ -33,7 +33,7 @@
                                     <label><input class="uk-checkbox uk-margin-small-right" type="checkbox"> Remember me </label>
                                 </div>
                                 <div class="uk-flex uk-flex-right">
-                                    <a href="{{route('forgot.password')}}" class="uk-primary">Forget Password ?</a>
+                                    <a href="{{route('forgot.password')}}" class="uk-primary">Forgot Password ?</a>
                                 </div>
                             </div>
                             <div class="uk-margin-top uk-text-center">
