@@ -6,7 +6,7 @@
         <div class="uk-container uk-flex uk-flex-center">
             <div class="uk-card uk-card-default uk-padding uk-margin-auto-vertical border" style="padding-bottom:60px; width: 678px; max-width: 100% !important;">
                 <ul class="uk-login-tab uk-flex-center" uk-tab>
-                    <li><a href="#"><i class="fa-solid fa-key login-logo"></i> Fogot Password </a></li>
+                    <li><a href="#"><i class="fa-solid fa-key login-logo"></i> Forgot Password </a></li>
                 </ul>
                 <div class="uk-switcher uk-margin">
                     <div>
@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div class="uk-margin-small-top">
-                                    <p>A reset link will be sent to your email. Please check your email after the form submition.</p>
+                                    <p>A reset link will be sent to your email. Please check your email after the form submission.</p>
                                 </div>
                             </div>
                             <div class="uk-margin-top uk-text-center">

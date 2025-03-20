@@ -60,9 +60,10 @@ document.querySelectorAll(".trigger").forEach(function (toggler) {
 //New changes ended
 
 // Event listeners
-buttons.change1.addEventListener("click", () => toggleDiv("new1"));
-buttons.change2.addEventListener("click", () => toggleDiv("new2"));
 buttons.close1.addEventListener("click", () => toggleDiv("original"));
 buttons.close2.addEventListener("click", () => toggleDiv("original"));
+buttons.change1.addEventListener("click", () => toggleDiv("new1"));
+buttons.change2.addEventListener("click", () => toggleDiv("new2"));
+
 
 

@@ -29,7 +29,7 @@
                 <ul class="nav nav-pills ml-auto p-2">
                   <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab"> GENERAL</a></li>
             
-                  <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> Certificates </a></li>
+                  {{--<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> Certificates </a></li>--}}
                                   
                 </ul>
               </div><!-- /.card-header -->
@@ -42,9 +42,9 @@
                   </div>
             
                   <!-- /.tab-pane -->
-                  <div class="tab-pane" id="tab_4">
-                  @include('admin.team.edit.edit-certificates')
-                  </div>                 
+                  {{--<div class="tab-pane" id="tab_4">
+                    @include('admin.team.edit.edit-certificates')
+                  </div>--}}          
                  
                   </div>
                   <!-- /.tab-pane -->

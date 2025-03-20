@@ -481,7 +481,7 @@
                 <div class="uk-title-font">
                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
                     <h1 class="uk-secondary">Latest from our travellers</h1>
-                    <div uk-slider>
+                    <div uk-slider="autoplay : true; autoplay-interval: 6000; pause-on-hover: true; finite: false;">
                         <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
                             <div class="uk-slider-items">
                                 <!-- client detail -->
