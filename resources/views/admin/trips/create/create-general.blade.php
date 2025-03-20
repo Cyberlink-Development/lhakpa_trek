@@ -248,6 +248,20 @@
                 </div>
             </div>
         </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Latest Information</span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <textarea class="form-control my-editor" name="latest_info" rows="9">{{ old('latest_info') }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="panel">
             <div class="panel-heading">

@@ -266,6 +266,21 @@
             </div>
         </div>
     </div>
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Latest Infromation</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <div class="bs-component">
+                        <textarea class="my-editor form-control" name="latest_info" id="latest_info"
+                            placeholder="Latest Information" rows="9">{{ $data->latest_info }}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--<div class="panel">-->
     <!--    <div class="panel-heading">-->
     <!--        <span class="panel-title">Related Trips</span>-->
