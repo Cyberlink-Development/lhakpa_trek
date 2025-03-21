@@ -48,6 +48,10 @@
                                             <td class="">{{ $book->price ? $book->price : '-' }}</td>
                                         </tr>
                                     @endif
+                                    <tr>
+                                        <td class="">Trip Status</td>
+                                        <td class="">{{$book->paid_status == 1 ? 'Completed' : 'Ongoing'}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
 						</div>

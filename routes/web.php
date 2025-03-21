@@ -94,6 +94,7 @@ Route::post('store/trip/tailormade', 'FrontendControllers\FrontpageController@st
 Route::post('store/trip/filmmaking', 'FrontendControllers\FrontpageController@store_filmmaking')->name('filmmaking');
 // Route::post('trip-booking', 'FrontendControllers\FrontpageController@post_tripbooking')->name('post-trip');
 Route::post('trip-booking', [FrontpageController::class, 'post_tripbooking'])->name('post-trip');
+Route::post('/bookings/{id}/update-status', [FrontpageController::class, 'updateStatus'])->name('bookings.updateStatus');
 Route::post('inquiry', [FrontpageController::class, 'inquiry'])->name('inquiry');
 Route::post('need-agents', [FrontpageController::class, 'needAgent'])->name('need.agent');
 Route::post('inquiry-now', 'FrontendControllers\FrontpageController@post_inquiry')->name('post-inquiry');

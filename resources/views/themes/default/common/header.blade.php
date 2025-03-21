@@ -476,19 +476,26 @@
                 <div class="uk-container">
                     <nav class="uk-navbar" uk-navbar="{&quot;container&quot;:&quot;.uk-header-mobile&quot;}">
                         <div class="uk-navbar-left">
-                            <a href="index.php" class="uk-logo uk-navbar-item"> <img src="assets/img/logo.png" alt="" style="height:56px;"> </a>
+                            <a href="{{ url('/') }}" class="uk-logo uk-navbar-item"> <img src="{{asset('theme-assets/img/logoo.png')}}" alt="" style="height:56px;"> </a>
                         </div>
                         <div class="uk-navbar-right" style="gap: 10px;">
-                            {{-- <a href="contact.php"><i class="fa-solid fa-phone uk-white f-20 uk-margin-small-right"></i></a>
-                            <a href="#modal-search" uk-toggle><i class="fa-solid fa-magnifying-glass uk-white f-20 uk-margin-small-right"></i></a> --}}
+                            <a href="#modal-search" uk-toggle><i class="fa-solid fa-magnifying-glass uk-white f-20 uk-margin-small-right"></i></a>
                             
-                            <a href="wishlist.php"><i class="fa-solid fa-heart uk-white f-20 uk-margin-small-right"></i></a>
+                            @if(Auth::check())
+                                <a href="{{ route('user-wishlist') }}">
+                                    <i class="fa-solid fa-heart uk-white f-20 uk-margin-small-right"></i>[{{ Auth::user()->wishlists->count()}}]
+                                </a>
+                            @else
+                                <a href="{{ route('user-wishlist') }}">
+                                    <i class="fa-solid fa-heart uk-white f-20 uk-margin-small-right"></i>
+                                </a>
+                            @endif
                             <a href="#modal-form" uk-toggle><i class="fa-solid fa-user uk-white f-20 uk-margin-small-right"></i></a>
                             <div id="modal-search" uk-modal>
                                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                                    <form class="uk-search uk-search-default uk-width-1-1">
-                                        <input class="uk-search-input " type="search" placeholder="Search" aria-label="Search">
-                                        <span class="uk-search-icon-flip" uk-search-icon></span>
+                                    <form class="uk-search uk-search-default uk-width-1-1" action="{{ route('searchtrip') }}" method="GET" >
+                                        <input class="uk-search-input" name="query" id="search-input" placeholder="Search" aria-label="Search" autocomplete="off">
+                                        <button type="submit" class="uk-search-icon-flip" uk-search-icon></button>
                                     </form>
                                 </div>
                             </div>
