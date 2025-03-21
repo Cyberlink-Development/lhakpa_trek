@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 /************************** Bibek Routes Starts *********************************/
 Route::group(['namespace' => 'Auth'], function () {
-    Route::get('/register-page', 'RegisterController@register_page')->name('register');
+    Route::get('/register-page', 'RegisterController@register_page')->name('register');  
     Route::post('/register', 'RegisterController@store')->name('user-registration');
     Route::get('/login', 'LoginController@login_page')->name('login-page');
     Route::post('/user-login', 'LoginController@login_user')->name('user.login');

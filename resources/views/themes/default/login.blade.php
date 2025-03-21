@@ -41,7 +41,7 @@
                             </div>
                         </form>
                     </div>
-                    <div>
+                    <div>  
                         <form class="uk-contact-form" action="{{route('user-registration')}}" method="POST">
                             @csrf
                             <div class=" uk-child-width-1-1@m uk-grid">
