@@ -25,7 +25,7 @@
         <div uk-grid  uk-scrollspy="cls: uk-animation-fade;  delay: 300; repeat: false">
             <div class="uk-width-1-3@m uk-text-left@m uk-text-center">
                 <a class="uk-logo" href="{{ url('/') }}">
-                    <img src="{{asset('theme-assets/img/logo.png')}}" class="footer-logo" width="180" alt="">
+                    <img src="{{asset('theme-assets/img/logoo.png')}}" class="footer-logo" width="180" alt="">
                 </a>
                 <hr style="border-top: 1px solid #e5e5e530;">
                 <p class="text-white">{{$setting->copyright_text}}</p>
@@ -64,10 +64,6 @@
                         <ul class=" footer-list">
                             @foreach ($navigations as $nav)
                                 <li><a href="{{route('page.posttype_detail',$nav->uri)}}">{{$nav->post_type}} </a></li>
-                                {{-- <li><a href="team.php">Team Members</a></li>
-                                <li><a href="list.php">Travelling Style</a></li>
-                                <li><a href="news.php">News / Blogs</a></li>
-                                <li><a href="women.php">Women Empowerment</a></li> --}}
                             @endforeach
                         </ul>
                     </div>

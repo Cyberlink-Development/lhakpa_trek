@@ -275,7 +275,7 @@
                                             <div class="tooltip-container">
                                                 {{ grade_message_trek($data->trip_grade) }}
                                                 @if ($data->status_text)
-                                                    <div class="tooltip-content">
+                                                    <div class="tooltip-content uk-contents">
                                                         {{-- <strong>Toolkit Options:</strong> --}}
                                                         {!! $data->status_text !!}
                                                     </div>

@@ -1392,6 +1392,9 @@ footer p {
 }  
 
 /****************** By anil ****************/
+.uk-contents *{
+  color: var(--white)!important;
+}
 .uk-contents p{
   color: var(--white)!important;
 }

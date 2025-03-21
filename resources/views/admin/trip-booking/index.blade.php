@@ -17,6 +17,7 @@
                                     <th class="">Email</th>
                                     <th class="">Trip / REF ID</th>
                                     <th>Departure Type</th>
+                                    <th  class="text-center align-middle">Trip Status</th>
                                     <th class="text-left">Action</th>
                                 </tr>
                                 </thead>
@@ -37,6 +38,15 @@
                                   </td>
                                   <td>
                                     {{$row->depature_type == 1 ? 'Fixed Departure' : 'Normal Booking'}}
+                                  </td>
+                                  <td id="status-{{ $row->id }}" class="text-center align-middle">
+                                    @if($row->paid_status == 1)
+                                        <span class="text-success">Completed</span> <br>
+                                        <button onclick="updateStatus({{ $row->id }})" class="btn btn-xs btn-warning mt-1">Mark as Ongoing</button>
+                                    @else
+                                        <span class="text-danger">Ongoing</span> <br>
+                                        <button onclick="updateStatus({{ $row->id }})" class="btn btn-xs btn-success  mt-1">Mark as Completed</button>
+                                    @endif
                                   </td>
                                   <td class="text-left">
                                     <a href="{{route('view-trip-booking',$row->id)}}">View</a> |
@@ -99,5 +109,22 @@
     }
   });
   </script>
+
+<script>
+  function updateStatus(id) {
+      fetch(`/bookings/${id}/update-status`, {
+          method: 'POST',
+          headers: {
+              'X-CSRF-TOKEN': '{{ csrf_token() }}',
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          location.reload();
+      })
+      .catch(error => console.error('Error:', error));
+  }
+</script>
 @endsection
 

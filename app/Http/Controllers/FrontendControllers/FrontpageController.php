@@ -367,6 +367,14 @@ class FrontpageController extends Controller
             return back()->with('error', 'You are a robot');
         }
     }
+    public function updateStatus($id)
+    {
+        $booking = BookingModel::findOrFail($id);
+        $booking->paid_status = $booking->paid_status == 1 ? 0 : 1;
+        $booking->save();
+
+        return response()->json(['message' => 'Booking status updated successfully!', 'status' => $booking->paid_status]);
+    }
     private function getCaptcha($secretKey)
     {
         $secret_key = env('SECRET_KEY');
@@ -732,14 +740,20 @@ class FrontpageController extends Controller
         $query = trim($request->input('query'));
 
         if (!$query) {
+            $query = $request->query('query');
+        }
+
+        if (!$query) {
             return redirect()->back()->with('error', 'Please enter text to search.');
         }
 
         $searchQuery = TripModel::where('trip_title', 'like', "%{$query}%")->orWhere('sub_title', 'like', "%{$query}%");
-
-        $results = $searchQuery->orderBy('created_at', 'asc')->paginate(5)->appends(['query' => $query]);
-
         $totalResults = $searchQuery->count();
+
+        $results = $searchQuery->orderBy('created_at', 'asc')->paginate(5);
+        $results->appends(['query' => $query]);
+
+        // dd($results);
 
         return view('themes.default.search', compact('results', 'query', 'totalResults'));
     }
