@@ -8,9 +8,8 @@
             <div class="swiper-slide">
                   <div class="uk-inline hero-items">
                      <img src="{{ $banner->picture ? asset('uploads/banners/'.$banner->picture) : asset('theme-assets/img/mountain/mountain5.jpeg')}}" width="1800" height="1200" alt="">
-                     <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column
-                        ">
-                        <div class="uk-banner-font uk-width-1-1 uk-width-1-3@m uk-text-center uk-margin-large-top">
+                     <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column" uk-scrollspy="cls: uk-animation-fade; target: h1,a; delay: 500;">
+                        <div class="uk-banner-font uk-width-1-1 uk-width-1-2@m uk-text-center uk-margin-large-top">
                               <h1>{{$banner->title}}</h1>
                         </div>
                         @if ($banner->link)
@@ -72,11 +71,11 @@
    <!-- start about section -->
 
    <section class="uk-primary-bg">
-    <div class=" uk-grid-match uk-grid-collapse" uk-grid>  
-        <div class=" uk-width-expand@m uk-primary-bg uk-padding uk-padding-left uk-about-text">
-            <div class="uk-container uk-flex uk-flex-middle uk-margin-top uk-margin-bottom">
-                <div class="uk-title-font uk-contents"  uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 500;">
-                    <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
+      <div class=" uk-grid-match uk-grid-collapse" uk-grid>
+          <div class=" uk-width-3-4@m uk-primary-bg uk-padding uk-padding-left uk-about-text">
+              <div class="uk-container uk-flex uk-flex-middle uk-margin-top uk-margin-bottom">
+                  <div class="uk-title-font uk-contents"  uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 500;">
+                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
                     <h1 class="uk-secondary">{{$about_us->post_type}}</h1>
                     <!-- <span class="uk-white uk-contents">  -->
                      {!! $about_us->content !!}
@@ -85,11 +84,11 @@
                 </div>
             </div> 
         </div>
-        <div class="uk-width-auto@m uk-padding uk-flex uk-flex-center uk-flex-middle uk-visible@s"  uk-scrollspy="cls: uk-animation-fade;  delay: 500;">
+        <div class="uk-width-1-4@m uk-padding uk-flex uk-flex-center uk-flex-middle uk-visible@s"  uk-scrollspy="cls: uk-animation-fade;  delay: 500;">
             <img src="{{asset('theme-assets/img/new-logo.png')}}" alt="{{$about_us->post_type}}" style="height:300px; width:100%; object-fit:contain; margin-right: 80px;">
-        </div>
-    </div>
-</section>
+         </div>
+      </div>
+   </section>
    <!-- end about section -->
 
    <!--start trip section -->

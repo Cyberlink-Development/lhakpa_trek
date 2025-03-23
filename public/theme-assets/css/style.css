@@ -764,6 +764,24 @@ border-right: 1px solid var(--white);
   background-color: var(--primary);
   color: var(--white);
 }
+.uk-visible-wishlist {
+  display: none;
+}
+.uk-navbar-container.uk-navbar-transparent.uk-navbar-sticky .uk-visible-wishlist  {
+  display: block;
+}
+.info-box{
+  background: #2e2d2d;background: #2e2d2d;
+  border-radius: 5px;
+  margin-top: -8px;
+}
+.info-box p{
+  padding: 22px;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 18px;
+  color: #c6c6c6
+}
 /*================================================== */
 /* Homepage css - start
 ================================================== */
@@ -886,12 +904,12 @@ border-right: 1px solid var(--white);
 .prev-btn, .next-btn{
   background-color: var(--primary);
   border-radius: 100%;
-  padding: 10px 14px;
+  padding: 6px 14px;
   margin: 10px 4px;
   transition: 0.9s ease;
 }
 .prev-btn svg, .next-btn svg{
-  height: 20px !important;
+  height: 30px !important;
 }
 .prev-btn:hover, .next-btn:hover{
   background-color: var(--secondary);
@@ -958,8 +976,7 @@ section {
     margin-right: 16px;
 }
 .uk-profile-img{
-  height: 55px;
-  width: 55px;
+  height: 50px;
    border-radius: 100%;
    object-fit: cover;
    margin-right: 16px;
@@ -1318,7 +1335,7 @@ footer p {
 }
 .uk-price-li{
   border-bottom: 1px solid #3d3d3d2b;
-  padding: 10px 0;
+  padding: 25px 0; 
   margin: 0 !important;
 }
 /*css added*/
@@ -1375,7 +1392,7 @@ footer p {
   z-index: 1;
   box-shadow: none;
   background-color: transparent;
-  border: 1px solid var(--secondary);
+  border: 1px solid var(--secondary) !important;
   color: var(--white);
   border-radius: 100%;
   padding: 10px;
@@ -1390,7 +1407,35 @@ footer p {
 .uk-wish-button.active {
   background-color: var(--secondary);
 }  
-
+.uk-history-img{
+    height:45px;
+    width:80px;
+    object-fit:cover;
+}
+.trigger{
+    display:flex;
+}
+.pointer{
+  color: var(--secondary) !important;
+    padding: 1px 8px;
+    font-size: 16px;
+    border-radius: 100%;
+    cursor: pointer;
+    text-decoration:underline;
+}
+.uk-info-button{
+  background-color: transparent;
+  color: var(--primary);
+  border: none;
+  padding: 0;
+  margin-left: 15px;
+  text-decoration: underline;
+}
+.flag img{
+  height: 22px;
+  margin-right: 6px;
+  margin-top: 10px;
+}
 /****************** By anil ****************/
 .uk-contents *{
   color: var(--white)!important;
@@ -1399,17 +1444,3 @@ footer p {
   color: var(--white)!important;
 }
 /********************************************/
-
-
-/************ New changes added *************/
-.trigger{
-  display:flex;
-}
-.pointer{
-color: var(--secondary) !important;
-  padding: 1px 8px;
-  font-size: 16px;
-  border-radius: 100%;
-  cursor: pointer;
-  text-decoration:underline;
-}
