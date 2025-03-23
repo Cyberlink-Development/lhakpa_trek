@@ -90,7 +90,7 @@
                         <div class="uk-flex uk-flex-middle">
                             <button class="uk-wish-button" id="wish-button" data-id="{{ $data->id }}"><i class="fa-solid fa-heart"></i></button>
                             <!-- <button class="uk-wish-button" id="wish-button" onclick="toggleActive(this)"><i class="fa-solid fa-heart"></i></button> -->
-                            <h2 class="uk-white uk-text-uppercase uk-margin-remove">Nepal</h2>
+                            <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{getDestinationNameByTripId($data->id)}}</h2>
                         </div>
                         <div class="uk-star-rating">
                             <i class="fa-solid fa-star"></i>
@@ -534,6 +534,74 @@
 </section>
 <!-- review section end -->
 
+<!-- new element added -->
+<!-- similar trip section  start-->
+<section class="uk-section">
+    <div class="uk-container">
+        <div class="uk-text-center">
+            <div class="uk-title-font">
+                <span class="uk-secondary "><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>PACKAGES</span>
+                <h1 class="uk-primary uk-margin-bottom">Related Trips</h1>
+            </div>
+        </div>
+        <div class="uk-child-width-1-2@m" uk-grid uk-height-match>
+            @if ($related_trips)
+                @foreach ($related_trips as $row)
+                    <div class="activity">
+                        <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
+                            <div class="uk-width-2-5@m">
+                                <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-220">
+                                    <img src="{{ !empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg')}}" class="uk-height-1-1 uk-width-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
+                                <div class="uk-text-title uk-text-title">
+                                    <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-news-title">
+                                        <h2>{{$row->trip_title}}</h2>
+                                    </a>
+                                </div>
+                                <div class="uk-star-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="uk-flex uk-flex-between uk-margin-small-top uk-margin-small-bottom">
+                                    <div class="uk-flex uk-flex-middle uk-trip">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <div>
+                                            <p class="uk-trip-title uk-margin-remove">Duration</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{$row->duration}} Days</p>
+                                        </div>
+                                    </div>
+                                    <div class="uk-flex uk-flex-middle uk-trip ">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <div>
+                                            <p class="uk-trip-title uk-margin-remove">Location</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{ getDestinationNameByTripId($row->id)}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="uk-flex uk-flex-middle uk-trip ">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <div>
+                                            <p class="uk-trip-title uk-margin-remove">Difficulty</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{ grade_message_trek($row->trip_grade)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="uk-margin-remove line-three">{{$row->sub_title}}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+</section>
+<!-- similar trip section  end-->
+<!-- new element added -->
+
 <!-- review form modal start -->
  
 <div id="offcanvas-review" uk-modal>
@@ -762,6 +830,17 @@
                     </div>
                 </div>
             </div>
+            <!-- new element added -->
+            <div class="uk-flex uk-flex-middle uk-margin-top">
+                <p class="uk-margin-remove">To know more about our latest trip information:</p>
+                <button class="uk-button uk-button-default uk-info-button" type="button" uk-toggle="target: .toggle">View Info</button>
+            </div>
+            <p class="toggle"></p>
+            <div class="toggle" hidden>
+                <h3 class="uk-secondary uk-margin-top">More Information</h3>
+                <div class=" uk-padding uk-light-bg border uk-margin-remove ">{!! $data->latest_info !!}</div>
+            </div>
+            <!-- new element added -->
             <hr>
             <h3 class="uk-secondary uk-margin-remove">Personal Information</h3>
             <div class=" uk-child-width-1-2@m uk-grid">

@@ -156,11 +156,11 @@
                 <div class=" uk-flex uk-flex-middle uk-grid-collapse uk-grid uk-margin-top uk-top-nav">
                   
                     <div class="uk-width-auto@m uk-flex">
-                            <a href="{{ url('/') }}"> <img src="{{asset('theme-assets/img/logoo.png')}}" width="200" alt=""></a>
-                            <h2  class="uk-dark text-container" style="font-size: 20px; color: white; margin-top: 22px; margin-left: 19px;">
-                                Your Travel Partner in Nepal
-                            </h2>
-                        </div>
+                        <a href="{{ url('/') }}"> <img src="{{asset('theme-assets/img/logoo.png')}}" width="180" alt=""></a>
+                        <h2  class="uk-dark text-container" style="font-size: 20px; color: white; margin-top: 22px; margin-left: 19px;">
+                            Your Travel Partner in Nepal
+                        </h2>
+                    </div>
                     <div class="uk-width-expand@m">
                         <ul class="uk-flex uk-flex-right uk-topnavbar-ul uk-margin-bottom">
                             @if($news)
@@ -359,19 +359,22 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a> Travelling Style <span uk-navbar-parent-icon></span></a>
+                                    <a href="#"> Travelling Style <span uk-navbar-parent-icon></span></a>
                                     <div class="uk-dropbar uk-dropbar-top uk-pattern-bg" uk-drop="boundary:!.uk-main-header-transparent; stretch: x; flip: false; animation: reveal-top; delay-hide: 10; duration: 700;">
                                         <div class="uk-position-relative uk-visible-toggle uk-light uk-container " tabindex="-1" uk-slider>
                                             <div class="uk-slider-items uk-child-width-1-2 uk-child-width-1-4@m uk-grid">
                                                 @foreach ($travels as $travel)
                                                     <div>
                                                         <a href="{{ route('travel-list', $travel->uri) }}">
-                                                            <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                            <div class="uk-media-140 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
                                                                 <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="{{ $travel->title }}" src="{{ $travel->thumbnail ? asset('uploads/icon/'.$travel->thumbnail) : asset('theme-assets/img/mountain/mountain3.jpeg') }}" />
                                                                 <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
                                                                 <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
                                                                     <h2 class="uk-secondary uk-margin-remove">{{ $travel->title }}</h2>
                                                                 </div>
+                                                            </div>
+                                                            <div class="info-box uk-contents">
+                                                                <p >{{ $travel->excerpt }} </p>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -379,12 +382,15 @@
                                                 @if ($your_group)
                                                     <div>
                                                         <a href="{{route('page.posttype_detail',$your_group->uri)}}">
-                                                            <div class="uk-media-205 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
-                                                                <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="{{ $your_group->post_type }}" src="{{ $your_group->banner ? asset('uploads/original/'.$your_group->banner) : asset('theme-assets/img/mountain/mountain8.jpeg')}} "/>
+                                                            <div class="uk-media-140 uk-cover-container border  uk-display-block uk-transition-toggle uk-link-toggle" href="detail.php">
+                                                                <img class="uk-image uk-cover uk-transition-scale-up uk-transition-opaque" alt="{{ $your_group->post_type }}" src="{{ $your_group->banner ? asset('uploads/original/'.$your_group->banner) : asset('theme-assets/img/mountain/mountain8.jpeg')}}" />
                                                                 <div class="uk-overlay-banner uk-overlay uk-position-cover"></div>
                                                                 <div class="uk-position-bottom-center  uk-activities uk-text-center uk-title-font">
                                                                     <h2 class="uk-secondary uk-margin-remove">{{ $your_group->post_type }}</h2>
                                                                 </div>
+                                                            </div>
+                                                            <div class="info-box uk-contents">
+                                                                <p>{{ $your_group->content }}</p>
                                                             </div>
                                                         </a>
                                                     </div>
@@ -463,6 +469,11 @@
                                 <ul id="search-results" class="uk-list uk-dropdown uk-dropdown-bottom-left uk-width-large" style="display: none; position: absolute; background: #fff; border: 1px solid #ccc; z-index: 1000;">
                                 </ul>
                             </form>
+                        </li>
+                        <li class="uk-visible-wishlist">
+                            <a href="{{ route('user-wishlist') }}" class="uk-flex uk-flex-center">
+                                <i class="fa-solid fa-heart uk-margin-small-right" style="font-size:23px;"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
