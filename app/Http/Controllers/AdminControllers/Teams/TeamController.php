@@ -266,6 +266,7 @@ class TeamController extends Controller
       $data->phone = $request->phone;
       $data->email = $request->email;
       $data->brief = $request->brief; 
+      $data->language = $request->highlights; 
       $data->content = $request->content; 
       $data->ordering = $request->ordering; 
       $data->fb_url = $request->fb_url; 
@@ -278,9 +279,9 @@ class TeamController extends Controller
       $isChecked = $request->has('status');
       $data->status = ($isChecked)?'1':'0';     
       $data->show_in_home = $request->show_in_home;   
-      if($request->has('show_in_home')){
-        TeamModel::where('show_in_home', '1')->update(['show_in_home' => 0]);
-      }  
+      // if($request->has('show_in_home')){
+      //   TeamModel::where('show_in_home', '1')->update(['show_in_home' => 0]);
+      // }  
       $data->is_draft = $is_draft;      
       $_data = TeamModel::find($id);
         

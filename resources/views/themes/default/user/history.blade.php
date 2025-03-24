@@ -28,21 +28,21 @@
                             <th>Trip Name</th>
                             <th>Departure Type</th>
                             <th>Trip Status</th>
-                            <th>Trip Date</th>      
+                            <th>Trip Start Date</th>      
                         </tr>
                     </thead>
                     <tbody>
                     @if($data->count() > 0)
-                    @foreach ($data as $row)
+                    @foreach ($data as $row)  
                         <tr>
                             <td><img src="{{!empty(tripdetail($row->trip_id)->thumbnail) ? asset('uploads/original/'.tripdetail($row->trip_id)->thumbnail) : asset('theme-assets/img/mountain/mountain9.jpeg')}}" class="uk-history-img" alt="{{ tripname($row->trip_id) }}"></td>
                             <td class="uk-text-uppercase">{{ tripname($row->trip_id) }}</td>
                             <td>{{ $row->depature_type  == 1 ? 'Fixed' : 'normal' }}</td>
-                            <td>{{ $row->status == 0 ? 'In Review' :
-                            ($row->status === 1 ? 'Confirmed' : 
-                            ($row->status === 2 ? 'Completed' : 'Pending')) 
-                             }}</td>
-                            <td>{{ $row->created_at->format('d M Y') }}</td>
+                            <td>
+                            {{ $row->paid_status == 0 ? 'Ongoing' : 'Completed' }}
+                                                      
+                        </td>
+                            <td>{{ date("d M Y", strtotime($row->trip_start_date)) }}</td>
                         </tr>
                         @endforeach
                         @endif

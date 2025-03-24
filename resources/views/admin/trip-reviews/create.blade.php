@@ -71,7 +71,7 @@
     <div class="col-lg-8">
      <div class="bs-component">
        <div class="bs-component">
-         <textarea class="textarea form-control" id="textArea3" name="message" rows="9" autocomplete="off"></textarea>
+         <textarea class=" form-control" name="message" rows="9" autocomplete="off"></textarea>
        </div>
      </div>
    </div>

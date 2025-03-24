@@ -92,5 +92,47 @@
         </div>
     </div>
 </section>
-
+@if($expert)
+<section class="uk-section uk-padding-remove-top">
+    <div class="uk-container">
+        <div class="uk-grid">
+            <div class="uk-width-1-3@m uk-first-column">
+                <div class="uk-title-font">
+                    <span class="uk-secondary dotted-line-black "><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>ENQUIRY</span>
+                    <h1 class="uk-primary  uk-margin-bottom">CONTACT OUR TRAVEL EXPERTS</h1>
+                    <a href="#enquiry-form" class="uk-btn uk-btn-secondary " uk-scroll>Enquiry Now</a>
+                </div>
+            </div>
+            <div class="uk-width-2-3@m">
+                <div class="uk-title-font">
+                    <h1 class="uk-secondary  uk-margin-bottom"></h1>
+                    <div class="uk-flex">
+                        <div>
+                            <img src="{{ !empty($expert->thumbnail) ? asset('uploads/team/' .$expert->thumbnail) : asset('theme-assets/img/mountain/mountain1.jpeg')}}" alt="" style="height: 215px; width: 230px; object-fit: cover;">
+                        </div>
+                        <div class="uk-padding-small">
+                            <h2 class="uk-margin-remove">{{ $expert->name }}</h2>
+                            <h3 class="uk-margin-remove uk-secondary">{{ $expert->position }}</h3>
+                            <span><i class="fa-solid fa-phone uk-margin-small-right uk-secondary" aria-hidden="true"></i>
+                        {{ $expert->phone }}
+                        </span>
+                            <span class="uk-margin-small-left"><i class="fa-solid fa-envelope uk-margin-small-right uk-secondary"></i>
+                        {{ $expert->email }}</span>
+                            <br>
+                            {{ $expert->language }}
+                            <div class="flag">
+                                <!-- <img src="assets/img/flag1.jpg" alt=""> 
+                                <img src="assets/img/flag2.jpg" alt="">
+                                <img src="assets/img/flag3.jpg" alt=""> -->
+                            </div>
+                            <p>Contact our travel guide to know more about your travel journey.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+@endif
 @endsection

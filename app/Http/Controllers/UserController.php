@@ -66,7 +66,7 @@ class UserController extends Controller
     }
     public function user_history()
     {
-        $data=BookingModel::orderBy('id','desc')->paginate(3);
+        $data=BookingModel::where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate(3);  
         return view('themes.default.user.history',compact('data'));  
     }
     public function user_recommendation()
@@ -139,6 +139,6 @@ class UserController extends Controller
         $find = Wishlist::where('trip_id',$request->id)->first();
         $find->delete();
         return back()->with('success', 'Trip removed from wishlist');
-    }
+    } 
 }
 

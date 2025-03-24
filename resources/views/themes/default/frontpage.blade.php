@@ -344,9 +344,9 @@
          </div>
          <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
                <div class="uk-container uk-flex uk-flex-middle">
-                  <div class="uk-title-font">
+                  <div class="">
                      <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
-                     <h1 class="uk-secondary">Latest from our travellers</h1>
+                     <h1 class="uk-secondary  uk-margin-remove">Latest from our travellers</h1>
                      <div uk-slider="autoplay : true; autoplay-interval: 6000; pause-on-hover: true; finite: false;">
                            <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
                               <div class="uk-slider-items">
@@ -358,8 +358,9 @@
                                              @endfor
                                           </div>
                                           <span class="uk-contents">
-                                             
-                                          {!! $value->message !!}
+                                             <p class="uk-margin-top">
+                                                {{ $value->message }}
+                                             </p>
                                            </span>
                                              <div class="uk-flex">
                                                 <img src="{{$value->image ? asset('uploads/reviews/'.$value->image) : asset('theme-assets/img/user.png')}}" class="uk-client-img" alt="">
