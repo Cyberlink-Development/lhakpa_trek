@@ -32,7 +32,7 @@
                 <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> EQUIPMENT </a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES</a></li>
-                <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li> -->
 
                 </ul>
                 </div><!-- /.card-header -->
@@ -59,9 +59,9 @@
                            <div class="tab-pane" id="tab_7">
                            @include('admin.trips.edit.edit-trip-schedule') 
                         </div>  
-                        <div class="tab-pane" id="tab_8">
+                        <!-- <div class="tab-pane" id="tab_8">
                            @include('admin.trips.edit.edit-faqs') 
-                        </div>
+                        </div> -->
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->

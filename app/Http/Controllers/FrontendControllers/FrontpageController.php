@@ -140,8 +140,9 @@ class FrontpageController extends Controller
         $international = PostTypeModel::where('uri','international-team')->first();
         $trips = TripModel::where(['status' => '1'])->get();
         $travels = ActivityModel::where('activity_parent','travel')->get();
-        // dd($international);
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international','trips','travels'));
+        $expert=TeamModel::where('show_in_home',1)->first();
+        // dd($expert);
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international','trips','travels','expert'));
     }
 
 

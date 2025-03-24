@@ -491,25 +491,27 @@
         </div>
         <div class="uk-primary-bg uk-padding uk-padding-left uk-about-text" style="line-break: anywhere;">
             <div class="uk-container uk-flex uk-flex-middle">
-                <div class="uk-title-font">
+                <div class="">
                     <span class="uk-white dotted-line-white"><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>TRAVEL WITH US</span>
-                    <h1 class="uk-secondary">Latest from our travellers</h1>
+                    <h1 class="uk-secondary uk-margin-remove">Latest from our travellers</h1>
                     <div uk-slider="autoplay : true; autoplay-interval: 6000; pause-on-hover: true; finite: false;">
                         <div class="uk-position-relative uk-visible-toggle" tabindex="-1">
                             <div class="uk-slider-items">
                                 <!-- client detail -->
-                                @foreach ($trip_review as $value)
-                                    <div>
+                                @foreach ($trip_review as $value)  
+                                    <div class="uk-width-1-1">  
                                         <div class="uk-star-rating">
                                             @for($i=0; $i < $value->rating; $i++)
                                                 <i class="fa-solid fa-star"></i>
                                             @endfor
                                         </div>
-                                        <span class="uk-contents"> 
+                                        <span class=" uk-contents"> 
                                              
-                                             {!! $value->message !!}
+                                             <p class="uk-margin-top"> 
+                                             {{ $value->message }}
+                                             </p>
                                               </span>
-                                            <div class="uk-flex">
+                                            <div class="uk-flex uk-margin-top">
                                                 <img src="{{$value->image ? asset('uploads/reviews/'.$value->image) : asset('theme-assets/img/user.png')}}" class="uk-client-img" alt="">
                                                 <div class="uk-title-font">
                                                     <h2 class="uk-secondary">{{ $value->full_name }}</h2>
@@ -604,7 +606,7 @@
 
 <!-- review form modal start -->
  
-<div id="offcanvas-review" uk-modal>
+<div id="offcanvas-review" uk-modal> 
     <div class="uk-modal-dialog uk-modal-body uk-padding-remove-top uk-padding-remove-left uk-padding-remove-right uk-padding-bottom">
         <div class="uk-padding uk-padding-remove-bottom">
             <h3 class="uk-modal-title uk-text-center uk-white uk-margin-remove uk-primary-bg border">write a review</h3>
@@ -616,19 +618,19 @@
                     <div class="uk-margin-small-top">
                         <label class="uk-form-label uk-text-bold" for="full_name">Full Name</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="fullname" name="full_name" required type="text">
+                            <input class="uk-input" id="fullname" name="full_name" value="{{ Auth::check() ? Auth::user()->name : '' }}" required type="text">  
                         </div>
                     </div>
                     <div class="uk-margin-small-top">
                         <label class="uk-form-label uk-text-bold" for="email">Email</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="email" name="email" required type="email">
+                            <input class="uk-input" id="email" name="email"  value="{{ Auth::check() ? Auth::user()->email : '' }}" required type="email">
                         </div>
                     </div>
                     <div class="uk-margin-small-top">
                         <label class="uk-form-label uk-text-bold" for="image">Image</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="image" name="image" required type="file" style="padding: 6px;">
+                            <input class="uk-input" id="image" name="image"  type="file" style="padding: 6px;">
                         </div>
                     </div>
                     <div class="uk-margin-small-top">
@@ -650,7 +652,9 @@
                 <div class="uk-margin-small-top">
                     <label class="uk-form-label uk-text-bold" for="country">Country</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" id="country" name="country" required type="text">
+                        <select name="country" class="uk-select border" id="country" required>
+                                @include('themes.default.common.country')
+                            </select>
                     </div>
                 </div>
                 <div class="uk-margin-small-top">

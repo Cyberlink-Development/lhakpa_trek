@@ -48,7 +48,7 @@
                                 <div class="uk-margin-small-top">
                                     <label class="uk-form-label uk-text-bold" for="users_name">Full Name</label>
                                     <div class="uk-form-controls">
-                                        <input class="uk-input" id="users_name" name="name" required type="email">
+                                        <input class="uk-input" id="users_name" name="name" required type="text">
                                     </div>
                                 </div>
                                 <div class="uk-margin-small-top">

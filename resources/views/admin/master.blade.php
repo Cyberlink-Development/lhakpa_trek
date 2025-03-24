@@ -310,6 +310,8 @@
                     <li class="">
                         @if (Request::segment(1) == 'contact-us' ||
                                 Request::segment(1) == 'admin-trip-booking' ||
+                                Request::segment(1) == 'admin-trip-review' ||
+                                Request::segment(1) == 'admin-trip-edit-review' ||
                                 Request::segment(1) == 'category-inquiry' ||
                                 Request::segment(1) == 'tailor-made' ||
                                 Request::segment(1) == 'trip-inquiry' ||
@@ -343,7 +345,7 @@
                                     <span class="sidebar-title">Trip Inquiry</span>
                                 </a>
                             </li>
-                    <li class="{{ (Request::segment(1) == 'admin-trip-review')?'active':'' }}">
+                    <li class="{{ (Request::segment(1) == 'admin-trip-review') || (Request::segment(1) == 'admin-trip-edit-review')  ?'active':'' }}">
 
                 <a href="{{ route('trip-review') }}">
                 <span class="fa fa-dot-circle-o "></span>

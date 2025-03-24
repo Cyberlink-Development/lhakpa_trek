@@ -34,7 +34,7 @@ class TripBookingController extends Controller
      {
      if ($request->isMethod('get'))
      {
-         $book=BookingModel::orderby('id','desc')->get();
+         $book=BookingModel::orderby('id','desc')->get();  
          return view('admin.trip-booking.index',compact('book'));
 
      }

@@ -610,7 +610,7 @@
                 </div>
             </div>
          
-            <div class="sid_bvijay mb10">
+            <!-- <div class="sid_bvijay mb10">
                 <h4> Altitude Chart </h4>
                 <div class="hd_show_con">
                    <div id="xedit" class="bs-component">
@@ -626,7 +626,7 @@
                     </div>
                      <small> (Width: 1500px Height: 1500px) </small>
                 </div>
-            </div>
+            </div> -->
 
             <div class="sid_bvijay mb10">
                 <h4> Trip Banner </h4>
@@ -646,7 +646,7 @@
             </div>
 
             <div class="sid_bvijay mb10">
-                <h4> Upload PDF </h4>
+                <h4> Itinerary PDF </h4>
                 <div class="hd_show_con">
                     <div id="xedit" class="bs-component">
                      <label class="field prepend-icon append-button file mb20">

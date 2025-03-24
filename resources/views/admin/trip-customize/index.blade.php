@@ -15,8 +15,8 @@
                             <th class="">SN</th>
                             <th class="">Detail</th>
                             <th class="">Trip / Travel Type</th>
-                            <th class="">Start Date</th>
-                            <th class="">Total People</th>
+                            <th class="">Start Date / Trip Duration</th>
+                            <th class="">No. of People</th>
                             <th class="">Inquiry On</th>
                             <th class="">Comments</th>
                             <th class="text-left">Action</th>
@@ -30,7 +30,7 @@
                             <td class="">{{$key+=1}}</td>
                             <td class="">{{ ucfirst($row->name) }} <br> {{ ($row->email) }} <br> {{$row->phone}} <br> {{$row->country}}</td> 
                             <td class="">{{ucfirst(tripname($row->trip_id))}} <br> - {{ucfirst($row->travel_title)}}</td>
-                            <td class="">{{$row->trip_start_date}}</td>
+                            <td class="">{{$row->trip_start_date}}<br/>{{ $row->duration }} days</td>
                             <td class="">{{ ($row->no_of_people) }}</td>
                             <td class="">{{$row->created_at->format('d M Y')}}</td>
                             <td class=""><textarea>{!!$row->comments!!}</textarea></td>

@@ -70,7 +70,7 @@
      <label for="inputStandard" class="col-lg-2 control-label">Language</label>               
       <div class="col-lg-9">
         <div class="bs-component">
-          <input class="form-control"   name="highlights" rows="6">{{$data->highlights}}</input>
+          <input class="form-control"   name="highlights" rows="6" value="{{$data->language}}"></input>
         </div>
       </div>
     </div>  
