@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminControllers\Travels;
 
+use App\Models\Travels\TripGuideModel;
 use App\Models\Travels\TripsTag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -352,6 +353,24 @@ class TripController extends Controller
                   $tripInfo->save(); 
                   $sn_info++;     
                 }
+              }         
+              // Insert into Guide
+              if(isset($request->guide_ordering)){
+                $guide_keys = array_keys($request->guide_ordering);   
+                $sn_guide = 1;
+                $sn_guide_count = count($request->guide_ordering);
+                foreach($guide_keys as $key){
+                  if( $key + 1 >= $sn_guide_count ){
+                    continue;
+                  }
+                  $tripGuide = new TripGuideModel();
+                  $tripGuide->trip_id = $last_id;       
+                  $tripGuide->ordering = $request->guide_ordering[$key];   
+                  $tripGuide->title = $request->guide_title[$key];    
+                  $tripGuide->content = $request->guide_content[$key];    
+                  $tripGuide->save(); 
+                  $sn_guide++;     
+                }
               }            
 
         /************Attach******************/
@@ -437,6 +456,7 @@ class TripController extends Controller
         $banner = $data->banners()->orderBy('ordering','asc')->get();
         $costincludes = $data->costincludes()->orderBy('ordering','asc')->get();
         $costexcludes = $data->costexcludes()->orderBy('ordering','asc')->get();
+        $guidelines = $data->guidelines()->orderBy('ordering','asc')->get();
         $all_trips = TripModel::get();
         $grades = TripGradeModel::all();
         $trip_type = TripTypeModel::get();
@@ -465,6 +485,7 @@ class TripController extends Controller
             'gears',
             'costincludes',
             'costexcludes',
+            'guidelines',
             'grades',
             'banner',
             'expeditions',
@@ -954,6 +975,34 @@ class TripController extends Controller
                     $sn_info++;
                 }
             }
+            // Update guidelines
+            if (isset($request->guide_id)) {
+                $guide_keys = array_keys($request->guide_id);
+                $sn_guide = 1;
+                $sn_guide_count = count($request->guide_id);
+                foreach ($guide_keys as $key => $value) {
+                    if ($key + 1 >= $sn_guide_count) {
+                        continue;
+                    }
+                    if ($request->guide_id[$value] == "") {
+                        $guideData = new TripGuideModel();
+                        $guideData->trip_id = $data->id;
+                        $guideData->ordering = $request->guide_ordering[$key];
+                        $guideData->title = $request->guide_title[$key];
+                        $guideData->content = $request->guide_content[$key];
+                        $guideData->save();
+                    } else if ($request->guide_id[$value] !== null && $request->guide_id[$value] !== "") {
+                        $guide_id = $request->guide_id[$value];
+                        $guideData = TripGuideModel::find($guide_id);
+                        $guideData->trip_id = $data->id;
+                        $guideData->ordering = $request->guide_ordering[$key];
+                        $guideData->title = $request->guide_title[$key];
+                        $guideData->content = $request->guide_content[$key];
+                        $guideData->save();
+                    }
+                    $sn_guide++;
+                }
+            }
 
 
             $data->save();
@@ -1006,6 +1055,7 @@ class TripController extends Controller
         $data->itineraries()->delete();        
         $data->costincludes()->delete();
         $data->costexcludes()->delete();
+        $data->guidelines()->delete();
         $data->schedules()->delete();
         $data->gears()->delete();
         

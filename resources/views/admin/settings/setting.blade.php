@@ -31,7 +31,7 @@
                                     <!-- <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> Logo and
                                             Affiliated Logos </a></li> -->
                                     <!--<li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> Flight Information </a></li>-->
-                                    <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> USA Details</a></li>
+                                    <!--<li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> USA Details</a></li>-->
                                     <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> Home Text</a></li>
                                 </ul>
                             </div><!-- /.card-header -->
@@ -50,7 +50,7 @@
                                         @include('admin.settings.flight')
                                     </div>
                                     <div class="tab-pane" id="tab_5">
-                                        @include('admin.settings.usaDetails')
+                                        <!--@include('admin.settings.usaDetails')-->
                                     </div>
                                     <div class="tab-pane" id="tab_6">
                                         @include('admin.settings.homeStatic')

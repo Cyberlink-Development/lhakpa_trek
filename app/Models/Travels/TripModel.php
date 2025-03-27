@@ -61,7 +61,10 @@ class TripModel extends Model
     {
         return $this->hasMany('App\Models\Cost\CostExcludesModel', 'trip_detail_id');
     }
-
+    public function guidelines()
+    {
+        return $this->hasMany('App\Models\Travels\TripGuideModel', 'trip_id');
+    }
      public function itineraries()
      {
         return $this->hasMany('App\Models\Travels\TripItineraryModel','trip_detail_id');

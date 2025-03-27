@@ -74,8 +74,7 @@
     
     <div class="small-footer uk-child-width-1-2@m uk-padding uk-padding-remove-vertical uk-flex uk-flex-middle uk-pattern-bg " uk-grid >
         <div class="uk-text-center uk-text-left@m uk-margin-top" uk-scrollspy="cls: uk-animation-fade;  delay: 300; repeat: false">
-            {{-- <a href="privacy.php" class="uk-white uk-margin-large-right">Terms & Conditions</a>
-            <a href="privacy.php" class="uk-white">Privacy Policy</a>--}}
+            <div class="uk-white">Made with <i class="fa fa-heart" style="color: #ea050a;"></i> by <a href="https://cyberlink.com.np/" class="uk-white">Cyberlink Pvt.Ltd.</a></div>
         </div>
         <div class="uk-footer-icon uk-text-right@m uk-text-center uk-margin-top uk-margin-bottom" uk-scrollspy="cls: uk-animation-fade;  delay: 300; repeat: false">
             <a href="{{$setting->youtube_link}}" class="uk-icon-button uk-margin-small-right"><i class="fa-brands fa-youtube"></i></a>
