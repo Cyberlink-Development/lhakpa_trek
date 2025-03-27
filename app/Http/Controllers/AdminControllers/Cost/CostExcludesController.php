@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers\Cost;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cost\CostExcludesModel;
+use App\Models\Travels\TripGuideModel;
 use Illuminate\Http\Request;
 
 class CostExcludesController extends Controller
@@ -103,6 +104,13 @@ class CostExcludesController extends Controller
     public function destroy($trip_id, $id)
     {
         $data = CostExcludesModel::find($id);
+        $data->delete();      
+    }
+
+    // For Trip Guidelines
+    public function deleteGuide($trip_id, $id)
+    {
+        $data = TripGuideModel::find($id);
         $data->delete();      
     }
 }

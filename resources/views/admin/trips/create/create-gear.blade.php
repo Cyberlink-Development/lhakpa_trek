@@ -44,7 +44,7 @@
                     <div class="col-md-4"><input type="file" name="gear_thumbnail[]" class="form-control" />
                      <small> (Width: 1600px Height: 1200px) </small>
                     </div>
-                    <div class="col-md-1"><button class="btn btn-danger delete-gear" schedule-data-id="0"><i
+                    <div class="col-md-1"><button class="btn btn-danger delete-gear" gear-data-id="0"><i
                                 class="glyphicon glyphicon-trash"></i></button></div>
                 </div>
             </div>

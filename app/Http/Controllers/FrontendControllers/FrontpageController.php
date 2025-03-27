@@ -10,6 +10,7 @@ use App\Models\Inquiry\NeedAgentModel;
 use App\Models\PasswordReset;
 use App\Models\Team\TeamCategory;
 use App\Models\Travels\TripGradeModel;
+use App\Models\Travels\TripGuideModel;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -240,6 +241,7 @@ class FrontpageController extends Controller
             $faqs = $data->faqs()->orderBy('ordering', 'asc')->get();
             $cost_includes = CostIncludesModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
             $cost_excludes = CostExcludesModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
+            $guidelines = TripGuideModel::where('trip_id', $data->id)->orderBy('ordering', 'asc')->get();
             $photo_videos = TripGearModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
             $photos = TripGearModel::where('trip_detail_id', $data->id)->where('thumbnail', '!=', 'NULL')->orderBy('ordering', 'asc')->get();
             $videos = TripGearModel::where('trip_detail_id', $data->id)->where('video', '!=', 'NULL')->orderBy('ordering', 'asc')->get();
@@ -257,7 +259,7 @@ class FrontpageController extends Controller
         $setting = SettingModel::where('id',1)->first();
         // dd($data->latest_info);
         return view('themes.default.tripdetail', compact('data', 'trip_review',
-            'cost_includes', 'cost_excludes', 'itinerary',
+            'cost_includes', 'cost_excludes', 'itinerary','guidelines',
             'photo_videos', 'activity','related_trips','photos','videos','local','banner','setting','schedules','faqs'));
     }  
 

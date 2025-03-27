@@ -145,7 +145,7 @@
                                     <a href="#itinerary" uk-scroll>Itinerary & Maps </a>
                                 </li>
                             @endif
-                            @if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty())
+                            @if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty() || $guidelines->count() > 0)
                                 <li>
                                     <a href="#information" uk-scroll>Information</a>
                                 </li>
@@ -394,7 +394,7 @@
     </div>
 </section>
 <!-- cost includes / excludes section start-->
-@if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty())
+@if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty() || $guidelines->count() > 0)
     <section class="uk-position-relative uk-section  uk-background-norepeat uk-background-cover" uk-parallax="bgx: -100; easing: 1;" data-src="{{asset('theme-assets/img/bg/01.jpg')}}" id="information" uk-img>
         <div class="uk-overlay-pink uk-position-cover"></div>
         <div class="uk-container uk-position-relative">
@@ -407,6 +407,9 @@
                 @endif
                 @if ($cost_excludes->count() > 0)
                     <li><a href="#" class="green-border">Equipment</a></li>
+                @endif
+                @if ($guidelines->count() > 0)
+                    <li><a href="#" class="green-border">Guidelines</a></li>
                 @endif
             </ul>
             <div class="uk-switcher uk-margin">
@@ -444,6 +447,20 @@
                     <div class="uk-light-bg border uk-padding-small">
                         <ul uk-accordion class="uk-information-ul">
                             @foreach ($cost_excludes as $item)
+                                <li class="uk-information-li">
+                                    <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
+                                    <div class="uk-accordion-content uk-padding uk-margin-remove">
+                                        <p>{!! $item->content !!}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if ($guidelines->count() > 0)
+                    <div class="uk-light-bg border uk-padding-small">
+                        <ul uk-accordion class="uk-information-ul">
+                            @foreach ($guidelines as $item)
                                 <li class="uk-information-li">
                                     <a class="uk-accordion-title uk-accordion-font" href><span class="uk-margin-small-right">{{$loop->iteration}}</span>{{ $item->title }}</a>
                                     <div class="uk-accordion-content uk-padding uk-margin-remove">
@@ -834,16 +851,18 @@
                     </div>
                 </div>
             </div>
-            <!-- new element added -->
-            <div class="uk-flex uk-flex-middle uk-margin-top">
-                <p class="uk-margin-remove">To know more about our latest trip information:</p>
-                <button class="uk-button uk-button-default uk-info-button" type="button" uk-toggle="target: .toggle">View Info</button>
-            </div>
-            <p class="toggle"></p>
-            <div class="toggle" hidden>
-                <h3 class="uk-secondary uk-margin-top">More Information</h3>
-                <div class=" uk-padding uk-light-bg border uk-margin-remove ">{!! $data->latest_info !!}</div>
-            </div>
+            @if($data->latest_info)
+                <!-- new element added -->
+                <div class="uk-flex uk-flex-middle uk-margin-top">
+                    <p class="uk-margin-remove">To know more about our latest trip information:</p>
+                    <button class="uk-button uk-button-default uk-info-button" type="button" uk-toggle="target: .toggle">View Info</button>
+                </div>
+                <p class="toggle"></p>
+                <div class="toggle" hidden>
+                    <h3 class="uk-secondary uk-margin-top">More Information</h3>
+                    <div class=" uk-padding uk-light-bg border uk-margin-remove ">{!! $data->latest_info !!}</div>
+                </div>
+            @endif
             <!-- new element added -->
             <hr>
             <h3 class="uk-secondary uk-margin-remove">Personal Information</h3>

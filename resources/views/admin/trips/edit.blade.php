@@ -30,9 +30,10 @@
                 <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> HOLIDAY </a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> GENERAL</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> EQUIPMENT </a></li>
+                <li class="nav-item"><a class="nav-link" href="#tab_9" data-toggle="tab"> GUIDELINES </a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li> -->
+                 <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li> 
 
                 </ul>
                 </div><!-- /.card-header -->
@@ -59,9 +60,12 @@
                            <div class="tab-pane" id="tab_7">
                            @include('admin.trips.edit.edit-trip-schedule') 
                         </div>  
-                        <!-- <div class="tab-pane" id="tab_8">
+                        <div class="tab-pane" id="tab_8">
                            @include('admin.trips.edit.edit-faqs') 
-                        </div> -->
+                        </div>
+                        <div class="tab-pane" id="tab_9">
+                           @include('admin.trips.edit.edit-guide') 
+                        </div>
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->
@@ -474,7 +478,62 @@
             }
         });
         /******** End For Cost Excludes *********/
+        
+        /******** For Guidelines ***********/
+        jQuery(document).delegate('a.add-guide', 'click', function(e) {
+            e.preventDefault();
+            var content = jQuery('#row_guide_additional .row'),
+                size = jQuery('#row_guide_body >.row').length + 1,
+                element = null,
+                element = content.clone();
+            element.attr('id', 'guide-rec-' + size);
+            element.find('.delete-guide').attr('guide-data-id', size);
+            element.appendTo('#row_guide_body');
+            element.find('.sn').html(size);
+        });
 
+        jQuery(document).delegate('button.delete-guide', 'click', function(e) {
+            e.preventDefault();
+            var makeConfirm = confirm("Are you sure You want to delete");
+            if (makeConfirm == true) {
+                var id = jQuery(this).attr('guide-data-id');
+                var targetDiv = jQuery(this).attr('targetDiv');
+                // For delete FAQs individually.
+                var csrf = $('meta[name="csrf-token"]').attr('content');
+                var guide_rowid = jQuery(this).attr('guide-rowid');
+                var trip_id = '{{ $data->id }}';
+                var url = '{{ route('supporting-guide.destroy', ['id' => ':id', 'guide_id' => ':guide_id']) }}';
+                url = url.replace(':id', trip_id);
+                url = url.replace(':guide_id', guide_rowid);
+                if (guide_rowid) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: url,
+                        data: {
+                            _token: csrf
+                        },
+                        success: function(data) {
+                            console.log('success');
+                            // $('#guide-rec-' + guide_rowid ).remove();
+                        },
+                        error: function(data) {
+                            alert('Error occurred!');
+                        }
+                    });
+                }
+                //End for delete
+                jQuery('#guide-rec-' + id).remove();
+                //regnerate index number on table
+                // $('#row_guide_body .row').each(function(index) {
+                //   $(this).find('span.sn').html(index+1);
+                // });
+                return true;
+            } else {
+                return false;
+            }
+        });
+        /******** End For Guidelines *********/
+        
         // Delete Photo thumb
         jQuery(document).delegate('.delete_gear_thumb', 'click', function(e) {
             e.preventDefault();

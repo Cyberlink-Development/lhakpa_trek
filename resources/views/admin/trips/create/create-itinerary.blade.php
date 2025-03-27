@@ -40,7 +40,7 @@
                     <div class="col-md-1"><button class="btn btn-danger delete-itinerary" itinerary-data-id="0"><i class="glyphicon glyphicon-trash"></i></button></div>
                     </div>
                     <div class="col-lg-12">
-                    <div class="col-md-12"><textarea name="itinerary_content[]" class="form-control" placeholder="Content Goes Here" /></textarea></div>
+                    <div class="col-md-12"><textarea name="itinerary_content[]" class="form-control" placeholder="Content Goes Here" ></textarea></div>
                     </div>
                     <div class="clearfix"></div>
                     <hr>

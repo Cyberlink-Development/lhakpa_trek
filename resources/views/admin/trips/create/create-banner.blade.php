@@ -56,7 +56,7 @@
                         <textarea class="form-control" name="banner_content[]" placeholder=""></textarea>
                     </div>
 
-                    <div class="col-md-1"><button class="btn btn-danger delete-banner" schedule-data-id="0"><i class="glyphicon glyphicon-trash"></i></button></div>
+                    <div class="col-md-1"><button class="btn btn-danger delete-banner" banner-data-id="0"><i class="glyphicon glyphicon-trash"></i></button></div>
                 </div>
             </div>
         </div>

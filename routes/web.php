@@ -233,6 +233,7 @@ Route::middleware(['auth'])->group(function () {
 
     // cost excludes
     Route::delete('admin/trip/{id}/{info_id}', 'AdminControllers\Cost\CostExcludesController@destroy')->name('supporting-info.destroy');
+    Route::delete('admin/guide/{id}/{guide_id}', 'AdminControllers\Cost\CostExcludesController@deleteGuide')->name('supporting-guide.destroy');
     Route::delete('admin/itinerary/{id?}/{info_id?}', 'AdminControllers\Travels\TripItineraryController@destroy')->name('itinerary.destroy');
     //for trip banner
     Route::delete('admin/banner/{id}/{banner_id}', 'AdminControllers\Travels\TripBannerController@destory')->name('trip_banner_destory');

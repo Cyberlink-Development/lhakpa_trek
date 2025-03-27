@@ -33,9 +33,10 @@
                     <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> HOLIDAY</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> GENERAL </a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> EQUIPMENT</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#tab_9" data-toggle="tab"> GUIDELINES</a></li> 
                     <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS </a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> DATES </a></li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="#tab_8" data-toggle="tab"> FAQ's </a></li>
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -61,9 +62,12 @@
                         <div class="tab-pane" id="tab_7">
                            @include('admin.trips.create.create-trip-schedule') 
                         </div>  
-                        <!-- <div class="tab-pane" id="tab_8">
+                        <div class="tab-pane" id="tab_8">
                            @include('admin.trips.create.create-faqs') 
-                        </div>                -->
+                        </div> 
+                        <div class="tab-pane" id="tab_9">
+                           @include('admin.trips.create.create-guide') 
+                        </div>   
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->
@@ -257,7 +261,39 @@
             }
         });
         /******** End For Info *********/
+        
+        /******** For Guide ***********/
+        jQuery(document).delegate('a.add-guide', 'click', function(e) {
+            e.preventDefault();
+            jQuery('#guide-headingg').hide();
+            var content = jQuery('#row_guide_additional .row'),
+                size = jQuery('#row_guide_body >.row').length + 1,
+                element = null,
+                element = content.clone();
+            element.attr('id', 'guide-rec-' + size);
+            element.find('.delete-guide').attr('guide-data-id', size);
+            element.appendTo('#row_guide_body');
+            element.find('.sn').html(size);
+        });
 
+        jQuery(document).delegate('button.delete-guide', 'click', function(e) {
+            e.preventDefault();
+            var makeConfirm = confirm("Are you sure You want to delete");
+            if (makeConfirm == true) {
+                var id = jQuery(this).attr('guide-data-id');
+                var targetDiv = jQuery(this).attr('targetDiv');
+                jQuery('#guide-rec-' + id).remove();
+                //regnerate index number on table
+                $('#row_guide_body .row').each(function(index) {
+                    $(this).find('span.sn').html(index + 1);
+                });
+                return true;
+            } else {
+                return false;
+            }
+        });
+        /******** End For Guide *********/
+        
         /* start of banner*/
         jQuery(document).delegate('a.add-banner', 'click', function(e) {
             e.preventDefault();
