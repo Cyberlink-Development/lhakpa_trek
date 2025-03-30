@@ -81,14 +81,14 @@
       </div>                    
       @endif
       
-     <!-- <div class="form-group">-->
-     <!--   <label class="col-lg-2 control-label" for="link">Youtube ID</label>-->
-     <!--   <div class="col-lg-6">-->
-     <!--    <div class="bs-component">-->
-     <!--       <input type="text" class="form-control" name="youtube_link" placeholder="Unique Video ID of youtube video" value="{{$data->youtube_link}}" /> <br /> https://youtu.be/<b>iwhpS4ow7Zc</b>     -->
-     <!--     </div>-->
-     <!--   </div>-->
-     <!--</div>           -->
+     <div class="form-group">
+       <label class="col-lg-2 control-label" for="link">Youtube ID</label>
+       <div class="col-lg-6">
+        <div class="bs-component">
+           <input type="text" class="form-control" name="youtube_link" placeholder="Unique Video ID of youtube video" value="{{$data->youtube_link}}" /> <br /> https://youtu.be/<b>iwhpS4ow7Zc</b>     
+         </div>
+       </div>
+    </div>           
 
      <div class="form-group">
         <label class="col-lg-2 control-label" for="link">Button Link</label>

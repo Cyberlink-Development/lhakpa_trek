@@ -73,7 +73,8 @@ class FrontpageController extends Controller
 {
     public function index()
     {
-        $banners = BannerModel::where('status', '1')->get();
+        // $banners = BannerModel::where('status', '1')->get();
+        $banners = BannerModel::orderBy('created_at', 'desc')->get();
         $homeBrief = HomeBriefModel::where('id', 1)->first();
         $whoweare = PostModel::where('id', '148')->first();
         $whywork= PostModel::where('id',149)->first();
@@ -141,9 +142,9 @@ class FrontpageController extends Controller
         $international = PostTypeModel::where('uri','international-team')->first();
         $trips = TripModel::where(['status' => '1'])->get();
         $travels = ActivityModel::where('activity_parent','travel')->get();
-        $expert=TeamModel::where('show_in_home',1)->first();
-        // dd($expert);
-        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international','trips','travels','expert'));
+        $experts = TeamModel::where('show_in_home',1)->get();
+        // dd($experts);
+        return view('themes.default.' . $data['template'] . '', compact('data', 'posts','news','your_group_post','setting','reviews','team_category','related_teams','international','trips','travels','experts'));
     }
 
 
@@ -591,7 +592,13 @@ class FrontpageController extends Controller
                 'full_name' => 'required',
                 'number' => 'required',
                 'email' => 'required|email',
+                'expert' => 'nullable|exists:cl_team,id'
             ]);
+            
+            if($request->expert){
+                $experts = TeamModel::where('id',$request->expert)->first();
+            }
+            // dd($request->all(),$request->expert);
 
             if ($request->isMethod('post')) {
                 $setting = SettingModel::where('id', 1)->first();
@@ -600,7 +607,8 @@ class FrontpageController extends Controller
                     'email' => $request->email,
                     'number' => $request->number,
                     'message' => $request->message,
-                    'country' => $request->country
+                    'country' => $request->country,
+                    'expert' => $request->expert ?? NULL
                 ]);
                 return new AdminContactMail();
                 // Mail::send(new \App\Mail\AdminContactMail($request->email));
