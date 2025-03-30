@@ -64,22 +64,30 @@
                     <input type="hidden" id="g_recaptcha_response" name="g_recaptcha_response"/>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="Name">Full Name</label>
-                        <input class="uk-input border" name="full_name" type="text" aria-label="Name">
+                        <input class="uk-input border" name="full_name" type="text" aria-label="Name" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="Contact">Contact</label>
-                        <input class="uk-input border" name="number" type="number" aria-label="Contact">
+                        <input class="uk-input border" name="number" type="number" aria-label="Contact" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="Email">Email</label>
-                        <input class="uk-input border" name="email" type="email" aria-label="Email">
+                        <input class="uk-input border" name="email" type="email" aria-label="Email" required>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label uk-white" for="country">Country</label>
-                        <select class="uk-input border" name="country" id="country">
+                        <select class="uk-input border" name="country" id="country" required>
                             @include('themes.default.common.country')
                         </select>
-                        <!-- <input class="uk-input border" name="country" type="text" aria-label="country"> -->
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <label class="uk-form-label uk-white" for="expert">Experts</label>
+                        <select class="uk-input border" name="expert" id="expert">
+                            <option value="" selected>Select Expert</option>
+                            @foreach ($experts as $expert)
+                                <option value="{{ $expert->id }}">{{ $expert->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="uk-width-1-1">
                         <textarea class="uk-textarea border" rows="5" name="message" placeholder="Message" aria-label="Message"></textarea>
@@ -92,47 +100,47 @@
         </div>
     </div>
 </section>
-@if($expert)
-<section class="uk-section uk-padding-remove-top">
-    <div class="uk-container">
-        <div class="uk-grid">
-            <div class="uk-width-1-3@m uk-first-column">
-                <div class="uk-title-font">
-                    <span class="uk-secondary dotted-line-black "><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>ENQUIRY</span>
-                    <h1 class="uk-primary  uk-margin-bottom">CONTACT OUR TRAVEL EXPERTS</h1>
-                    <a href="#enquiry-form" class="uk-btn uk-btn-secondary " uk-scroll>Enquiry Now</a>
-                </div>
-            </div>
-            <div class="uk-width-2-3@m">
-                <div class="uk-title-font">
-                    <h1 class="uk-secondary  uk-margin-bottom"></h1>
-                    <div class="uk-flex">
-                        <div>
-                            <img src="{{ !empty($expert->thumbnail) ? asset('uploads/team/' .$expert->thumbnail) : asset('theme-assets/img/mountain/mountain1.jpeg')}}" alt="" style="height: 215px; width: 230px; object-fit: cover;">
-                        </div>
-                        <div class="uk-padding-small">
-                            <h2 class="uk-margin-remove">{{ $expert->name }}</h2>
-                            <h3 class="uk-margin-remove uk-secondary">{{ $expert->position }}</h3>
-                            <span><i class="fa-solid fa-phone uk-margin-small-right uk-secondary" aria-hidden="true"></i>
-                        {{ $expert->phone }}
-                        </span>
-                            <span class="uk-margin-small-left"><i class="fa-solid fa-envelope uk-margin-small-right uk-secondary"></i>
-                        {{ $expert->email }}</span>
-                            <br>
-                            {{ $expert->language }}
-                            <div class="flag">
-                                <!-- <img src="assets/img/flag1.jpg" alt=""> 
-                                <img src="assets/img/flag2.jpg" alt="">
-                                <img src="assets/img/flag3.jpg" alt=""> -->
-                            </div>
-                            <p>Contact our travel guide to know more about your travel journey.</p>
-                        </div>
+@if($experts)
+    <section class="uk-section uk-padding-remove-top">
+        <div class="uk-container">
+            <div class="uk-grid-collapse uk-grid">
+                <div class="uk-width-1-4@m uk-first-column">
+                    <div class="uk-title-font">
+                        <span class="uk-secondary dotted-line-black "><i class="fa-solid fa-person-hiking uk-margin-small-right"></i>ENQUIRY</span>
+                        <h1 class="uk-primary  uk-margin-bottom">CONTACT OUR TRAVEL EXPERTS</h1>
+                        {{-- <a href="#enquiry-form" class="uk-btn uk-btn-secondary uk-margin-bottom" uk-scroll>Enquiry Now</a> --}}
                     </div>
                 </div>
-                
+                <div class="uk-width-3-4@m">
+                    <div class="uk-child-width-1-2@m uk-grid">
+                        @foreach ($experts as $expert)
+                            <div class="uk-title-font">
+                                <h1 class="uk-secondary  uk-margin-bottom"></h1>
+                                <div class="uk-flex">
+                                    <div>
+                                        <img src="{{ !empty($expert->thumbnail) ? asset('uploads/team/' .$expert->thumbnail) : asset('theme-assets/img/mountain/mountain1.jpeg')}}" alt="{{ $expert->name }}" style="height: 165px; width: 180px; object-fit: cover;">
+                                    </div>
+                                    <div class="uk-padding-small">
+                                        <h2 class="uk-margin-remove">{{ $expert->name }}</h2>
+                                        <h3 class="uk-margin-remove uk-secondary">{{ $expert->position }}</h3>
+                                        <span><i class="fa-solid fa-phone uk-margin-small-right uk-secondary" aria-hidden="true"></i>{{ $expert->phone }}</span><br>
+                                        <span><i class="fa-solid fa-envelope uk-margin-small-right uk-secondary" aria-hidden="true"></i>{{ $expert->email }}</span>
+                                        <br>
+                                        <div class="flag">
+                                            {{ $expert->language }}
+                                            {{-- <img src="assets/img/flag1.jpg" alt="">
+                                            <img src="assets/img/flag2.jpg" alt="">
+                                            <img src="assets/img/flag3.jpg" alt=""> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endif
+
 @endsection

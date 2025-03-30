@@ -2,7 +2,42 @@
 @section('content')
 
    <!-- start banner section -->
-   <div class="swiper mySwiper  banner-carousel">
+<div class="swiper mySwiper  banner-carousel">
+   <div class="swiper-wrapper">
+      <!--for video-->
+      @foreach ($banners as $banner)
+         @if ($banner->youtube_link)
+            <div class="swiper-slide">
+               <div class="uk-position-relative" id="ytbg3" data-ytbg-fade-in="true" data-ytbg-mute-button="true" data-youtube="https://youtu.be/{{ $banner->youtube_link }}"></div>
+               <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column" uk-scrollspy="cls: uk-animation-fade; target: h1,a; delay: 500;">
+                  <div class="uk-banner-font uk-width-1-1 uk-width-1-2@m uk-text-center uk-margin-large-top">
+                     <h1>{{$banner->title}}</h1>
+                  </div>
+                  <a href="{{ $banner->link }}" class="uk-btn uk-btn-secondary">Discover Trip</a>
+               </div>
+            </div>
+         @else
+            <!--for image-->
+            <div class="swiper-slide">
+               <div class="uk-inline hero-items">
+                  <img src="{{ $banner->picture ? asset('uploads/banners/'.$banner->picture) : asset('theme-assets/img/mountain/mountain5.jpeg')}}" width="1800" height="1200" alt="">
+                     <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column
+                     " uk-scrollspy="cls: uk-animation-fade; target: h1,a; delay: 500;">
+                        <div class="uk-banner-font uk-width-1-1 uk-width-1-2@m uk-text-center uk-margin-large-top" >
+                           <h1>{{$banner->title}}</h1>
+                        </div>
+                        <a href="{{ $banner->link }}" class="uk-btn uk-btn-secondary">Discover Trip</a>
+                     </div>
+               </div>
+            </div>
+         @endif
+      @endforeach
+   </div>
+   <div class="swiper-pagination"></div>
+</div>
+<!-- end banner section -->
+   <!-- start banner section -->
+   {{-- <div class="swiper mySwiper  banner-carousel">
       <div class="swiper-wrapper">
          @foreach ($banners as $banner)
             <div class="swiper-slide">
@@ -21,7 +56,7 @@
          @endforeach
       </div>
       <div class="swiper-pagination"></div>
-   </div>
+   </div> --}}
    <!-- end banner section -->
 
    <!-- start activities section -->
