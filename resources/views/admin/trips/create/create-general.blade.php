@@ -51,7 +51,7 @@
                             @if ($trek->count() > 0)
                                 <select class="form-control" name="trip_grade">
                                     @foreach ($trek as $row)
-                                        <option value="{{ $row->id }}">{{ $row->trip_grade }} </option>
+                                        <option value="{{ $row->id }}">{{ $row->id }} </option>
                                     @endforeach
                                 </select>
                             @endif
@@ -100,8 +100,14 @@
                 <div class="form-group">
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Price</label>
-                            <input type="number" min="1" name="price" class="form-control" value="{{ old('price') }}" />
+                            <label>Price ($)</label>
+                            <input type="number" min="1" name="price" class="form-control" value="{{ old('price') }}" placeholder="IN USD" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Price (€) </label>
+                            <input type="number" min="1" name="price" class="form-control" value="{{ old('price') }}" placeholder="IN EURO"/>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -142,6 +148,9 @@
                             </select>
                         </div>
                     </div>
+                    
+                </div>  
+                <div class="form-group">
                     <div class="col-lg-6">
                         <div class="bs-component">
                             <label>Guided trip</label>
@@ -151,7 +160,19 @@
                             </select>
                         </div>
                     </div>
-                </div>  
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Trip Rating</label>
+                            <select class="form-control" name="rating">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <!--</div>-->
 
                 <!--<div class="form-group">-->

@@ -90,14 +90,13 @@
                         <div class="uk-flex uk-flex-middle">
                             <button class="uk-wish-button" id="wish-button" data-id="{{ $data->id }}"><i class="fa-solid fa-heart"></i></button>
                             <!-- <button class="uk-wish-button" id="wish-button" onclick="toggleActive(this)"><i class="fa-solid fa-heart"></i></button> -->
-                            <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{getDestinationNameByTripId($data->id)}}</h2>
+                            <h3 class="uk-white uk-text-uppercase uk-margin-remove">{{ $data->trip_title }}</h3>
+                            {{-- <h2 class="uk-white uk-text-uppercase uk-margin-remove">{{getDestinationNameByTripId($data->id)}}</h2> --}}
                         </div>
                         <div class="uk-star-rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            @for ($i = 0 ; $i < $data->rating ; $i++)
+                                <i class="fa-solid fa-star"></i>
+                            @endfor
                         </div>
                     </div>
                     <hr style="border-color: var(--secondary);">
@@ -273,7 +272,7 @@
                                         <div class="uk-feature-font">
                                             <p class="uk-margin-remove"><strong>Trip Grade</strong></p>
                                             <div class="tooltip-container">
-                                                {{ grade_message_trek($data->trip_grade) }}
+                                                {{ ($data->trip_grade) }}
                                                 @if ($data->status_text)
                                                     <div class="tooltip-content uk-contents">
                                                         {{-- <strong>Toolkit Options:</strong> --}}
@@ -400,10 +399,10 @@
         <div class="uk-container uk-position-relative">
             <ul class="uk-subnav uk-subnav-pill uk-why-us-tab uk-flex-center" uk-switcher="animation: uk-animation-fade">           
                 @if ($cost_includes->count() > 0)
-                    <li><a href="#" class="green-border">Holiday</a></li>
+                    <li><a href="#" class="green-border">TRIP</a></li>
                 @endif
                 @if ($banner->count() > 0)
-                    <li><a href="#" class="green-border">General</a></li>
+                    <li><a href="#" class="green-border">Document</a></li>
                 @endif
                 @if ($cost_excludes->count() > 0)
                     <li><a href="#" class="green-border">Equipment</a></li>
@@ -605,7 +604,7 @@
                                         <i class="fa-solid fa-calendar"></i>
                                         <div>
                                             <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                            <p class="uk-trip-description uk-margin-remove">{{ grade_message_trek($row->trip_grade)}}</p>
+                                            <p class="uk-trip-description uk-margin-remove">{{ ($row->trip_grade)}}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -661,6 +661,7 @@ class TripController extends Controller
             $data->trip_content = $request->trip_content;
             $data->latest_info = $request->latest_info;
             $data->trip_grade = $request->trip_grade ? $request->trip_grade : '';
+            $data->rating = $request->rating;
             $data->status_text = $request->status_text;
             $data->uri = Str::slug($request->uri);
             $data->ordering = $request->ordering;
@@ -674,6 +675,7 @@ class TripController extends Controller
             $data->guided=$request->guided;
             $data->start_date = $request->start_date;
             $data->price = $request->price;
+            $data->price_euro = $request->price_euro;
             $data->discount = $request->discount;
 
             $_data = TripModel::find($id);

@@ -50,11 +50,9 @@
                                     </div>
                                     <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
                                         <div class="uk-star-rating">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                            @for ($i = 0 ; $i < $row->rating ; $i++)
+                                                <i class="fa-solid fa-star"></i>
+                                            @endfor
                                         </div>
                                         <div class="uk-text-title uk-text-title uk-flex uk-flex-between">
                                             <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-news-title">

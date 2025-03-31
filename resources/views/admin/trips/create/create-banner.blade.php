@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="panel">
         <div class="panel-heading">
-            <span class="panel-title"> General </span>
+            <span class="panel-title"> Document </span>
             <a class="btn btn-primary pull-right add-banner" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row </a>
         </div>
 
