@@ -107,23 +107,30 @@
                         <div class="uk-margin-bottom">
                             <div class=" uk-flex-middle uk-grid-match uk-grid-collapse" uk-height-match uk-grid>
                                 <div class="uk-width-2-5@m">
-                                    <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-270">
-                                        <img src="{{!empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain9.jpeg')}}" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="">
-                                    </a>
+                                    <div class="uk-display-block uk-inline-clip uk-transition-toggle uk-link-toggle uk-media-270">                          
+                                        <img src="{{!empty($row->thumbnail) ? asset('uploads/original/'.$row->thumbnail) : asset('theme-assets/img/mountain/mountain9.jpeg')}}" class="uk-height-1-1 uk-transition-scale-up uk-transition-opaque" alt="{{$row->trip_title}}">
+                                        <div class="uk-position-top-left uk-overlay uk-overlay-default" style="background: none;">
+                                            {{-- <button class="uk-wish-button" onclick="toggleActive(this)"><i class="fa-solid fa-heart" aria-hidden="true"></i></button> --}}
+                                            <button class="uk-wish-button"id="wish-button" data-id="{{ $row->id }}"><i class="fa-solid fa-heart" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="uk-width-3-5@m uk-light-bg uk-padding-small uk-trip-list" style="padding: 30px 25px;">
-                                    <div class="uk-star-rating">
-                                        @for ($i = 0 ; $i < $row->rating ; $i++)
-                                            <i class="fa-solid fa-star"></i>
-                                        @endfor
-                                    </div>
-                                    <div class="uk-text-title uk-text-title uk-flex uk-flex-between">
-                                        <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-news-title">
-                                            <h2>{{$row->trip_title}}</h2>
-                                        </a>
-                                        @if($row->price)
-                                            <h2>US ${{$row->price}}</h2>
-                                        @endif
+                                    <div class="uk-text-title uk-text-title uk-flex uk-flex-between uk-flex-middle">
+                                        <div>
+                                            <div class="uk-star-rating">
+                                                @for ($i = 0 ; $i < $row->rating ; $i++)
+                                                    <i class="fa-solid fa-star"></i>
+                                                @endfor
+                                            </div>
+                                            <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-news-title">
+                                                <h2>{{$row->trip_title}}</h2>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <h2 class="uk-margin-remove uk-text-right" style="font-size:20px;">US ${{$row->price}}</h2>
+                                            <h3 class="uk-margin-remove uk-secondary uk-text-right" style="font-size:17px;"> € {{$row->price_euro}}</h3>
+                                        </div>
                                     </div>
                                     <p class="uk-margin-remove line-three">
                                         {{$row->sub_title}}
@@ -170,3 +177,46 @@
 @endif
 <!-- list section end -->
 @stop
+
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#wish-button', function (e) {
+                e.preventDefault();
+
+                // alert('ok'); // Debugging: Check if button click is detected
+
+                let itemId = $(this).data('id'); // Get the item ID from the button
+                let url = "{{ route('add-wishlist', ':id') }}".replace(':id', itemId);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            toastr.success(data.message);
+                        } else {
+                            toastr.error(data.message);
+                        }
+                        $.each(data.errors, function (key, value) {
+                            toastr.error(value);
+                        });
+                    },
+                    error: function (xhr) {
+                        alert("An error occurred.\nError code: " + xhr.statusText);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
