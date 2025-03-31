@@ -52,7 +52,7 @@
                                 {{-- <option value=""> Select Grade </option> --}}
                                 @foreach ($trek as $row)
                                     <option value="{{ $row->id }}"
-                                    {{ $row->id == $data->trip_grade ? 'selected' : '' }}>{{ $row->trip_grade }}
+                                    {{ $row->id == $data->trip_grade ? 'selected' : '' }}>{{ $row->id }}
                                     </option>
                                 @endforeach
                             </select>
@@ -110,9 +110,16 @@
             <div class="form-group">
                 <div class="col-lg-6">
                     <div class="bs-component">
-                        <label>Price (IN USD)</label>
+                        <label>Price ($)</label>
                         <input type="number" min="1" name="price" class="form-control"
                             value="{{$data->price }}" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bs-component">
+                        <label>Price (€)</label>
+                        <input type="number" min="1" name="price_euro" class="form-control"
+                            value="{{$data->price_euro }}" />
                     </div>
                 </div>
                  <div class="col-lg-6">
@@ -185,12 +192,26 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="form-group"> 
                 <div class="col-lg-6">
                     <div class="bs-component">
                         <label>Guided trip</label>
                          <select class="form-control" name="guided">
                             <option @if($data->guided==1)selected @endif value="1">Yes</option>
                             <option @if($data->guided==0)selected @endif value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bs-component">
+                        <label>Trip Rating</label>
+                        <select class="form-control" name="rating">
+                            <option value="1" {{ old('rating', $data->rating ?? 1) == 1 ? 'selected' : '' }}>1</option>
+                            <option value="2" {{ old('rating', $data->rating ?? 1) == 2 ? 'selected' : '' }}>2</option>
+                            <option value="3" {{ old('rating', $data->rating ?? 1) == 3 ? 'selected' : '' }}>3</option>
+                            <option value="4" {{ old('rating', $data->rating ?? 1) == 4 ? 'selected' : '' }}>4</option>
+                            <option value="5" {{ old('rating', $data->rating ?? 1) == 5 ? 'selected' : '' }}>5</option>
                         </select>
                     </div>
                 </div>

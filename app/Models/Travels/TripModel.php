@@ -13,7 +13,8 @@ class TripModel extends Model
         'walking_per_day', 'group_size', 'accommodation', 'route','trip_highlight','peak_name',
         'trip_type','starting_price','trip_map','trip_video','trip_chart','trip_excerpt', 
         'trip_content', 'trip_grade','status_text','uri','ordering','trip_code','meta_key',
-         'meta_description', 'banner','thumbnail','trip_pdf','visiter','video_status',  'start_date','price','discount','trip_of_the_month','show_in_home', 'guided', 'latest_info'];
+         'meta_description', 'banner','thumbnail','trip_pdf','visiter','video_status',  'start_date',
+         'price','price_euro','discount','trip_of_the_month','show_in_home', 'guided', 'latest_info','rating'];
 
     /* The destinations that belongs to the trip */
     public function destinations()

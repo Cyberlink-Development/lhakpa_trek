@@ -36,28 +36,6 @@
    <div class="swiper-pagination"></div>
 </div>
 <!-- end banner section -->
-   <!-- start banner section -->
-   {{-- <div class="swiper mySwiper  banner-carousel">
-      <div class="swiper-wrapper">
-         @foreach ($banners as $banner)
-            <div class="swiper-slide">
-                  <div class="uk-inline hero-items">
-                     <img src="{{ $banner->picture ? asset('uploads/banners/'.$banner->picture) : asset('theme-assets/img/mountain/mountain5.jpeg')}}" width="1800" height="1200" alt="">
-                     <div class="uk-overlay uk-overlay-primary uk-position-cover uk-banner-overlay uk-flex uk-flex-middle uk-flex-center uk-flex-column" uk-scrollspy="cls: uk-animation-fade; target: h1,a; delay: 500;">
-                        <div class="uk-banner-font uk-width-1-1 uk-width-1-2@m uk-text-center uk-margin-large-top">
-                              <h1>{{$banner->title}}</h1>
-                        </div>
-                        @if ($banner->link)
-                           <a href="{{ $banner->link }}" class="uk-btn uk-btn-secondary">Discover Trip</a>
-                        @endif
-                     </div>
-                  </div>
-            </div>
-         @endforeach
-      </div>
-      <div class="swiper-pagination"></div>
-   </div> --}}
-   <!-- end banner section -->
 
    <!-- start activities section -->
    <section class="uk-section uk-light-bg">
@@ -161,11 +139,9 @@
                               </a>
                            </div>
                            <div class="uk-star-rating">
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
-                              <i class="fa-solid fa-star"></i>
+                              @for ($i = 0 ; $i < $row->rating ; $i++)
+                                 <i class="fa-solid fa-star"></i>
+                              @endfor
                            </div>
                            <div class="uk-flex uk-flex-between uk-margin-small-top uk-margin-small-bottom">
                               <div class="uk-flex uk-flex-middle uk-trip">
@@ -186,7 +162,7 @@
                                  <i class="fa-solid fa-calendar"></i>
                                  <div>
                                        <p class="uk-trip-title uk-margin-remove">Difficulty</p>
-                                       <p class="uk-trip-description uk-margin-remove">{{grade_message_trek($row->trip_grade)}}</p>
+                                       <p class="uk-trip-description uk-margin-remove">{{($row->trip_grade)}}</p>
                                  </div>
                               </div>
                            </div>
@@ -237,11 +213,9 @@
                                           <h2 class="uk-white">{{$row->trip_title}}</h2>
                                        </a>
                                        <div class="uk-star-rating">
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
-                                          <i class="fa-solid fa-star"></i>
+                                          @for ($i = 0 ; $i < $row->rating ; $i++)
+                                             <i class="fa-solid fa-star"></i>
+                                          @endfor
                                        </div>
                                     </div>
                                     <hr>
@@ -264,7 +238,7 @@
                                              <i class="fa-solid fa-calendar uk-margin-small-right uk-white" style="font-size:25px;"></i>
                                              <div>
                                                 <p class="uk-small-title uk-margin-remove uk-white">Difficulty</p>
-                                                <p class="uk-small-description uk-margin-remove uk-white">{{ grade_message_trek($row->trip_grade)}}</p>
+                                                <p class="uk-small-description uk-margin-remove uk-white">{{ ($row->trip_grade)}}</p>
                                              </div>
                                           </div>
                                     </div>
