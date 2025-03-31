@@ -135,27 +135,27 @@
             <div class="border uk-light">
                 <div class="uk-small-details-nav">
                     <div class="uk-container uk-position-relative uk-flex uk-flex-middle">
-                        <ul class="uk-width-2-3 uk-navbar-single uk-flex uk-flex-between uk-flex-middle uk-margin-remove-bottom" id='sidenav'>
+                        <ul class="uk-width-2-3 uk-navbar-single uk-flex uk-flex-between uk-flex-middle uk-margin-remove-bottom sidenav" >
                             <li>
-                                <a href="#features" uk-scroll>Overview </a>
+                                <a href="#features" >Overview </a>
                             </li>
                             @if($itinerary->count() > 0)
                                 <li>
-                                    <a href="#itinerary" uk-scroll>Itinerary & Maps </a>
+                                    <a href="#itinerary" >Itinerary & Maps </a>
                                 </li>
                             @endif
                             @if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty() || $guidelines->count() > 0)
                                 <li>
-                                    <a href="#information" uk-scroll>Information</a>
+                                    <a href="#information" >Information</a>
                                 </li>
                             @endif
                             @if ($faqs->count() > 0)
                                 <li>
-                                    <a href="#faq" uk-scroll>FAQ </a>
+                                    <a href="#faq" >FAQ </a>
                                 </li>
                             @endif
                             <li>
-                                <a href="#review" uk-scroll>Review </a>
+                                <a href="#review" >Review </a>
                             </li>
                         </ul>
                         <div class="uk-width-1-3 uk-flex uk-flex-right">
@@ -169,11 +169,11 @@
         </div>
     </div>
 </div>
-<section class="uk-section">
+<section class="uk-section" id="features">
     <div class="uk-container">
         <div class="uk-grid">
             <div class="uk-width-3-4@m">
-                <div id="features">
+                <div >
                     <!-- overview start -->
                     <div>
                         <div class="uk-grid uk-flex uk-flex-middle ">
@@ -230,33 +230,6 @@
                     <!-- end notice -->
 
                 </div>
-                <!-- itnerary start-->
-                <div class="uk-font uk-margin-top uk-margin-bottom" id="itinerary">
-                    @if($itinerary->count() > 0)
-                        <span class="uk-primary uk-text-uppercase f-27 "><i class="fa-regular fa-calendar uk-margin-small-right" aria-hidden="true"></i>Itinerary</span>
-                        <div class=" uk-light-bg uk-padding border uk-margin-top uk-margin-bottom">
-                            <ul class="uk-detail-list" uk-accordion>
-                                @foreach ($itinerary as $item)
-                                    <li class="{{ $loop->first ? 'uk-open' : '' }}">
-                                        <a class="uk-accordion-title" href><span class="uk-margin-right">Day {{ $item->days }}</span> {{ $item->title }}</a>
-                                        <div class="uk-accordion-content uk-margin-remove">
-                                            <p>{!! $item->content !!}</p>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if(!empty($data->trip_map))
-                        <div class="uk-maps" uk-lightbox>
-                            <span class="uk-primary uk-text-uppercase f-27 "><i class="fa-regular fa-calendar uk-margin-small-right" aria-hidden="true"></i>Maps</span>
-                            <a href="{{ asset('uploads/original/'.$data->trip_map)}}" class="uk-media-400">
-                                <img src="{{ asset('uploads/original/'.$data->trip_map)}}" alt="{{$data->trip_title}}"/>
-                            </a>
-                        </div>
-                    @endif
-                </div>
-                <!-- itnerary end-->
             </div>
             <div class="uk-width-1-4@m">
                 <!-- facilities start -->
@@ -392,6 +365,43 @@
         <div id="my-id"></div>
     </div>
 </section>
+
+<!-- itnerary start-->
+<section id="itinerary">
+    <div class="uk-container">
+        <div class="uk-font uk-margin-top uk-margin-bottom" id="itinerary">
+            @if($itinerary->count() > 0)
+                <div class="uk-font uk-text-center">
+                    <span class="uk-primary uk-text-uppercase f-27 "><i class="fa-regular fa-calendar uk-margin-small-right" aria-hidden="true"></i>Itinerary</span>
+                </div>
+                <div class=" uk-light-bg uk-padding border uk-margin-top uk-margin-bottom">
+                    <ul class="uk-detail-list" uk-accordion>
+                        @foreach ($itinerary as $item)
+                            <li class="{{ $loop->first ? 'uk-open' : '' }}">
+                                <a class="uk-accordion-title" href><span class="uk-margin-right">Day {{ $item->days }}</span> {{ $item->title }}</a>
+                                <div class="uk-accordion-content uk-margin-remove">
+                                    <p>{!! $item->content !!}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(!empty($data->trip_map))
+                <div class="uk-maps" uk-lightbox>
+                    <div class="uk-font uk-text-center uk-margin-top">
+                        <span class="uk-primary uk-text-uppercase f-27 "><i class="fa-regular fa-calendar uk-margin-small-right" aria-hidden="true"></i>Maps</span>
+                    </div> 
+                    <a href="{{ asset('uploads/original/'.$data->trip_map)}}" class="uk-media-400">
+                        <img src="{{ asset('uploads/original/'.$data->trip_map)}}" alt="{{$data->trip_title}}"/>
+                    </a>
+                </div>
+            @endif
+        </div>
+    </div>
+</section>
+<!-- itnerary end-->
+
 <!-- cost includes / excludes section start-->
 @if ($cost_includes->isNotEmpty() || $banner->isNotEmpty() || $cost_excludes->isNotEmpty() || $guidelines->count() > 0)
     <section class="uk-position-relative uk-section  uk-background-norepeat uk-background-cover" uk-parallax="bgx: -100; easing: 1;" data-src="{{asset('theme-assets/img/bg/01.jpg')}}" id="information" uk-img>
@@ -906,9 +916,18 @@
     </div>
 </div>
 <script>
-    function toggleActive(button) {
-        button.classList.toggle("active");
-    }
+    document.querySelectorAll('.sidenav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(event) {
+            event.preventDefault(); 
+
+            const target = document.querySelector(this.getAttribute("href"));
+            const navbarHeight = document.querySelector(".sidenav").offsetHeight; // Get navbar height
+
+            window.scrollTo({
+                top: target.offsetTop - 120, 
+            });
+        });
+    });
 </script>
 <!-- inquiry form modal end -->
 @stop
