@@ -50,7 +50,7 @@
                                         @include('admin.settings.flight')
                                     </div>
                                     <div class="tab-pane" id="tab_5">
-                                        <!--@include('admin.settings.usaDetails')-->
+                                        @include('admin.settings.usaDetails')
                                     </div>
                                     <div class="tab-pane" id="tab_6">
                                         @include('admin.settings.homeStatic')
